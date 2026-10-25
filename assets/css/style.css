@@ -539,11 +539,196 @@ pre,
     border: 1px solid var(--border-strong);
 }
 
-.id-avatar-box {
+.id-badge-expanded {
+    width: 100%;
+    padding: 2rem 2.25rem;
+    border: 1px solid var(--border-strong);
+    background-color: var(--bg-surface);
+    box-shadow: var(--card-shadow);
+}
+
+.card-top-left {
     display: flex;
     align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.card-top-right {
+    display: flex;
+    align-items: center;
+}
+
+.id-badge-body {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 2.25rem;
+    align-items: stretch;
+    margin-top: 1rem;
+}
+
+/* Kolom Foto Besar & Frame */
+.id-photo-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.avatar-frame-large {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 380px;
+    background-color: var(--harbor-grey);
+    border: 2px solid var(--accent-lime);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 16px rgba(163, 230, 53, 0.12);
+}
+
+.avatar-photo-large {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.avatar-frame-large:hover .avatar-photo-large {
+    transform: scale(1.03);
+}
+
+.photo-overlay-tag {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(11, 13, 16, 0.95) 0%, rgba(11, 13, 16, 0.6) 65%, transparent 100%);
+    padding: 1.25rem 1rem 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.photo-overlay-tag .mono-small {
+    color: var(--accent-lime);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.photo-overlay-tag .photo-status {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+}
+
+/* Kolom Data di Samping Foto */
+.id-data-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.id-header-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.id-fullname {
+    font-family: var(--font-display);
+    font-size: clamp(1.85rem, 3.2vw, 2.6rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--text-primary);
+}
+
+.id-callsign {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--accent-lime);
+    letter-spacing: 0.06em;
+}
+
+.id-spec-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.spec-row dt {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--harbor-muted);
+    letter-spacing: 0.05em;
+}
+
+.spec-row dd {
+    font-weight: 600;
+    text-align: right;
+}
+
+.highlight-val {
+    color: var(--accent-lime);
+}
+
+.id-footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border-strong);
+}
+
+.id-barcode {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.55rem 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: var(--harbor-muted);
+}
+
+.id-quick-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+/* Fallback komponen avatar kecil */
+.avatar-frame {
+    width: 76px;
+    height: 76px;
+    background-color: var(--harbor-grey);
+    border: 2px solid var(--accent-lime);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.avatar-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
 }
 
 .avatar-monogram {
@@ -558,52 +743,6 @@ pre,
     font-weight: 700;
     font-size: 1.25rem;
     color: var(--text-primary);
-}
-
-.avatar-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
-
-.id-spec-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-    margin-bottom: 1.25rem;
-}
-
-.spec-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    padding-bottom: 0.4rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.spec-row dt {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--harbor-muted);
-}
-
-.spec-row dd {
-    font-weight: 600;
-    text-align: right;
-}
-
-.id-barcode {
-    background-color: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    padding: 0.6rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    font-family: var(--font-mono);
-    letter-spacing: 0.12em;
-    font-size: 0.75rem;
-    color: var(--harbor-muted);
 }
 
 /* ==========================================================================
@@ -1143,8 +1282,18 @@ pre,
 
 @media (max-width: 992px) {
     .hero-grid,
-    .guestbook-grid {
+    .guestbook-grid,
+    .id-badge-body {
         grid-template-columns: 1fr;
+    }
+
+    .id-badge-expanded {
+        padding: 1.5rem;
+    }
+
+    .avatar-frame-large {
+        min-height: 350px;
+        max-height: 480px;
     }
 
     .skills-grid,

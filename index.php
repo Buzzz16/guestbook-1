@@ -115,10 +115,8 @@ $portfolios = [
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
     <!-- Banner Identitas Wajib di Bagian Paling Atas -->
     <?php require_once __DIR__ . '/app/partials/served_by.php'; ?>
-
     <!-- Header & Navigasi Semantic HTML5 -->
     <header class="site-header" id="top">
         <div class="container header-inner">
@@ -153,103 +151,61 @@ $portfolios = [
     </header>
 
     <main>
-        <!-- SECTION 1: PROFIL (HERO) -->
+        <!-- SECTION 1: PROFIL (HERO ID BADGE EXPANDED) -->
         <section id="profil" class="hero-section section-block">
-            <div class="container hero-grid">
-                <div class="hero-content">
-                    <div class="spec-pill-row">
-                        <span class="spec-pill">ROLE // KETUA KELOMPOK (<?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?>)</span>
-                        <span class="spec-pill">NIM // <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></span>
-                        <span class="spec-pill">CLASS // <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
-                    </div>
-
-                    <h1 class="hero-title">
-                        Zulfa Almajid Basyaasyah
-                        <span class="hero-alias">A.K.A. &ldquo;BABAS&rdquo;</span>
-                    </h1>
-
-                    <p class="hero-lead">
-                        Mahasiswa <strong>S1 Informatika Telkom University</strong> kelas <strong>IF-48-05</strong> dan <strong>Asisten Dosen</strong> untuk 3 kelas Informatika. Berfokus pada rekayasa perangkat lunak <em>Full-Stack</em>, arsitektur backend yang tangguh, serta eksplorasi aplikasi berbasis kecerdasan buatan.
-                    </p>
-
-                    <div class="hero-cta-group">
-                        <a href="#portofolio" class="btn btn-primary">
-                            <span>Eksplorasi Portofolio</span>
-                            <span class="btn-arrow">&rarr;</span>
-                        </a>
-                        <a href="#aplikasi" class="btn btn-outline">
-                            <span>Isi Guestbook Bersama</span>
-                        </a>
-                        <a href="app/index.php" class="btn btn-ghost">
-                            <span>Halaman Penuh Guestbook &nearr;</span>
-                        </a>
-                    </div>
-
-                    <div class="telemetry-strip" aria-label="Ringkasan Akademik dan Proyek">
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">IF-48-05</span>
-                            <span class="telemetry-lbl">KELAS AKTIF</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">03 KELAS</span>
-                            <span class="telemetry-lbl">ASISTEN DOSEN</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">03+ APPS</span>
-                            <span class="telemetry-lbl">PORTOFOLIO UTAMA</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">NODE m0</span>
-                            <span class="telemetry-lbl">STATUS SERVER</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kartu Identitas Teknis (Techwear ID Tag) -->
-                <aside class="hero-id-card tech-card" aria-label="Kartu Identitas Mahasiswa">
+            <div class="container">
+                <!-- Kartu Identitas Teknis (Techwear ID Tag - Full Width Showcase) -->
+                <aside class="hero-id-card tech-card id-badge-expanded" aria-label="Kartu Identitas Mahasiswa">
                     <div class="card-top-bar">
                         <span class="mono-label">ID_BADGE // TELKOM_UNIV</span>
-                        <span class="status-chip">VERIFIED</span>
                     </div>
 
-                    <div class="id-avatar-box">
-                        <div class="avatar-monogram" aria-hidden="true">ZAB</div>
-                        <div class="avatar-meta">
-                            <span class="mono-small">CALLSIGN: BABAS</span>
-                            <span class="mono-small">SECTOR: BANDUNG, ID</span>
+                    <div class="id-badge-body">
+                        <!-- Kolom Foto Besar (Tingginya sebanding dengan seluruh data di sampingnya) -->
+                        <div class="id-photo-col">
+                            <div class="avatar-frame-large">
+                                <img src="assets/img/foto.JPG" alt="Foto Profil <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>" class="avatar-photo-large" loading="eager">
+                            </div>
                         </div>
-                    </div>
 
-                    <dl class="id-spec-list">
-                        <div class="spec-row">
-                            <dt>NAMA LENGKAP</dt>
-                            <dd><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>NIM</dt>
-                            <dd class="mono-val"><?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>PROGRAM STUDI</dt>
-                            <dd>S1 Informatika</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>INSTITUSI</dt>
-                            <dd>Telkom University</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>KELAS</dt>
-                            <dd class="mono-val">IF-48-05</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>NODE ROUTE</dt>
-                            <dd class="mono-val"><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?> (Ketua)</dd>
-                        </div>
-                    </dl>
+                        <!-- Kolom Seluruh Data-Data di Samping Foto -->
+                        <div class="id-data-col">
+                            <div class="id-header-block">
+                                <h1 class="id-fullname"><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></h1>
+                                <p class="id-callsign">A.K.A. &ldquo;BABAS&rdquo; &bull; S1 Informatika Telkom University</p>
+                            </div>
 
-                    <div class="id-barcode" aria-hidden="true">
-                        <span>||| || |||| | ||| |||| || | |||| ||| || | ||||</span>
-                        <span class="mono-small">103012400134-IF4805-M0</span>
+                            <dl class="id-spec-list">
+                                <div class="spec-row">
+                                    <dt>NAMA LENGKAP</dt>
+                                    <dd><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></dd>
+                                </div>
+                                <div class="spec-row">
+                                    <dt>NIM</dt>
+                                    <dd class="mono-val"><?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></dd>
+                                </div>
+                                <div class="spec-row">
+                                    <dt>PROGRAM STUDI</dt>
+                                    <dd>S1 Informatika</dd>
+                                </div>
+                                <div class="spec-row">
+                                    <dt>INSTITUSI</dt>
+                                    <dd>Telkom University</dd>
+                                </div>
+                                <div class="spec-row">
+                                    <dt>KELAS</dt>
+                                    <dd class="mono-val"><?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></dd>
+                                </div>
+                                <div class="spec-row">
+                                    <dt>NODE ROUTE</dt>
+                                    <dd class="mono-val"><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?> (Ketua Kelompok)</dd>
+                                </div>
+                                <div class="spec-row">
+                                    <dt>PERAN AKADEMIK</dt>
+                                    <dd class="mono-val highlight-val">Asisten Dosen (3 Kelas Informatika)</dd>
+                                </div>
+                            </dl>
+                        </div>
                     </div>
                 </aside>
             </div>
@@ -259,7 +215,7 @@ $portfolios = [
         <section id="pendidikan" class="section-block section-alt">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">02 // EDUCATION &amp; ACADEMIC EXPERIENCE</span>
+                    <span class="section-tag">02 // </span>
                     <h2 class="section-title">Pendidikan &amp; Pengalaman Akademik</h2>
                     <p class="section-subtitle">
                         Rekam jejak akademik di Fakultas Informatika Telkom University serta kontribusi aktif dalam kegiatan pengajaran dan asistensi kelas.
@@ -309,7 +265,7 @@ $portfolios = [
         <section id="keahlian" class="section-block">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">03 // TECHNICAL ARSENAL</span>
+                    <span class="section-tag">03 // </span>
                     <h2 class="section-title">Keahlian &amp; Teknologi</h2>
                     <p class="section-subtitle">
                         Tumpukan teknologi utama yang saya gunakan dalam merancang sistem backend, antarmuka frontend modern, serta manajemen basis data.
@@ -336,7 +292,7 @@ $portfolios = [
             <div class="container">
                 <div class="section-header-flex">
                     <div>
-                        <span class="section-tag">04 // SELECTED WORKS</span>
+                        <span class="section-tag">04 // </span>
                         <h2 class="section-title">Portofolio Proyek</h2>
                         <p class="section-subtitle">
                             Kumpulan proyek perangkat lunak yang dibangun menggunakan Java Spring Boot, Vue.js, Express, Next.js, dan Supabase.
@@ -393,27 +349,27 @@ $portfolios = [
                 </div>
 
                 <div class="contact-grid">
-                    <a href="mailto:zulfa.almajid@student.telkomuniversity.ac.id" class="tech-card contact-card">
+                    <a href="mailto:zulfaalmajid@student.telkomuniversity.ac.id" class="tech-card contact-card">
                         <div class="card-top-bar">
                             <span class="mono-label">CHANNEL // 01</span>
                             <span class="contact-arrow">&nearr;</span>
                         </div>
                         <h3 class="contact-title">Email Akademik &amp; Pribadi</h3>
-                        <p class="contact-handle">zulfa.almajid@student.telkomuniversity.ac.id</p>
+                        <p class="contact-handle">zulfaalmajid@student.telkomuniversity.ac.id</p>
                         <span class="contact-hint">Kirim pesan elektronik resmi</span>
                     </a>
 
-                    <a href="https://github.com/zulfaalmajid" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
+                    <a href="https://github.com/Buzzz16" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
                         <div class="card-top-bar">
                             <span class="mono-label">CHANNEL // 02</span>
                             <span class="contact-arrow">&nearr;</span>
                         </div>
                         <h3 class="contact-title">GitHub Repository</h3>
-                        <p class="contact-handle">github.com/zulfaalmajid</p>
+                        <p class="contact-handle">Buzzz16</p>
                         <span class="contact-hint">Lihat repositori kode &amp; proyek open-source</span>
                     </a>
 
-                    <a href="https://www.linkedin.com/in/zulfa-almajid-basyaasyah" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
+                    <a href="https://linkedin.com/in/zulfaalmajid-babas" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
                         <div class="card-top-bar">
                             <span class="mono-label">CHANNEL // 03</span>
                             <span class="contact-arrow">&nearr;</span>
