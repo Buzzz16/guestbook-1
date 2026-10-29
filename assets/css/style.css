@@ -13,7 +13,7 @@
     --bg-secondary: #1a2035;
     --bg-surface: #222943;
     --bg-elevated: #2b3456;
-    
+
     /* Mario Iconic Palette */
     --mario-red: #e52521;
     --mario-red-hover: #ff3834;
@@ -26,15 +26,15 @@
     --mario-pipe: #00a850;
     --mario-brick: #b84418;
     --mario-coin: #ffd700;
-    
+
     --text-primary: #ffffff;
     --text-secondary: #cbd5e1;
     --text-muted: #94a3b8;
-    
+
     --border-color: #334155;
     --border-mario: #fbd000;
     --card-shadow: 0 10px 0 rgba(0, 0, 0, 0.4), 0 15px 30px rgba(0, 0, 0, 0.3);
-    
+
     --font-pixel: 'Press Start 2P', monospace;
     --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
     --font-display: 'Space Grotesk', -apple-system, sans-serif;
@@ -47,7 +47,7 @@
     --bg-secondary: #e8f4fd;
     --bg-surface: #ffffff;
     --bg-elevated: #f8fafc;
-    
+
     --mario-red: #e52521;
     --mario-red-hover: #ff3834;
     --mario-blue: #0052cc;
@@ -59,11 +59,11 @@
     --mario-pipe: #00a850;
     --mario-brick: #b84418;
     --mario-coin: #e6b800;
-    
+
     --text-primary: #1e293b;
     --text-secondary: #475569;
     --text-muted: #64748b;
-    
+
     --border-color: #cbd5e1;
     --border-mario: #b84418;
     --card-shadow: 0 8px 0 rgba(0, 0, 0, 0.25), 0 12px 24px rgba(0, 0, 0, 0.15);
@@ -88,7 +88,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
-    background-image: 
+    background-image:
         radial-gradient(circle at 10% 20%, rgba(251, 208, 0, 0.08) 0%, transparent 20%),
         radial-gradient(circle at 90% 80%, rgba(229, 37, 33, 0.08) 0%, transparent 25%);
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -96,7 +96,7 @@ body {
 
 [data-theme="light"] body {
     background-color: #5c94fc;
-    background-image: 
+    background-image:
         radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.4) 0%, transparent 60%);
 }
 
@@ -164,8 +164,15 @@ ul {
 }
 
 @keyframes blinkCoin {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
 }
 
 .route-badge {
@@ -623,12 +630,13 @@ ul {
 }
 
 .avatar-img {
-    width: 72px;
-    height: 72px;
+    width: 110px;
+    height: 110px;
     object-fit: cover;
-    border-radius: 12px;
-    border: 3px solid #000000;
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+    object-position: 42% 58%;
+    border-radius: 14px;
+    border: 3px solid var(--mario-yellow);
+    box-shadow: 0 5px 0 #000000;
 }
 
 .avatar-monogram {
@@ -1022,8 +1030,15 @@ ul {
 }
 
 @keyframes modalPop {
-    from { transform: scale(0.85); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .modal-close-btn {
@@ -1094,18 +1109,22 @@ ul {
     .hero-grid {
         grid-template-columns: 1fr;
     }
+
     .timeline-grid,
     .skills-grid,
     .portfolio-grid,
     .contact-grid {
         grid-template-columns: 1fr;
     }
+
     .telemetry-strip {
         grid-template-columns: repeat(2, 1fr);
     }
+
     .telemetry-item:nth-child(2) {
         border-right: none;
     }
+
     .telemetry-item:nth-child(1),
     .telemetry-item:nth-child(2) {
         border-bottom: 2px solid var(--border-color);
@@ -1116,6 +1135,7 @@ ul {
     .mobile-nav-toggle {
         display: flex;
     }
+
     .site-nav {
         display: none;
         width: 100%;
@@ -1123,24 +1143,30 @@ ul {
         padding: 0.75rem 0;
         border-top: 2px solid var(--border-color);
     }
+
     .site-nav.is-open {
         display: block;
     }
+
     .site-nav .nav-list {
         flex-direction: column;
         align-items: stretch;
         gap: 0.35rem;
     }
+
     .header-inner {
         flex-wrap: wrap;
     }
+
     .telemetry-strip {
         grid-template-columns: 1fr;
     }
+
     .telemetry-item {
         border-right: none;
         border-bottom: 2px solid var(--border-color);
     }
+
     .telemetry-item:last-child {
         border-bottom: none;
     }

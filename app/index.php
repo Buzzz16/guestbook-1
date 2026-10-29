@@ -11,13 +11,13 @@ require_once __DIR__ . '/lib/db.php';
 
 $isEmbed = isset($_GET['embed']) && $_GET['embed'] === '1';
 $perPage = 5;
-$page    = isset($_GET['page']) ? max(1, (int) $_GET['page']) : 1;
+$page = isset($_GET['page']) ? max(1, (int) $_GET['page']) : 1;
 
-$errors     = [];
+$errors = [];
 $successMsg = '';
-$oldNama    = '';
-$oldPesan   = '';
-$dbError    = null;
+$oldNama = '';
+$oldPesan = '';
+$dbError = null;
 
 if (isset($_GET['status']) && $_GET['status'] === 'created') {
     $successMsg = 'Pesan Anda berhasil tercatat ke dalam Guestbook melalui node ' . htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') . '.';
@@ -32,13 +32,13 @@ try {
     );
     $ensureMemberStmt->execute([
         ':route_id' => MEMBER_ROUTE,
-        ':nim'      => MEMBER_NIM,
-        ':nama'     => MEMBER_NAMA,
+        ':nim' => MEMBER_NIM,
+        ':nama' => MEMBER_NAMA,
     ]);
 
     // Proses form POST (Validasi Sisi Server + PDO Prepared Statement)
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $oldNama  = trim((string) ($_POST['nama'] ?? ''));
+        $oldNama = trim((string) ($_POST['nama'] ?? ''));
         $oldPesan = trim((string) ($_POST['pesan'] ?? ''));
 
         if ($oldNama === '') {
@@ -63,8 +63,8 @@ try {
             );
             $insertStmt->execute([
                 ':route_id' => MEMBER_ROUTE,
-                ':nama'     => $oldNama,
-                ':pesan'    => $oldPesan,
+                ':nama' => $oldNama,
+                ':pesan' => $oldPesan,
             ]);
 
             $redirectParams = ['status' => 'created', 'page' => 1];
@@ -92,7 +92,7 @@ try {
         $countStmt->execute();
     }
     $totalEntries = (int) $countStmt->fetchColumn();
-    $totalPages   = max(1, (int) ceil($totalEntries / $perPage));
+    $totalPages = max(1, (int) ceil($totalEntries / $perPage));
 
     if ($page > $totalPages) {
         $page = $totalPages;
@@ -135,12 +135,12 @@ try {
     $daftarAnggota = $anggotaStmt->fetchAll();
 
 } catch (Throwable $e) {
-    $dbError       = $e->getMessage();
-    $entries       = [];
+    $dbError = $e->getMessage();
+    $entries = [];
     $daftarAnggota = [];
-    $totalEntries  = 0;
-    $totalPages    = 1;
-    $filterRoute   = '';
+    $totalEntries = 0;
+    $totalPages = 1;
+    $filterRoute = '';
 }
 
 function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): string
@@ -157,15 +157,19 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
 ?>
 <!DOCTYPE html>
 <html lang="id" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guestbook Bersama // <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
+
 <body class="<?= $isEmbed ? 'embed-body' : 'standalone-guestbook-body' ?>">
 
     <?php if (!$isEmbed): ?>
@@ -174,7 +178,10 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
         <header class="site-header">
             <div class="container header-inner">
                 <a href="../index.php" class="brand-logo" aria-label="Kembali ke Personal Page">
-                    <span class="brand-bracket">[</span><?= htmlspecialchars(strtoupper(MEMBER_NICKNAME), ENT_QUOTES, 'UTF-8') ?><span class="brand-accent">//</span><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?><span class="brand-bracket">]</span>
+                    <span
+                        class="brand-bracket">[</span><?= htmlspecialchars(strtoupper(MEMBER_NICKNAME), ENT_QUOTES, 'UTF-8') ?><span
+                        class="brand-accent">//</span><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?><span
+                        class="brand-bracket">]</span>
                 </a>
                 <div class="header-actions">
                     <a href="../index.php" class="btn btn-outline btn-sm">&larr; Kembali ke Personal Page</a>
@@ -194,7 +201,8 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
         <?php if ($dbError !== null): ?>
             <div class="alert alert-danger" role="alert">
                 <div class="alert-title">Koneksi Database Belum Siap</div>
-                <p> Aplikasi tidak dapat terhubung ke database <code>kelompok_db</code>. Pastikan layanan MySQL/MariaDB di XAMPP sudah berjalan dan Anda telah mengimpor <code>app/sql/schema.sql</code>.</p>
+                <p> Aplikasi tidak dapat terhubung ke database <code>kelompok_db</code>. Pastikan layanan MySQL/MariaDB di
+                    XAMPP sudah berjalan dan Anda telah mengimpor <code>app/sql/schema.sql</code>.</p>
                 <pre class="error-detail"><?= htmlspecialchars($dbError, ENT_QUOTES, 'UTF-8') ?></pre>
             </div>
         <?php endif; ?>
@@ -229,16 +237,10 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
                 <form id="guestbookForm" method="POST" action="index.php<?= $isEmbed ? '?embed=1' : '' ?>" novalidate>
                     <div class="form-group">
                         <label for="nama" class="form-label">Nama Lengkap / Panggilan <span class="req">*</span></label>
-                        <input
-                            type="text"
-                            id="nama"
-                            name="nama"
+                        <input type="text" id="nama" name="nama"
                             class="form-control <?= isset($errors['nama']) ? 'is-invalid' : '' ?>"
-                            placeholder="Contoh: Raka Pratama"
-                            maxlength="100"
-                            required
-                            value="<?= htmlspecialchars($oldNama, ENT_QUOTES, 'UTF-8') ?>"
-                        >
+                            placeholder="Contoh: Raka Pratama" maxlength="100" required
+                            value="<?= htmlspecialchars($oldNama, ENT_QUOTES, 'UTF-8') ?>">
                         <div class="field-feedback" id="namaFeedback">
                             <?= isset($errors['nama']) ? htmlspecialchars($errors['nama'], ENT_QUOTES, 'UTF-8') : '' ?>
                         </div>
@@ -249,23 +251,20 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
                             <label for="pesan" class="form-label">Pesan / Catatan <span class="req">*</span></label>
                             <span id="charCounter" class="mono-counter">0 / 1000</span>
                         </div>
-                        <textarea
-                            id="pesan"
-                            name="pesan"
-                            rows="4"
+                        <textarea id="pesan" name="pesan" rows="4"
                             class="form-control <?= isset($errors['pesan']) ? 'is-invalid' : '' ?>"
-                            placeholder="Tuliskan pesan Anda di sini (minimal 5 karakter)..."
-                            maxlength="1000"
-                            required
-                        ><?= htmlspecialchars($oldPesan, ENT_QUOTES, 'UTF-8') ?></textarea>
+                            placeholder="Tuliskan pesan Anda di sini (minimal 5 karakter)..." maxlength="1000"
+                            required><?= htmlspecialchars($oldPesan, ENT_QUOTES, 'UTF-8') ?></textarea>
                         <div class="field-feedback" id="pesanFeedback">
                             <?= isset($errors['pesan']) ? htmlspecialchars($errors['pesan'], ENT_QUOTES, 'UTF-8') : '' ?>
                         </div>
                     </div>
 
                     <div class="form-meta-box">
-                        <span class="mono-small">ROUTE_ID: <strong><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></strong></span>
-                        <span class="mono-small">HOST: <strong><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></strong></span>
+                        <span class="mono-small">ROUTE_ID:
+                            <strong><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></strong></span>
+                        <span class="mono-small">HOST:
+                            <strong><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></strong></span>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">
@@ -280,9 +279,9 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
                         <ul class="node-list">
                             <?php foreach ($daftarAnggota as $agt): ?>
                                 <?php
-                                $rId   = htmlspecialchars((string) $agt['route_id'], ENT_QUOTES, 'UTF-8');
+                                $rId = htmlspecialchars((string) $agt['route_id'], ENT_QUOTES, 'UTF-8');
                                 $rNama = htmlspecialchars((string) $agt['nama'], ENT_QUOTES, 'UTF-8');
-                                $rNim  = htmlspecialchars((string) $agt['nim'], ENT_QUOTES, 'UTF-8');
+                                $rNim = htmlspecialchars((string) $agt['nim'], ENT_QUOTES, 'UTF-8');
                                 $isCurrent = ($agt['route_id'] === MEMBER_ROUTE);
                                 ?>
                                 <li class="node-item <?= $isCurrent ? 'is-active-node' : '' ?>">
@@ -309,10 +308,10 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
                     <!-- Filter Node -->
                     <div class="route-filter-pills" role="group" aria-label="Filter berdasarkan route anggota">
                         <a href="<?= htmlspecialchars(build_page_url(1, $isEmbed, ''), ENT_QUOTES, 'UTF-8') ?>"
-                           class="filter-pill <?= $filterRoute === '' ? 'active' : '' ?>">Semua</a>
+                            class="filter-pill <?= $filterRoute === '' ? 'active' : '' ?>">Semua</a>
                         <?php foreach (['m0', 'm1', 'm2', 'm3', 'm4'] as $rCode): ?>
                             <a href="<?= htmlspecialchars(build_page_url(1, $isEmbed, $rCode), ENT_QUOTES, 'UTF-8') ?>"
-                               class="filter-pill <?= $filterRoute === $rCode ? 'active' : '' ?>"><?= $rCode ?></a>
+                                class="filter-pill <?= $filterRoute === $rCode ? 'active' : '' ?>"><?= $rCode ?></a>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -326,11 +325,11 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
                     <div class="entries-list">
                         <?php foreach ($entries as $item): ?>
                             <?php
-                            $eId          = (int) $item['id'];
-                            $eRoute       = htmlspecialchars((string) $item['route_id'], ENT_QUOTES, 'UTF-8');
-                            $eNama        = htmlspecialchars((string) $item['nama'], ENT_QUOTES, 'UTF-8');
-                            $ePesan       = nl2br(htmlspecialchars((string) $item['pesan'], ENT_QUOTES, 'UTF-8'));
-                            $eTime        = htmlspecialchars((string) $item['created_at'], ENT_QUOTES, 'UTF-8');
+                            $eId = (int) $item['id'];
+                            $eRoute = htmlspecialchars((string) $item['route_id'], ENT_QUOTES, 'UTF-8');
+                            $eNama = htmlspecialchars((string) $item['nama'], ENT_QUOTES, 'UTF-8');
+                            $ePesan = nl2br(htmlspecialchars((string) $item['pesan'], ENT_QUOTES, 'UTF-8'));
+                            $eTime = htmlspecialchars((string) $item['created_at'], ENT_QUOTES, 'UTF-8');
                             $eAnggotaNama = !empty($item['anggota_nama'])
                                 ? htmlspecialchars((string) $item['anggota_nama'], ENT_QUOTES, 'UTF-8')
                                 : 'Node ' . $eRoute;
@@ -338,10 +337,12 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
                             <article class="entry-item">
                                 <div class="entry-header">
                                     <div class="entry-author-wrap">
-                                        <span class="entry-avatar" aria-hidden="true"><?= htmlspecialchars(mb_strtoupper(mb_substr((string) $item['nama'], 0, 1)), ENT_QUOTES, 'UTF-8') ?></span>
+                                        <span class="entry-avatar"
+                                            aria-hidden="true"><?= htmlspecialchars(mb_strtoupper(mb_substr((string) $item['nama'], 0, 1)), ENT_QUOTES, 'UTF-8') ?></span>
                                         <div>
                                             <h3 class="entry-author"><?= $eNama ?></h3>
-                                            <span class="entry-via">via Node <strong><?= $eRoute ?></strong> (<?= $eAnggotaNama ?>)</span>
+                                            <span class="entry-via">via Node <strong><?= $eRoute ?></strong>
+                                                (<?= $eAnggotaNama ?>)</span>
                                         </div>
                                     </div>
                                     <div class="entry-meta">
@@ -359,24 +360,29 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
                     <!-- Navigasi Paginasi (5 Pesan per Halaman) -->
                     <nav class="pagination-bar" aria-label="Paginasi Guestbook">
                         <div class="pagination-info mono-small">
-                            Halaman <strong><?= $page ?></strong> dari <strong><?= $totalPages ?></strong> (<?= $perPage ?> entri/hal)
+                            Halaman <strong><?= $page ?></strong> dari <strong><?= $totalPages ?></strong> (<?= $perPage ?>
+                            entri/hal)
                         </div>
                         <div class="pagination-controls">
                             <?php if ($page > 1): ?>
-                                <a class="page-btn" href="<?= htmlspecialchars(build_page_url($page - 1, $isEmbed, $filterRoute), ENT_QUOTES, 'UTF-8') ?>">&laquo; Prev</a>
+                                <a class="page-btn"
+                                    href="<?= htmlspecialchars(build_page_url($page - 1, $isEmbed, $filterRoute), ENT_QUOTES, 'UTF-8') ?>">&laquo;
+                                    Prev</a>
                             <?php else: ?>
                                 <span class="page-btn is-disabled" aria-disabled="true">&laquo; Prev</span>
                             <?php endif; ?>
 
                             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                                 <a class="page-btn <?= $i === $page ? 'is-current' : '' ?>"
-                                   href="<?= htmlspecialchars(build_page_url($i, $isEmbed, $filterRoute), ENT_QUOTES, 'UTF-8') ?>">
+                                    href="<?= htmlspecialchars(build_page_url($i, $isEmbed, $filterRoute), ENT_QUOTES, 'UTF-8') ?>">
                                     <?= $i ?>
                                 </a>
                             <?php endfor; ?>
 
                             <?php if ($page < $totalPages): ?>
-                                <a class="page-btn" href="<?= htmlspecialchars(build_page_url($page + 1, $isEmbed, $filterRoute), ENT_QUOTES, 'UTF-8') ?>">Next &raquo;</a>
+                                <a class="page-btn"
+                                    href="<?= htmlspecialchars(build_page_url($page + 1, $isEmbed, $filterRoute), ENT_QUOTES, 'UTF-8') ?>">Next
+                                    &raquo;</a>
                             <?php else: ?>
                                 <span class="page-btn is-disabled" aria-disabled="true">Next &raquo;</span>
                             <?php endif; ?>
@@ -390,12 +396,15 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
     <?php if (!$isEmbed): ?>
         <footer class="site-footer">
             <div class="container footer-inner">
-                <p class="mono-small">&copy; <?= date('Y') ?> <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>) &mdash; IF-48-05 Telkom University.</p>
-                <p class="mono-small">MODUL:GUESTBOOK_PDO_V1 // ROUTE:<?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></p>
+                <p class="mono-small">&copy; <?= date('Y') ?>     <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>
+                    (<?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>) &mdash; IF-48-05 Telkom University.</p>
+                <p class="mono-small">MODUL:GUESTBOOK_PDO_V1 //
+                    ROUTE:<?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></p>
             </div>
         </footer>
     <?php endif; ?>
 
     <script src="../assets/js/main.js"></script>
 </body>
+
 </html>
