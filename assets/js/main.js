@@ -46,7 +46,7 @@ function initThemeToggle() {
 
 function updateThemeLabel(theme, labelEl) {
     if (!labelEl) return;
-    labelEl.textContent = theme === 'light' ? 'HARBOR LIGHT' : 'STEALTH DARK';
+    labelEl.textContent = theme === 'light' ? 'OVERWORLD' : 'UNDERGROUND';
 }
 
 /**
