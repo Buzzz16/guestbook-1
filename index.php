@@ -185,7 +185,7 @@ $portfolios = [
                     </h1>
 
                     <p class="hero-lead">
-                        Mahasiswa <strong><?= htmlspecialchars(MEMBER_PRODI, ENT_QUOTES, 'UTF-8') ?></strong> kelas <strong><?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></strong> dan panitia aktif pada kepanitiaan <strong>INTELECTA</strong>. Berfokus pada perancangan rekayasa perangkat lunak modern, basis data relasional terstruktur, serta eksplorasi antarmuka web yang intuitif, aman, dan responsif.
+                        Mahasiswa Informatika yang punya prinsip disiplin, perfeksionis, dan zero tolerance buat hal yang buang-buang waktu. Suka mengeksplorasi sistem, teknologi, dan ide-ide baru dengan pendekatan yang santai tapi fokus. <em>Let’s build cool things and enjoy the ride!</em>
                     </p>
 
                     <div class="hero-cta-group">
