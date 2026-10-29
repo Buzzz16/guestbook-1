@@ -141,7 +141,7 @@ $portfolios = [
     <link
         href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=3">
 </head>
 
 <body>
@@ -152,13 +152,9 @@ $portfolios = [
     <!-- Header & Navigasi -->
     <header class="site-header" id="top">
         <div class="container header-inner">
-            <a href="#profil" class="brand-logo"
-                aria-label="Beranda <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>">
+            <a href="#profil" class="brand-logo" aria-label="Beranda <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>">
                 <span>🍄</span>
-                <span
-                    class="brand-bracket">[</span><?= htmlspecialchars(strtoupper(MEMBER_NICKNAME), ENT_QUOTES, 'UTF-8') ?><span
-                    class="brand-accent">//</span><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?><span
-                    class="brand-bracket">]</span>
+                <span><span class="brand-bracket">[</span><?= htmlspecialchars(strtoupper(MEMBER_NICKNAME), ENT_QUOTES, 'UTF-8') ?><span class="brand-accent">//</span><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?><span class="brand-bracket">]</span></span>
             </a>
 
             <button class="mobile-nav-toggle" id="mobileNavToggle" aria-expanded="false" aria-controls="primaryNav"
@@ -170,12 +166,12 @@ $portfolios = [
 
             <nav class="site-nav" id="primaryNav" aria-label="Navigasi Level">
                 <ul class="nav-list">
-                    <li><a href="#profil" class="nav-link active">01. Profil</a></li>
-                    <li><a href="#pendidikan" class="nav-link">02. Pengalaman</a></li>
-                    <li><a href="#keahlian" class="nav-link">03. Power-Ups</a></li>
-                    <li><a href="#portofolio" class="nav-link">04. Portofolio</a></li>
-                    <li><a href="#aplikasi" class="nav-link">05. Guestbook</a></li>
-                    <li><a href="#kontak" class="nav-link">06. Kontak</a></li>
+                    <li><a href="#profil" class="nav-link active">Profil</a></li>
+                    <li><a href="#pendidikan" class="nav-link">Pengalaman</a></li>
+                    <li><a href="#keahlian" class="nav-link">Keahlian</a></li>
+                    <li><a href="#portofolio" class="nav-link">Portofolio</a></li>
+                    <li><a href="#aplikasi" class="nav-link">Guestbook</a></li>
+                    <li><a href="#kontak" class="nav-link">Kontak</a></li>
                 </ul>
             </nav>
 
