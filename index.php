@@ -16,6 +16,7 @@ $skills = [
         'level'    => 'Advanced',
         'desc'     => 'Pemrograman backend terstruktur dengan PHP 8 Native, integrasi PDO Prepared Statements anti-SQL injection, dan manajemen basis data relasional.',
         'code'     => 'PH-01',
+        'icon'     => '⚡',
     ],
     [
         'name'     => 'Java (OOP Architecture)',
@@ -23,6 +24,7 @@ $skills = [
         'level'    => 'Advanced',
         'desc'     => 'Penerapan prinsip OOP (Inheritance, Polymorphism, Encapsulation, Abstraction), struktur data linier, dan pemodelan arsitektur MVC.',
         'code'     => 'JV-02',
+        'icon'     => '☕',
     ],
     [
         'name'     => 'Frontend UI (HTML5 & CSS3)',
@@ -30,6 +32,7 @@ $skills = [
         'level'    => 'Advanced',
         'desc'     => 'Markup semantik ramah aksesibilitas, layout modern menggunakan Flexbox & CSS Grid, serta implementasi sistem tema Stealth Dark / Harbor Light.',
         'code'     => 'FE-03',
+        'icon'     => '🎨',
     ],
     [
         'name'     => 'JavaScript (Vanilla)',
@@ -37,6 +40,7 @@ $skills = [
         'level'    => 'Intermediate',
         'desc'     => 'Manipulasi DOM reaktif, filter data portofolio, modal interaktif, validasi formulir sisi klien, dan penanganan event berbasis asynchronous.',
         'code'     => 'JS-04',
+        'icon'     => '✨',
     ],
     [
         'name'     => 'Git & GitHub Collaboration',
@@ -44,6 +48,7 @@ $skills = [
         'level'    => 'Intermediate',
         'desc'     => 'Manajemen source code kolaboratif, branch workflow terisolasi, commit terstruktur, dan integrasi repositori bersama tim.',
         'code'     => 'GT-05',
+        'icon'     => '🌿',
     ],
     [
         'name'     => 'Event & Team Coordination',
@@ -51,12 +56,14 @@ $skills = [
         'level'    => 'Competent',
         'desc'     => 'Pengalaman kepanitiaan aktif pada INTELECTA (Informatics Intellectual Arena) dalam manajemen acara, komunikasi tim, dan alur teknis kegiatan.',
         'code'     => 'ORG-06',
+        'icon'     => '🚀',
     ],
 ];
 
 $portfolios = [
     [
         'id'       => 'PRJ-01',
+        'icon'     => '🏥',
         'title'    => 'MediCare Portal',
         'subtitle' => 'Sistem Reservasi & Antrean Layanan Kesehatan Terpadu',
         'category' => 'backend',
@@ -72,6 +79,7 @@ $portfolios = [
     ],
     [
         'id'       => 'PRJ-02',
+        'icon'     => '📦',
         'title'    => 'SmartInventory Core',
         'subtitle' => 'Sistem Manajemen Pergudangan & Pelacakan Stok Aset',
         'category' => 'java-app',
@@ -87,6 +95,7 @@ $portfolios = [
     ],
     [
         'id'       => 'PRJ-03',
+        'icon'     => '🏆',
         'title'    => 'Intelecta Event System',
         'subtitle' => 'Web Portal Informasi & Pendaftaran Peserta INTELECTA',
         'category' => 'event-web',
@@ -102,10 +111,11 @@ $portfolios = [
     ],
     [
         'id'       => 'PRJ-04',
+        'icon'     => '💬',
         'title'    => 'Distributed Guestbook Node',
         'subtitle' => 'Aplikasi Buku Tamu Terdistribusi Multi-Node (m0 - m5)',
         'category' => 'fullstack',
-        'tags'     => ['PHP 8 PDO', 'MySQL Server', 'Vanilla JS', 'Harbor Grey UI'],
+        'tags'     => ['PHP 8 PDO', 'MySQL Server', 'Vanilla JS', 'Cyber-Glass UI'],
         'year'     => '2026',
         'status'   => 'PRA-UTS COMPONENT',
         'summary'  => 'Node aplikasi bersama pra-UTS yang menghubungkan personal page ke sistem buku tamu terpusat dengan filter route mahasiswa, paginasi dinamis, dan validasi sisi klien & server.',
@@ -126,7 +136,7 @@ $portfolios = [
     <title><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> // Personal Page &amp; Guestbook</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -174,9 +184,9 @@ $portfolios = [
             <div class="container hero-grid">
                 <div class="hero-content">
                     <div class="spec-pill-row">
-                        <span class="spec-pill">NODE // <?= htmlspecialchars(strtoupper(MEMBER_ROUTE), ENT_QUOTES, 'UTF-8') ?></span>
-                        <span class="spec-pill">NIM // <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></span>
-                        <span class="spec-pill">CLASS // <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
+                        <span class="spec-pill">✨ NODE // <?= htmlspecialchars(strtoupper(MEMBER_ROUTE), ENT_QUOTES, 'UTF-8') ?></span>
+                        <span class="spec-pill">🎓 NIM // <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></span>
+                        <span class="spec-pill">🚀 CLASS // <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
                     </div>
 
                     <h1 class="hero-title">
@@ -207,15 +217,15 @@ $portfolios = [
                             <span class="telemetry-lbl">KELAS AKTIF</span>
                         </div>
                         <div class="telemetry-item">
-                            <span class="telemetry-val">INTELECTA</span>
+                            <span class="telemetry-val" style="color: var(--accent-pink);">INTELECTA</span>
                             <span class="telemetry-lbl">KEPANITIAAN</span>
                         </div>
                         <div class="telemetry-item">
-                            <span class="telemetry-val">04 APPS</span>
+                            <span class="telemetry-val" style="color: var(--accent-cyan);">04 APPS</span>
                             <span class="telemetry-lbl">PORTOFOLIO UTAMA</span>
                         </div>
                         <div class="telemetry-item">
-                            <span class="telemetry-val">NODE <?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></span>
+                            <span class="telemetry-val" style="color: var(--accent-lime);">NODE <?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></span>
                             <span class="telemetry-lbl">STATUS SERVER</span>
                         </div>
                     </div>
@@ -229,7 +239,7 @@ $portfolios = [
                     </div>
 
                     <div class="id-avatar-box">
-                        <img src="assets/img/avatar.png" alt="Avatar <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>" class="avatar-img" width="64" height="64" onerror="this.style.display='none'; document.getElementById('avatarFallback').style.display='flex';">
+                        <img src="assets/img/avatar.png" alt="Avatar <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>" class="avatar-img" width="76" height="76" onerror="this.style.display='none'; document.getElementById('avatarFallback').style.display='flex';">
                         <div class="avatar-monogram" id="avatarFallback" style="display: none;" aria-hidden="true">DNM</div>
                         <div class="avatar-meta">
                             <span class="mono-small">CALLSIGN: <?= htmlspecialchars(strtoupper(MEMBER_NICKNAME), ENT_QUOTES, 'UTF-8') ?></span>
@@ -245,7 +255,7 @@ $portfolios = [
                         </div>
                         <div class="spec-row">
                             <dt>NIM</dt>
-                            <dd class="mono-val"><?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></dd>
+                            <dd class="mono-val" style="color: var(--accent-cyan);"><?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></dd>
                         </div>
                         <div class="spec-row">
                             <dt>PROGRAM STUDI</dt>
@@ -261,7 +271,7 @@ $portfolios = [
                         </div>
                         <div class="spec-row">
                             <dt>NODE ROUTE</dt>
-                            <dd class="mono-val"><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?> (Anggota)</dd>
+                            <dd class="mono-val" style="color: var(--accent-pink);"><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?> (Anggota)</dd>
                         </div>
                     </dl>
 
@@ -288,7 +298,7 @@ $portfolios = [
                     <!-- Card Pendidikan -->
                     <article class="tech-card timeline-card">
                         <div class="card-top-bar">
-                            <span class="mono-label">EDU // UNDERGRADUATE</span>
+                            <span class="mono-label">🎓 EDU // UNDERGRADUATE</span>
                             <span class="badge-route">2024 &mdash; SEKARANG</span>
                         </div>
                         <h3 class="card-heading">S1 Informatika &mdash; Telkom University</h3>
@@ -305,8 +315,8 @@ $portfolios = [
                     <!-- Card Kepanitiaan INTELECTA -->
                     <article class="tech-card timeline-card highlight-border">
                         <div class="card-top-bar">
-                            <span class="mono-label">COMMITTEE // INTELECTA</span>
-                            <span class="badge-route">ACTIVE MEMBER</span>
+                            <span class="mono-label" style="color: var(--accent-pink);">🏆 COMMITTEE // INTELECTA</span>
+                            <span class="badge-route" style="background: rgba(236, 72, 153, 0.15); color: var(--accent-pink); border-color: rgba(236, 72, 153, 0.4);">ACTIVE MEMBER</span>
                         </div>
                         <h3 class="card-heading">Kepanitiaan INTELECTA</h3>
                         <p class="card-sub">Informatics Intellectual Arena &bull; Fakultas Informatika</p>
@@ -338,7 +348,7 @@ $portfolios = [
                     <?php foreach ($skills as $skill): ?>
                         <article class="tech-card skill-card">
                             <div class="card-top-bar">
-                                <span class="mono-label"><?= htmlspecialchars($skill['code'], ENT_QUOTES, 'UTF-8') ?> // <?= htmlspecialchars($skill['category'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <span class="mono-label"><?= $skill['icon'] ?> <?= htmlspecialchars($skill['code'], ENT_QUOTES, 'UTF-8') ?> // <?= htmlspecialchars($skill['category'], ENT_QUOTES, 'UTF-8') ?></span>
                                 <span class="skill-level"><?= htmlspecialchars($skill['level'], ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
                             <h3 class="skill-title"><?= htmlspecialchars($skill['name'], ENT_QUOTES, 'UTF-8') ?></h3>
@@ -357,7 +367,7 @@ $portfolios = [
                         <span class="section-tag">04 // SELECTED PROJECTS</span>
                         <h2 class="section-title">Portofolio Proyek</h2>
                         <p class="section-subtitle">
-                            Koleksi karya proyek perangkat lunak pilihan. Klik kartu untuk melihat ringkasan detail.
+                            Koleksi karya proyek perangkat lunak pilihan. Klik kartu untuk melihat ringkasan detail interaktif.
                         </p>
                     </div>
 
@@ -375,7 +385,7 @@ $portfolios = [
                     <?php foreach ($portfolios as $proj): ?>
                         <article class="tech-card portfolio-card" data-category="<?= htmlspecialchars($proj['category'], ENT_QUOTES, 'UTF-8') ?>" tabindex="0" role="button" aria-label="Lihat detail proyek <?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?>">
                             <div class="card-top-bar">
-                                <span class="mono-label"><?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?> // <?= htmlspecialchars($proj['year'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <span class="mono-label"><?= $proj['icon'] ?> <?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?> // <?= htmlspecialchars($proj['year'], ENT_QUOTES, 'UTF-8') ?></span>
                                 <span class="status-chip"><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
 
@@ -414,7 +424,7 @@ $portfolios = [
                 <div class="app-embed-card">
                     <div class="app-embed-topbar">
                         <div class="topbar-left">
-                            <span class="mono-label">LIVE_EMBED // app/index.php</span>
+                            <span class="mono-label">⚡ LIVE_EMBED // app/index.php</span>
                             <span class="route-badge">NODE <?= htmlspecialchars(strtoupper(MEMBER_ROUTE), ENT_QUOTES, 'UTF-8') ?></span>
                         </div>
                         <div class="topbar-right">
@@ -442,7 +452,7 @@ $portfolios = [
                 <div class="contact-grid">
                     <a href="mailto:dininadia2005@gmail.com" class="tech-card contact-card">
                         <div class="card-top-bar">
-                            <span class="mono-label">CHANNEL // 01</span>
+                            <span class="mono-label">💌 CHANNEL // 01</span>
                             <span class="contact-arrow">&nearr;</span>
                         </div>
                         <h3 class="contact-title">Email Resmi</h3>
@@ -452,7 +462,7 @@ $portfolios = [
 
                     <a href="https://github.com/DiniNadia13" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
                         <div class="card-top-bar">
-                            <span class="mono-label">CHANNEL // 02</span>
+                            <span class="mono-label">🐙 CHANNEL // 02</span>
                             <span class="contact-arrow">&nearr;</span>
                         </div>
                         <h3 class="contact-title">GitHub Repository</h3>
@@ -462,7 +472,7 @@ $portfolios = [
 
                     <a href="https://www.linkedin.com/in/dini-nadia-mawaddah-098132405/" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
                         <div class="card-top-bar">
-                            <span class="mono-label">CHANNEL // 03</span>
+                            <span class="mono-label">💼 CHANNEL // 03</span>
                             <span class="contact-arrow">&nearr;</span>
                         </div>
                         <h3 class="contact-title">LinkedIn Profile</h3>
@@ -483,13 +493,13 @@ $portfolios = [
                 <span class="status-chip" id="modalStatus">STATUS</span>
             </div>
             <h3 class="portfolio-title" id="modalTitle" style="margin-top: 0.5rem;">Judul Proyek</h3>
-            <p class="portfolio-subtitle" id="modalSubtitle" style="margin-bottom: 1rem; color: var(--accent-lime);">Subjudul Proyek</p>
+            <p class="portfolio-subtitle" id="modalSubtitle" style="margin-bottom: 1rem; color: var(--accent-pink);">Subjudul Proyek</p>
             <p class="portfolio-summary" id="modalSummary" style="margin-bottom: 1rem;"></p>
             
-            <h4 style="font-size: 0.95rem; font-family: var(--font-mono); margin-bottom: 0.5rem; color: var(--text-primary);">HIGHLIGHT FITUR:</h4>
+            <h4 style="font-size: 0.95rem; font-family: var(--font-mono); margin-bottom: 0.5rem; color: var(--accent-cyan);">HIGHLIGHT FITUR:</h4>
             <ul class="spec-bullet-list" id="modalHighlights" style="margin-bottom: 1.25rem;"></ul>
 
-            <h4 style="font-size: 0.95rem; font-family: var(--font-mono); margin-bottom: 0.5rem; color: var(--text-primary);">TEKNOLOGI:</h4>
+            <h4 style="font-size: 0.95rem; font-family: var(--font-mono); margin-bottom: 0.5rem; color: var(--accent-cyan);">TEKNOLOGI:</h4>
             <div class="tag-row" id="modalTags"></div>
         </div>
     </div>
@@ -498,7 +508,7 @@ $portfolios = [
     <footer class="site-footer">
         <div class="container footer-inner">
             <div class="footer-brand">
-                <span class="mono-small"><strong><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></strong> (<?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>)</span>
+                <span class="mono-small"><strong>Dini Nadia Mawaddah</strong> (103012430028)</span>
                 <span class="mono-small">S1 Informatika Telkom University &bull; Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull; Panitia INTELECTA</span>
             </div>
             <div class="footer-links">
