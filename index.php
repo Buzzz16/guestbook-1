@@ -4,125 +4,125 @@ declare(strict_types=1);
 /**
  * Halaman Utama Personal Page (Root `index.php`)
  * Mahasiswa : Dini Nadia Mawaddah - 103012430028
- * Kelas     : S1 Informatika Telkom University (IF-48-05)
+ * Tema      : Super Mario Bros Retro-Modern & Clean Readable UI
  */
 
 require_once __DIR__ . '/identity.php';
 
 $skills = [
     [
-        'name'     => 'PHP & MySQL (Backend)',
-        'category' => 'Web Backend & Database',
-        'level'    => 'Advanced',
-        'desc'     => 'Pemrograman backend terstruktur dengan PHP 8 Native, integrasi PDO Prepared Statements anti-SQL injection, dan manajemen basis data relasional.',
+        'name'     => 'PHP & MySQL',
+        'category' => 'Backend & Database',
+        'level'    => 'POWER-UP ★★★',
+        'desc'     => 'Backend web terstruktur, integrasi PDO anti-SQL Injection, dan perancangan skema relasional.',
         'code'     => 'PH-01',
-        'icon'     => '⚡',
+        'icon'     => '🍄',
     ],
     [
-        'name'     => 'Java (OOP Architecture)',
-        'category' => 'Object-Oriented Programming',
-        'level'    => 'Advanced',
-        'desc'     => 'Penerapan prinsip OOP (Inheritance, Polymorphism, Encapsulation, Abstraction), struktur data linier, dan pemodelan arsitektur MVC.',
+        'name'     => 'Java OOP',
+        'category' => 'Object-Oriented Architecture',
+        'level'    => 'POWER-UP ★★★',
+        'desc'     => 'Pemrograman berorientasi objek (Inheritance, Polymorphism, Encapsulation), MVC, dan struktur data.',
         'code'     => 'JV-02',
         'icon'     => '☕',
     ],
     [
-        'name'     => 'Frontend UI (HTML5 & CSS3)',
-        'category' => 'Responsive UI Engineering',
-        'level'    => 'Advanced',
-        'desc'     => 'Markup semantik ramah aksesibilitas, layout modern menggunakan Flexbox & CSS Grid, serta implementasi sistem tema Stealth Dark / Harbor Light.',
+        'name'     => 'HTML5 & CSS3',
+        'category' => 'Responsive UI Design',
+        'level'    => 'POWER-UP ★★★',
+        'desc'     => 'Desain semantik modern, sistem Flexbox & Grid, responsif laptop & ponsel, serta tema dinamis.',
         'code'     => 'FE-03',
         'icon'     => '🎨',
     ],
     [
-        'name'     => 'JavaScript (Vanilla)',
-        'category' => 'Client-Side Scripting',
-        'level'    => 'Intermediate',
-        'desc'     => 'Manipulasi DOM reaktif, filter data portofolio, modal interaktif, validasi formulir sisi klien, dan penanganan event berbasis asynchronous.',
+        'name'     => 'Vanilla JavaScript',
+        'category' => 'Interactive Scripting',
+        'level'    => 'POWER-UP ★★☆',
+        'desc'     => 'Manipulasi DOM dinamis, modal dialog interaktif, filter portofolio, dan validasi form.',
         'code'     => 'JS-04',
-        'icon'     => '✨',
+        'icon'     => '⭐',
     ],
     [
-        'name'     => 'Git & GitHub Collaboration',
-        'category' => 'Version Control System',
-        'level'    => 'Intermediate',
-        'desc'     => 'Manajemen source code kolaboratif, branch workflow terisolasi, commit terstruktur, dan integrasi repositori bersama tim.',
+        'name'     => 'Git & GitHub',
+        'category' => 'Version Control',
+        'level'    => 'POWER-UP ★★☆',
+        'desc'     => 'Kolaborasi source code, workflow branching terstruktur, commit konsisten, dan sinkronisasi tim.',
         'code'     => 'GT-05',
         'icon'     => '🌿',
     ],
     [
-        'name'     => 'Event & Team Coordination',
-        'category' => 'Leadership & Organization',
-        'level'    => 'Competent',
-        'desc'     => 'Pengalaman kepanitiaan aktif pada INTELECTA (Informatics Intellectual Arena) dalam manajemen acara, komunikasi tim, dan alur teknis kegiatan.',
+        'name'     => 'INTELECTA Event',
+        'category' => 'Organization & Teamwork',
+        'level'    => 'SPECIAL BADGE 🏆',
+        'desc'     => 'Kepanitiaan aktif INTELECTA dalam koordinasi acara, manajemen teknis kompetisi, dan alur peserta.',
         'code'     => 'ORG-06',
-        'icon'     => '🚀',
+        'icon'     => '🚩',
     ],
 ];
 
 $portfolios = [
     [
-        'id'       => 'PRJ-01',
+        'id'       => 'WORLD 1',
         'icon'     => '🏥',
         'title'    => 'MediCare Portal',
-        'subtitle' => 'Sistem Reservasi & Antrean Layanan Kesehatan Terpadu',
+        'subtitle' => 'Platform Manajemen & Reservasi Antrean Pasien',
         'category' => 'backend',
-        'tags'     => ['PHP 8 Native', 'MySQL (PDO)', 'Responsive CSS', 'Clean Architecture'],
+        'tags'     => ['PHP 8 Native', 'MySQL PDO', 'Clean MVC'],
         'year'     => '2025',
-        'status'   => 'PRODUCTION READY',
-        'summary'  => 'Aplikasi web manajemen klinik yang memfasilitasi pendaftaran pasien, penjadwalan dokter secara real-time, pencatatan histori layanan medis, serta verifikasi data berbasis role-based access.',
+        'status'   => 'CLEARED 🏆',
+        'summary'  => 'Sistem registrasi layanan kesehatan dengan autentikasi berjenjang (Admin & Pasien), penjadwalan dokter, serta proteksi penuh SQL Injection via PDO.',
         'highlights' => [
-            'Autentikasi role-based untuk Admin, Tenaga Medis, dan Pasien',
-            'Implementasi PDO Prepared Statements untuk pencegahan SQL Injection menyeluruh',
-            'Antarmuka adaptif yang responsif pada layar desktop maupun smartphone',
+            'Autentikasi role-based dan dashboard dokter real-time',
+            'Manajemen rekam medis dengan validasi input berlapis',
+            'Tampilan adaptif dan responsif untuk mobile dan tablet',
         ],
     ],
     [
-        'id'       => 'PRJ-02',
+        'id'       => 'WORLD 2',
         'icon'     => '📦',
         'title'    => 'SmartInventory Core',
-        'subtitle' => 'Sistem Manajemen Pergudangan & Pelacakan Stok Aset',
+        'subtitle' => 'Sistem Pelacakan Aset & Pergudangan Logistik',
         'category' => 'java-app',
-        'tags'     => ['Java 17', 'OOP Architecture', 'MySQL', 'Desktop UI'],
+        'tags'     => ['Java 17', 'OOP Architecture', 'MySQL DB'],
         'year'     => '2025',
-        'status'   => 'COMPLETED',
-        'summary'  => 'Perangkat lunak enterprise untuk pengelolaan logistik pergudangan yang dilengkapi fitur pelacakan otomatis pergerakan stok, verifikasi batas minimum barang, serta pelaporan transaksi inventaris.',
+        'status'   => 'CLEARED 🏆',
+        'summary'  => 'Aplikasi desktop berbasis Java OOP untuk inventarisasi barang gudang, peringatan stok minimum otomatis, dan pencatatan transaksi ACID.',
         'highlights' => [
-            'Penerapan konsep OOP murni dengan arsitektur berlapis yang rapi',
-            'Integritas data transaksi ACID untuk menghindari anomali kuantitas stok',
-            'Modul pencarian cepat dan penyaringan data inventaris multi-kriteria',
+            'Arsitektur pola MVC berorientasi objek yang rapi',
+            'Integrasi transaksi basis data untuk integritas stok',
+            'Modul pencarian cepat dan ekspor laporan inventaris',
         ],
     ],
     [
-        'id'       => 'PRJ-03',
+        'id'       => 'WORLD 3',
         'icon'     => '🏆',
         'title'    => 'Intelecta Event System',
-        'subtitle' => 'Web Portal Informasi & Pendaftaran Peserta INTELECTA',
+        'subtitle' => 'Web Portal Pendaftaran & Lini Masa INTELECTA',
         'category' => 'event-web',
-        'tags'     => ['HTML5 Semantic', 'Custom CSS', 'JavaScript', 'PHP Backend'],
+        'tags'     => ['HTML5 Semantic', 'Custom CSS', 'Vanilla JS'],
         'year'     => '2025',
-        'status'   => 'ACTIVE RELEASE',
-        'summary'  => 'Platform web resmi kepanitiaan INTELECTA (Informatics Intellectual Arena) untuk menyajikan jadwal perlombaan, panduan teknis, pendaftaran delegasi peserta lomba, dan pengumuman tahap kompetisi.',
+        'status'   => 'ONLINE ⭐️',
+        'summary'  => 'Portal resmi kompetisi tahunan INTELECTA Fakultas Informatika untuk publikasi jadwal lomba, panduan teknis, dan verifikasi delegasi peserta.',
         'highlights' => [
-            'Portal registrasi digital terintegrasi untuk peserta kompetisi informatika',
-            'Tampilan jadwal dan lini masa perlombaan interaktif yang informatif',
-            'Dukungan koordinasi divisi acara dan sekretariat dalam verifikasi berkas',
+            'Sistem registrasi delegasi peserta lomba terpusat',
+            'Tampilan lini masa kompetisi yang interaktif dan jelas',
+            'Alur koordinasi divisi acara yang terorganisir',
         ],
     ],
     [
-        'id'       => 'PRJ-04',
+        'id'       => 'WORLD 4',
         'icon'     => '💬',
         'title'    => 'Distributed Guestbook Node',
-        'subtitle' => 'Aplikasi Buku Tamu Terdistribusi Multi-Node (m0 - m5)',
+        'subtitle' => 'Node Aplikasi Bersama Terdistribusi Pra-UTS',
         'category' => 'fullstack',
-        'tags'     => ['PHP 8 PDO', 'MySQL Server', 'Vanilla JS', 'Cyber-Glass UI'],
+        'tags'     => ['PHP 8 PDO', 'MySQL Server', 'Mario HUD'],
         'year'     => '2026',
-        'status'   => 'PRA-UTS COMPONENT',
-        'summary'  => 'Node aplikasi bersama pra-UTS yang menghubungkan personal page ke sistem buku tamu terpusat dengan filter route mahasiswa, paginasi dinamis, dan validasi sisi klien & server.',
+        'status'   => 'ACTIVE NODE 🟢',
+        'summary'  => 'Aplikasi buku tamu terdistribusi yang menyematkan konektivitas basis data terpusat, filter route anggota (m0 - m5), dan live embed iframe.',
         'highlights' => [
-            'Berfungsi sebagai node pelayan lokal terverifikasi (Node m3)',
-            'Mendukung mode standalone maupun mode embed iframe di halaman utama',
-            'Validasi karakter ganda serta pencegahan XSS dengan htmlspecialchars',
+            'Node pelayan lokal terverifikasi (Node m3)',
+            'Mendukung mode standalone maupun embed di halaman utama',
+            'Validasi sisi klien & server dengan proteksi anti-XSS',
         ],
     ],
 ];
@@ -133,21 +133,22 @@ $portfolios = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Personal Page <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> - Mahasiswa S1 Informatika Telkom University (<?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?>) & Aplikasi Bersama Guestbook.">
-    <title><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> // Personal Page &amp; Guestbook</title>
+    <title><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> // Mario Level // Personal Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-    <!-- Banner Identitas Wajib di Bagian Paling Atas (served_by.php) -->
+    <!-- Mario HUD Banner (`app/partials/served_by.php`) -->
     <?php require_once __DIR__ . '/app/partials/served_by.php'; ?>
 
-    <!-- Header & Navigasi Semantik HTML5 -->
+    <!-- Header & Navigasi -->
     <header class="site-header" id="top">
         <div class="container header-inner">
             <a href="#profil" class="brand-logo" aria-label="Beranda <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>">
+                <span>🍄</span>
                 <span class="brand-bracket">[</span><?= htmlspecialchars(strtoupper(MEMBER_NICKNAME), ENT_QUOTES, 'UTF-8') ?><span class="brand-accent">//</span><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?><span class="brand-bracket">]</span>
             </a>
 
@@ -157,21 +158,21 @@ $portfolios = [
                 <span class="bar"></span>
             </button>
 
-            <nav class="site-nav" id="primaryNav" aria-label="Navigasi Utama">
+            <nav class="site-nav" id="primaryNav" aria-label="Navigasi Level">
                 <ul class="nav-list">
                     <li><a href="#profil" class="nav-link active">01. Profil</a></li>
-                    <li><a href="#pendidikan" class="nav-link">02. Pendidikan &amp; Organisasi</a></li>
-                    <li><a href="#keahlian" class="nav-link">03. Keahlian</a></li>
+                    <li><a href="#pendidikan" class="nav-link">02. Pengalaman</a></li>
+                    <li><a href="#keahlian" class="nav-link">03. Power-Ups</a></li>
                     <li><a href="#portofolio" class="nav-link">04. Portofolio</a></li>
-                    <li><a href="#aplikasi" class="nav-link">05. Aplikasi</a></li>
+                    <li><a href="#aplikasi" class="nav-link">05. Guestbook</a></li>
                     <li><a href="#kontak" class="nav-link">06. Kontak</a></li>
                 </ul>
             </nav>
 
             <div class="header-actions">
-                <button type="button" id="themeToggleBtn" class="btn btn-icon" aria-label="Ubah mode kontras tampilan" title="Toggle Harbor Contrast Theme">
+                <button type="button" id="themeToggleBtn" class="btn btn-icon" aria-label="Ubah tema Overworld / Underground" title="Toggle Mario World Theme">
                     <span class="theme-indicator-dot"></span>
-                    <span class="mono-small" id="themeLabel">STEALTH DARK</span>
+                    <span class="mono-small" id="themeLabel" style="font-family: var(--font-pixel); font-size: 0.65rem;">UNDERGROUND</span>
                 </button>
                 <a href="app/index.php" class="btn btn-primary btn-sm">Buka Guestbook &nearr;</a>
             </div>
@@ -179,19 +180,19 @@ $portfolios = [
     </header>
 
     <main>
-        <!-- SECTION 1: PROFIL (HERO SECTION) -->
+        <!-- SECTION 1: PROFIL (LEVEL 1: PLAYER PROFILE) -->
         <section id="profil" class="hero-section section-block">
             <div class="container hero-grid">
                 <div class="hero-content">
                     <div class="spec-pill-row">
-                        <span class="spec-pill">✨ NODE // <?= htmlspecialchars(strtoupper(MEMBER_ROUTE), ENT_QUOTES, 'UTF-8') ?></span>
-                        <span class="spec-pill">🎓 NIM // <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></span>
-                        <span class="spec-pill">🚀 CLASS // <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
+                        <span class="spec-pill">⭐ PLAYER 1 READY</span>
+                        <span class="spec-pill">NODE // <?= htmlspecialchars(strtoupper(MEMBER_ROUTE), ENT_QUOTES, 'UTF-8') ?></span>
+                        <span class="spec-pill">NIM // <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></span>
                     </div>
 
                     <h1 class="hero-title">
                         <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>
-                        <span class="hero-alias">CALLSIGN &ldquo;<?= htmlspecialchars(strtoupper(MEMBER_NICKNAME), ENT_QUOTES, 'UTF-8') ?>&rdquo;</span>
+                        <span class="hero-alias">★ DINI</span>
                     </h1>
 
                     <p class="hero-lead">
@@ -200,97 +201,84 @@ $portfolios = [
 
                     <div class="hero-cta-group">
                         <a href="#portofolio" class="btn btn-primary">
-                            <span>Lihat Portofolio</span>
-                            <span class="btn-arrow">&rarr;</span>
+                            <span>▶ Lihat Portofolio</span>
                         </a>
                         <a href="#aplikasi" class="btn btn-outline">
-                            <span>Isi Buku Tamu Bersama</span>
-                        </a>
-                        <a href="app/index.php" class="btn btn-ghost">
-                            <span>Halaman Penuh Guestbook &nearr;</span>
+                            <span>🟢 Buka Guestbook Bersama</span>
                         </a>
                     </div>
 
-                    <div class="telemetry-strip" aria-label="Ringkasan Akademik dan Proyek">
+                    <!-- HUD Status Ringkas -->
+                    <div class="telemetry-strip" aria-label="Status Player">
                         <div class="telemetry-item">
                             <span class="telemetry-val"><?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
-                            <span class="telemetry-lbl">KELAS AKTIF</span>
+                            <span class="telemetry-lbl">KELAS</span>
                         </div>
                         <div class="telemetry-item">
-                            <span class="telemetry-val" style="color: var(--accent-pink);">INTELECTA</span>
-                            <span class="telemetry-lbl">KEPANITIAAN</span>
+                            <span class="telemetry-val">INTELECTA</span>
+                            <span class="telemetry-lbl">PANITIA</span>
                         </div>
                         <div class="telemetry-item">
-                            <span class="telemetry-val" style="color: var(--accent-cyan);">04 APPS</span>
-                            <span class="telemetry-lbl">PORTOFOLIO UTAMA</span>
+                            <span class="telemetry-val">04 WORLDS</span>
+                            <span class="telemetry-lbl">PROYEK</span>
                         </div>
                         <div class="telemetry-item">
-                            <span class="telemetry-val" style="color: var(--accent-lime);">NODE <?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></span>
-                            <span class="telemetry-lbl">STATUS SERVER</span>
+                            <span class="telemetry-val">NODE <?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></span>
+                            <span class="telemetry-lbl">SERVER</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Kartu Identitas Teknis (Techwear ID Tag) -->
-                <aside class="hero-id-card tech-card" aria-label="Kartu Identitas Mahasiswa">
+                <!-- Mario Player Card -->
+                <aside class="hero-id-card tech-card" aria-label="Player Character Card">
                     <div class="card-top-bar">
-                        <span class="mono-label">ID_BADGE // TELKOM_UNIV</span>
-                        <span class="status-chip">VERIFIED</span>
+                        <span class="mono-label">★ CHARACTER BADGE</span>
+                        <span class="status-chip">LVL 99</span>
                     </div>
 
                     <div class="id-avatar-box">
-                        <img src="assets/img/avatar.png" alt="Avatar <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>" class="avatar-img" width="76" height="76" onerror="this.style.display='none'; document.getElementById('avatarFallback').style.display='flex';">
+                        <img src="assets/img/avatar.png" alt="Avatar Mario Dini Nadia Mawaddah" class="avatar-img" width="72" height="72" onerror="this.style.display='none'; document.getElementById('avatarFallback').style.display='flex';">
                         <div class="avatar-monogram" id="avatarFallback" style="display: none;" aria-hidden="true">DNM</div>
                         <div class="avatar-meta">
-                            <span class="mono-small">CALLSIGN: <?= htmlspecialchars(strtoupper(MEMBER_NICKNAME), ENT_QUOTES, 'UTF-8') ?></span>
-                            <span class="mono-small">DIVISI: KEPANITIAAN INTELECTA</span>
-                            <span class="mono-small">SECTOR: BANDUNG, ID</span>
+                            <span class="mono-small">DINI NADIA // M3</span>
+                            <span class="mono-small">HP: ❤️❤️❤️❤️❤️</span>
                         </div>
                     </div>
 
                     <dl class="id-spec-list">
                         <div class="spec-row">
-                            <dt>NAMA LENGKAP</dt>
+                            <dt>NAMA</dt>
                             <dd><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></dd>
                         </div>
                         <div class="spec-row">
                             <dt>NIM</dt>
-                            <dd class="mono-val" style="color: var(--accent-cyan);"><?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></dd>
+                            <dd><?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></dd>
                         </div>
                         <div class="spec-row">
-                            <dt>PROGRAM STUDI</dt>
+                            <dt>PRODI</dt>
                             <dd>S1 Informatika</dd>
                         </div>
                         <div class="spec-row">
-                            <dt>INSTITUSI</dt>
+                            <dt>KAMPUS</dt>
                             <dd>Telkom University</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>KELAS</dt>
-                            <dd class="mono-val"><?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>NODE ROUTE</dt>
-                            <dd class="mono-val" style="color: var(--accent-pink);"><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?> (Anggota)</dd>
                         </div>
                     </dl>
 
                     <div class="id-barcode" aria-hidden="true">
-                        <span>||| || |||| | ||| |||| || | |||| ||| || | ||||</span>
-                        <span class="mono-small"><?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>-IF4805-<?= htmlspecialchars(strtoupper(MEMBER_ROUTE), ENT_QUOTES, 'UTF-8') ?></span>
+                        <span>🍄 ⭐️ 🪙 1-UP 🍄</span>
                     </div>
                 </aside>
             </div>
         </section>
 
-        <!-- SECTION 2: PENDIDIKAN & KEPANITIAAN -->
+        <!-- SECTION 2: PENDIDIKAN & KEPANITIAAN (LEVEL 2: QUEST LOG) -->
         <section id="pendidikan" class="section-block section-alt">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">02 // ACADEMIC &amp; COMMITTEE EXPERIENCE</span>
-                    <h2 class="section-title">Pendidikan &amp; Kepanitiaan</h2>
+                    <span class="section-tag">★ LEVEL 02 // QUEST LOG</span>
+                    <h2 class="section-title">Pendidikan &amp; Pengalaman</h2>
                     <p class="section-subtitle">
-                        Perjalanan studi di Program Studi S1 Informatika Telkom University serta keterlibatan aktif dalam kepanitiaan INTELECTA.
+                        Perjalanan akademik di Telkom University dan kontribusi aktif di kepanitiaan kampus.
                     </p>
                 </div>
 
@@ -298,49 +286,48 @@ $portfolios = [
                     <!-- Card Pendidikan -->
                     <article class="tech-card timeline-card">
                         <div class="card-top-bar">
-                            <span class="mono-label">🎓 EDU // UNDERGRADUATE</span>
+                            <span class="mono-label">🎓 UNDERGRADUATE</span>
                             <span class="badge-route">2024 &mdash; SEKARANG</span>
                         </div>
                         <h3 class="card-heading">S1 Informatika &mdash; Telkom University</h3>
-                        <p class="card-sub">Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull; Bandung, Jawa Barat</p>
+                        <p class="card-sub">Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull; Bandung</p>
                         <p class="card-desc">
-                            Menempuh pendidikan sarjana informatika dengan fokus pemahaman algoritma dan struktur data, pemrograman berorientasi objek menggunakan Java, arsitektur basis data relasional MySQL, jaringan komputer, dan rekayasa web modern.
+                            Mendalami fondasi ilmu komputer, pemrograman berorientasi objek (Java), basis data relasional MySQL, jaringan komputer, serta rekayasa web modern.
                         </p>
                         <ul class="spec-bullet-list">
-                            <li>Anggota Node <code><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></code> pada Proyek Kolaborasi Aplikasi Bersama Guestbook Pra-UTS.</li>
-                            <li>Mengembangkan berbagai aplikasi web dan sistem desktop dengan standar clean code dan keamanan data.</li>
+                            <li>Anggota Node <code><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></code> pada Proyek Aplikasi Bersama Pra-UTS.</li>
+                            <li>Fokus pada arsitektur perangkat lunak yang bersih, terstruktur, dan solutif.</li>
                         </ul>
                     </article>
 
                     <!-- Card Kepanitiaan INTELECTA -->
                     <article class="tech-card timeline-card highlight-border">
                         <div class="card-top-bar">
-                            <span class="mono-label" style="color: var(--accent-pink);">🏆 COMMITTEE // INTELECTA</span>
-                            <span class="badge-route" style="background: rgba(236, 72, 153, 0.15); color: var(--accent-pink); border-color: rgba(236, 72, 153, 0.4);">ACTIVE MEMBER</span>
+                            <span class="mono-label">🏆 COMMITTEE</span>
+                            <span class="badge-route">ACTIVE</span>
                         </div>
                         <h3 class="card-heading">Kepanitiaan INTELECTA</h3>
                         <p class="card-sub">Informatics Intellectual Arena &bull; Fakultas Informatika</p>
                         <p class="card-desc">
-                            Berperan aktif dalam kepanitiaan <strong>INTELECTA</strong>, agenda perlombaan dan festival teknologi tahunan mahasiswa Informatika yang menguji wawasan komputasi, kreativitas, dan inovasi digital.
+                            Berperan aktif dalam kepanitiaan <strong>INTELECTA</strong>, festival dan kompetisi teknologi tahunan mahasiswa Informatika.
                         </p>
                         <ul class="spec-bullet-list">
-                            <li>Terlibat dalam koordinasi alur operasional acara, manajemen teknis kompetisi, dan briefing peserta.</li>
-                            <li>Bekerja sama lintas divisi untuk memastikan kelancaran logistik, administrasi, dan registrasi digital delegasi.</li>
-                            <li>Melatih kapabilitas pemecahan masalah (problem-solving), kepemimpinan tim, serta komunikasi interpersonal.</li>
+                            <li>Koordinasi alur teknis perlombaan dan briefing delegasi peserta.</li>
+                            <li>Kolaborasi lintas divisi untuk kelancaran logistik dan administrasi kompetisi.</li>
                         </ul>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 3: KEAHLIAN (SKILLS) -->
+        <!-- SECTION 3: KEAHLIAN (LEVEL 3: POWER-UPS) -->
         <section id="keahlian" class="section-block">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">03 // TECHNICAL ARSENAL</span>
-                    <h2 class="section-title">Keahlian &amp; Kompetensi</h2>
+                    <span class="section-tag">★ LEVEL 03 // POWER-UPS</span>
+                    <h2 class="section-title">Keahlian &amp; Teknologi</h2>
                     <p class="section-subtitle">
-                        Tumpukan teknologi dan keahlian teknis yang saya kuasai dalam rekayasa backend, perancangan antarmuka, basis data, dan kolaborasi tim.
+                        Tumpukan teknologi utama yang dikuasai untuk merancang sistem web dan aplikasi handal.
                     </p>
                 </div>
 
@@ -348,7 +335,7 @@ $portfolios = [
                     <?php foreach ($skills as $skill): ?>
                         <article class="tech-card skill-card">
                             <div class="card-top-bar">
-                                <span class="mono-label"><?= $skill['icon'] ?> <?= htmlspecialchars($skill['code'], ENT_QUOTES, 'UTF-8') ?> // <?= htmlspecialchars($skill['category'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <span class="mono-label"><?= $skill['icon'] ?> <?= htmlspecialchars($skill['category'], ENT_QUOTES, 'UTF-8') ?></span>
                                 <span class="skill-level"><?= htmlspecialchars($skill['level'], ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
                             <h3 class="skill-title"><?= htmlspecialchars($skill['name'], ENT_QUOTES, 'UTF-8') ?></h3>
@@ -359,15 +346,15 @@ $portfolios = [
             </div>
         </section>
 
-        <!-- SECTION 4: PORTOFOLIO PROYEK -->
+        <!-- SECTION 4: PORTOFOLIO (LEVEL 4: CLEARED WORLDS) -->
         <section id="portofolio" class="section-block section-alt">
             <div class="container">
                 <div class="section-header-flex">
                     <div>
-                        <span class="section-tag">04 // SELECTED PROJECTS</span>
+                        <span class="section-tag">★ LEVEL 04 // CLEARED WORLDS</span>
                         <h2 class="section-title">Portofolio Proyek</h2>
                         <p class="section-subtitle">
-                            Koleksi karya proyek perangkat lunak pilihan. Klik kartu untuk melihat ringkasan detail interaktif.
+                            Koleksi karya proyek perangkat lunak pilihan. Klik kartu untuk melihat rincian misi.
                         </p>
                     </div>
 
@@ -383,9 +370,9 @@ $portfolios = [
 
                 <div class="portfolio-grid" id="portfolioGrid">
                     <?php foreach ($portfolios as $proj): ?>
-                        <article class="tech-card portfolio-card" data-category="<?= htmlspecialchars($proj['category'], ENT_QUOTES, 'UTF-8') ?>" tabindex="0" role="button" aria-label="Lihat detail proyek <?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?>">
+                        <article class="tech-card portfolio-card" data-category="<?= htmlspecialchars($proj['category'], ENT_QUOTES, 'UTF-8') ?>" tabindex="0" role="button" aria-label="Lihat rincian misi <?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?>">
                             <div class="card-top-bar">
-                                <span class="mono-label"><?= $proj['icon'] ?> <?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?> // <?= htmlspecialchars($proj['year'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <span class="mono-label"><?= $proj['icon'] ?> <?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?></span>
                                 <span class="status-chip"><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
 
@@ -410,25 +397,24 @@ $portfolios = [
             </div>
         </section>
 
-        <!-- SECTION 5: APLIKASI BERSAMA (GUESTBOOK EMBED & RINGKASAN) -->
+        <!-- SECTION 5: APLIKASI BERSAMA (WARP PIPE GUESTBOOK) -->
         <section id="aplikasi" class="section-block">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">05 // SHARED APPLICATION</span>
-                    <h2 class="section-title">Aplikasi Bersama &mdash; Guestbook Kelompok</h2>
+                    <span class="section-tag">★ WARP PIPE // SHARED APPLICATION</span>
+                    <h2 class="section-title">Aplikasi Bersama &mdash; Guestbook</h2>
                     <p class="section-subtitle">
-                        Aplikasi buku tamu terdistribusi yang terhubung ke basis data terpusat <code>kelompok_db</code>. Anda dapat menuliskan pesan secara langsung melalui form tersemat di bawah ini, atau membuka tautan langsung ke <a href="app/index.php" class="inline-link">halaman mandiri aplikasi (app/) &nearr;</a>.
+                        Tinggalkan pesan di buku tamu terdistribusi kelompok, atau kunjungi langsung <a href="app/index.php" class="inline-link">halaman mandiri aplikasi (app/) &nearr;</a>.
                     </p>
                 </div>
 
                 <div class="app-embed-card">
                     <div class="app-embed-topbar">
-                        <div class="topbar-left">
-                            <span class="mono-label">⚡ LIVE_EMBED // app/index.php</span>
-                            <span class="route-badge">NODE <?= htmlspecialchars(strtoupper(MEMBER_ROUTE), ENT_QUOTES, 'UTF-8') ?></span>
+                        <div>
+                            <span class="mono-label">🟢 WARP PIPE // LIVE EMBED</span>
                         </div>
-                        <div class="topbar-right">
-                            <a href="app/index.php" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Buka di Tab Baru &nearr;</a>
+                        <div>
+                            <a href="app/index.php" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Buka Halaman Penuh &nearr;</a>
                         </div>
                     </div>
                     <div class="app-embed-wrapper">
@@ -438,82 +424,79 @@ $portfolios = [
             </div>
         </section>
 
-        <!-- SECTION 6: KONTAK -->
+        <!-- SECTION 6: KONTAK (SAVE POINT) -->
         <section id="kontak" class="section-block section-alt">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">06 // COMMUNICATION &amp; NETWORK</span>
-                    <h2 class="section-title">Kontak &amp; Jejaring Profesional</h2>
+                    <span class="section-tag">★ SAVE POINT // CONTACT</span>
+                    <h2 class="section-title">Kontak &amp; Jejaring</h2>
                     <p class="section-subtitle">
-                        Terbuka untuk diskusi kolaborasi proyek informatika, kegiatan kepanitiaan kampus, serta jejaring profesional. Sesuai kebijakan keamanan privasi, nomor kontak telepon tidak dipublikasikan secara terbuka.
+                        Mari berdiskusi tentang kolaborasi proyek maupun kegiatan kampus. (Nomor kontak tidak dipublikasikan untuk privasi).
                     </p>
                 </div>
 
                 <div class="contact-grid">
                     <a href="mailto:dininadia2005@gmail.com" class="tech-card contact-card">
                         <div class="card-top-bar">
-                            <span class="mono-label">💌 CHANNEL // 01</span>
-                            <span class="contact-arrow">&nearr;</span>
+                            <span class="mono-label">💌 EMAIL</span>
                         </div>
-                        <h3 class="contact-title">Email Resmi</h3>
+                        <h3 class="contact-title">Kirim Surat</h3>
                         <p class="contact-handle">dininadia2005@gmail.com</p>
-                        <span class="contact-hint">Kirim pesan via surat elektronik</span>
+                        <span class="contact-hint">Kirim pesan langsung via email</span>
                     </a>
 
                     <a href="https://github.com/DiniNadia13" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
                         <div class="card-top-bar">
-                            <span class="mono-label">🐙 CHANNEL // 02</span>
-                            <span class="contact-arrow">&nearr;</span>
+                            <span class="mono-label">🐙 GITHUB</span>
                         </div>
-                        <h3 class="contact-title">GitHub Repository</h3>
+                        <h3 class="contact-title">Kode &amp; Proyek</h3>
                         <p class="contact-handle">github.com/DiniNadia13</p>
-                        <span class="contact-hint">Eksplorasi repositori kode &amp; proyek</span>
+                        <span class="contact-hint">Lihat repositori kode sumber</span>
                     </a>
 
                     <a href="https://www.linkedin.com/in/dini-nadia-mawaddah-098132405/" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
                         <div class="card-top-bar">
-                            <span class="mono-label">💼 CHANNEL // 03</span>
-                            <span class="contact-arrow">&nearr;</span>
+                            <span class="mono-label">💼 LINKEDIN</span>
                         </div>
-                        <h3 class="contact-title">LinkedIn Profile</h3>
+                        <h3 class="contact-title">Jejaring Karir</h3>
                         <p class="contact-handle">linkedin.com/in/dini-nadia-mawaddah</p>
-                        <span class="contact-hint">Jejaring profesional dan rekam jejak</span>
+                        <span class="contact-hint">Hubungkan di jejaring profesional</span>
                     </a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Modal Dialog Interaktif Portofolio -->
+    <!-- Modal Dialog Misi Portofolio -->
     <div class="modal-backdrop" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-dialog">
-            <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Tutup jendela rincian proyek">&times;</button>
+            <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Tutup jendela">&times;</button>
             <div class="card-top-bar">
-                <span class="mono-label">DETAIL // PROYEK</span>
+                <span class="mono-label">★ MISSION DETAIL</span>
                 <span class="status-chip" id="modalStatus">STATUS</span>
             </div>
             <h3 class="portfolio-title" id="modalTitle" style="margin-top: 0.5rem;">Judul Proyek</h3>
-            <p class="portfolio-subtitle" id="modalSubtitle" style="margin-bottom: 1rem; color: var(--accent-pink);">Subjudul Proyek</p>
+            <p class="portfolio-subtitle" id="modalSubtitle" style="margin-bottom: 1rem;">Subjudul Proyek</p>
             <p class="portfolio-summary" id="modalSummary" style="margin-bottom: 1rem;"></p>
             
-            <h4 style="font-size: 0.95rem; font-family: var(--font-mono); margin-bottom: 0.5rem; color: var(--accent-cyan);">HIGHLIGHT FITUR:</h4>
+            <h4 style="font-size: 0.88rem; font-family: var(--font-pixel); margin-bottom: 0.5rem; color: var(--mario-yellow);">HIGHLIGHT FITUR:</h4>
             <ul class="spec-bullet-list" id="modalHighlights" style="margin-bottom: 1.25rem;"></ul>
 
-            <h4 style="font-size: 0.95rem; font-family: var(--font-mono); margin-bottom: 0.5rem; color: var(--accent-cyan);">TEKNOLOGI:</h4>
+            <h4 style="font-size: 0.88rem; font-family: var(--font-pixel); margin-bottom: 0.5rem; color: var(--mario-yellow);">TEKNOLOGI:</h4>
             <div class="tag-row" id="modalTags"></div>
         </div>
     </div>
 
-    <!-- Footer Semantik HTML5 -->
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="container footer-inner">
             <div class="footer-brand">
-                <span class="mono-small"><strong>Dini Nadia Mawaddah</strong> (103012430028)</span>
-                <span class="mono-small">S1 Informatika Telkom University &bull; Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull; Panitia INTELECTA</span>
+                <span>⭐ <strong><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></strong> (<?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>)</span>
+                <span>S1 Informatika Telkom University &bull; Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull; Panitia INTELECTA</span>
             </div>
             <div class="footer-links">
-                <a href="#top" class="mono-small">BACK_TO_TOP &uarr;</a>
-                <a href="app/index.php" class="mono-small">GUESTBOOK_APP &nearr;</a>
+                <a href="#top">BACK TO TOP &uarr;</a>
+                <a href="app/index.php">GUESTBOOK &nearr;</a>
             </div>
         </div>
     </footer>
