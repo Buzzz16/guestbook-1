@@ -152,11 +152,6 @@ $portfolios = [
     <!-- Header & Navigasi -->
     <header class="site-header" id="top">
         <div class="container header-inner">
-            <a href="#profil" class="brand-logo" aria-label="Beranda <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>">
-                <span>🍄</span>
-                <span><span class="brand-bracket">[</span><?= htmlspecialchars(strtoupper(MEMBER_NICKNAME), ENT_QUOTES, 'UTF-8') ?><span class="brand-accent">//</span><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?><span class="brand-bracket">]</span></span>
-            </a>
-
             <button class="mobile-nav-toggle" id="mobileNavToggle" aria-expanded="false" aria-controls="primaryNav"
                 aria-label="Buka menu navigasi">
                 <span class="bar"></span>
