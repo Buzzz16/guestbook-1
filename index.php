@@ -11,66 +11,66 @@ require_once __DIR__ . '/identity.php';
 
 $skills = [
     [
-        'name'     => 'PHP & MySQL',
+        'name' => 'PHP & MySQL',
         'category' => 'Backend & Database',
-        'level'    => 'POWER-UP ★★★',
-        'desc'     => 'Backend web terstruktur, integrasi PDO anti-SQL Injection, dan perancangan skema relasional.',
-        'code'     => 'PH-01',
-        'icon'     => '🍄',
+        'level' => 'POWER-UP ★★★',
+        'desc' => 'Backend web terstruktur, integrasi PDO anti-SQL Injection, dan perancangan skema relasional.',
+        'code' => 'PH-01',
+        'icon' => '🍄',
     ],
     [
-        'name'     => 'Java OOP',
+        'name' => 'Java OOP',
         'category' => 'Object-Oriented Architecture',
-        'level'    => 'POWER-UP ★★★',
-        'desc'     => 'Pemrograman berorientasi objek (Inheritance, Polymorphism, Encapsulation), MVC, dan struktur data.',
-        'code'     => 'JV-02',
-        'icon'     => '☕',
+        'level' => 'POWER-UP ★★★',
+        'desc' => 'Pemrograman berorientasi objek (Inheritance, Polymorphism, Encapsulation), MVC, dan struktur data.',
+        'code' => 'JV-02',
+        'icon' => '☕',
     ],
     [
-        'name'     => 'HTML5 & CSS3',
+        'name' => 'HTML5 & CSS3',
         'category' => 'Responsive UI Design',
-        'level'    => 'POWER-UP ★★★',
-        'desc'     => 'Desain semantik modern, sistem Flexbox & Grid, responsif laptop & ponsel, serta tema dinamis.',
-        'code'     => 'FE-03',
-        'icon'     => '🎨',
+        'level' => 'POWER-UP ★★★',
+        'desc' => 'Desain semantik modern, sistem Flexbox & Grid, responsif laptop & ponsel, serta tema dinamis.',
+        'code' => 'FE-03',
+        'icon' => '🎨',
     ],
     [
-        'name'     => 'Vanilla JavaScript',
+        'name' => 'Vanilla JavaScript',
         'category' => 'Interactive Scripting',
-        'level'    => 'POWER-UP ★★☆',
-        'desc'     => 'Manipulasi DOM dinamis, modal dialog interaktif, filter portofolio, dan validasi form.',
-        'code'     => 'JS-04',
-        'icon'     => '⭐',
+        'level' => 'POWER-UP ★★☆',
+        'desc' => 'Manipulasi DOM dinamis, modal dialog interaktif, filter portofolio, dan validasi form.',
+        'code' => 'JS-04',
+        'icon' => '⭐',
     ],
     [
-        'name'     => 'Git & GitHub',
+        'name' => 'Git & GitHub',
         'category' => 'Version Control',
-        'level'    => 'POWER-UP ★★☆',
-        'desc'     => 'Kolaborasi source code, workflow branching terstruktur, commit konsisten, dan sinkronisasi tim.',
-        'code'     => 'GT-05',
-        'icon'     => '🌿',
+        'level' => 'POWER-UP ★★☆',
+        'desc' => 'Kolaborasi source code, workflow branching terstruktur, commit konsisten, dan sinkronisasi tim.',
+        'code' => 'GT-05',
+        'icon' => '🌿',
     ],
     [
-        'name'     => 'UI/UX & Figma',
+        'name' => 'UI/UX & Figma',
         'category' => 'Interface & Prototyping',
-        'level'    => 'POWER-UP ★★★',
-        'desc'     => 'Desain antarmuka berpusat pada pengguna, wireframing, perancangan prototipe interaktif di Figma, dan user flow.',
-        'code'     => 'UX-06',
-        'icon'     => '🎯',
+        'level' => 'POWER-UP ★★★',
+        'desc' => 'Desain antarmuka berpusat pada pengguna, wireframing, perancangan prototipe interaktif di Figma, dan user flow.',
+        'code' => 'UX-06',
+        'icon' => '🎯',
     ],
 ];
 
 $portfolios = [
     [
-        'id'       => 'WORLD 1',
-        'icon'     => '🏠',
-        'title'    => 'SuperKost',
+        'id' => 'WORLD 1',
+        'icon' => '🏠',
+        'title' => 'SuperKost',
         'subtitle' => 'Platform Manajemen & Digitalisasi Hunian Indekos',
         'category' => 'web-app',
-        'tags'     => ['PHP / Java', 'MySQL DB', 'Kost Management'],
-        'year'     => '2025',
-        'status'   => 'CLEARED 🏆',
-        'summary'  => 'Aplikasi pengelolaan kamar kos dan hunian terpadu untuk monitoring ketersediaan unit, pencatatan sewa penghuni, tagihan berkala, dan rekap keuangan pemilik kos.',
+        'tags' => ['PHP / Java', 'MySQL DB', 'Kost Management'],
+        'year' => '2025',
+        'status' => 'CLEARED 🏆',
+        'summary' => 'Aplikasi pengelolaan kamar kos dan hunian terpadu untuk monitoring ketersediaan unit, pencatatan sewa penghuni, tagihan berkala, dan rekap keuangan pemilik kos.',
         'highlights' => [
             'Manajemen ketersediaan unit kamar dan data penghuni real-time',
             'Pencatatan otomatis histori tagihan bulanan dan pembayaran sewa',
@@ -78,15 +78,15 @@ $portfolios = [
         ],
     ],
     [
-        'id'       => 'WORLD 2',
-        'icon'     => '🎓',
-        'title'    => 'Redesain iGracias',
+        'id' => 'WORLD 2',
+        'icon' => '🎓',
+        'title' => 'Redesain iGracias',
         'subtitle' => 'UI/UX Redesign Portal Akademik Terintegrasi',
         'category' => 'ui-ux',
-        'tags'     => ['UI/UX Design', 'Figma', 'Responsive Web'],
-        'year'     => '2025',
-        'status'   => 'FEATURED ⭐️',
-        'summary'  => 'Pembaruan antarmuka portal akademik iGracias Telkom University yang lebih bersih, modern, dan intuitif untuk kemudahan registrasi mata kuliah (KRS), cek jadwal kuliah, dan pantau nilai.',
+        'tags' => ['UI/UX Design', 'Figma', 'Responsive Web'],
+        'year' => '2025',
+        'status' => 'FEATURED ⭐️',
+        'summary' => 'Pembaruan antarmuka portal akademik iGracias Telkom University yang lebih bersih, modern, dan intuitif untuk kemudahan registrasi mata kuliah (KRS), cek jadwal kuliah, dan pantau nilai.',
         'highlights' => [
             'Antarmuka modern yang segar, minim distraksi, dan mudah dipahami',
             'Tata letak jadwal perkuliahan serta grafik nilai yang lebih rapi',
@@ -94,15 +94,15 @@ $portfolios = [
         ],
     ],
     [
-        'id'       => 'WORLD 3',
-        'icon'     => '💰',
-        'title'    => 'FinSmart',
+        'id' => 'WORLD 3',
+        'icon' => '💰',
+        'title' => 'FinSmart',
         'subtitle' => 'Aplikasi Pelacak & Pengatur Keuangan Mandiri',
         'category' => 'fintech',
-        'tags'     => ['Finance Tracker', 'JavaScript', 'Data Charts'],
-        'year'     => '2025',
-        'status'   => 'CLEARED 🏆',
-        'summary'  => 'Platform pengatur keuangan cerdas untuk mencatat arus kas harian (pemasukan & pengeluaran), menetapkan alokasi anggaran belanja, dan menyajikan ringkasan visual.',
+        'tags' => ['Finance Tracker', 'JavaScript', 'Data Charts'],
+        'year' => '2025',
+        'status' => 'CLEARED 🏆',
+        'summary' => 'Platform pengatur keuangan cerdas untuk mencatat arus kas harian (pemasukan & pengeluaran), menetapkan alokasi anggaran belanja, dan menyajikan ringkasan visual.',
         'highlights' => [
             'Pencatatan transaksi harian cepat dengan kategorisasi pengeluaran',
             'Fitur penetapan target anggaran dan peringatan batas belanja',
@@ -110,15 +110,15 @@ $portfolios = [
         ],
     ],
     [
-        'id'       => 'WORLD 4',
-        'icon'     => '💬',
-        'title'    => 'Distributed Guestbook Node',
+        'id' => 'WORLD 4',
+        'icon' => '💬',
+        'title' => 'Distributed Guestbook Node',
         'subtitle' => 'Node Aplikasi Bersama Terdistribusi Pra-UTS',
         'category' => 'fullstack',
-        'tags'     => ['PHP 8 PDO', 'MySQL Server', 'Live Embed'],
-        'year'     => '2026',
-        'status'   => 'ACTIVE NODE 🟢',
-        'summary'  => 'Aplikasi buku tamu bersama terdistribusi yang terhubung ke database terpusat kelompok, filter route anggota (m0 - m5), dan live embed iframe.',
+        'tags' => ['PHP 8 PDO', 'MySQL Server', 'Live Embed'],
+        'year' => '2026',
+        'status' => 'ACTIVE NODE 🟢',
+        'summary' => 'Aplikasi buku tamu bersama terdistribusi yang terhubung ke database terpusat kelompok, filter route anggota (m0 - m5), dan live embed iframe.',
         'highlights' => [
             'Node pelayan lokal terverifikasi (Node m3)',
             'Mendukung mode standalone maupun embed di halaman utama',
@@ -129,16 +129,21 @@ $portfolios = [
 ?>
 <!DOCTYPE html>
 <html lang="id" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal Page <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> - Mahasiswa S1 Informatika Telkom University (<?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?>) & Aplikasi Bersama Guestbook.">
+    <meta name="description"
+        content="Personal Page <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> - Mahasiswa S1 Informatika Telkom University (<?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?>) & Aplikasi Bersama Guestbook.">
     <title><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> // Mario Level // Personal Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
     <!-- Mario HUD Banner (`app/partials/served_by.php`) -->
@@ -147,12 +152,17 @@ $portfolios = [
     <!-- Header & Navigasi -->
     <header class="site-header" id="top">
         <div class="container header-inner">
-            <a href="#profil" class="brand-logo" aria-label="Beranda <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>">
+            <a href="#profil" class="brand-logo"
+                aria-label="Beranda <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>">
                 <span>🍄</span>
-                <span class="brand-bracket">[</span><?= htmlspecialchars(strtoupper(MEMBER_NICKNAME), ENT_QUOTES, 'UTF-8') ?><span class="brand-accent">//</span><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?><span class="brand-bracket">]</span>
+                <span
+                    class="brand-bracket">[</span><?= htmlspecialchars(strtoupper(MEMBER_NICKNAME), ENT_QUOTES, 'UTF-8') ?><span
+                    class="brand-accent">//</span><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?><span
+                    class="brand-bracket">]</span>
             </a>
 
-            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Buka menu navigasi">
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-expanded="false" aria-controls="primaryNav"
+                aria-label="Buka menu navigasi">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -170,9 +180,11 @@ $portfolios = [
             </nav>
 
             <div class="header-actions">
-                <button type="button" id="themeToggleBtn" class="btn btn-icon" aria-label="Ubah tema Overworld / Underground" title="Toggle Mario World Theme">
+                <button type="button" id="themeToggleBtn" class="btn btn-icon"
+                    aria-label="Ubah tema Overworld / Underground" title="Toggle Mario World Theme">
                     <span class="theme-indicator-dot"></span>
-                    <span class="mono-small" id="themeLabel" style="font-family: var(--font-pixel); font-size: 0.65rem;">UNDERGROUND</span>
+                    <span class="mono-small" id="themeLabel"
+                        style="font-family: var(--font-pixel); font-size: 0.65rem;">UNDERGROUND</span>
                 </button>
                 <a href="app/index.php" class="btn btn-primary btn-sm">Buka Guestbook &nearr;</a>
             </div>
@@ -186,7 +198,8 @@ $portfolios = [
                 <div class="hero-content">
                     <div class="spec-pill-row">
                         <span class="spec-pill">⭐ PLAYER 1 READY</span>
-                        <span class="spec-pill">NODE // <?= htmlspecialchars(strtoupper(MEMBER_ROUTE), ENT_QUOTES, 'UTF-8') ?></span>
+                        <span class="spec-pill">NODE //
+                            <?= htmlspecialchars(strtoupper(MEMBER_ROUTE), ENT_QUOTES, 'UTF-8') ?></span>
                         <span class="spec-pill">NIM // <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></span>
                     </div>
 
@@ -196,7 +209,9 @@ $portfolios = [
                     </h1>
 
                     <p class="hero-lead">
-                        Mahasiswa Informatika yang punya prinsip disiplin, perfeksionis, dan zero tolerance buat hal yang buang-buang waktu. Suka mengeksplorasi sistem, teknologi, dan ide-ide baru dengan pendekatan yang santai tapi fokus. <em>Let’s build cool things and enjoy the ride!</em>
+                        Mahasiswa Informatika yang punya prinsip disiplin, perfeksionis, dan zero tolerance buat hal
+                        yang buang-buang waktu. Suka mengeksplorasi sistem, teknologi, dan ide-ide baru dengan
+                        pendekatan yang santai tapi fokus. <em>Let’s build cool things and enjoy the ride!</em>
                     </p>
 
                     <div class="hero-cta-group">
@@ -211,7 +226,8 @@ $portfolios = [
                     <!-- HUD Status Ringkas -->
                     <div class="telemetry-strip" aria-label="Status Player">
                         <div class="telemetry-item">
-                            <span class="telemetry-val"><?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
+                            <span
+                                class="telemetry-val"><?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
                             <span class="telemetry-lbl">KELAS</span>
                         </div>
                         <div class="telemetry-item">
@@ -223,7 +239,8 @@ $portfolios = [
                             <span class="telemetry-lbl">PROYEK</span>
                         </div>
                         <div class="telemetry-item">
-                            <span class="telemetry-val">NODE <?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></span>
+                            <span class="telemetry-val">NODE
+                                <?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></span>
                             <span class="telemetry-lbl">SERVER</span>
                         </div>
                     </div>
@@ -237,8 +254,11 @@ $portfolios = [
                     </div>
 
                     <div class="id-avatar-box">
-                        <img src="assets/img/avatar.png" alt="Avatar Mario Dini Nadia Mawaddah" class="avatar-img" width="72" height="72" onerror="this.style.display='none'; document.getElementById('avatarFallback').style.display='flex';">
-                        <div class="avatar-monogram" id="avatarFallback" style="display: none;" aria-hidden="true">DNM</div>
+                        <img src="assets/img/avatar.png?v=2" alt="Foto Profil Dini Nadia Mawaddah" class="avatar-img"
+                            width="110" height="110"
+                            onerror="this.style.display='none'; document.getElementById('avatarFallback').style.display='flex';">
+                        <div class="avatar-monogram" id="avatarFallback" style="display: none;" aria-hidden="true">DNM
+                        </div>
                         <div class="avatar-meta">
                             <span class="mono-small">DINI NADIA // M3</span>
                             <span class="mono-small">HP: ❤️❤️❤️❤️❤️</span>
@@ -290,12 +310,15 @@ $portfolios = [
                             <span class="badge-route">2024 &mdash; SEKARANG</span>
                         </div>
                         <h3 class="card-heading">S1 Informatika &mdash; Telkom University</h3>
-                        <p class="card-sub">Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull; Bandung</p>
+                        <p class="card-sub">Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull;
+                            Bandung</p>
                         <p class="card-desc">
-                            Mendalami fondasi ilmu komputer, pemrograman berorientasi objek (Java), basis data relasional MySQL, jaringan komputer, serta rekayasa web modern.
+                            Mendalami fondasi ilmu komputer, pemrograman berorientasi objek (Java), basis data
+                            relasional MySQL, jaringan komputer, serta rekayasa web modern.
                         </p>
                         <ul class="spec-bullet-list">
-                            <li>Anggota Node <code><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></code> pada Proyek Aplikasi Bersama Pra-UTS.</li>
+                            <li>Anggota Node <code><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></code>
+                                pada Proyek Aplikasi Bersama Pra-UTS.</li>
                             <li>Fokus pada arsitektur perangkat lunak yang bersih, terstruktur, dan solutif.</li>
                         </ul>
                     </article>
@@ -309,11 +332,13 @@ $portfolios = [
                         <h3 class="card-heading">Eksplorasi Rekayasa Web &amp; Desain</h3>
                         <p class="card-sub">Web Development &amp; UI/UX Engineering</p>
                         <p class="card-desc">
-                            Aktif merancang produk perangkat lunak mandiri dan kolaboratif dengan penekanan pada fungsionalitas sistem yang efisien dan antarmuka yang bersih.
+                            Aktif merancang produk perangkat lunak mandiri dan kolaboratif dengan penekanan pada
+                            fungsionalitas sistem yang efisien dan antarmuka yang bersih.
                         </p>
                         <ul class="spec-bullet-list">
                             <li>Mengembangkan solusi digital seperti SuperKost, Redesain iGracias, dan FinSmart.</li>
-                            <li>Mengutamakan struktur kode bersih dan alur pengguna yang intuitif tanpa fitur berlebih.</li>
+                            <li>Mengutamakan struktur kode bersih dan alur pengguna yang intuitif tanpa fitur berlebih.
+                            </li>
                         </ul>
                     </article>
                 </div>
@@ -335,8 +360,10 @@ $portfolios = [
                     <?php foreach ($skills as $skill): ?>
                         <article class="tech-card skill-card">
                             <div class="card-top-bar">
-                                <span class="mono-label"><?= $skill['icon'] ?> <?= htmlspecialchars($skill['category'], ENT_QUOTES, 'UTF-8') ?></span>
-                                <span class="skill-level"><?= htmlspecialchars($skill['level'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <span class="mono-label"><?= $skill['icon'] ?>
+                                    <?= htmlspecialchars($skill['category'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <span
+                                    class="skill-level"><?= htmlspecialchars($skill['level'], ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
                             <h3 class="skill-title"><?= htmlspecialchars($skill['name'], ENT_QUOTES, 'UTF-8') ?></h3>
                             <p class="skill-desc"><?= htmlspecialchars($skill['desc'], ENT_QUOTES, 'UTF-8') ?></p>
@@ -370,14 +397,20 @@ $portfolios = [
 
                 <div class="portfolio-grid" id="portfolioGrid">
                     <?php foreach ($portfolios as $proj): ?>
-                        <article class="tech-card portfolio-card" data-category="<?= htmlspecialchars($proj['category'], ENT_QUOTES, 'UTF-8') ?>" tabindex="0" role="button" aria-label="Lihat rincian misi <?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?>">
+                        <article class="tech-card portfolio-card"
+                            data-category="<?= htmlspecialchars($proj['category'], ENT_QUOTES, 'UTF-8') ?>" tabindex="0"
+                            role="button"
+                            aria-label="Lihat rincian misi <?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?>">
                             <div class="card-top-bar">
-                                <span class="mono-label"><?= $proj['icon'] ?> <?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?></span>
-                                <span class="status-chip"><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <span class="mono-label"><?= $proj['icon'] ?>
+                                    <?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <span
+                                    class="status-chip"><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
 
                             <h3 class="portfolio-title"><?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?></h3>
-                            <p class="portfolio-subtitle"><?= htmlspecialchars($proj['subtitle'], ENT_QUOTES, 'UTF-8') ?></p>
+                            <p class="portfolio-subtitle"><?= htmlspecialchars($proj['subtitle'], ENT_QUOTES, 'UTF-8') ?>
+                            </p>
                             <p class="portfolio-summary"><?= htmlspecialchars($proj['summary'], ENT_QUOTES, 'UTF-8') ?></p>
 
                             <ul class="spec-bullet-list portfolio-highlights">
@@ -404,7 +437,8 @@ $portfolios = [
                     <span class="section-tag">★ WARP PIPE // SHARED APPLICATION</span>
                     <h2 class="section-title">Aplikasi Bersama &mdash; Guestbook</h2>
                     <p class="section-subtitle">
-                        Tinggalkan pesan di buku tamu terdistribusi kelompok, atau kunjungi langsung <a href="app/index.php" class="inline-link">halaman mandiri aplikasi (app/) &nearr;</a>.
+                        Tinggalkan pesan di buku tamu terdistribusi kelompok, atau kunjungi langsung <a
+                            href="app/index.php" class="inline-link">halaman mandiri aplikasi (app/) &nearr;</a>.
                     </p>
                 </div>
 
@@ -414,11 +448,13 @@ $portfolios = [
                             <span class="mono-label">🟢 WARP PIPE // LIVE EMBED</span>
                         </div>
                         <div>
-                            <a href="app/index.php" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Buka Halaman Penuh &nearr;</a>
+                            <a href="app/index.php" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-outline btn-sm">Buka Halaman Penuh &nearr;</a>
                         </div>
                     </div>
                     <div class="app-embed-wrapper">
-                        <iframe src="app/index.php?embed=1" title="Aplikasi Bersama — Guestbook Kelompok Terdistribusi" loading="lazy"></iframe>
+                        <iframe src="app/index.php?embed=1" title="Aplikasi Bersama — Guestbook Kelompok Terdistribusi"
+                            loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
@@ -431,7 +467,8 @@ $portfolios = [
                     <span class="section-tag">★ SAVE POINT // CONTACT</span>
                     <h2 class="section-title">Kontak &amp; Jejaring</h2>
                     <p class="section-subtitle">
-                        Mari berdiskusi tentang kolaborasi proyek maupun kegiatan kampus. (Nomor kontak tidak dipublikasikan untuk privasi).
+                        Mari berdiskusi tentang kolaborasi proyek maupun kegiatan kampus. (Nomor kontak tidak
+                        dipublikasikan untuk privasi).
                     </p>
                 </div>
 
@@ -445,7 +482,8 @@ $portfolios = [
                         <span class="contact-hint">Kirim pesan langsung via email</span>
                     </a>
 
-                    <a href="https://github.com/DiniNadia13" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
+                    <a href="https://github.com/DiniNadia13" target="_blank" rel="noopener noreferrer"
+                        class="tech-card contact-card">
                         <div class="card-top-bar">
                             <span class="mono-label">🐙 GITHUB</span>
                         </div>
@@ -454,7 +492,8 @@ $portfolios = [
                         <span class="contact-hint">Lihat repositori kode sumber</span>
                     </a>
 
-                    <a href="https://www.linkedin.com/in/dini-nadia-mawaddah-098132405/" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
+                    <a href="https://www.linkedin.com/in/dini-nadia-mawaddah-098132405/" target="_blank"
+                        rel="noopener noreferrer" class="tech-card contact-card">
                         <div class="card-top-bar">
                             <span class="mono-label">💼 LINKEDIN</span>
                         </div>
@@ -478,11 +517,15 @@ $portfolios = [
             <h3 class="portfolio-title" id="modalTitle" style="margin-top: 0.5rem;">Judul Proyek</h3>
             <p class="portfolio-subtitle" id="modalSubtitle" style="margin-bottom: 1rem;">Subjudul Proyek</p>
             <p class="portfolio-summary" id="modalSummary" style="margin-bottom: 1rem;"></p>
-            
-            <h4 style="font-size: 0.88rem; font-family: var(--font-pixel); margin-bottom: 0.5rem; color: var(--mario-yellow);">HIGHLIGHT FITUR:</h4>
+
+            <h4
+                style="font-size: 0.88rem; font-family: var(--font-pixel); margin-bottom: 0.5rem; color: var(--mario-yellow);">
+                HIGHLIGHT FITUR:</h4>
             <ul class="spec-bullet-list" id="modalHighlights" style="margin-bottom: 1.25rem;"></ul>
 
-            <h4 style="font-size: 0.88rem; font-family: var(--font-pixel); margin-bottom: 0.5rem; color: var(--mario-yellow);">TEKNOLOGI:</h4>
+            <h4
+                style="font-size: 0.88rem; font-family: var(--font-pixel); margin-bottom: 0.5rem; color: var(--mario-yellow);">
+                TEKNOLOGI:</h4>
             <div class="tag-row" id="modalTags"></div>
         </div>
     </div>
@@ -491,8 +534,10 @@ $portfolios = [
     <footer class="site-footer">
         <div class="container footer-inner">
             <div class="footer-brand">
-                <span>⭐ <strong><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></strong> (<?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>)</span>
-                <span>S1 Informatika Telkom University &bull; Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
+                <span>⭐ <strong><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></strong>
+                    (<?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>)</span>
+                <span>S1 Informatika Telkom University &bull; Kelas
+                    <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
             </div>
             <div class="footer-links">
                 <a href="#top">BACK TO TOP &uarr;</a>
@@ -503,4 +548,5 @@ $portfolios = [
 
     <script src="assets/js/main.js"></script>
 </body>
+
 </html>
