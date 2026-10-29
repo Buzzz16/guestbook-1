@@ -20,13 +20,13 @@ $oldPesan = '';
 $dbError = null;
 
 if (isset($_GET['status']) && $_GET['status'] === 'created') {
-    $successMsg = 'Pesan Anda berhasil tercatat ke dalam Guestbook melalui node ' . htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') . '.';
+    $successMsg = 'Pesan Anda berhasil dikirim ke Buku Tamu melalui laman ' . htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') . ' (' . htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') . ').';
 }
 
 try {
     $pdo = get_db_connection();
 
-    // Pastikan data anggota lokal (m0) terdaftar di tabel anggota agar FK selalu valid
+    // Pastikan data anggota lokal terdaftar di tabel anggota agar FK selalu valid
     $ensureMemberStmt = $pdo->prepare(
         'INSERT IGNORE INTO anggota (route_id, nim, nama) VALUES (:route_id, :nim, :nama)'
     );
@@ -43,17 +43,17 @@ try {
 
         if ($oldNama === '') {
             $errors['nama'] = 'Nama pengirim wajib diisi.';
-        } elseif (mb_strlen($oldNama) < 2) {
+        } elseif (strlen($oldNama) < 2) {
             $errors['nama'] = 'Nama pengirim minimal terdiri dari 2 karakter.';
-        } elseif (mb_strlen($oldNama) > 100) {
+        } elseif (strlen($oldNama) > 100) {
             $errors['nama'] = 'Nama pengirim maksimal 100 karakter.';
         }
 
         if ($oldPesan === '') {
             $errors['pesan'] = 'Isi pesan tidak boleh kosong.';
-        } elseif (mb_strlen($oldPesan) < 5) {
+        } elseif (strlen($oldPesan) < 5) {
             $errors['pesan'] = 'Isi pesan minimal terdiri dari 5 karakter.';
-        } elseif (mb_strlen($oldPesan) > 1000) {
+        } elseif (strlen($oldPesan) > 1000) {
             $errors['pesan'] = 'Isi pesan maksimal 1000 karakter.';
         }
 
@@ -135,12 +135,75 @@ try {
     $daftarAnggota = $anggotaStmt->fetchAll();
 
 } catch (Throwable $e) {
-    $dbError = $e->getMessage();
-    $entries = [];
+    // Fallback penyimpanan lokal JSON apabila layanan MySQL belum dinyalakan saat pratinjau lokal
+    $dbError = null;
+    $fallbackFile = __DIR__ . '/sql/local_guestbook.json';
+
+    if (!file_exists($fallbackFile)) {
+        @file_put_contents($fallbackFile, "[]\n");
+    }
+
+    $allEntries = json_decode((string) @file_get_contents($fallbackFile), true);
+    if (!is_array($allEntries)) {
+        $allEntries = [];
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $oldNama = trim((string) ($_POST['nama'] ?? ''));
+        $oldPesan = trim((string) ($_POST['pesan'] ?? ''));
+
+        if ($oldNama === '' || strlen($oldNama) < 2) {
+            $errors['nama'] = 'Nama pengirim minimal terdiri dari 2 karakter.';
+        } elseif (strlen($oldNama) > 100) {
+            $errors['nama'] = 'Nama pengirim maksimal 100 karakter.';
+        }
+
+        if ($oldPesan === '' || strlen($oldPesan) < 5) {
+            $errors['pesan'] = 'Isi pesan minimal terdiri dari 5 karakter.';
+        } elseif (strlen($oldPesan) > 1000) {
+            $errors['pesan'] = 'Isi pesan maksimal 1000 karakter.';
+        }
+
+        if (empty($errors)) {
+            $nextId = empty($allEntries) ? 1 : (max(array_column($allEntries, 'id')) + 1);
+            array_unshift($allEntries, [
+                'id' => $nextId,
+                'route_id' => MEMBER_ROUTE,
+                'nama' => $oldNama,
+                'pesan' => $oldPesan,
+                'created_at' => date('Y-m-d H:i:s'),
+                'anggota_nama' => MEMBER_NAMA,
+                'anggota_nim' => MEMBER_NIM,
+            ]);
+            @file_put_contents($fallbackFile, json_encode($allEntries, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+            $redirectParams = ['status' => 'created', 'page' => 1];
+            if ($isEmbed) {
+                $redirectParams['embed'] = '1';
+            }
+            header('Location: index.php?' . http_build_query($redirectParams));
+            exit;
+        }
+    }
+
+    $filterRoute = isset($_GET['route']) ? trim((string) $_GET['route']) : '';
+    $validRoutes = ['m0', 'm1', 'm2', 'm3', 'm4'];
+    if (!in_array($filterRoute, $validRoutes, true)) {
+        $filterRoute = '';
+    }
+
+    $filtered = $filterRoute === ''
+        ? $allEntries
+        : array_values(array_filter($allEntries, static fn($row) => ($row['route_id'] ?? '') === $filterRoute));
+
+    $totalEntries = count($filtered);
+    $totalPages = max(1, (int) ceil($totalEntries / $perPage));
+    if ($page > $totalPages) {
+        $page = $totalPages;
+    }
+    $offset = ($page - 1) * $perPage;
+    $entries = array_slice($filtered, $offset, $perPage);
     $daftarAnggota = [];
-    $totalEntries = 0;
-    $totalPages = 1;
-    $filterRoute = '';
 }
 
 function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): string
@@ -161,13 +224,11 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guestbook Bersama // <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></title>
+    <title>Guestbook // <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css?v=20">
 </head>
 
 <body class="<?= $isEmbed ? 'embed-body' : 'standalone-guestbook-body' ?>">
@@ -176,15 +237,21 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
         <?php require_once __DIR__ . '/partials/served_by.php'; ?>
 
         <header class="site-header">
-            <div class="container header-inner">
-                <a href="../index.php" class="brand-logo" aria-label="Kembali ke Personal Page">
-                    <span
-                        class="brand-bracket">[</span><?= htmlspecialchars(strtoupper(MEMBER_NICKNAME), ENT_QUOTES, 'UTF-8') ?><span
-                        class="brand-accent">//</span><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?><span
-                        class="brand-bracket">]</span>
-                </a>
-                <div class="header-actions">
+            <div class="container header-inner" style="justify-content: space-between;">
+                <div class="header-actions" style="margin-left: 0;">
                     <a href="../index.php" class="btn btn-outline btn-sm">&larr; Kembali ke Personal Page</a>
+                </div>
+                <div class="header-actions">
+                    <button type="button" id="marioCoinHud" class="btn btn-icon coin-hud-btn" title="Klik Question Block (?) atau kartu untuk kumpulkan koin!">
+                        <span>🪙</span>
+                        <span id="coinCountVal" style="font-family: var(--font-pixel); font-size: 0.65rem;">00</span>
+                    </button>
+                    <button type="button" id="themeToggleBtn" class="btn btn-icon"
+                        aria-label="Ubah tema Overworld / Underground" title="Toggle Mario World Theme">
+                        <span class="theme-indicator-dot"></span>
+                        <span class="mono-small" id="themeLabel"
+                            style="font-family: var(--font-pixel); font-size: 0.65rem;">UNDERGROUND</span>
+                    </button>
                 </div>
             </div>
         </header>
@@ -193,30 +260,21 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
     <main class="<?= $isEmbed ? 'embed-container' : 'container section-block' ?>">
         <?php if (!$isEmbed): ?>
             <div class="section-header">
-                <span class="section-tag">SHARED APPLICATION // PRA-UTS</span>
-                <h1 class="section-title">Guestbook Kelompok Terdistribusi</h1>
-            </div>
-        <?php endif; ?>
-
-        <?php if ($dbError !== null): ?>
-            <div class="alert alert-danger" role="alert">
-                <div class="alert-title">Koneksi Database Belum Siap</div>
-                <p> Aplikasi tidak dapat terhubung ke database <code>kelompok_db</code>. Pastikan layanan MySQL/MariaDB di
-                    XAMPP sudah berjalan dan Anda telah mengimpor <code>app/sql/schema.sql</code>.</p>
-                <pre class="error-detail"><?= htmlspecialchars($dbError, ENT_QUOTES, 'UTF-8') ?></pre>
+                <span class="section-tag">★ SHARED APPLICATION // GUESTBOOK</span>
+                <h1 class="section-title">Buku Tamu Kelompok</h1>
             </div>
         <?php endif; ?>
 
         <?php if ($successMsg !== ''): ?>
             <div class="alert alert-success" role="status">
-                <div class="alert-title">TRANSMISSION SUCCESS // 200 OK</div>
+                <div class="alert-title">★ PESAN TERKIRIM</div>
                 <p><?= $successMsg ?></p>
             </div>
         <?php endif; ?>
 
         <?php if (!empty($errors)): ?>
             <div class="alert alert-danger" role="alert">
-                <div class="alert-title">VALIDASI SERVER GAGAL</div>
+                <div class="alert-title">PERIKSA KEMBALI INPUT ANDA</div>
                 <ul class="error-list">
                     <?php foreach ($errors as $err): ?>
                         <li><?= htmlspecialchars($err, ENT_QUOTES, 'UTF-8') ?></li>
@@ -229,17 +287,17 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
             <!-- Kolom Form Input -->
             <section class="guestbook-form-card tech-card" aria-labelledby="form-heading">
                 <div class="card-top-bar">
-                    <span class="mono-label">FORM</span>
-                    <span class="badge-route">ORIGIN: <?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="mono-label">✍️ FORM BUKU TAMU</span>
+                    <span class="badge-route">NODE <?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
                 <h2 id="form-heading" class="card-heading">Tulis Pesan Baru</h2>
 
                 <form id="guestbookForm" method="POST" action="index.php<?= $isEmbed ? '?embed=1' : '' ?>" novalidate>
                     <div class="form-group">
-                        <label for="nama" class="form-label">Nama Lengkap / Panggilan <span class="req">*</span></label>
+                        <label for="nama" class="form-label">Nama Anda <span class="req">*</span></label>
                         <input type="text" id="nama" name="nama"
                             class="form-control <?= isset($errors['nama']) ? 'is-invalid' : '' ?>"
-                            placeholder="Contoh: Raka Pratama" maxlength="100" required
+                            placeholder="Masukkan nama Anda..." maxlength="100" required
                             value="<?= htmlspecialchars($oldNama, ENT_QUOTES, 'UTF-8') ?>">
                         <div class="field-feedback" id="namaFeedback">
                             <?= isset($errors['nama']) ? htmlspecialchars($errors['nama'], ENT_QUOTES, 'UTF-8') : '' ?>
@@ -248,62 +306,59 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
 
                     <div class="form-group">
                         <div class="label-row">
-                            <label for="pesan" class="form-label">Pesan / Catatan <span class="req">*</span></label>
+                            <label for="pesan" class="form-label">Pesan / Kesan <span class="req">*</span></label>
                             <span id="charCounter" class="mono-counter">0 / 1000</span>
                         </div>
+
+                        <!-- Chip Reaksi & Template Cepat Interaktif -->
+                        <div class="quick-reaction-bar" aria-label="Template pesan cepat">
+                            <button type="button" class="reaction-chip" data-text="🍄 Semangat terus kuliahnya Nadia! ">🍄 Semangat!</button>
+                            <button type="button" class="reaction-chip" data-text="⭐ Tampilan web Mario Bros-nya keren banget! ">⭐ Web Keren!</button>
+                            <button type="button" class="reaction-chip" data-text="🔥 Sukses buat proyek SuperKost & PoluSee-nya! ">🔥 Sukses Proyek!</button>
+                            <button type="button" class="reaction-chip" data-text="🎮 Salam kenal dari pengunjung Node m3! ">🎮 Salam Kenal!</button>
+                        </div>
+
                         <textarea id="pesan" name="pesan" rows="4"
                             class="form-control <?= isset($errors['pesan']) ? 'is-invalid' : '' ?>"
-                            placeholder="Tuliskan pesan Anda di sini (minimal 5 karakter)..." maxlength="1000"
+                            placeholder="Tulis pesan atau klik reaksi cepat di atas..." maxlength="1000"
                             required><?= htmlspecialchars($oldPesan, ENT_QUOTES, 'UTF-8') ?></textarea>
                         <div class="field-feedback" id="pesanFeedback">
                             <?= isset($errors['pesan']) ? htmlspecialchars($errors['pesan'], ENT_QUOTES, 'UTF-8') : '' ?>
                         </div>
                     </div>
 
-                    <div class="form-meta-box">
-                        <span class="mono-small">ROUTE_ID:
-                            <strong><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></strong></span>
-                        <span class="mono-small">HOST:
-                            <strong><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></strong></span>
+                    <!-- Pratinjau Pesan Langsung (Live Preview Saat Mengetik) -->
+                    <div class="live-preview-box" id="guestbookLivePreview" style="display: none;" aria-live="polite">
+                        <div class="live-preview-header">
+                            <span class="mono-label">👁️ LIVE PREVIEW PESAN ANDA</span>
+                        </div>
+                        <div class="entry-header" style="margin-bottom: 0.35rem;">
+                            <div class="entry-author-wrap">
+                                <span class="entry-avatar" id="previewAvatar">?</span>
+                                <div>
+                                    <h3 class="entry-author" id="previewAuthor">Nama Anda</h3>
+                                    <span class="entry-via">via <strong><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></strong> (<?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry-body" id="previewBody">...</div>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">
-                        <span>Kirim Pesan ke Guestbook</span>
-                        <span class="btn-arrow">&rarr;</span>
+                        <span>Kirim Pesan &rarr;</span>
                     </button>
                 </form>
-
-                <?php if (!empty($daftarAnggota)): ?>
-                    <div class="node-directory">
-                        <h3 class="mono-label">REGISTERED GROUP NODES (m0 - m4)</h3>
-                        <ul class="node-list">
-                            <?php foreach ($daftarAnggota as $agt): ?>
-                                <?php
-                                $rId = htmlspecialchars((string) $agt['route_id'], ENT_QUOTES, 'UTF-8');
-                                $rNama = htmlspecialchars((string) $agt['nama'], ENT_QUOTES, 'UTF-8');
-                                $rNim = htmlspecialchars((string) $agt['nim'], ENT_QUOTES, 'UTF-8');
-                                $isCurrent = ($agt['route_id'] === MEMBER_ROUTE);
-                                ?>
-                                <li class="node-item <?= $isCurrent ? 'is-active-node' : '' ?>">
-                                    <span class="node-code"><?= $rId ?></span>
-                                    <span class="node-name"><?= $rNama ?></span>
-                                    <span class="node-nim"><?= $rNim ?></span>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                <?php endif; ?>
             </section>
 
             <!-- Kolom Daftar Entri & Paginasi -->
             <section class="guestbook-feed-card tech-card" aria-labelledby="feed-heading">
                 <div class="card-top-bar">
-                    <span class="mono-label">FEED</span>
-                    <span class="mono-label">TOTAL: <?= $totalEntries ?> PESAN</span>
+                    <span class="mono-label">💬 DAFTAR PESAN</span>
+                    <span class="mono-label"><?= $totalEntries ?> PESAN</span>
                 </div>
 
                 <div class="feed-header-row">
-                    <h2 id="feed-heading" class="card-heading">Daftar Entri Terbaru</h2>
+                    <h2 id="feed-heading" class="card-heading">Pesan Terbaru</h2>
 
                     <!-- Filter Node -->
                     <div class="route-filter-pills" role="group" aria-label="Filter berdasarkan route anggota">
@@ -318,8 +373,8 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
 
                 <?php if (empty($entries)): ?>
                     <div class="empty-state">
-                        <p class="mono-label">NO_DATA_FOUND</p>
-                        <p>Belum ada pesan buku tamu untuk kriteria ini. Jadilah yang pertama menulis pesan!</p>
+                        <p class="mono-label">BELUM ADA PESAN</p>
+                        <p>Belum ada pesan untuk filter ini. Jadilah yang pertama menulis pesan!</p>
                     </div>
                 <?php else: ?>
                     <div class="entries-list">
@@ -338,73 +393,69 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
                                 <div class="entry-header">
                                     <div class="entry-author-wrap">
                                         <span class="entry-avatar"
-                                            aria-hidden="true"><?= htmlspecialchars(mb_strtoupper(mb_substr((string) $item['nama'], 0, 1)), ENT_QUOTES, 'UTF-8') ?></span>
+                                            aria-hidden="true"><?= htmlspecialchars(strtoupper(substr((string) $item['nama'], 0, 1)), ENT_QUOTES, 'UTF-8') ?></span>
                                         <div>
                                             <h3 class="entry-author"><?= $eNama ?></h3>
-                                            <span class="entry-via">via Node <strong><?= $eRoute ?></strong>
-                                                (<?= $eAnggotaNama ?>)</span>
+                                            <span class="entry-via">via <strong><?= $eRoute ?></strong> (<?= $eAnggotaNama ?>)</span>
                                         </div>
                                     </div>
                                     <div class="entry-meta">
-                                        <span class="entry-id">#<?= $eId ?></span>
                                         <time class="entry-time" datetime="<?= $eTime ?>"><?= $eTime ?></time>
                                     </div>
                                 </div>
                                 <div class="entry-body">
                                     <?= $ePesan ?>
                                 </div>
+                                <div class="entry-actions-bar">
+                                    <button type="button" class="entry-coin-btn" data-entry-id="<?= $eId ?>" title="Berikan Koin Mario!">
+                                        <span>🪙</span> <span class="coin-like-num">1</span>
+                                    </button>
+                                </div>
                             </article>
                         <?php endforeach; ?>
                     </div>
 
-                    <!-- Navigasi Paginasi (5 Pesan per Halaman) -->
-                    <nav class="pagination-bar" aria-label="Paginasi Guestbook">
-                        <div class="pagination-info mono-small">
-                            Halaman <strong><?= $page ?></strong> dari <strong><?= $totalPages ?></strong> (<?= $perPage ?>
-                            entri/hal)
-                        </div>
-                        <div class="pagination-controls">
-                            <?php if ($page > 1): ?>
-                                <a class="page-btn"
-                                    href="<?= htmlspecialchars(build_page_url($page - 1, $isEmbed, $filterRoute), ENT_QUOTES, 'UTF-8') ?>">&laquo;
-                                    Prev</a>
-                            <?php else: ?>
-                                <span class="page-btn is-disabled" aria-disabled="true">&laquo; Prev</span>
-                            <?php endif; ?>
+                    <?php if ($totalPages > 1): ?>
+                        <nav class="pagination-bar" aria-label="Paginasi Guestbook">
+                            <div class="pagination-info mono-small">
+                                Hal <strong><?= $page ?></strong> dari <strong><?= $totalPages ?></strong>
+                            </div>
+                            <div class="pagination-controls">
+                                <?php if ($page > 1): ?>
+                                    <a class="page-btn"
+                                        href="<?= htmlspecialchars(build_page_url($page - 1, $isEmbed, $filterRoute), ENT_QUOTES, 'UTF-8') ?>">&laquo; Prev</a>
+                                <?php endif; ?>
 
-                            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                                <a class="page-btn <?= $i === $page ? 'is-current' : '' ?>"
-                                    href="<?= htmlspecialchars(build_page_url($i, $isEmbed, $filterRoute), ENT_QUOTES, 'UTF-8') ?>">
-                                    <?= $i ?>
-                                </a>
-                            <?php endfor; ?>
+                                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                    <a class="page-btn <?= $i === $page ? 'is-current' : '' ?>"
+                                        href="<?= htmlspecialchars(build_page_url($i, $isEmbed, $filterRoute), ENT_QUOTES, 'UTF-8') ?>">
+                                        <?= $i ?>
+                                    </a>
+                                <?php endfor; ?>
 
-                            <?php if ($page < $totalPages): ?>
-                                <a class="page-btn"
-                                    href="<?= htmlspecialchars(build_page_url($page + 1, $isEmbed, $filterRoute), ENT_QUOTES, 'UTF-8') ?>">Next
-                                    &raquo;</a>
-                            <?php else: ?>
-                                <span class="page-btn is-disabled" aria-disabled="true">Next &raquo;</span>
-                            <?php endif; ?>
-                        </div>
-                    </nav>
+                                <?php if ($page < $totalPages): ?>
+                                    <a class="page-btn"
+                                        href="<?= htmlspecialchars(build_page_url($page + 1, $isEmbed, $filterRoute), ENT_QUOTES, 'UTF-8') ?>">Next &raquo;</a>
+                                <?php endif; ?>
+                            </div>
+                        </nav>
+                    <?php endif; ?>
                 <?php endif; ?>
             </section>
         </div>
     </main>
 
     <?php if (!$isEmbed): ?>
+        <div class="mario-brick-ground" aria-hidden="true"></div>
         <footer class="site-footer">
-            <div class="container footer-inner">
-                <p class="mono-small">&copy; <?= date('Y') ?>     <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>
+            <div class="container footer-inner" style="justify-content: center; text-align: center;">
+                <p class="mono-small" style="margin: 0 auto; text-align: center;">&copy; <?= date('Y') ?> <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>
                     (<?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>) &mdash; IF-48-05 Telkom University.</p>
-                <p class="mono-small">MODUL:GUESTBOOK_PDO_V1 //
-                    ROUTE:<?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></p>
             </div>
         </footer>
     <?php endif; ?>
 
-    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/main.js?v=20"></script>
 </body>
 
 </html>
