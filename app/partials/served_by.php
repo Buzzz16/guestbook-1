@@ -23,9 +23,7 @@ $servedRoute = defined('MEMBER_ROUTE') ? htmlspecialchars((string) MEMBER_ROUTE,
             <span class="route-badge">NODE // <?= $servedRoute ?></span>
         </span>
         <p class="served-by-text">
-            Anda dilayani oleh laman <strong><?= $servedNama ?></strong> (<span
-                class="mono-nim"><?= $servedNim ?></span>)
+            Anda dilayani oleh laman <strong><?= $servedNama ?></strong> (<span class="mono-nim"><?= $servedNim ?></span>)
         </p>
-        <span class="served-by-meta">TEL-U // IF-48-05</span>
     </div>
 </div>

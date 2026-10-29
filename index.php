@@ -189,9 +189,6 @@ $portfolios = [
                 <div class="hero-content">
                     <div class="spec-pill-row">
                         <span class="spec-pill">⭐ PLAYER 1 READY</span>
-                        <span class="spec-pill">NODE //
-                            <?= htmlspecialchars(strtoupper(MEMBER_ROUTE), ENT_QUOTES, 'UTF-8') ?></span>
-                        <span class="spec-pill">NIM // <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></span>
                     </div>
 
                     <h1 class="hero-title">
