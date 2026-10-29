@@ -1,14 +1,15 @@
 /**
  * MAIN.JS — INTERAKSI VANILLA JAVASCRIPT
  * Proyek    : Personal Page dan Aplikasi Bersama (Pra-UTS)
- * Mahasiswa : Zulfa Almajid Basyaasyah (Babas) - 103012400134
+ * Mahasiswa : Dini Nadia Mawaddah - 103012430028
  *
- * Mencakup 5 fitur interaktif:
- * 1. Smooth Scroll & Active Section Spy pada Navigasi
- * 2. Filter Portofolio Dinamis (Semua / Spring Boot / AI Vue / Next.js)
- * 3. Dark / Harbor Light Theme Toggle dengan penyimpanan localStorage
- * 4. Validasi Sisi Klien (Client-Side) & Live Character Counter pada Form Guestbook
- * 5. Toggle Menu Navigasi Mobile Responsif
+ * Fitur interaktif:
+ * 1. Dark / Harbor Light Theme Toggle dengan penyimpanan localStorage
+ * 2. Navigasi Mobile Responsif (Hamburger Drawer)
+ * 3. Smooth Scroll & Active Section Spy pada Navigasi
+ * 4. Filter Portofolio Dinamis Berdasarkan Kategori
+ * 5. Modal Dialog Interaktif untuk Detail Portofolio
+ * 6. Validasi Sisi Klien & Live Character Counter pada Form Guestbook
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileNav();
     initSmoothScrollAndSpy();
     initPortfolioFilter();
+    initPortfolioModal();
     initGuestbookValidation();
 });
 
@@ -27,7 +29,7 @@ function initThemeToggle() {
     const toggleBtn = document.getElementById('themeToggleBtn');
     const themeLabel = document.getElementById('themeLabel');
 
-    const savedTheme = localStorage.getItem('babas_theme') || 'dark';
+    const savedTheme = localStorage.getItem('dini_theme') || localStorage.getItem('babas_theme') || 'dark';
     root.setAttribute('data-theme', savedTheme);
     updateThemeLabel(savedTheme, themeLabel);
 
@@ -37,7 +39,7 @@ function initThemeToggle() {
         const currentTheme = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
         const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
         root.setAttribute('data-theme', nextTheme);
-        localStorage.setItem('babas_theme', nextTheme);
+        localStorage.setItem('dini_theme', nextTheme);
         updateThemeLabel(nextTheme, themeLabel);
     });
 }
@@ -138,7 +140,83 @@ function initPortfolioFilter() {
 }
 
 /**
- * 5. Validasi Sisi Klien (Client-Side) & Penghitung Karakter pada Form Guestbook
+ * 5. Modal Interaktif Detail Portofolio
+ */
+function initPortfolioModal() {
+    const modalBackdrop = document.getElementById('projectModal');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSubtitle = document.getElementById('modalSubtitle');
+    const modalStatus = document.getElementById('modalStatus');
+    const modalSummary = document.getElementById('modalSummary');
+    const modalHighlights = document.getElementById('modalHighlights');
+    const modalTags = document.getElementById('modalTags');
+
+    if (!modalBackdrop) return;
+
+    const cards = document.querySelectorAll('#portfolioGrid .portfolio-card');
+    cards.forEach((card) => {
+        card.addEventListener('click', () => {
+            const title = card.querySelector('.portfolio-title')?.textContent || '';
+            const subtitle = card.querySelector('.portfolio-subtitle')?.textContent || '';
+            const status = card.querySelector('.status-chip')?.textContent || '';
+            const summary = card.querySelector('.portfolio-summary')?.textContent || '';
+            const highlightsList = card.querySelectorAll('.portfolio-highlights li');
+            const tags = card.querySelectorAll('.tech-tag');
+
+            if (modalTitle) modalTitle.textContent = title;
+            if (modalSubtitle) modalSubtitle.textContent = subtitle;
+            if (modalStatus) modalStatus.textContent = status;
+            if (modalSummary) modalSummary.textContent = summary;
+
+            if (modalHighlights) {
+                modalHighlights.innerHTML = '';
+                highlightsList.forEach((li) => {
+                    const newLi = document.createElement('li');
+                    newLi.textContent = li.textContent;
+                    modalHighlights.appendChild(newLi);
+                });
+            }
+
+            if (modalTags) {
+                modalTags.innerHTML = '';
+                tags.forEach((tag) => {
+                    const span = document.createElement('span');
+                    span.className = 'tech-tag';
+                    span.textContent = tag.textContent;
+                    modalTags.appendChild(span);
+                });
+            }
+
+            modalBackdrop.classList.add('is-active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    const closeModal = () => {
+        modalBackdrop.classList.remove('is-active');
+        document.body.style.overflow = '';
+    };
+
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', closeModal);
+    }
+
+    modalBackdrop.addEventListener('click', (e) => {
+        if (e.target === modalBackdrop) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalBackdrop.classList.contains('is-active')) {
+            closeModal();
+        }
+    });
+}
+
+/**
+ * 6. Validasi Sisi Klien (Client-Side) & Penghitung Karakter pada Form Guestbook
  */
 function initGuestbookValidation() {
     const form = document.getElementById('guestbookForm');
