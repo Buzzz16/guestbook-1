@@ -1,6 +1,6 @@
 # Personal Page dan Aplikasi Bersama (Pra-UTS)
 
-Dokumentasi resmi proyek perkuliahan **Personal Page dan Aplikasi Bersama (Pra-UTS)** yang dibangun menggunakan **PHP Native 8.x**, **MySQL / MariaDB (PDO)**, **Semantic HTML5**, **Custom CSS (Dark Tech-wear / Harbor Grey Theme)**, dan **Vanilla JavaScript**.
+Dokumentasi resmi proyek perkuliahan **Personal Page dan Aplikasi Bersama (Pra-UTS)** yang dibangun menggunakan **PHP Native 8.x**, **MySQL / MariaDB (PDO)**, **Semantic HTML5**, **Custom CSS (Super Mario Bros Retro-Modern Theme)**, dan **Vanilla JavaScript**.
 
 ---
 
@@ -9,7 +9,7 @@ Dokumentasi resmi proyek perkuliahan **Personal Page dan Aplikasi Bersama (Pra-U
 - **Judul Proyek**: Personal Page dan Aplikasi Bersama (Pra-UTS)
 - **Nama Aplikasi Bersama**: Guestbook Kelompok Terdistribusi (`kelompok_db`)
 - **Program Studi / Kelas**: S1 Informatika Telkom University — **IF-48-05**
-- **Node Pemilik Laman Lokal**: `m0` — **Zulfa Almajid Basyaasyah (Babas)** (`103012400134`)
+- **Node Pemilik Laman Lokal**: `m3` — **Dini Nadia Mawaddah** (`103012430028`)
 
 ### Daftar Anggota Kelompok (`m0` – `m4`)
 
@@ -18,7 +18,7 @@ Dokumentasi resmi proyek perkuliahan **Personal Page dan Aplikasi Bersama (Pra-U
 | **`m0`** | `103012400134` | **Zulfa Almajid Basyaasyah** | **Ketua Kelompok (Pemilik Personal Page ini)** |
 | **`m1`** | `103012400` | **a** | Anggota |
 | **`m2`** | `103012400` | **a** | Anggota |
-| **`m3`** | `103012400` | **a** | Anggota |
+| **`m3`** | `103012430028` | **Dini Nadia Mawaddah** | **Anggota (Pemilik Personal Page ini)** |
 | **`m4`** | `103012400` | **a** | Anggota |
 
 ---
@@ -29,9 +29,9 @@ Dokumentasi resmi proyek perkuliahan **Personal Page dan Aplikasi Bersama (Pra-U
 personal/
 ├── index.php                  (Halaman utama Personal Page)
 ├── assets/                    (Folder statis individu)
-│   ├── css/style.css          (Stylesheet Dark Techwear & Harbor Grey)
+│   ├── css/style.css          (Stylesheet Super Mario Bros Retro-Modern)
 │   └── js/main.js             (Interaksi Vanilla JS: Filter, Smooth Scroll, Theme, Validasi)
-├── identity.php               (Konfigurasi identitas mahasiswa lokal: m0 - Zulfa)
+├── identity.php               (Konfigurasi identitas mahasiswa lokal: m3 - Dini Nadia Mawaddah)
 ├── config/                    (Folder konfigurasi lokal)
 │   ├── .htaccess              (Proteksi akses langsung: Require all denied)
 │   └── db.php                 (Kredensial database: host, name, user, pass)
@@ -119,9 +119,9 @@ mysql -u root -p < C:/xampp/htdocs/personal/app/sql/schema.sql
    ```
    *(Apabila port MySQL XAMPP Anda diubah, sesuaikan nilai `'port'` pada file tersebut).*
 2. Periksa file `personal/identity.php` yang menyimpan konstanta identitas lokal:
-   - `MEMBER_ROUTE`: `'m0'`
-   - `MEMBER_NAMA`: `'Zulfa Almajid Basyaasyah'`
-   - `MEMBER_NIM`: `'103012400134'`
+   - `MEMBER_ROUTE`: `'m3'`
+   - `MEMBER_NAMA`: `'Dini Nadia Mawaddah'`
+   - `MEMBER_NIM`: `'103012430028'`
 
 ---
 

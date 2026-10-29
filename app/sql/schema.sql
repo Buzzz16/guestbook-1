@@ -50,7 +50,7 @@ INSERT INTO `anggota` (`route_id`, `nim`, `nama`) VALUES
     ('m0', '103012400134', 'Zulfa Almajid Basyaasyah'),
     ('m1', '1030124001', 'a'),
     ('m2', '1030124002', 'a'),
-    ('m3', '1030124003', 'a'),
+    ('m3', '103012430028', 'Dini Nadia Mawaddah'),
     ('m4', '1030124004', 'a'),
     ('m5', '1030124005', 'a')
 ON DUPLICATE KEY UPDATE
