@@ -51,12 +51,12 @@ $skills = [
         'icon'     => '🌿',
     ],
     [
-        'name'     => 'INTELECTA Event',
-        'category' => 'Organization & Teamwork',
-        'level'    => 'SPECIAL BADGE 🏆',
-        'desc'     => 'Kepanitiaan aktif INTELECTA dalam koordinasi acara, manajemen teknis kompetisi, dan alur peserta.',
-        'code'     => 'ORG-06',
-        'icon'     => '🚩',
+        'name'     => 'UI/UX & Figma',
+        'category' => 'Interface & Prototyping',
+        'level'    => 'POWER-UP ★★★',
+        'desc'     => 'Desain antarmuka berpusat pada pengguna, wireframing, perancangan prototipe interaktif di Figma, dan user flow.',
+        'code'     => 'UX-06',
+        'icon'     => '🎯',
     ],
 ];
 
@@ -215,8 +215,8 @@ $portfolios = [
                             <span class="telemetry-lbl">KELAS</span>
                         </div>
                         <div class="telemetry-item">
-                            <span class="telemetry-val">INTELECTA</span>
-                            <span class="telemetry-lbl">PANITIA</span>
+                            <span class="telemetry-val">INFORMATIKA</span>
+                            <span class="telemetry-lbl">PRODI</span>
                         </div>
                         <div class="telemetry-item">
                             <span class="telemetry-val">04 WORLDS</span>
@@ -271,14 +271,14 @@ $portfolios = [
             </div>
         </section>
 
-        <!-- SECTION 2: PENDIDIKAN & KEPANITIAAN (LEVEL 2: QUEST LOG) -->
+        <!-- SECTION 2: PENDIDIKAN & PENGALAMAN (LEVEL 2: QUEST LOG) -->
         <section id="pendidikan" class="section-block section-alt">
             <div class="container">
                 <div class="section-header">
                     <span class="section-tag">★ LEVEL 02 // QUEST LOG</span>
                     <h2 class="section-title">Pendidikan &amp; Pengalaman</h2>
                     <p class="section-subtitle">
-                        Perjalanan akademik di Telkom University dan kontribusi aktif di kepanitiaan kampus.
+                        Perjalanan akademik di Telkom University dan fokus eksplorasi rekayasa perangkat lunak.
                     </p>
                 </div>
 
@@ -300,20 +300,20 @@ $portfolios = [
                         </ul>
                     </article>
 
-                    <!-- Card Kepanitiaan INTELECTA -->
+                    <!-- Card Eksplorasi Produk & Desain -->
                     <article class="tech-card timeline-card highlight-border">
                         <div class="card-top-bar">
-                            <span class="mono-label">🏆 COMMITTEE</span>
-                            <span class="badge-route">ACTIVE</span>
+                            <span class="mono-label">🚀 PRODUCT DEV</span>
+                            <span class="badge-route">ACTIVE FOCUS</span>
                         </div>
-                        <h3 class="card-heading">Kepanitiaan INTELECTA</h3>
-                        <p class="card-sub">Informatics Intellectual Arena &bull; Fakultas Informatika</p>
+                        <h3 class="card-heading">Eksplorasi Rekayasa Web &amp; Desain</h3>
+                        <p class="card-sub">Web Development &amp; UI/UX Engineering</p>
                         <p class="card-desc">
-                            Berperan aktif dalam kepanitiaan <strong>INTELECTA</strong>, festival dan kompetisi teknologi tahunan mahasiswa Informatika.
+                            Aktif merancang produk perangkat lunak mandiri dan kolaboratif dengan penekanan pada fungsionalitas sistem yang efisien dan antarmuka yang bersih.
                         </p>
                         <ul class="spec-bullet-list">
-                            <li>Koordinasi alur teknis perlombaan dan briefing delegasi peserta.</li>
-                            <li>Kolaborasi lintas divisi untuk kelancaran logistik dan administrasi kompetisi.</li>
+                            <li>Mengembangkan solusi digital seperti SuperKost, Redesain iGracias, dan FinSmart.</li>
+                            <li>Mengutamakan struktur kode bersih dan alur pengguna yang intuitif tanpa fitur berlebih.</li>
                         </ul>
                     </article>
                 </div>
@@ -492,7 +492,7 @@ $portfolios = [
         <div class="container footer-inner">
             <div class="footer-brand">
                 <span>⭐ <strong><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></strong> (<?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>)</span>
-                <span>S1 Informatika Telkom University &bull; Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull; Panitia INTELECTA</span>
+                <span>S1 Informatika Telkom University &bull; Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
             </div>
             <div class="footer-links">
                 <a href="#top">BACK TO TOP &uarr;</a>
