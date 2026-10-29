@@ -63,50 +63,50 @@ $skills = [
 $portfolios = [
     [
         'id'       => 'WORLD 1',
-        'icon'     => '🏥',
-        'title'    => 'MediCare Portal',
-        'subtitle' => 'Platform Manajemen & Reservasi Antrean Pasien',
-        'category' => 'backend',
-        'tags'     => ['PHP 8 Native', 'MySQL PDO', 'Clean MVC'],
+        'icon'     => '🏠',
+        'title'    => 'SuperKost',
+        'subtitle' => 'Platform Manajemen & Digitalisasi Hunian Indekos',
+        'category' => 'web-app',
+        'tags'     => ['PHP / Java', 'MySQL DB', 'Kost Management'],
         'year'     => '2025',
         'status'   => 'CLEARED 🏆',
-        'summary'  => 'Sistem registrasi layanan kesehatan dengan autentikasi berjenjang (Admin & Pasien), penjadwalan dokter, serta proteksi penuh SQL Injection via PDO.',
+        'summary'  => 'Aplikasi pengelolaan kamar kos dan hunian terpadu untuk monitoring ketersediaan unit, pencatatan sewa penghuni, tagihan berkala, dan rekap keuangan pemilik kos.',
         'highlights' => [
-            'Autentikasi role-based dan dashboard dokter real-time',
-            'Manajemen rekam medis dengan validasi input berlapis',
-            'Tampilan adaptif dan responsif untuk mobile dan tablet',
+            'Manajemen ketersediaan unit kamar dan data penghuni real-time',
+            'Pencatatan otomatis histori tagihan bulanan dan pembayaran sewa',
+            'Dashboard ringkas untuk laporan keuangan dan rekap hunian',
         ],
     ],
     [
         'id'       => 'WORLD 2',
-        'icon'     => '📦',
-        'title'    => 'SmartInventory Core',
-        'subtitle' => 'Sistem Pelacakan Aset & Pergudangan Logistik',
-        'category' => 'java-app',
-        'tags'     => ['Java 17', 'OOP Architecture', 'MySQL DB'],
+        'icon'     => '🎓',
+        'title'    => 'Redesain iGracias',
+        'subtitle' => 'UI/UX Redesign Portal Akademik Terintegrasi',
+        'category' => 'ui-ux',
+        'tags'     => ['UI/UX Design', 'Figma', 'Responsive Web'],
         'year'     => '2025',
-        'status'   => 'CLEARED 🏆',
-        'summary'  => 'Aplikasi desktop berbasis Java OOP untuk inventarisasi barang gudang, peringatan stok minimum otomatis, dan pencatatan transaksi ACID.',
+        'status'   => 'FEATURED ⭐️',
+        'summary'  => 'Pembaruan antarmuka portal akademik iGracias Telkom University yang lebih bersih, modern, dan intuitif untuk kemudahan registrasi mata kuliah (KRS), cek jadwal kuliah, dan pantau nilai.',
         'highlights' => [
-            'Arsitektur pola MVC berorientasi objek yang rapi',
-            'Integrasi transaksi basis data untuk integritas stok',
-            'Modul pencarian cepat dan ekspor laporan inventaris',
+            'Antarmuka modern yang segar, minim distraksi, dan mudah dipahami',
+            'Tata letak jadwal perkuliahan serta grafik nilai yang lebih rapi',
+            'Navigasi responsif yang nyaman diakses melalui perangkat smartphone',
         ],
     ],
     [
         'id'       => 'WORLD 3',
-        'icon'     => '🏆',
-        'title'    => 'Intelecta Event System',
-        'subtitle' => 'Web Portal Pendaftaran & Lini Masa INTELECTA',
-        'category' => 'event-web',
-        'tags'     => ['HTML5 Semantic', 'Custom CSS', 'Vanilla JS'],
+        'icon'     => '💰',
+        'title'    => 'FinSmart',
+        'subtitle' => 'Aplikasi Pelacak & Pengatur Keuangan Mandiri',
+        'category' => 'fintech',
+        'tags'     => ['Finance Tracker', 'JavaScript', 'Data Charts'],
         'year'     => '2025',
-        'status'   => 'ONLINE ⭐️',
-        'summary'  => 'Portal resmi kompetisi tahunan INTELECTA Fakultas Informatika untuk publikasi jadwal lomba, panduan teknis, dan verifikasi delegasi peserta.',
+        'status'   => 'CLEARED 🏆',
+        'summary'  => 'Platform pengatur keuangan cerdas untuk mencatat arus kas harian (pemasukan & pengeluaran), menetapkan alokasi anggaran belanja, dan menyajikan ringkasan visual.',
         'highlights' => [
-            'Sistem registrasi delegasi peserta lomba terpusat',
-            'Tampilan lini masa kompetisi yang interaktif dan jelas',
-            'Alur koordinasi divisi acara yang terorganisir',
+            'Pencatatan transaksi harian cepat dengan kategorisasi pengeluaran',
+            'Fitur penetapan target anggaran dan peringatan batas belanja',
+            'Visualisasi grafik arus kas interaktif yang informatif',
         ],
     ],
     [
@@ -115,10 +115,10 @@ $portfolios = [
         'title'    => 'Distributed Guestbook Node',
         'subtitle' => 'Node Aplikasi Bersama Terdistribusi Pra-UTS',
         'category' => 'fullstack',
-        'tags'     => ['PHP 8 PDO', 'MySQL Server', 'Mario HUD'],
+        'tags'     => ['PHP 8 PDO', 'MySQL Server', 'Live Embed'],
         'year'     => '2026',
         'status'   => 'ACTIVE NODE 🟢',
-        'summary'  => 'Aplikasi buku tamu terdistribusi yang menyematkan konektivitas basis data terpusat, filter route anggota (m0 - m5), dan live embed iframe.',
+        'summary'  => 'Aplikasi buku tamu bersama terdistribusi yang terhubung ke database terpusat kelompok, filter route anggota (m0 - m5), dan live embed iframe.',
         'highlights' => [
             'Node pelayan lokal terverifikasi (Node m3)',
             'Mendukung mode standalone maupun embed di halaman utama',
@@ -361,9 +361,9 @@ $portfolios = [
                     <!-- Filter Interaktif via assets/js/main.js -->
                     <div class="portfolio-filters" role="group" aria-label="Filter kategori portofolio">
                         <button type="button" class="filter-btn active" data-filter="all">Semua (4)</button>
-                        <button type="button" class="filter-btn" data-filter="backend">PHP &amp; MySQL</button>
-                        <button type="button" class="filter-btn" data-filter="java-app">Java OOP</button>
-                        <button type="button" class="filter-btn" data-filter="event-web">Intelecta</button>
+                        <button type="button" class="filter-btn" data-filter="web-app">SuperKost</button>
+                        <button type="button" class="filter-btn" data-filter="ui-ux">Redesain iGracias</button>
+                        <button type="button" class="filter-btn" data-filter="fintech">FinSmart</button>
                         <button type="button" class="filter-btn" data-filter="fullstack">Guestbook Node</button>
                     </div>
                 </div>
