@@ -150,31 +150,68 @@ function initGuestbookValidation() {
 
     if (!form || !namaInput || !pesanInput) return;
 
+    // Helper menghitung jumlah kata secara akurat
+    const countWords = (text) => {
+        const trimmed = text.trim();
+        return trimmed.length === 0 ? 0 : trimmed.split(/\s+/).filter(Boolean).length;
+    };
+
     const updateCounter = () => {
         if (!charCounter) return;
-        const len = pesanInput.value.length;
-        charCounter.textContent = `${len} / 1000`;
+        const words = countWords(pesanInput.value);
+        charCounter.textContent = `${words} / 1000 kata`;
+        if (words > 1000) {
+            charCounter.style.color = 'var(--danger-color, #ff4d4f)';
+        } else {
+            charCounter.style.color = '';
+        }
     };
 
     updateCounter();
     pesanInput.addEventListener('input', updateCounter);
 
+    // Live validation nama: tolak angka dan simbol secara instan
+    namaInput.addEventListener('input', () => {
+        const rawVal = namaInput.value;
+        const nameRegex = /^[a-zA-Z\s]*$/;
+        if (!nameRegex.test(rawVal)) {
+            namaInput.classList.add('is-invalid');
+            if (namaFeedback) {
+                namaFeedback.textContent = 'Nama hanya boleh berupa huruf dan spasi (tidak boleh mengandung angka atau simbol).';
+            }
+        } else {
+            namaInput.classList.remove('is-invalid');
+            if (namaFeedback) {
+                namaFeedback.textContent = '';
+            }
+        }
+    });
+
     form.addEventListener('submit', (event) => {
         let isValid = true;
         const namaVal = namaInput.value.trim();
         const pesanVal = pesanInput.value.trim();
+        const nameRegex = /^[a-zA-Z\s]+$/;
+        const wordCount = countWords(pesanVal);
 
-        // Reset state
+        // Reset status validasi
         namaInput.classList.remove('is-invalid');
         pesanInput.classList.remove('is-invalid');
         if (namaFeedback) namaFeedback.textContent = '';
         if (pesanFeedback) pesanFeedback.textContent = '';
 
-        if (namaVal.length < 2) {
+        // 1. Validasi Nama
+        if (namaVal === '') {
             isValid = false;
             namaInput.classList.add('is-invalid');
             if (namaFeedback) {
-                namaFeedback.textContent = 'Nama pengirim wajib diisi (minimal 2 karakter).';
+                namaFeedback.textContent = 'Nama pengirim wajib diisi.';
+            }
+        } else if (namaVal.length < 2) {
+            isValid = false;
+            namaInput.classList.add('is-invalid');
+            if (namaFeedback) {
+                namaFeedback.textContent = 'Nama pengirim minimal terdiri dari 2 karakter.';
             }
         } else if (namaVal.length > 100) {
             isValid = false;
@@ -182,19 +219,32 @@ function initGuestbookValidation() {
             if (namaFeedback) {
                 namaFeedback.textContent = 'Nama pengirim maksimal 100 karakter.';
             }
+        } else if (!nameRegex.test(namaVal)) {
+            isValid = false;
+            namaInput.classList.add('is-invalid');
+            if (namaFeedback) {
+                namaFeedback.textContent = 'Nama hanya boleh berupa huruf dan spasi (tidak boleh mengandung angka atau simbol).';
+            }
         }
 
-        if (pesanVal.length < 5) {
+        // 2. Validasi Pesan
+        if (pesanVal === '') {
             isValid = false;
             pesanInput.classList.add('is-invalid');
             if (pesanFeedback) {
-                pesanFeedback.textContent = 'Pesan wajib diisi (minimal 5 karakter).';
+                pesanFeedback.textContent = 'Isi pesan tidak boleh kosong.';
             }
-        } else if (pesanVal.length > 1000) {
+        } else if (pesanVal.length < 5) {
             isValid = false;
             pesanInput.classList.add('is-invalid');
             if (pesanFeedback) {
-                pesanFeedback.textContent = 'Pesan maksimal 1000 karakter.';
+                pesanFeedback.textContent = 'Isi pesan minimal terdiri dari 5 karakter.';
+            }
+        } else if (wordCount > 1000) {
+            isValid = false;
+            pesanInput.classList.add('is-invalid');
+            if (pesanFeedback) {
+                pesanFeedback.textContent = `Isi pesan tidak boleh melebihi 1000 kata (saat ini: ${wordCount} kata).`;
             }
         }
 
