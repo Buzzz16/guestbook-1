@@ -19,7 +19,7 @@ Dokumentasi resmi proyek perkuliahan **Personal Page dan Aplikasi Bersama (Pra-U
 | **`m1`** | `103012400` | **a** | Anggota |
 | **`m2`** | `103012400` | **a** | Anggota |
 | **`m3`** | `103012400` | **a** | Anggota |
-| **`m4`** | `103012400` | **a** | Anggota |
+| **`m4`** | `103012400045` | **Yuriko Astiani** | Anggota |
 
 ---
 
