@@ -2544,4 +2544,20 @@ body.dark-mode .project-stack-mini span {
     overflow-x: auto;
 }
 
+.sort-toolbar {
+    background: var(--bg-cream);
+    border: 2px dashed var(--border-ink);
+    border-radius: 12px;
+    padding: 0.65rem 0.9rem;
+    margin-bottom: 1.15rem;
+}
+
+.sort-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--text-ink);
+}
+
+
 
