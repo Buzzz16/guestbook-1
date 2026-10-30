@@ -7,19 +7,19 @@ declare(strict_types=1);
  */
 
 if (!defined('MEMBER_ROUTE')) {
-    define('MEMBER_ROUTE', 'm0'); // Ketua Kelompok
+    define('MEMBER_ROUTE', 'm2'); // Node Anggota
 }
 
 if (!defined('MEMBER_NAMA')) {
-    define('MEMBER_NAMA', 'Zulfa Almajid Basyaasyah');
+    define('MEMBER_NAMA', 'Meyneza Ari Dwi Astuti');
 }
 
 if (!defined('MEMBER_NIM')) {
-    define('MEMBER_NIM', '103012400134');
+    define('MEMBER_NIM', '103012400299');
 }
 
 if (!defined('MEMBER_NICKNAME')) {
-    define('MEMBER_NICKNAME', 'Babas');
+    define('MEMBER_NICKNAME', 'Nejaa');
 }
 
 if (!defined('MEMBER_KELAS')) {
