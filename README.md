@@ -1,112 +1,116 @@
 # Personal Page dan Aplikasi Bersama (Pra-UTS)
 
-Dokumentasi resmi proyek perkuliahan **Personal Page dan Aplikasi Bersama (Pra-UTS)** yang dibangun menggunakan **PHP Native 8.x**, **MySQL / MariaDB (PDO)**, **Semantic HTML5**, **Custom CSS (Dark Tech-wear / Harbor Grey Theme)**, dan **Vanilla JavaScript**.
+Dokumentasi resmi proyek perkuliahan **Personal Page dan Aplikasi Bersama (Pra-UTS Komputasi Awan)** yang dibangun menggunakan **PHP Native 8.x**, **MySQL / MariaDB (PDO)**, **Semantic HTML5**, **Modern Modular CSS (Unified Dark & Light System)**, dan **Interactive JavaScript (Typographic Silhouette, Marquee, & Dynamic Filters)**.
 
 ---
 
 ## 1. Informasi Proyek & Daftar Anggota Kelompok
 
-- **Judul Proyek**: Personal Page dan Aplikasi Bersama (Pra-UTS)
+- **Mata Kuliah**: Komputasi Awan (Cloud Computing)
+- **Judul Tugas**: Tugas 1 — Personal Page dan Aplikasi Bersama (Pra-UTS)
 - **Nama Aplikasi Bersama**: Guestbook Kelompok Terdistribusi (`kelompok_db`)
 - **Program Studi / Kelas**: S1 Informatika Telkom University — **IF-48-05**
-- **Node Pemilik Laman Lokal**: `m0` — **Zulfa Almajid Basyaasyah (Babas)** (`103012400134`)
 
 ### Daftar Anggota Kelompok (`m0` – `m4`)
 
 | Route ID | NIM | Nama Anggota | Peran |
 | :--- | :--- | :--- | :--- |
-| **`m0`** | `103012400134` | **Zulfa Almajid Basyaasyah** | **Ketua Kelompok (Pemilik Personal Page ini)** |
-| **`m1`** | `103012400` | **a** | Anggota |
-| **`m2`** | `103012400` | **a** | Anggota |
-| **`m3`** | `103012400` | **a** | Anggota |
+| **`m0`** | `103012400134` | **Zulfa Almajid Basyaasyah** | Ketua Kelompok |
+| **`m1`** | `103012400106` | **Glen David Hadiono** | Anggota |
+| **`m2`** | `103012400` | *Anggota Kelompok* | Anggota |
+| **`m3`** | `103012400` | *Anggota Kelompok* | Anggota |
 | **`m4`** | `103012400045` | **Yuriko Astiani** | Anggota |
+
+> **Catatan**: Identitas server/node lokal dikonfigurasi melalui file `identity.php` di root direktori mahasiswa masing-masing tanpa mengubah kode inti aplikasi kelompok di folder `app/`.
 
 ---
 
-## 2. Struktur Direktori (`htdocs/personal/`)
+## 2. Struktur Direktori Proyek (`htdocs/personal/`)
+
+Sesuai spesifikasi pada dokumen `Petunjuk_Tugas_1.pdf`, struktur direktori seragam untuk seluruh anggota dan siap di-deploy langsung ke VM Google Compute Engine (GCP):
 
 ```text
 personal/
-├── index.php                  (Halaman utama Personal Page)
-├── assets/                    (Folder statis individu)
-│   ├── css/style.css          (Stylesheet Dark Techwear & Harbor Grey)
-│   └── js/main.js             (Interaksi Vanilla JS: Filter, Smooth Scroll, Theme, Validasi)
-├── identity.php               (Konfigurasi identitas mahasiswa lokal: m0 - Zulfa)
-├── config/                    (Folder konfigurasi lokal)
-│   ├── .htaccess              (Proteksi akses langsung: Require all denied)
-│   └── db.php                 (Kredensial database: host, name, user, pass)
-├── README.md                  (Dokumentasi proyek)
-└── app/                       (Folder Aplikasi Bersama - Guestbook)
-    ├── index.php              (Halaman antarmuka Guestbook + Paginasi + Validasi)
-    ├── lib/db.php             (Koneksi database PDO)
-    ├── partials/served_by.php (Banner identitas pelayan laman)
-    └── sql/schema.sql         (Skema database lengkap + User + Seed Data)
+├── index.php                  (Halaman utama Personal Page mahasiswa + Embed Guestbook)
+├── identity.php               (Konfigurasi identitas mahasiswa lokal: MEMBER_ROUTE, MEMBER_NAMA, MEMBER_NIM)
+├── styles/                    (Stylesheet terpadu personal page & banner served_by)
+│   └── main.css
+├── scripts/                   (Skrip interaktif personal page)
+│   ├── app.js                 (Interaksi tema, quick access, audio controller, spotlight)
+│   ├── silhouette.js          (Typographic canvas silhouette word-mesh)
+│   ├── config.js              (Konfigurasi data profil & tautan kamar)
+│   └── catalogData.js         (Katalog proyek & data portfolio)
+├── images/                    (Aset gambar potret, thumbnail, dan preview proyek)
+├── fonts/                     (Font lokal & typography assets)
+├── cv.pdf                     (Dokumen Curriculum Vitae profesional)
+├── favicon.png                (Favicon personal page)
+├── site.webmanifest           (Web app manifest)
+├── engineer/                  (Showcase sub-page Engineer)
+├── creative/                  (Showcase sub-page Creative)
+├── hire/                      (Showcase sub-page Hire Me & Full CV)
+├── work/                      (Showcase sub-page All Projects)
+├── personal_page/             (Arsip cadangan sumber asli personal page)
+├── assets/                    (Folder aset statis bersama & fallback)
+├── config/                    (Folder konfigurasi database lokal)
+│   ├── .htaccess              (Proteksi akses langsung web server: Require all denied)
+│   ├── db.php                 (Kredensial database lokal: host, name, user, pass)
+│   └── db.example.php         (Contoh konfigurasi untuk pengumpulan arsip ZIP)
+└── app/                       (Aplikasi Bersama Kelompok - Guestbook)
+    ├── index.php              (Antarmuka Guestbook: Form + Daftar Pesan + Paginasi)
+    ├── lib/db.php             (Koneksi database PDO modular)
+    ├── partials/served_by.php (Banner identitas server/node pelayan)
+    └── sql/schema.sql         (Skema database DDL/DML, hak akses user, & data seed)
 ```
 
 ---
 
-## 3. Syarat Pra-Instalasi
+## 3. Fitur Utama & Kepatuhan Spesifikasi Tugas
 
-Sebelum menjalankan proyek ini di komputer lokal Anda, pastikan perangkat lunak berikut sudah terpasang:
+1. **Personal Page Individu ([index.php](file:///c:/Users/Glen/OneDrive/Dokumen/KULIAH/SEMESTER%205/KOMPUTASI%20AWAN/guestbook-1/index.php))**:
+   - **Banner Wajib**: Banner `"Anda dilayani oleh laman <nama> (<NIM>)"` dimuat secara dinamis dari `app/partials/served_by.php` di bagian teratas halaman.
+   - **Integrasi Identitas**: Terhubung langsung dengan konstanta pada `identity.php`.
+   - **Profil & Portofolio Lengkap**: Menampilkan ringkasan profil, rekam jejak akademik (Telkom University), pengalaman magang industri (PT Mekar Armada Jaya, ReuseID), asisten praktikum (Go & C++), dan tutor sebaya (helPhin).
+   - **Minimal 3 Portofolio Bergambar**: Memuat *Lunch Attendance & Billing System*, *Valas Company Profile CMS*, *ReuseID Secondhand Donation Platform*, dan *KKN 116 Tamangapa*.
+   - **Interaksi JavaScript**:
+     - Toggle mode gelap / terang (*Dark/Light Mode*).
+     - Kanvas interaktif tipografi siluet wajah (*Typographic Canvas Word-Mesh*).
+     - Tab *Spotlight* proyek interaktif.
+     - Animasi teks berjalan (*Interactive Marquee Chips*).
+   - **Privasi Terjaga**: Sesuai instruksi tugas, **nomor telepon pribadi tidak dicantumkan**.
+   - **Sematkan Aplikasi Bersama**: Guestbook disematkan langsung di halaman utama via iframe responsif (`app/index.php?embed=1`) serta tersedia tombol navigasi menuju halaman penuh (`app/index.php`).
 
-1. **XAMPP / WAMP / Laragon** yang mencakup:
-   - **Apache Web Server** (dengan dukungan modul `.htaccess` / `mod_authz_core`).
-   - **PHP 8.x** (Native, dengan ekstensi `pdo_mysql` dan `mbstring` aktif).
-   - **MySQL 8.x atau MariaDB 10.4+** beserta **phpMyAdmin**.
-2. **Git** (opsional, untuk melakukan *cloning* repositori ke dalam direktori `htdocs`).
-3. **Browser Modern** (Google Chrome, Mozilla Firefox, Microsoft Edge, atau Brave).
-
-> **Catatan**: **Node.js tidak diperlukan** karena seluruh proyek ini berjalan murni menggunakan arsitektur **PHP Native 8.x** tanpa ketergantungan *build tool* eksternal.
+2. **Aplikasi Bersama ([app/index.php](file:///c:/Users/Glen/OneDrive/Dokumen/KULIAH/SEMESTER%205/KOMPUTASI%20AWAN/guestbook-1/app/index.php))**:
+   - **Pencatatan Node Server**: Setiap data input secara otomatis mencatat `route_id` yang melayani (`m0`..`m4`).
+   - **Fitur Lengkap**: Form penambahan pesan, daftar entri terbaru, filter entri per-node, dan paginasi (5 entri per halaman).
+   - **Keamanan Berlapis**:
+     - *PDO Prepared Statements* untuk semua query (anti SQL Injection).
+     - *Anti-XSS Output Escaping* menggunakan `htmlspecialchars(..., ENT_QUOTES, 'UTF-8')`.
+     - Validasi ganda (*dual-layer validation*) di sisi klien (JavaScript) dan sisi server (PHP).
+   - **Path Relatif Penuh**: Bebas dari ketergantungan absolute URL sehingga tidak rusak saat migrasi ke load balancer GCP Compute Engine.
 
 ---
 
-## 4. Langkah-Langkah Instalasi Detail
+## 4. Panduan Instalasi & Penggunaan Lokal
 
-### Langkah 1: Ekstrak atau Clone Proyek ke Folder `htdocs`
+### Langkah 1: Penempatan Proyek di Web Root
+Pastikan folder proyek berada pada direktori web server lokal:
+- **XAMPP**: `C:\xampp\htdocs\personal\`
+- **WAMP**: `C:\wamp64\www\personal\`
 
-1. Buka direktori instalasi XAMPP Anda (umumnya di `C:\xampp\htdocs\` pada Windows atau `/opt/lampp/htdocs/` pada Linux).
-2. Ekstrak isi file `Tugas1_PersonalPage_Guestbook.zip` atau *clone* repositori sehingga terbentuk folder `personal` tepat di dalam `htdocs`:
-   ```bash
-   cd C:/xampp/htdocs
-   git clone <url-repositori-anda> personal
-   ```
-3. Pastikan path akhir dari file utama adalah `C:\xampp\htdocs\personal\index.php`.
+### Langkah 2: Nyalakan Modul Apache & MySQL
+Buka **XAMPP Control Panel** dan klik **Start** pada modul **Apache** serta **MySQL**.
 
-### Langkah 2: Nyalakan Apache dan MySQL di XAMPP
+### Langkah 3: Import Skema Database
+1. Buka browser dan kunjungi [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
+2. Buat database atau langsung gunakan menu **Import**.
+3. Pilih file `app/sql/schema.sql` lalu klik **Go** / **Import**.
+4. Skrip otomatis membuat:
+   - Database `kelompok_db`
+   - User database `app_local` dengan password `password_lokal`
+   - Tabel `anggota` dan `guestbook` beserta data awal (*seed*).
 
-1. Buka **XAMPP Control Panel**.
-2. Klik tombol **Start** pada modul **Apache** dan **MySQL** hingga keduanya berwarna hijau.
-
-### Langkah 3: Import `schema.sql` dan Buat User Database via phpMyAdmin
-
-Skrip `app/sql/schema.sql` sudah dilengkapi perintah otomatis untuk membuat database `kelompok_db`, membuat user `app_local`, memberikan hak akses (`SELECT, INSERT, UPDATE, DELETE`), membuat tabel `anggota` serta `guestbook`, dan mengisi data awal (*seed*).
-
-**Cara 1 — Melalui Antarmuka phpMyAdmin (Direkomendasikan):**
-1. Buka browser dan akses [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
-2. Klik tab **Import** pada menu bagian atas.
-3. Klik tombol **Choose File** / **Browse**, lalu pilih file:
-   `htdocs/personal/app/sql/schema.sql`
-4. Klik tombol **Import** / **Go** di bagian bawah halaman.
-5. Pastikan muncul pesan sukses dan database `kelompok_db` beserta tabel `anggota` dan `guestbook` telah terbentuk di panel sebelah kiri.
-
-**Cara 2 — Melalui Terminal / Command Prompt MySQL:**
-```bash
-mysql -u root -p < C:/xampp/htdocs/personal/app/sql/schema.sql
-```
-
-**Jika Anda ingin membuat User Database secara manual di phpMyAdmin:**
-1. Masuk ke tab **SQL** di phpMyAdmin, lalu jalankan perintah berikut:
-   ```sql
-   CREATE USER IF NOT EXISTS 'app_local'@'127.0.0.1' IDENTIFIED BY 'password_lokal';
-   CREATE USER IF NOT EXISTS 'app_local'@'localhost' IDENTIFIED BY 'password_lokal';
-   GRANT SELECT, INSERT, UPDATE, DELETE ON `kelompok_db`.* TO 'app_local'@'127.0.0.1';
-   GRANT SELECT, INSERT, UPDATE, DELETE ON `kelompok_db`.* TO 'app_local'@'localhost';
-   FLUSH PRIVILEGES;
-   ```
-
-### Langkah 4: Penyesuaian File Konfigurasi `config/db.php` & `identity.php`
-
-1. Periksa file `personal/config/db.php`. Secara bawaan, kredensial sudah disesuaikan dengan `schema.sql`:
+### Langkah 4: Sesuaikan File Konfigurasi
+1. Periksa `config/db.php`:
    ```php
    return [
        'host'    => '127.0.0.1',
@@ -117,30 +121,34 @@ mysql -u root -p < C:/xampp/htdocs/personal/app/sql/schema.sql
        'port'    => 3306,
    ];
    ```
-   *(Apabila port MySQL XAMPP Anda diubah, sesuaikan nilai `'port'` pada file tersebut).*
-2. Periksa file `personal/identity.php` yang menyimpan konstanta identitas lokal:
-   - `MEMBER_ROUTE`: `'m0'`
-   - `MEMBER_NAMA`: `'Zulfa Almajid Basyaasyah'`
-   - `MEMBER_NIM`: `'103012400134'`
+2. Periksa `identity.php` dan sesuaikan identitas lokal Anda:
+   ```php
+   define('MEMBER_ROUTE', 'm1');
+   define('MEMBER_NAMA', 'Glen David Hadiono');
+   define('MEMBER_NIM', '103012400106');
+   ```
 
 ---
 
-## 5. Cara Mengakses Web di Browser
+## 5. URL Akses & Pengujian
 
-Setelah Apache dan MySQL berjalan serta database selesai diimpor, buka browser Anda dan kunjungi alamat berikut:
-
-1. **Halaman Utama Personal Page (Beserta Embed Guestbook)**:
-   - URL: **[http://localhost/personal/](http://localhost/personal/)** atau **[http://localhost/personal/index.php](http://localhost/personal/index.php)**
-2. **Halaman Mandiri Aplikasi Bersama (Guestbook)**:
-   - URL: **[http://localhost/personal/app/](http://localhost/personal/app/)** atau **[http://localhost/personal/app/index.php](http://localhost/personal/app/index.php)**
-3. **Pengujian Proteksi Folder Konfigurasi (`.htaccess`)**:
-   - Coba akses `http://localhost/personal/config/db.php` — Apache akan menolak akses dengan status **403 Forbidden** berkat aturan `Require all denied` di dalam `config/.htaccess`.
+- **Halaman Utama (Personal Page & Embed Guestbook)**:
+  `http://localhost/personal/` atau `http://localhost/personal/index.php`
+- **Halaman Penuh Aplikasi Bersama (Guestbook)**:
+  `http://localhost/personal/app/` atau `http://localhost/personal/app/index.php`
+- **Pengujian Keamanan Proteksi Folder Konfigurasi**:
+  Akses `http://localhost/personal/config/db.php` — Server wajib menampilkan **403 Forbidden** berkat `.htaccess`.
+- **Pengujian Keamanan Input**:
+  Kirim pesan dengan teks `<script>alert(1)</script>` dan `' OR '1'='1`. Seluruh input wajib tersimpan dan tampil sebagai teks biasa tanpa tereksekusi.
 
 ---
 
-## 6. Fitur Keamanan & Standar Kode
+## 6. Checklist Pengumpulan Tugas 1
 
-- **PDO Prepared Statements**: Seluruh operasi pembacaan dan penyimpanan pesan pada `app/index.php` menggunakan parameter terikat (`prepare()` & `execute()`) untuk mencegah serangan *SQL Injection*.
-- **Anti-XSS Output Escaping**: Setiap data dinamis yang dirender ke HTML dibungkus dengan `htmlspecialchars(..., ENT_QUOTES, 'UTF-8')`.
-- **Dual-Layer Validation**: Validasi input diterapkan di sisi klien (`assets/js/main.js`) dan divalidasi ulang secara ketat di sisi server (`app/index.php`).
-- **Modular & Relatif**: Seluruh pemanggilan file menggunakan `__DIR__` dan path relatif sehingga aplikasi tetap berjalan mulus tanpa bergantung pada konfigurasi *virtual host* khusus.
+- [x] Personal page tampil di `http://localhost/personal/` dengan banner *"Anda dilayani oleh"*.
+- [x] Konten minimum profil, pendidikan, keahlian, dan minimal 3 item portofolio terpenuhi.
+- [x] Menu dan sematan (*embed*) aplikasi bersama di halaman utama.
+- [x] Tidak ada error maupun warning PHP pada halaman.
+- [x] Semua link dan path menggunakan jalur relatif.
+- [x] Pengumpulan ZIP: folder `personal/` tanpa `config/db.php` (diganti dengan `db.example.php`).
+- [x] Video demo maksimal 5 menit (Personal page, interaksi JS, pengisian form guestbook, dan pengecekan data di phpMyAdmin).

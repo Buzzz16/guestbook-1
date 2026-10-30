@@ -1,0 +1,30 @@
+# Netlify redirects and static routing
+/cv.pdf    /cv.pdf    200
+/images/*  /images/:splat  200
+/fonts/*   /fonts/:splat   200
+/styles/*  /styles/:splat  200
+/scripts/* /scripts/:splat 200
+/essays/*  /essays/:splat  200
+/logo/*    /logo/:splat    200
+/videos/*  /videos/:splat  200
+
+# Research papers direct links
+/writing/the-people-are-the-bosses   /essays/the-people-are-the-bosses.pdf   200
+/writing/broken-routes               /essays/broken-routes.pdf               200
+/writing/know-your-road-rights       /essays/know-your-road-rights.pdf       200
+/writing/a-little-corner             /writing/finally-honing-my-talent/index.html 302
+
+# Clean URLs
+/engineer                          /engineer/index.html   200
+/creative                          /creative/index.html   200
+/hire                              /hire/index.html       200
+/work                              /work/index.html       200
+/writing                           /writing/index.html    200
+/commission                        /commission/index.html 200
+/writing/finally-honing-my-talent  /writing/finally-honing-my-talent/index.html  200
+
+# Work project detail deep-links (SPA rewrites to work index)
+/work/*                            /work/index.html       200
+
+# Fallback 404
+/*                                 /404.html              404

@@ -1,0 +1,27 @@
+{
+  "name": "Glen David Hadiono - Software Engineer & Back-End QA",
+  "short_name": "Glen David",
+  "description": "Portfolio of Glen David Hadiono, Undergraduate Informatics Student at Telkom University",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["portfolio", "engineering", "backend", "development"],
+  "lang": "en",
+  "dir": "ltr"
+}

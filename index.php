@@ -3,444 +3,453 @@ declare(strict_types=1);
 
 /**
  * Halaman Utama Personal Page (Root `personal/index.php`)
- * Mahasiswa : Zulfa Almajid Basyaasyah (Babas) - 103012400134
- * Kelas     : S1 Informatika Telkom University (IF-48-05)
+ * Proyek: Personal Page dan Aplikasi Bersama (Pra-UTS Komputasi Awan)
+ * Terintegrasi dengan identity.php dan partials/served_by.php
  */
 
 require_once __DIR__ . '/identity.php';
 
-$skills = [
-    [
-        'name'     => 'Python',
-        'category' => 'Backend & AI/Data',
-        'level'    => 'Advanced',
-        'desc'     => 'Scripting otomasi, pengolahan data, pemodelan AI/ML, dan pembuatan REST API cepat.',
-        'code'     => 'PY-01',
-    ],
-    [
-        'name'     => 'Java (Spring Boot)',
-        'category' => 'Enterprise Backend',
-        'level'    => 'Advanced',
-        'desc'     => 'Arsitektur berlapis (Controller-Service-Repository), Spring Data JPA, keamanan, dan RESTful microservice.',
-        'code'     => 'JV-02',
-    ],
-    [
-        'name'     => 'Node.js',
-        'category' => 'Runtime & API',
-        'level'    => 'Intermediate',
-        'desc'     => 'Backend asynchronous menggunakan Express.js untuk layanan real-time dan integrasi IoT/AI.',
-        'code'     => 'ND-03',
-    ],
-    [
-        'name'     => 'Vue.js',
-        'category' => 'Frontend Reactive',
-        'level'    => 'Intermediate',
-        'desc'     => 'Single Page Application (SPA) reaktif, manajemen state komponen, dan visualisasi metrik interaktif.',
-        'code'     => 'VU-04',
-    ],
-    [
-        'name'     => 'Tailwind CSS',
-        'category' => 'UI Engineering',
-        'level'    => 'Advanced',
-        'desc'     => 'Sistem desain utility-first yang responsif, dark-mode terstruktur, dan tipografi modern.',
-        'code'     => 'TW-05',
-    ],
-    [
-        'name'     => 'PostgreSQL',
-        'category' => 'Relational DBMS',
-        'level'    => 'Intermediate',
-        'desc'     => 'Perancangan skema relasional, optimasi indexing, transaksi ACID, dan integrasi cloud (Supabase).',
-        'code'     => 'PG-06',
-    ],
-];
-
-$portfolios = [
-    [
-        'id'       => 'PRJ-01',
-        'title'    => 'SuperKost',
-        'subtitle' => 'Platform Manajemen Hunian Indekos Terpadu',
-        'category' => 'backend',
-        'tags'     => ['Java Spring Boot', 'MySQL', 'Thymeleaf / REST', 'MVC'],
-        'year'     => '2025',
-        'status'   => 'PRODUCTION READY',
-        'summary'  => 'Web App berbasis Java Spring Boot & MySQL untuk mendigitalisasi pengelolaan kamar kos, pencatatan tagihan bulanan penghuni, manajemen ketersediaan unit real-time, serta pelaporan keuangan pemilik kos secara terstruktur.',
-        'highlights' => [
-            'Autentikasi berbasis role (Pemilik Kos & Penghuni)',
-            'Manajemen transaksi sewa dan histori pembayaran otomatis',
-            'Skema relasional MySQL dengan integritas referensial penuh',
-        ],
-    ],
-    [
-        'id'       => 'PRJ-02',
-        'title'    => 'PoluSee',
-        'subtitle' => 'AI-Powered Air Quality Monitoring Dashboard',
-        'category' => 'ai-web',
-        'tags'     => ['Vue.js', 'Express', 'Node.js', 'AI Forecasting'],
-        'year'     => '2025',
-        'status'   => 'PROTOTYPE DEPLOYED',
-        'summary'  => 'Sistem pemantauan kualitas udara cerdas berbasis AI dengan antarmuka reaktif Vue.js dan backend Express. Menganalisis indeks polutan (PM2.5, PM10, CO, AQI) serta menyajikan prediksi kualitas udara dan rekomendasi kesehatan.',
-        'highlights' => [
-            'Visualisasi tren indeks kualitas udara (AQI) secara real-time',
-            'Integrasi pipeline prediksi berbasis model Machine Learning',
-            'REST API ringan dengan Express.js dan arsitektur modular',
-        ],
-    ],
-    [
-        'id'       => 'PRJ-03',
-        'title'    => 'ChronosPlan',
-        'subtitle' => 'Progressive Web App Countdown & Academic Schedule',
-        'category' => 'fullstack',
-        'tags'     => ['Next.js', 'Supabase', 'PostgreSQL', 'PWA'],
-        'year'     => '2026',
-        'status'   => 'ACTIVE RELEASE',
-        'summary'  => 'Aplikasi Progressive Web App (PWA) pengatur jadwal dan hitung mundur (countdown) tenggat akademik menggunakan Next.js dan Supabase. Dapat diinstal di perangkat mobile maupun desktop dengan sinkronisasi cloud real-time.',
-        'highlights' => [
-            'Dukungan instalasi PWA & akses cepat jadwal perkuliahan/asistensi',
-            'Database PostgreSQL real-time via Supabase dengan Row Level Security',
-            'Antarmuka minimalis berfokus pada produktivitas mahasiswa',
-        ],
-    ],
-];
+$displayName = defined('MEMBER_NAMA') && !empty(MEMBER_NAMA) ? MEMBER_NAMA : 'Glen David Hadiono';
+$displayNim  = defined('MEMBER_NIM') && !empty(MEMBER_NIM) ? MEMBER_NIM : '103012400106';
+$displayRoute = defined('MEMBER_ROUTE') && !empty(MEMBER_ROUTE) ? MEMBER_ROUTE : 'm1';
 ?>
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal Page Zulfa Almajid Basyaasyah (Babas) - Mahasiswa S1 Informatika Telkom University (IF-48-05) & Aplikasi Bersama Guestbook.">
-    <title><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> (Babas) // Personal Page &amp; Guestbook</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="theme-color" content="#0e0e0e"/>
+
+  <title><?= htmlspecialchars($displayName, ENT_QUOTES, 'UTF-8') ?> · my little corner of the internet</title>
+  <meta name="description" content="Undergraduate student of Telkom University Bandung. Software engineer, back-end developer, QA tester, and analytical thinker in Bandung, Indonesia."/>
+  <link rel="icon" type="image/png" href="./favicon.png"/>
+  <link rel="manifest" href="./site.webmanifest"/>
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Inter:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"/>
+
+  <!-- Unified Master Stylesheet -->
+  <link rel="stylesheet" href="./styles/main.css"/>
 </head>
 <body>
 
-    <!-- Banner Identitas Wajib di Bagian Paling Atas -->
-    <?php require_once __DIR__ . '/app/partials/served_by.php'; ?>
+  <!-- Banner Identitas Wajib (Tugas 1 Pra-UTS) -->
+  <?php require_once __DIR__ . '/app/partials/served_by.php'; ?>
 
-    <!-- Header & Navigasi Semantic HTML5 -->
-    <header class="site-header" id="top">
-        <div class="container header-inner">
-            <a href="#profil" class="brand-logo" aria-label="Beranda Zulfa Almajid Basyaasyah">
-                <span class="brand-bracket">[</span>BABAS<span class="brand-accent">//</span><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?><span class="brand-bracket">]</span>
+  <div class="corner" data-room="me" data-theme="dark">
+    <a href="#main" class="sr-only">Skip to content</a>
+    
+    <button class="c-qa-tab" aria-label="Open quick access" aria-expanded="false">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256"><path d="M216,36H40A20,20,0,0,0,20,56V200a20,20,0,0,0,20,20H216a20,20,0,0,0,20-20V56A20,20,0,0,0,216,36ZM44,60H76V196H44ZM212,196H100V60H212Z"></path></svg>
+    </button>
+
+    <aside class="c-qa" data-open="false" aria-label="Quick access">
+      <button class="c-qa-toggle" aria-label="Expand quick access" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256"><path d="M216,36H40A20,20,0,0,0,20,56V200a20,20,0,0,0,20,20H216a20,20,0,0,0,20-20V56A20,20,0,0,0,216,36ZM44,60H76V196H44ZM212,196H100V60H212Z"></path></svg>
+        <span>Quick access</span>
+      </button>
+      <nav>
+        <a class="c-qa-item" data-tip="Everything I've made" aria-label="Everything I've made" href="./work/">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" viewBox="0 0 256 256"><path d="M112,56v48a8,8,0,0,1-8,8H56a8,8,0,0,1-8-8V56a8,8,0,0,1,8-8h48A8,8,0,0,1,112,56Zm88-8H152a8,8,0,0,0-8,8v48a8,8,0,0,0,8,8h48a8,8,0,0,0,8-8V56A8,8,0,0,0,200,48Zm-96,96H56a8,8,0,0,0-8,8v48a8,8,0,0,0,8,8h48a8,8,0,0,0,8-8V152A8,8,0,0,0,104,144Zm96,0H152a8,8,0,0,0-8,8v48a8,8,0,0,0,8,8h48a8,8,0,0,0,8-8V152A8,8,0,0,0,200,144Z" opacity="0.2"></path><path d="M200,136H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,200,136Zm0,64H152V152h48v48ZM104,40H56A16,16,0,0,0,40,56v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,104,40Zm0,64H56V56h48v48Zm96-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,200,40Zm0,64H152V56h48v48Zm-96,32H56a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,104,136Zm0,64H56V152h48v48Z"></path></svg>
+          <span>Everything I've made</span>
+        </a>
+        <a class="c-qa-item" data-tip="Guestbook (Aplikasi Bersama)" aria-label="Guestbook (Aplikasi Bersama)" href="#guestbook">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" viewBox="0 0 256 256"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM40,56H216v24H40ZM216,200H40V96H216V200Zm-24-72a8,8,0,0,1-8,8H72a8,8,0,0,1,0-16h112A8,8,0,0,1,192,128Zm0,32a8,8,0,0,1-8,8H72a8,8,0,0,1,0-16h112A8,8,0,0,1,192,160Z"></path></svg>
+          <span>Guestbook App</span>
+        </a>
+        <a class="c-qa-item" data-tip="Hire me & CV" aria-label="Hire me & CV" href="./hire/">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" viewBox="0 0 256 256"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z" opacity="0.2"></path><path d="M224,40H32A16,16,0,0,0,16,56V192a24,24,0,0,0,24,24H216a24,24,0,0,0,24-24V56A16,16,0,0,0,224,40Zm0,16v1.43L135.53,138.86a16,16,0,0,1-19.06,0L32,57.43V56ZM216,200H40a8,8,0,0,1-8-8V78.22l75.47,68.45a32,32,0,0,0,41.06,0L224,78.22V192A8,8,0,0,1,216,200Z"></path></svg>
+          <span>Hire me & CV</span>
+        </a>
+      </nav>
+      <span class="c-qa-sep" aria-hidden="true"></span>
+      <button class="c-qa-item c-theme" id="qaThemeToggle" aria-label="Switch theme" data-tip="Toggle theme">
+        <span class="theme-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" viewBox="0 0 256 256"><path d="M227.89,147.89A96,96,0,1,1,108.11,28.11,96.09,96.09,0,0,0,227.89,147.89Z" opacity="0.2"></path><path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"></path></svg>
+        </span>
+        <span class="c-theme-label">Dark mode</span>
+      </button>
+
+      <button class="c-qa-item c-music" id="qaMusicToggle" data-status="idle" aria-label="Play music" data-tip="Play music">
+        <span class="c-music-ic">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" viewBox="0 0 256 256"><path d="M208,164a28,28,0,1,1-28-28A28,28,0,0,1,208,164ZM52,168a28,28,0,1,0,28,28A28,28,0,0,0,52,168Z" opacity="0.2"></path><path d="M212.92,17.69a8,8,0,0,0-6.86-1.45l-128,32A8,8,0,0,0,72,56V166.08A36,36,0,1,0,88,196V62.25l112-28v99.83A36,36,0,1,0,216,164V24A8,8,0,0,0,212.92,17.69ZM52,216a20,20,0,1,1,20-20A20,20,0,0,1,52,216Zm128-32a20,20,0,1,1,20-20A20,20,0,0,1,180,184Z"></path></svg>
+        </span>
+        <span class="c-music-label">Play music</span>
+      </button>
+    </aside>
+
+    <div class="c-dock-explore" data-show="false" aria-hidden="true">Explore another side of me</div>
+    
+    <nav class="c-dock" data-hidden="false" data-big="false" aria-label="Main">
+      <a class="c-dock-name" aria-label="Glen David, home" aria-current="page" href="./"><span class="c-dock-badge">GD</span><span>Glen David</span></a>
+      <span class="c-dock-sep" aria-hidden="true"></span>
+      <a class="c-roomtab" data-room="developer" title="Back-end architecture, Go algorithms, type-safety, and QA testing." href="./engineer/">
+        <span class="dot" aria-hidden="true"></span>Engineer
+      </a>
+      <a class="c-roomtab" data-room="creative" title="UI/UX collaboration on Figma, event leadership, and student initiatives." href="./creative/">
+        <span class="dot" aria-hidden="true"></span>Creative
+      </a>
+      <a class="c-roomtab" data-room="guestbook" title="Buku Tamu Terdistribusi (Aplikasi Bersama)" href="#guestbook">
+        <span class="dot" aria-hidden="true"></span>Guestbook
+      </a>
+      <span class="c-dock-sep" aria-hidden="true"></span>
+      <div class="c-hire-split" data-current="false">
+        <a class="c-hire" title="Informatics student, lecture assistant, helPhin mentor, analytical thinker." href="./hire/">
+          <span class="pulse" aria-hidden="true"></span>Hire me
+        </a>
+        <a href="./cv.pdf" download="Glen David Hadiono - CV.pdf" class="c-hire-cv" aria-label="Download CV (PDF)" title="Download CV (PDF)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M228,144v64a12,12,0,0,1-12,12H40a12,12,0,0,1-12-12V144a12,12,0,0,1,24,0v52H204V144a12,12,0,0,1,24,0Zm-108.49,8.49a12,12,0,0,0,17,0l40-40a12,12,0,0,0-17-17L140,115V32a12,12,0,0,0-24,0v83L96.49,95.51a12,12,0,0,0-17,17Z"></path>
+          </svg>
+          <span>CV</span>
+        </a>
+      </div>
+    </nav>
+
+    <main id="main">
+      <section class="c-hero" style="height:320vh" aria-label="Portrait made of words">
+        <div class="c-hero-stage">
+          <canvas aria-hidden="true"></canvas>
+          <div class="c-hero-shade" style="opacity:0" aria-hidden="true"></div>
+          <div class="c-hero-copy" style="transform:scale(1)">
+            <h1>
+              <span style="display:block;white-space:nowrap">Glen</span>
+              <span style="display:block;white-space:nowrap">David</span>
+            </h1>
+            <p style="opacity:1">Welcome to my little corner of the internet.</p>
+            <div class="c-scroll-cue" style="margin-top:28px;opacity:1"><i aria-hidden="true"></i> scroll to meet me</div>
+          </div>
+          <button class="c-btn c-btn-sm c-hero-skip">Skip intro ↓</button>
+          <div style="position:absolute;right:var(--gutter);top:50%" class="c-eyebrow" id="loadingWords">loading the words…</div>
+        </div>
+        <ul class="sr-only">
+          <li>Software engineer</li>
+          <li>Back-end engineer</li>
+          <li>Quality assurance tester</li>
+          <li>TypeScript developer</li>
+          <li>Go developer</li>
+          <li>Node.js developer</li>
+          <li>Database architect</li>
+          <li>API designer</li>
+          <li>Systems thinker</li>
+          <li>QA test designer</li>
+          <li>Database migrator</li>
+          <li>UI/UX collaborator</li>
+          <li>Figma explorer</li>
+          <li>Algorithmic problem solver</li>
+          <li>Automated challenge builder</li>
+          <li>Analytical thinker</li>
+          <li>Critical thinker</li>
+          <li>Problem solver</li>
+          <li>Peer mentor</li>
+          <li>Academic tutor</li>
+          <li>Data organizer</li>
+          <li>Programming teaching assistant</li>
+          <li>Data structure TA</li>
+          <li>KONTENT academic tutor</li>
+          <li>helPhin mentor</li>
+          <li>Corporate IT intern</li>
+          <li>Collaborative team player</li>
+          <li>Telkom University student</li>
+          <li>S1 Informatics (GPA 3.85)</li>
+          <li>Bandung resident</li>
+          <li>Makassar native</li>
+          <li>SMA Negeri 2 Makassar alumnus</li>
+          <li>Lifelong learner</li>
+        </ul>
+      </section>
+
+      <section id="after-hero" class="c-section">
+        <div class="c-iam-wrap">
+          <div class="c-iam-lead" aria-hidden="true"><span>I&nbsp;am&nbsp;a</span></div>
+          <div class="c-iam-rows">
+            <div class="c-marquee" aria-label="I am a builder">
+              <div class="c-marquee-row" data-reverse="false" style="--dur:46s">
+                <button class="c-iam" tabindex="0">Software engineer</button>
+                <button class="c-iam" tabindex="0">Back-end engineer</button>
+                <button class="c-iam" tabindex="0">Quality assurance tester</button>
+                <button class="c-iam" tabindex="0">TypeScript developer</button>
+                <button class="c-iam" tabindex="0">Go developer</button>
+                <button class="c-iam" tabindex="0">Node.js developer</button>
+                <button class="c-iam" tabindex="0">Database architect</button>
+                <button class="c-iam" tabindex="0">API designer</button>
+                <button class="c-iam" tabindex="0">Systems thinker</button>
+                <button class="c-iam" tabindex="0">Continuous learner</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Software engineer</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Back-end engineer</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Quality assurance tester</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">TypeScript developer</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Go developer</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Node.js developer</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Database architect</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">API designer</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Systems thinker</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Continuous learner</button>
+              </div>
+            </div>
+            <div class="c-marquee" aria-label="I am a maker">
+              <div class="c-marquee-row" data-reverse="true" style="--dur:55s">
+                <button class="c-iam" tabindex="0">QA test designer</button>
+                <button class="c-iam" tabindex="0">Database migrator</button>
+                <button class="c-iam" tabindex="0">UI/UX collaborator</button>
+                <button class="c-iam" tabindex="0">Figma explorer</button>
+                <button class="c-iam" tabindex="0">Algorithmic problem solver</button>
+                <button class="c-iam" tabindex="0">Automated challenge builder</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">QA test designer</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Database migrator</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">UI/UX collaborator</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Figma explorer</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Algorithmic problem solver</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Automated challenge builder</button>
+              </div>
+            </div>
+            <div class="c-marquee" aria-label="I am a thinker">
+              <div class="c-marquee-row" data-reverse="false" style="--dur:64s">
+                <button class="c-iam" tabindex="0">Analytical thinker</button>
+                <button class="c-iam" tabindex="0">Critical thinker</button>
+                <button class="c-iam" tabindex="0">Problem solver</button>
+                <button class="c-iam" tabindex="0">Peer mentor</button>
+                <button class="c-iam" tabindex="0">Academic tutor</button>
+                <button class="c-iam" tabindex="0">Data organizer</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Analytical thinker</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Critical thinker</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Problem solver</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Peer mentor</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Academic tutor</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Data organizer</button>
+              </div>
+            </div>
+            <div class="c-marquee" aria-label="I am a leader">
+              <div class="c-marquee-row" data-reverse="true" style="--dur:73s">
+                <button class="c-iam" tabindex="0">Programming teaching assistant</button>
+                <button class="c-iam" tabindex="0">Data structure TA</button>
+                <button class="c-iam" tabindex="0">KONTENT academic tutor</button>
+                <button class="c-iam" tabindex="0">helPhin mentor</button>
+                <button class="c-iam" tabindex="0">Corporate IT intern</button>
+                <button class="c-iam" tabindex="0">Collaborative team player</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Programming teaching assistant</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Data structure TA</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">KONTENT academic tutor</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">helPhin mentor</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Corporate IT intern</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Collaborative team player</button>
+              </div>
+            </div>
+            <div class="c-marquee" aria-label="I am a human">
+              <div class="c-marquee-row" data-reverse="false" style="--dur:82s">
+                <button class="c-iam" tabindex="0">Telkom University student</button>
+                <button class="c-iam" tabindex="0">S1 Informatics (GPA 3.85)</button>
+                <button class="c-iam" tabindex="0">Bandung resident</button>
+                <button class="c-iam" tabindex="0">Makassar native</button>
+                <button class="c-iam" tabindex="0">SMA Negeri 2 Makassar alumnus</button>
+                <button class="c-iam" tabindex="0">Lifelong learner</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Telkom University student</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">S1 Informatics (GPA 3.85)</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Bandung resident</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Makassar native</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">SMA Negeri 2 Makassar alumnus</button>
+                <button class="c-iam" tabindex="-1" aria-hidden="true">Lifelong learner</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="c-section">
+        <div class="c-wrap">
+          <div class="c-reveal" data-in="false" style="transition-delay:0ms">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px">
+              <p class="c-eyebrow">Currently</p>
+              <span style="display:flex;gap:18px;align-items:baseline">
+                <span class="c-eyebrow" style="color:var(--faint)">updated 2026-10-30</span>
+              </span>
+            </div>
+            <div class="c-currently">
+              <div>
+                <span class="c-eyebrow">Building</span>
+                <a href="./work/?filter=reuseid"><b>ReuseID (Secondhand Donation Platform) - Back-End & QA ↗</b></a>
+              </div>
+              <div>
+                <span class="c-eyebrow">Assisting</span>
+                <a href="./engineer/"><b>Algorithm & Programming II (Go) at Telkom University ↗</b></a>
+              </div>
+              <div>
+                <span class="c-eyebrow">Mentoring</span>
+                <a href="./hire/"><b>helPhin Peer Tutoring at Bandung Techno Park ↗</b></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="c-section">
+        <div class="c-wrap">
+          <div class="c-spotlight">
+            <div class="c-reveal c-head" data-in="false" style="transition-delay:0ms">
+              <div>
+                <p class="c-eyebrow">Featured Experience · Corporate IT &amp; Engineering</p>
+                <h2 class="c-h2" style="margin-top:10px">Building Enterprise Systems &amp; Guiding Future Engineers</h2>
+              </div>
+              <a class="c-btn c-btn-primary" href="./hire/">View Experience &amp; CV →</a>
+            </div>
+            <div class="c-update-teaser">
+              <div>
+                <div class="c-chips c-noprint" style="display:flex;gap:8px;margin-bottom:12px" id="spotlightChips">
+                  <button type="button" class="c-chip" aria-pressed="true" id="tabLunch" onclick="switchSpotlight('lunch')">01. Lunch Attendance &amp; Billing</button>
+                  <button type="button" class="c-chip" aria-pressed="false" id="tabValas" onclick="switchSpotlight('valas')">02. Valas Company Profile CMS</button>
+                </div>
+                <a class="c-video" id="spotlightLink" style="border-radius:18px;border:1px solid var(--border);background:#0b1118;display:block;position:relative;overflow:hidden" href="./hire/">
+                  <img id="spotlightImg" src="./images/opt/projects/lunch-attendance.webp" alt="Internal Lunch Attendance &amp; Billing System - PT Mekar Armada Jaya" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:opacity 0.3s ease"/>
+                  <div id="spotlightBadge" style="position:absolute;bottom:12px;left:14px;background:rgba(10,12,16,0.78);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.14);color:#fff;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:8px;z-index:2">
+                    <span style="width:7px;height:7px;border-radius:50%;background:#22c55e"></span>
+                    <span id="spotlightBadgeText">New Armada Group · Lunch Attendance System</span>
+                  </div>
+                </a>
+              </div>
+              <div style="display:flex;flex-direction:column;justify-content:center">
+                <p class="c-muted" style="font-size:18px;line-height:1.65">
+                  During my Corporate IT internship at <b>PT Mekar Armada Jaya (New Armada Group)</b>, I engineered a web-based canteen lunch attendance and billing platform using Laravel and Tailwind CSS, and built a dynamic company profile CMS with live foreign currency exchange boards. Alongside corporate platforms, I architected TypeScript &amp; PostgreSQL backend services for ReuseID, designed automated Go coding challenges, and mentored students as an Informatics Practicum TA at Telkom University.
+                </p>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
+                  <a class="c-btn c-btn-primary" href="./hire/">Read full experience &amp; CV →</a>
+                  <a class="c-btn" href="./work/">Explore all projects →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="c-section">
+        <div class="c-wrap">
+          <div class="c-reveal c-head" data-in="false" style="transition-delay:0ms">
+            <h2 class="c-h2">Explore another side of me.</h2>
+            <p class="c-muted">Three rooms. Pick one.</p>
+          </div>
+          <div class="c-doors">
+            <a class="c-door2" data-active="false" data-dim="false" style="--glow:rgba(34, 197, 94, .5)" href="./engineer/">
+              <img src="./images/opt/me-working-me-working6-large.webp" alt="Engineer" loading="lazy" style="object-position:50% 40%"/>
+              <span class="c-door2-shade" aria-hidden="true"></span>
+              <span class="c-door2-text">
+                <span class="c-eyebrow">01</span>
+                <span class="c-door2-title">Engineer</span>
+                <span class="c-door2-blurb">Me behind the laptop: Back-end systems, Go coding challenges, and QA architecture.</span>
+                <span class="c-door2-cta">
+                  See what I've built
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M224.49,136.49l-72,72a12,12,0,0,1-17-17L187,140H40a12,12,0,0,1,0-24H187L135.51,64.48a12,12,0,0,1,17-17l72,72A12,12,0,0,1,224.49,136.49Z"></path>
+                  </svg>
+                </span>
+              </span>
             </a>
 
-            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Buka menu navigasi">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
+            <a class="c-door2" data-active="false" data-dim="false" style="--glow:rgba(250, 204, 21, .5)" href="./hire/">
+              <img src="./images/opt/me-working-me-working2.webp" alt="Hire me" loading="lazy" style="object-position:70% 50%"/>
+              <span class="c-door2-shade" aria-hidden="true"></span>
+              <span class="c-door2-text">
+                <span class="c-eyebrow">02</span>
+                <span class="c-door2-title">Hire me</span>
+                <span class="c-door2-blurb">Experience, leadership, the master CV, and how to work with me.</span>
+                <span class="c-door2-cta">
+                  Let's work together
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M224.49,136.49l-72,72a12,12,0,0,1-17-17L187,140H40a12,12,0,0,1,0-24H187L135.51,64.48a12,12,0,0,1,17-17l72,72A12,12,0,0,1,224.49,136.49Z"></path>
+                  </svg>
+                </span>
+              </span>
+            </a>
 
-            <nav class="site-nav" id="primaryNav" aria-label="Navigasi Utama">
-                <ul class="nav-list">
-                    <li><a href="#profil" class="nav-link active">01. Profil</a></li>
-                    <li><a href="#pendidikan" class="nav-link">02. Pengalaman</a></li>
-                    <li><a href="#keahlian" class="nav-link">03. Keahlian</a></li>
-                    <li><a href="#portofolio" class="nav-link">04. Portofolio</a></li>
-                    <li><a href="#kontak" class="nav-link">05. Kontak</a></li>
-                </ul>
-            </nav>
-
-            <div class="header-actions">
-                <button type="button" id="themeToggleBtn" class="btn btn-icon" aria-label="Ubah mode kontras tampilan" title="Toggle Harbor Contrast Theme">
-                    <span class="theme-indicator-dot"></span>
-                    <span class="mono-small" id="themeLabel">STEALTH DARK</span>
-                </button>
-                <a href="app/index.php" class="btn btn-primary btn-sm">Buka Guestbook &nearr;</a>
-            </div>
+            <a class="c-door2" data-active="false" data-dim="false" style="--glow:rgba(47, 111, 237, .55)" href="./creative/">
+              <img src="./images/opt/me-working-me-working4-large.webp" alt="Creative" loading="lazy" style="object-position:50% 45%"/>
+              <span class="c-door2-shade" aria-hidden="true"></span>
+              <span class="c-door2-text">
+                <span class="c-eyebrow">03</span>
+                <span class="c-door2-title">Creative</span>
+                <span class="c-door2-blurb">Creative projects &amp; showcase — Coming Soon.</span>
+                <span class="c-door2-cta">
+                  Coming Soon
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M224.49,136.49l-72,72a12,12,0,0,1-17-17L187,140H40a12,12,0,0,1,0-24H187L135.51,64.48a12,12,0,0,1,17-17l72,72A12,12,0,0,1,224.49,136.49Z"></path>
+                  </svg>
+                </span>
+              </span>
+            </a>
+          </div>
         </div>
-    </header>
+      </section>
 
-    <main>
-        <!-- SECTION 1: PROFIL (HERO) -->
-        <section id="profil" class="hero-section section-block">
-            <div class="container hero-grid">
-                <div class="hero-content">
-                    <div class="spec-pill-row">
-                        <span class="spec-pill">ROLE // KETUA KELOMPOK (<?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?>)</span>
-                        <span class="spec-pill">NIM // <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></span>
-                        <span class="spec-pill">CLASS // <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
-                    </div>
-
-                    <h1 class="hero-title">
-                        Zulfa Almajid Basyaasyah
-                        <span class="hero-alias">A.K.A. &ldquo;BABAS&rdquo;</span>
-                    </h1>
-
-                    <p class="hero-lead">
-                        Mahasiswa <strong>S1 Informatika Telkom University</strong> kelas <strong>IF-48-05</strong> dan <strong>Asisten Dosen</strong> untuk 3 kelas Informatika. Berfokus pada rekayasa perangkat lunak <em>Full-Stack</em>, arsitektur backend yang tangguh, serta eksplorasi aplikasi berbasis kecerdasan buatan.
-                    </p>
-
-                    <div class="hero-cta-group">
-                        <a href="#portofolio" class="btn btn-primary">
-                            <span>Eksplorasi Portofolio</span>
-                            <span class="btn-arrow">&rarr;</span>
-                        </a>
-                        <a href="#aplikasi" class="btn btn-outline">
-                            <span>Isi Guestbook Bersama</span>
-                        </a>
-                        <a href="app/index.php" class="btn btn-ghost">
-                            <span>Halaman Penuh Guestbook &nearr;</span>
-                        </a>
-                    </div>
-
-                    <div class="telemetry-strip" aria-label="Ringkasan Akademik dan Proyek">
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">IF-48-05</span>
-                            <span class="telemetry-lbl">KELAS AKTIF</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">03 KELAS</span>
-                            <span class="telemetry-lbl">ASISTEN DOSEN</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">03+ APPS</span>
-                            <span class="telemetry-lbl">PORTOFOLIO UTAMA</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">NODE m0</span>
-                            <span class="telemetry-lbl">STATUS SERVER</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kartu Identitas Teknis (Techwear ID Tag) -->
-                <aside class="hero-id-card tech-card" aria-label="Kartu Identitas Mahasiswa">
-                    <div class="card-top-bar">
-                        <span class="mono-label">ID_BADGE // TELKOM_UNIV</span>
-                        <span class="status-chip">VERIFIED</span>
-                    </div>
-
-                    <div class="id-avatar-box">
-                        <div class="avatar-monogram" aria-hidden="true">ZAB</div>
-                        <div class="avatar-meta">
-                            <span class="mono-small">CALLSIGN: BABAS</span>
-                            <span class="mono-small">SECTOR: BANDUNG, ID</span>
-                        </div>
-                    </div>
-
-                    <dl class="id-spec-list">
-                        <div class="spec-row">
-                            <dt>NAMA LENGKAP</dt>
-                            <dd><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>NIM</dt>
-                            <dd class="mono-val"><?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>PROGRAM STUDI</dt>
-                            <dd>S1 Informatika</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>INSTITUSI</dt>
-                            <dd>Telkom University</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>KELAS</dt>
-                            <dd class="mono-val">IF-48-05</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>NODE ROUTE</dt>
-                            <dd class="mono-val"><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?> (Ketua)</dd>
-                        </div>
-                    </dl>
-
-                    <div class="id-barcode" aria-hidden="true">
-                        <span>||| || |||| | ||| |||| || | |||| ||| || | ||||</span>
-                        <span class="mono-small">103012400134-IF4805-M0</span>
-                    </div>
-                </aside>
+      <!-- SECTION APLIKASI BERSAMA (GUESTBOOK KELOMPOK TERDISTRIBUSI) -->
+      <section id="guestbook" class="c-section">
+        <div class="c-wrap">
+          <div class="c-reveal c-head" data-in="false" style="transition-delay:0ms">
+            <div>
+              <p class="c-eyebrow">Aplikasi Bersama · Pra-UTS Komputasi Awan</p>
+              <h2 class="c-h2" style="margin-top:10px">Buku Tamu Terdistribusi (Guestbook)</h2>
+              <p class="c-muted" style="margin-top:8px">
+                Aplikasi buku tamu bersama kelompok yang terintegrasi dengan basis data MySQL melalui PDO. Data disimpan dan dilayani melalui Node <strong><?= htmlspecialchars($displayRoute, ENT_QUOTES, 'UTF-8') ?></strong>.
+              </p>
             </div>
-        </section>
+            <a class="c-btn c-btn-primary" href="./app/index.php">Buka Halaman Mandiri Guestbook →</a>
+          </div>
 
-        <!-- SECTION 2: PENGALAMAN & PENDIDIKAN -->
-        <section id="pendidikan" class="section-block section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">02 // EDUCATION &amp; ACADEMIC EXPERIENCE</span>
-                    <h2 class="section-title">Pendidikan &amp; Pengalaman Akademik</h2>
-                    <p class="section-subtitle">
-                        Rekam jejak akademik di Fakultas Informatika Telkom University serta kontribusi aktif dalam kegiatan pengajaran dan asistensi kelas.
-                    </p>
-                </div>
-
-                <div class="timeline-grid">
-                    <!-- Card Pendidikan -->
-                    <article class="tech-card timeline-card">
-                        <div class="card-top-bar">
-                            <span class="mono-label">EDU // UNDERGRADUATE</span>
-                            <span class="badge-route">2024 &mdash; SEKARANG</span>
-                        </div>
-                        <h3 class="card-heading">S1 Informatika &mdash; Telkom University</h3>
-                        <p class="card-sub">Kelas IF-48-05 &bull; Bandung, Jawa Barat</p>
-                        <p class="card-desc">
-                            Menempuh pendidikan sarjana pada Program Studi S1 Informatika dengan fokus pada algoritma, struktur data, rekayasa perangkat lunak berbasis objek, basis data relasional, serta pengembangan aplikasi web modern.
-                        </p>
-                        <ul class="spec-bullet-list">
-                            <li>Ketua Kelompok (Node <code>m0</code>) pada Proyek Aplikasi Bersama Pra-UTS.</li>
-                            <li>Aktif mengembangkan berbagai produk perangkat lunak mandiri (SuperKost, PoluSee, ChronosPlan).</li>
-                        </ul>
-                    </article>
-
-                    <!-- Card Pengalaman Asisten Dosen -->
-                    <article class="tech-card timeline-card highlight-border">
-                        <div class="card-top-bar">
-                            <span class="mono-label">EXP // TEACHING ASSISTANT</span>
-                            <span class="badge-route">ACTIVE ROLE</span>
-                        </div>
-                        <h3 class="card-heading">Asisten Dosen (3 Kelas Informatika)</h3>
-                        <p class="card-sub">Fakultas Informatika &bull; Telkom University</p>
-                        <p class="card-desc">
-                            Dipercaya sebagai Asisten Dosen yang mendampingi proses perkuliahan, sesi praktikum/responsi, evaluasi tugas pemrograman, serta pembimbingan teknis bagi mahasiswa di <strong>3 kelas Informatika</strong>.
-                        </p>
-                        <ul class="spec-bullet-list">
-                            <li>Memfasilitasi diskusi pemecahan masalah algoritma dan debugging kode secara terstruktur.</li>
-                            <li>Menyusun materi asistensi, melakukan code review tugas mahasiswa, dan menjaga standar kualitas akademik.</li>
-                            <li>Berkoordinasi langsung dengan dosen pengampu untuk pemantauan progres belajar di 3 kelas paralel.</li>
-                        </ul>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 3: KEAHLIAN (SKILLS) -->
-        <section id="keahlian" class="section-block">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">03 // TECHNICAL ARSENAL</span>
-                    <h2 class="section-title">Keahlian &amp; Teknologi</h2>
-                    <p class="section-subtitle">
-                        Tumpukan teknologi utama yang saya gunakan dalam merancang sistem backend, antarmuka frontend modern, serta manajemen basis data.
-                    </p>
-                </div>
-
-                <div class="skills-grid">
-                    <?php foreach ($skills as $skill): ?>
-                        <article class="tech-card skill-card">
-                            <div class="card-top-bar">
-                                <span class="mono-label"><?= htmlspecialchars($skill['code'], ENT_QUOTES, 'UTF-8') ?> // <?= htmlspecialchars($skill['category'], ENT_QUOTES, 'UTF-8') ?></span>
-                                <span class="skill-level"><?= htmlspecialchars($skill['level'], ENT_QUOTES, 'UTF-8') ?></span>
-                            </div>
-                            <h3 class="skill-title"><?= htmlspecialchars($skill['name'], ENT_QUOTES, 'UTF-8') ?></h3>
-                            <p class="skill-desc"><?= htmlspecialchars($skill['desc'], ENT_QUOTES, 'UTF-8') ?></p>
-                        </article>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 4: PORTOFOLIO -->
-        <section id="portofolio" class="section-block section-alt">
-            <div class="container">
-                <div class="section-header-flex">
-                    <div>
-                        <span class="section-tag">04 // SELECTED WORKS</span>
-                        <h2 class="section-title">Portofolio Proyek</h2>
-                        <p class="section-subtitle">
-                            Kumpulan proyek perangkat lunak yang dibangun menggunakan Java Spring Boot, Vue.js, Express, Next.js, dan Supabase.
-                        </p>
-                    </div>
-
-                    <!-- Filter Interaktif via assets/js/main.js -->
-                    <div class="portfolio-filters" role="group" aria-label="Filter kategori portofolio">
-                        <button type="button" class="filter-btn active" data-filter="all">Semua (3)</button>
-                        <button type="button" class="filter-btn" data-filter="backend">Spring Boot &amp; SQL</button>
-                        <button type="button" class="filter-btn" data-filter="ai-web">AI &amp; Vue/Express</button>
-                        <button type="button" class="filter-btn" data-filter="fullstack">Next.js &amp; Supabase</button>
-                    </div>
-                </div>
-
-                <div class="portfolio-grid" id="portfolioGrid">
-                    <?php foreach ($portfolios as $proj): ?>
-                        <article class="tech-card portfolio-card" data-category="<?= htmlspecialchars($proj['category'], ENT_QUOTES, 'UTF-8') ?>">
-                            <div class="card-top-bar">
-                                <span class="mono-label"><?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?> // <?= htmlspecialchars($proj['year'], ENT_QUOTES, 'UTF-8') ?></span>
-                                <span class="status-chip"><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?></span>
-                            </div>
-
-                            <h3 class="portfolio-title"><?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?></h3>
-                            <p class="portfolio-subtitle"><?= htmlspecialchars($proj['subtitle'], ENT_QUOTES, 'UTF-8') ?></p>
-                            <p class="portfolio-summary"><?= htmlspecialchars($proj['summary'], ENT_QUOTES, 'UTF-8') ?></p>
-
-                            <ul class="spec-bullet-list portfolio-highlights">
-                                <?php foreach ($proj['highlights'] as $hl): ?>
-                                    <li><?= htmlspecialchars($hl, ENT_QUOTES, 'UTF-8') ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-
-                            <div class="tag-row">
-                                <?php foreach ($proj['tags'] as $tag): ?>
-                                    <span class="tech-tag"><?= htmlspecialchars($tag, ENT_QUOTES, 'UTF-8') ?></span>
-                                <?php endforeach; ?>
-                            </div>
-                        </article>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 5: KONTAK (TANPA NOMOR TELEPON) -->
-        <section id="kontak" class="section-block section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">05 // COMMUNICATION CHANNELS</span>
-                    <h2 class="section-title">Kontak &amp; Jejaring Profesional</h2>
-                    <p class="section-subtitle">
-                        Terbuka untuk diskusi seputar kolaborasi proyek perangkat lunak, riset informatika, maupun kegiatan akademik. (Sesuai kebijakan privasi, nomor telepon tidak dicantumkan di laman publik).
-                    </p>
-                </div>
-
-                <div class="contact-grid">
-                    <a href="mailto:zulfa.almajid@student.telkomuniversity.ac.id" class="tech-card contact-card">
-                        <div class="card-top-bar">
-                            <span class="mono-label">CHANNEL // 01</span>
-                            <span class="contact-arrow">&nearr;</span>
-                        </div>
-                        <h3 class="contact-title">Email Akademik &amp; Pribadi</h3>
-                        <p class="contact-handle">zulfa.almajid@student.telkomuniversity.ac.id</p>
-                        <span class="contact-hint">Kirim pesan elektronik resmi</span>
-                    </a>
-
-                    <a href="https://github.com/zulfaalmajid" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
-                        <div class="card-top-bar">
-                            <span class="mono-label">CHANNEL // 02</span>
-                            <span class="contact-arrow">&nearr;</span>
-                        </div>
-                        <h3 class="contact-title">GitHub Repository</h3>
-                        <p class="contact-handle">github.com/zulfaalmajid</p>
-                        <span class="contact-hint">Lihat repositori kode &amp; proyek open-source</span>
-                    </a>
-
-                    <a href="https://www.linkedin.com/in/zulfa-almajid-basyaasyah" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
-                        <div class="card-top-bar">
-                            <span class="mono-label">CHANNEL // 03</span>
-                            <span class="contact-arrow">&nearr;</span>
-                        </div>
-                        <h3 class="contact-title">LinkedIn Profile</h3>
-                        <p class="contact-handle">linkedin.com/in/zulfa-almajid-basyaasyah</p>
-                        <span class="contact-hint">Jejaring profesional &amp; rekam jejak karier</span>
-                    </a>
-                </div>
-            </div>
-        </section>
+          <div class="c-guestbook-frame">
+            <iframe src="./app/index.php?embed=1" title="Aplikasi Buku Tamu Bersama"></iframe>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <!-- Footer Semantic HTML5 -->
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <div class="footer-brand">
-                <span class="mono-small"><strong><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></strong> (<?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>)</span>
-                <span class="mono-small">S1 Informatika Telkom University &bull; Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
-            </div>
-            <div class="footer-links">
-                <a href="#top" class="mono-small">BACK_TO_TOP &uarr;</a>
-                <a href="app/index.php" class="mono-small">GUESTBOOK_APP &nearr;</a>
-            </div>
+    <footer class="c-footer">
+      <div class="c-wrap c-footer-grid">
+        <div>
+          <p class="c-eyebrow">my little corner of the internet</p>
+          <p class="c-h3" style="margin-top:10px"><?= htmlspecialchars($displayName, ENT_QUOTES, 'UTF-8') ?></p>
+          <p class="c-muted" style="margin:18px 0 14px">Undergraduate Informatics student at Telkom University Bandung (NIM <?= htmlspecialchars($displayNim, ENT_QUOTES, 'UTF-8') ?>). Software engineer, back-end developer, QA tester, and analytical thinker.</p>
+          <div style="display:flex;gap:10px;margin-top:14px">
+            <a class="c-btn c-btn-primary" href="mailto:glendavid344@gmail.com">Get in touch ✉</a>
+            <a class="c-btn" href="./cv.pdf" download="Glen David Hadiono - CV.pdf">Download CV ↓</a>
+          </div>
         </div>
+        <div>
+          <h4>Rooms</h4>
+          <ul>
+            <li><a href="./engineer/">Engineer</a></li>
+            <li><a href="./hire/">Hire me</a></li>
+            <li><a href="./creative/">Creative</a></li>
+            <li><a href="./work/">Everything</a></li>
+            <li><a href="#guestbook">Guestbook (Aplikasi Bersama)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="mailto:glendavid344@gmail.com">glendavid344@gmail.com</a></li>
+            <li><a href="./cv.pdf" download="Glen David Hadiono - CV.pdf">Curriculum Vitae (PDF)</a></li>
+            <li><a href="./app/index.php">Guestbook App</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Elsewhere</h4>
+          <ul>
+            <li><a href="https://github.com/gln15" target="_blank" rel="noreferrer">GitHub (gln15) ↗</a></li>
+            <li><a href="https://linkedin.com/in/glendavid" target="_blank" rel="noreferrer">LinkedIn (glendavid) ↗</a></li>
+            <li><a href="https://instagram.com/glendavidd_" target="_blank" rel="noreferrer">Instagram (@glendavidd_) ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="c-wrap" style="margin-top:48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <span class="c-eyebrow">© 2026 <?= htmlspecialchars($displayName, ENT_QUOTES, 'UTF-8') ?> · Bandung, West Java, Indonesia</span>
+        <span class="c-eyebrow">Telkom University · S1 Informatika (Node <?= htmlspecialchars($displayRoute, ENT_QUOTES, 'UTF-8') ?>)</span>
+      </div>
     </footer>
+  </div>
 
-    <script src="assets/js/main.js"></script>
+  <!-- Page Interaction Scripts -->
+  <script src="./scripts/catalogData.js"></script>
+  <script src="./scripts/config.js"></script>
+  <script src="./scripts/silhouette.js"></script>
+  <script src="./scripts/app.js"></script>
 </body>
 </html>

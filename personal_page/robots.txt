@@ -1,0 +1,7 @@
+User-Agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin-legacy
+Disallow: /api/
+
+Sitemap: https://portfolio.nanaamoako.com/sitemap.xml
