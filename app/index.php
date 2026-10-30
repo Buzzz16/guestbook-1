@@ -227,8 +227,8 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
     <title>Guestbook // <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css?v=20">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cabinet+Grotesk:wght@700;800;900&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css?v=25">
 </head>
 
 <body class="<?= $isEmbed ? 'embed-body' : 'standalone-guestbook-body' ?>">
@@ -242,10 +242,6 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
                     <a href="../index.php" class="btn btn-outline btn-sm">&larr; Kembali ke Personal Page</a>
                 </div>
                 <div class="header-actions">
-                    <button type="button" id="marioCoinHud" class="btn btn-icon coin-hud-btn" title="Klik Question Block (?) atau kartu untuk kumpulkan koin!">
-                        <span>🪙</span>
-                        <span id="coinCountVal" style="font-family: var(--font-pixel); font-size: 0.65rem;">00</span>
-                    </button>
                     <button type="button" id="themeToggleBtn" class="btn btn-icon"
                         aria-label="Ubah tema Overworld / Underground" title="Toggle Mario World Theme">
                         <span class="theme-indicator-dot"></span>
@@ -354,7 +350,14 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
             <section class="guestbook-feed-card tech-card" aria-labelledby="feed-heading">
                 <div class="card-top-bar">
                     <span class="mono-label">💬 DAFTAR PESAN</span>
-                    <span class="mono-label"><?= $totalEntries ?> PESAN</span>
+                    <div style="display: inline-flex; align-items: center; gap: 0.65rem;">
+                        <button type="button" class="time-format-toggle-btn" id="timeFormatToggleBtn"
+                            title="Klik untuk beralih antara Waktu Relatif (lalu) dan Tanggal Asli">
+                            <span class="time-toggle-icon">⏱️</span>
+                            <span class="time-toggle-label">Waktu Relatif</span>
+                        </button>
+                        <span class="mono-label"><?= $totalEntries ?> PESAN</span>
+                    </div>
                 </div>
 
                 <div class="feed-header-row">
@@ -455,7 +458,7 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
         </footer>
     <?php endif; ?>
 
-    <script src="../assets/js/main.js?v=20"></script>
+    <script src="../assets/js/main.js?v=25"></script>
 </body>
 
 </html>

@@ -145,9 +145,9 @@ $portfolios = [
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cabinet+Grotesk:wght@700;800;900&family=Space+Grotesk:wght@600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css?v=20">
+    <link rel="stylesheet" href="assets/css/style.css?v=25">
 </head>
 
 <body>
@@ -192,7 +192,6 @@ $portfolios = [
 
             <!-- Platform Lift Naik-Turun di Samping Kiri -->
             <div class="side-elevator-platform">
-                <span class="Platform-item">🪙</span>
                 <div class="platform-bricks">
                     <span>🧱</span><span>?</span><span>🧱</span>
                 </div>
@@ -259,10 +258,6 @@ $portfolios = [
             </nav>
 
             <div class="header-actions">
-                <button type="button" id="marioCoinHud" class="btn btn-icon coin-hud-btn" title="Klik Question Block (?) atau ikon untuk kumpulkan koin!">
-                    <span>🪙</span>
-                    <span id="coinCountVal" style="font-family: var(--font-pixel); font-size: 0.65rem;">00</span>
-                </button>
                 <button type="button" id="themeToggleBtn" class="btn btn-icon"
                     aria-label="Ubah tema Overworld / Underground" title="Toggle Mario World Theme">
                     <span class="theme-indicator-dot"></span>
@@ -288,7 +283,8 @@ $portfolios = [
                         <img src="assets/img/avatar.png?v=2" alt="Foto Profil Dini Nadia Mawaddah"
                             class="spotlight-avatar-img" width="195" height="195"
                             onerror="this.style.display='none'; document.getElementById('avatarFallback').style.display='flex';">
-                        <div class="avatar-monogram" id="avatarFallback" style="display: none;" aria-hidden="true">DNM</div>
+                        <div class="avatar-monogram" id="avatarFallback" style="display: none;" aria-hidden="true">DNM
+                        </div>
                         <span class="spotlight-hp-pill">❤️❤️❤️❤️❤️</span>
                     </div>
 
@@ -342,7 +338,8 @@ $portfolios = [
                         <div class="telemetry-item stat-pill-box">
                             <span class="stat-pill-icon">🎮</span>
                             <div>
-                                <span class="telemetry-val"><?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
+                                <span
+                                    class="telemetry-val"><?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
                                 <span class="telemetry-lbl">KELAS AKTIF</span>
                             </div>
                         </div>
@@ -372,18 +369,12 @@ $portfolios = [
                     <span class="section-tag">★ WORLD MAP // CLEARED STAGES</span>
                     <h2 class="section-title">Portofolio Proyek</h2>
                     <p class="section-subtitle">
-                        Koleksi karya perangkat lunak dan desain antarmuka pilihan. Klik kartu level untuk membuka rincian misi.
+                        Koleksi karya perangkat lunak dan desain antarmuka pilihan. Klik kartu level untuk membuka
+                        rincian misi.
                     </p>
 
-                    <!-- Filter Interaktif di Tengah -->
-                    <div class="portfolio-filters portfolio-filters-centered" role="group"
-                        aria-label="Filter kategori portofolio">
-                        <button type="button" class="filter-btn active" data-filter="all">Semua (4)</button>
-                        <button type="button" class="filter-btn" data-filter="web-app">SuperKost</button>
-                        <button type="button" class="filter-btn" data-filter="ui-ux">Redesain iGracias</button>
-                        <button type="button" class="filter-btn" data-filter="fintech">FinSmart</button>
-                        <button type="button" class="filter-btn" data-filter="env-web">PoluSee</button>
-                    </div>
+                    <!-- Filter Interaktif di Tengah (Opsional/Hidden) -->
+                    <!-- Filter portofolio dihilangkan sesuai permintaan -->
                 </div>
 
                 <div class="portfolio-world-grid" id="portfolioGrid">
@@ -395,15 +386,20 @@ $portfolios = [
                             <div class="world-stage-banner">
                                 <div class="world-icon-badge"><?= $proj['icon'] ?></div>
                                 <div class="world-stage-meta">
-                                    <span class="mono-label"><?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?></span>
-                                    <span class="status-chip"><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?></span>
+                                    <span
+                                        class="mono-label"><?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?></span>
+                                    <span
+                                        class="status-chip"><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?></span>
                                 </div>
                             </div>
 
                             <div class="world-stage-body">
-                                <h3 class="portfolio-title"><?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?></h3>
-                                <p class="portfolio-subtitle"><?= htmlspecialchars($proj['subtitle'], ENT_QUOTES, 'UTF-8') ?></p>
-                                <p class="portfolio-summary"><?= htmlspecialchars($proj['summary'], ENT_QUOTES, 'UTF-8') ?></p>
+                                <h3 class="portfolio-title"><?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?>
+                                </h3>
+                                <p class="portfolio-subtitle">
+                                    <?= htmlspecialchars($proj['subtitle'], ENT_QUOTES, 'UTF-8') ?></p>
+                                <p class="portfolio-summary"><?= htmlspecialchars($proj['summary'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
 
                                 <ul class="spec-bullet-list portfolio-highlights">
                                     <?php foreach ($proj['highlights'] as $hl): ?>
@@ -447,7 +443,8 @@ $portfolios = [
                         </div>
                         <div class="timeline-step-content">
                             <h3 class="card-heading">S1 Informatika &mdash; Telkom University</h3>
-                            <p class="card-sub">Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull; Bandung</p>
+                            <p class="card-sub">Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull;
+                                Bandung</p>
                             <p class="card-desc">
                                 Mendalami fondasi ilmu komputer, pemrograman berorientasi objek (Java), basis data
                                 relasional MySQL, jaringan komputer, serta rekayasa web modern.
@@ -471,12 +468,15 @@ $portfolios = [
                             <h3 class="card-heading">Kepanitiaan INTELECTA</h3>
                             <p class="card-sub">Guardian Force &bull; Fakultas Informatika</p>
                             <p class="card-desc">
-                                Berperan aktif sebagai Guardian Force dalam kepanitiaan INTELECTA untuk menjaga kedisiplinan,
+                                Berperan aktif sebagai Guardian Force dalam kepanitiaan INTELECTA untuk menjaga
+                                kedisiplinan,
                                 ketertiban, serta kelancaran jalannya rangkaian kegiatan.
                             </p>
                             <ul class="spec-bullet-list">
-                                <li>Mengawal ketertiban, kedisiplinan peserta, dan kondusivitas selama acara berlangsung.</li>
-                                <li>Berkoordinasi aktif dengan seluruh divisi kepanitiaan untuk pengamanan dan kelancaran kegiatan.</li>
+                                <li>Mengawal ketertiban, kedisiplinan peserta, dan kondusivitas selama acara
+                                    berlangsung.</li>
+                                <li>Berkoordinasi aktif dengan seluruh divisi kepanitiaan untuk pengamanan dan
+                                    kelancaran kegiatan.</li>
                             </ul>
                         </div>
                     </article>
@@ -504,14 +504,18 @@ $portfolios = [
                             <div class="skill-slot-body">
                                 <div class="skill-slot-header">
                                     <div>
-                                        <span class="mono-label"><?= htmlspecialchars($skill['category'], ENT_QUOTES, 'UTF-8') ?></span>
-                                        <h3 class="skill-title"><?= htmlspecialchars($skill['name'], ENT_QUOTES, 'UTF-8') ?></h3>
+                                        <span
+                                            class="mono-label"><?= htmlspecialchars($skill['category'], ENT_QUOTES, 'UTF-8') ?></span>
+                                        <h3 class="skill-title"><?= htmlspecialchars($skill['name'], ENT_QUOTES, 'UTF-8') ?>
+                                        </h3>
                                     </div>
-                                    <span class="skill-level"><?= htmlspecialchars($skill['level'], ENT_QUOTES, 'UTF-8') ?></span>
+                                    <span
+                                        class="skill-level"><?= htmlspecialchars($skill['level'], ENT_QUOTES, 'UTF-8') ?></span>
                                 </div>
                                 <p class="skill-desc"><?= htmlspecialchars($skill['desc'], ENT_QUOTES, 'UTF-8') ?></p>
                                 <div class="power-meter-track" aria-hidden="true">
-                                    <div class="power-meter-fill" style="width: <?= htmlspecialchars($skill['meter'], ENT_QUOTES, 'UTF-8') ?>;"></div>
+                                    <div class="power-meter-fill"
+                                        style="width: <?= htmlspecialchars($skill['meter'], ENT_QUOTES, 'UTF-8') ?>;"></div>
                                 </div>
                             </div>
                         </article>
@@ -527,7 +531,8 @@ $portfolios = [
                     <span class="section-tag">★ SAVE POINT // CONNECT</span>
                     <h2 class="section-title">Kontak &amp; Jejaring</h2>
                     <p class="section-subtitle">
-                        Mari terhubung untuk kolaborasi proyek maupun kegiatan kampus. (Nomor kontak tidak dipublikasikan untuk privasi).
+                        Mari terhubung untuk kolaborasi proyek maupun kegiatan kampus. (Nomor kontak tidak
+                        dipublikasikan untuk privasi).
                     </p>
                 </div>
 
@@ -573,14 +578,19 @@ $portfolios = [
             <div class="container stage-game-hud">
                 <div class="stage-game-info">
                     <span class="stage-game-badge">🎮 PLAYABLE STAGE</span>
-                    <span class="stage-game-hint">Gunakan tombol <strong>◀ ▶</strong> / <strong>A D</strong> untuk jalan &amp; <strong>SPASI / ▲</strong> untuk lompat!</span>
+                    <span class="stage-game-hint">Gunakan tombol <strong>◀ ▶</strong> / <strong>A D</strong> untuk jalan
+                        &amp; <strong>SPASI / ▲</strong> untuk lompat!</span>
                 </div>
                 <div class="stage-game-controls">
                     <span class="stage-status-pill" id="stageGameStatus">READY!</span>
-                    <button type="button" class="stage-ctrl-btn" id="btnMarioLeft" aria-label="Jalan ke kiri" title="Jalan Kiri (A / ◀)">◀</button>
-                    <button type="button" class="stage-ctrl-btn stage-ctrl-jump" id="btnMarioJump" aria-label="Lompat" title="Lompat (Spasi / W / ▲)">LOMPAT ⏫</button>
-                    <button type="button" class="stage-ctrl-btn" id="btnMarioRight" aria-label="Jalan ke kanan" title="Jalan Kanan (D / ▶)">▶</button>
-                    <button type="button" class="stage-ctrl-btn stage-ctrl-reset" id="btnMarioReset" aria-label="Reset posisi Mario" title="Ulangi Posisi">🔄</button>
+                    <button type="button" class="stage-ctrl-btn" id="btnMarioLeft" aria-label="Jalan ke kiri"
+                        title="Jalan Kiri (A / ◀)">◀</button>
+                    <button type="button" class="stage-ctrl-btn stage-ctrl-jump" id="btnMarioJump" aria-label="Lompat"
+                        title="Lompat (Spasi / W / ▲)">LOMPAT ⏫</button>
+                    <button type="button" class="stage-ctrl-btn" id="btnMarioRight" aria-label="Jalan ke kanan"
+                        title="Jalan Kanan (D / ▶)">▶</button>
+                    <button type="button" class="stage-ctrl-btn stage-ctrl-reset" id="btnMarioReset"
+                        aria-label="Reset posisi Mario" title="Ulangi Posisi">🔄</button>
                 </div>
             </div>
 
@@ -667,7 +677,7 @@ $portfolios = [
         </div>
     </footer>
 
-    <script src="assets/js/main.js?v=20"></script>
+    <script src="assets/js/main.js?v=25"></script>
 </body>
 
 </html>
