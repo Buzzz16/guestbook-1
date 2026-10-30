@@ -4973,7 +4973,8 @@ div.c-gallery-item:hover img {
   justify-items: center;
   gap: 18px;
   color: #fff;
-  transition: opacity 1s var(--ease), filter 1s
+  transition: opacity 1s var(--ease), filter 1s;
+  pointer-events: none;
 }
 
 .c-eng-ident img {
