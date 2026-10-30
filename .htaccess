@@ -1,0 +1,5 @@
+# Konfigurasi Apache Laman Personal
+# Proyek: Personal Page dan Aplikasi Bersama (Pra-UTS)
+
+DirectoryIndex index.php index.html
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="1; url=index.php">
+    <title>Zulfa Almajid Basyaasyah (Babas) // Personal Page &amp; Guestbook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        // Redirect otomatis ke index.php jika berjalan di server lokal (Apache / XAMPP)
+        if (window.location.protocol.indexOf('http') === 0 && !window.location.search.includes('no_redirect')) {
+            window.location.replace('index.php');
+        }
+    </script>
+</head>
+<body>
+    <!-- Banner Identitas Pelayan Laman -->
+    <div class="served-by-banner" role="region" aria-label="Identitas Node Pelayan">
+        <div class="served-by-inner">
+            <span class="served-by-status">
+                <span class="pulse-dot" aria-hidden="true"></span>
+                <span class="route-badge">NODE // m0</span>
+            </span>
+            <p class="served-by-text">
+                Anda dilayani oleh laman <strong>Zulfa Almajid Basyaasyah</strong> (<span class="mono-nim">103012400134</span>)
+            </p>
+            <span class="served-by-meta">TEL-U // IF-48-05</span>
+        </div>
+    </div>
+
+    <!-- Header & Navigasi -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.php" class="brand-logo" aria-label="Beranda Babas">
+                <span class="brand-bracket">[</span>BABAS<span class="brand-accent">//</span>m0<span class="brand-bracket">]</span>
+            </a>
+            <div class="header-actions">
+                <a href="index.php" class="btn btn-primary btn-sm">Buka Personal Page (index.php) &rarr;</a>
+                <a href="app/index.php" class="btn btn-secondary btn-sm">Guestbook Mandiri &nearr;</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container section-block">
+        <!-- Notifikasi Gateway / Status Redirect -->
+        <div class="tech-card" style="margin-bottom: 2rem; border-left: 4px solid var(--accent-lime); padding: 1.5rem;">
+            <div class="card-top-bar">
+                <span class="mono-label">GATEWAY // ENTRYPOINT</span>
+                <span class="status-chip">SYSTEM ONLINE</span>
+            </div>
+            <h1 class="card-heading" style="font-size: 1.5rem; margin-bottom: 0.5rem;">Personal Page &amp; Aplikasi Bersama (Pra-UTS)</h1>
+            <p class="card-desc" style="margin-bottom: 1.25rem;">
+                Halaman ini memuat aplikasi buku tamu kelompok terdistribusi secara langsung (*embedded*). Jika Anda menggunakan server lokal XAMPP, browser akan mengalihkan Anda ke laman dinamis penuh <code>index.php</code> secara otomatis.
+            </p>
+
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <a href="index.php" class="btn btn-primary btn-sm">Laman Utama Dinamis (index.php) &rarr;</a>
+                <a href="app/index.php" class="btn btn-secondary btn-sm">Guestbook Mandiri (app/index.php) &nearr;</a>
+                <a href="app/export.php" class="btn btn-secondary btn-sm">Pusat Ekspor Data (app/export.php) &nearr;</a>
+            </div>
+        </div>
+
+        <!-- Telemetri Kualifikasi Ringkas -->
+        <div class="telemetry-strip" style="margin-bottom: 2rem;" aria-label="Ringkasan Statistik Kualifikasi">
+            <div class="telemetry-item">
+                <span class="telemetry-val">3.58 / 4.00</span>
+                <span class="telemetry-lbl">GPA // TELKOM UNIVERSITY</span>
+            </div>
+            <div class="telemetry-item">
+                <span class="telemetry-val">Go &amp; SQL</span>
+                <span class="telemetry-lbl">PRIMARY PROGRAMMING STACK</span>
+            </div>
+            <div class="telemetry-item">
+                <span class="telemetry-val">480 (CEFR B1)</span>
+                <span class="telemetry-lbl">EPrT ENGLISH PROFICIENCY</span>
+            </div>
+            <div class="telemetry-item">
+                <span class="telemetry-val">Big Data &amp; ML</span>
+                <span class="telemetry-lbl">RESEARCH DOMAIN // MBC LAB</span>
+            </div>
+        </div>
+
+        <!-- Bagian Aplikasi Bersama (Embed Guestbook) -->
+        <section id="guestbook-embed-section">
+            <div class="section-header-flex">
+                <div>
+                    <span class="section-tag">SHARED APPLICATION // DISTRIBUTED</span>
+                    <h2 class="section-title">Aplikasi Bersama &bull; Guestbook Kelompok</h2>
+                    <p class="section-subtitle">
+                        Dimuat langsung melalui iframe terhubung ke backend PHP Native &amp; MySQL <code>app/index.php?embed=1</code>.
+                    </p>
+                </div>
+                <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                    <a href="app/index.php" target="_blank" class="btn btn-primary btn-sm">Layar Penuh &nearr;</a>
+                    <a href="app/export.php" target="_blank" class="btn btn-secondary btn-sm">Pusat Ekspor &nearr;</a>
+                </div>
+            </div>
+
+            <div class="tech-card embed-frame-wrapper" style="margin-top: 1.25rem;">
+                <iframe src="app/index.php?embed=1" class="guestbook-iframe" title="Guestbook Aplikasi Bersama" loading="lazy"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="mono-small"><strong>Zulfa Almajid Basyaasyah</strong> (103012400134) &bull; Babas</span>
+                <span class="mono-small">S1 Informatika Telkom University &bull; Kelas IF-48-05 &bull; Bandung City</span>
+            </div>
+            <div class="footer-links">
+                <a href="index.php" class="mono-small">INDEX_PHP &rarr;</a>
+                <a href="app/index.php" class="mono-small">GUESTBOOK_APP &nearr;</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
