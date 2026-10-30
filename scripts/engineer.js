@@ -263,22 +263,99 @@
       track.addEventListener('mouseenter', stopAutoPlay);
       track.addEventListener('mouseleave', () => { if (isPlaying) startAutoPlay(); });
 
-      // Interactive Card Clicks (Deep Dive Navigation)
-      const cardLinks = [
-        'https://reuse-id-web.vercel.app/',
-        'https://github.com/gln15',
-        '../work/?p=lunch-attendance',
-        '../work/?p=valas-cms'
-      ];
+      // Detail Modal for Engineer Page
+      function openEngineerModal(data) {
+        let modal = document.getElementById('engDetailModal');
+        if (!modal) {
+          modal = document.createElement('div');
+          modal.id = 'engDetailModal';
+          modal.className = 'c-peek-root';
+          modal.innerHTML = `
+            <div class="c-peek-bg" id="engModalBg"></div>
+            <div class="c-peek" role="dialog" aria-modal="true" style="max-width:700px;">
+              <div class="c-peek-bar">
+                <span class="c-eyebrow" id="engModalCat" style="color:var(--accent)"></span>
+                <button class="c-peek-btn" id="engModalClose" aria-label="Close">✕</button>
+              </div>
+              <div class="c-peek-body" style="padding:28px 24px;">
+                <h2 id="engModalTitle" class="c-wordpeek-title" style="margin-bottom:14px;font-size:22px"></h2>
+                <div id="engModalMedia" style="margin:16px 0;border-radius:14px;overflow:hidden;background:#0d1117;border:1px solid var(--border);"></div>
+                <p id="engModalDesc" class="c-lede" style="font-size:15px;line-height:1.65;margin-bottom:18px;color:var(--fg);opacity:0.9"></p>
+                <div id="engModalMeta" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+              </div>
+            </div>
+          `;
+          document.body.appendChild(modal);
 
+          const closeModal = () => {
+            modal.setAttribute('data-open', 'false');
+            setTimeout(() => { modal.style.display = 'none'; }, 220);
+          };
+
+          modal.querySelector('#engModalClose').addEventListener('click', closeModal);
+          modal.querySelector('#engModalBg').addEventListener('click', closeModal);
+        }
+
+        modal.querySelector('#engModalCat').textContent = data.category || 'ENGINEERING SHOWCASE';
+        modal.querySelector('#engModalTitle').textContent = data.title;
+        modal.querySelector('#engModalDesc').textContent = data.desc || '';
+
+        const media = modal.querySelector('#engModalMedia');
+        if (data.img) {
+          media.innerHTML = `<img src="${data.img}" alt="${data.title}" style="width:100%;height:auto;max-height:360px;object-fit:cover;display:block;border-radius:12px;">`;
+          media.style.display = 'block';
+        } else {
+          media.style.display = 'none';
+        }
+
+        const meta = modal.querySelector('#engModalMeta');
+        meta.innerHTML = '';
+        if (data.tags) {
+          data.tags.forEach(t => {
+            meta.innerHTML += `<span class="c-tag">${t}</span>`;
+          });
+        }
+        if (data.url) {
+          meta.innerHTML += `<a href="${data.url}" target="_blank" rel="noopener,noreferrer" class="c-btn c-btn-primary" style="margin-top:10px;padding:6px 16px;border-radius:999px;font-size:13px;display:inline-flex;align-items:center;gap:6px">Visit Live Website ↗</a>`;
+        }
+
+        modal.style.display = 'grid';
+        setTimeout(() => { modal.setAttribute('data-open', 'true'); }, 10);
+      }
+
+      // Interactive Card Clicks
       cards.forEach((card, idx) => {
+        // Card 1 (Alpro) is intentionally non-clickable per user request
+        if (idx === 1) {
+          card.style.cursor = 'default';
+          card.removeAttribute('role');
+          return;
+        }
+
         card.style.cursor = 'pointer';
         card.addEventListener('click', (e) => {
-          const targetUrl = cardLinks[idx] || '../work/?room=developer';
-          if (targetUrl.startsWith('http')) {
-            window.open(targetUrl, '_blank', 'noopener,noreferrer');
-          } else {
-            window.location.href = targetUrl;
+          e.preventDefault();
+          if (idx === 0) {
+            // ReuseID -> Open Live Web
+            window.open('https://reuse-id-web.vercel.app/', '_blank', 'noopener,noreferrer');
+          } else if (idx === 2) {
+            // Lunch Attendance -> Open Modal with Image
+            openEngineerModal({
+              title: 'Internal Lunch Attendance & Billing System',
+              category: '2026 · WEB APPLICATION',
+              img: '../images/opt/projects/lunch-attendance.webp',
+              desc: 'Internal corporate web application for employee meal attendance tracking integrated with database and QR code employee ID cards, role-based access control, admin analytics dashboard, and automated vendor billing reports built with PHP, Laravel Blade, Tailwind CSS, and Vite at PT Mekar Armada Jaya (New Armada Group).',
+              tags: ['PHP', 'Laravel', 'Tailwind CSS', 'Vite', 'QR Cards', 'MySQL']
+            });
+          } else if (idx === 3) {
+            // Valas CMS -> Open Modal with Image
+            openEngineerModal({
+              title: 'Valas Company Profile CMS',
+              category: '2026 · FULL-STACK',
+              img: '../images/opt/projects/valas-cms.webp',
+              desc: 'Prototype corporate website and dynamic Content Management System built with Next.js and TypeScript, featuring JWT authentication, bcrypt password hashing, and centralized admin controls for live foreign exchange rates, news, and client testimonials.',
+              tags: ['Next.js', 'TypeScript', 'JWT', 'bcrypt', 'Full-Stack', 'CMS']
+            });
           }
         });
       });

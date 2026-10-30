@@ -177,7 +177,11 @@
     cards.forEach(card => {
       card.addEventListener('click', () => {
         const title = (card.querySelector('h3') ? card.querySelector('h3').textContent : '').trim();
-        const found = catalog.find(item => item.title.toLowerCase() === title.toLowerCase()) || {
+        const found = catalog.find(item => 
+          item.title.toLowerCase() === title.toLowerCase() ||
+          item.title.toLowerCase().includes(title.toLowerCase()) ||
+          title.toLowerCase().includes(item.title.toLowerCase())
+        ) || {
           title,
           desc: (card.querySelector('p') ? card.querySelector('p').textContent : '').trim(),
           category: (card.querySelector('.c-eyebrow') ? card.querySelector('.c-eyebrow').textContent : '').trim(),
@@ -227,7 +231,13 @@
 
       const media = modal.querySelector('#modalMedia');
       if (item.img) {
-        media.innerHTML = `<img src="${item.img}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;display:block;">`;
+        let imgSrc = item.img;
+        if (imgSrc.startsWith('./images/')) {
+          imgSrc = '../images/' + imgSrc.slice(9);
+        } else if (imgSrc.startsWith('images/')) {
+          imgSrc = '../images/' + imgSrc.slice(7);
+        }
+        media.innerHTML = `<img src="${imgSrc}" alt="${item.title}" style="width:100%;height:100%;max-height:360px;object-fit:cover;display:block;border-radius:12px;">`;
         media.style.display = 'block';
       } else {
         media.style.display = 'none';
