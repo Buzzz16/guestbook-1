@@ -11,8 +11,8 @@ window.siteConfig = {
     phone: "+62 851 - 5835 - 2544",
     university: "Telkom University, Makassar",
     major: "S1 Informatics (IPK 3.85)",
-    cvUrl: "/cv.pdf",
-    portrait: "/images/portrait/glen-full.webp",
+    cvUrl: "./cv.pdf",
+    portrait: "./images/portrait/glen-full.webp",
     socials: {
       github: "https://github.com/gln15",
       githubUser: "gln15",
@@ -24,28 +24,28 @@ window.siteConfig = {
   rooms: {
     developer: {
       label: "Engineer",
-      href: "/engineer",
+      href: "./engineer/",
       tagline: "Back-end architecture, Go labs, C++ data structures, and QA testing."
     },
     me: {
       label: "Hire me",
-      href: "/hire",
+      href: "./hire/",
       tagline: "Informatics undergraduate (GPA 3.85), teaching assistant, academic tutor, analytical thinker."
     },
     creative: {
       label: "Creative",
-      href: "/creative",
+      href: "./creative/",
       tagline: "Coming soon."
     }
   },
 
   hero: {
-    src: "/images/portrait/glen-cutout.webp",
+    src: "./images/portrait/glen-cutout.webp",
     cutout: true,
     focus: { x: 0.50, y: 0.47 },
     backdrop: {
-      full: "/images/portrait/glen-full.webp",
-      ext: "/images/portrait/glen-ext.webp",
+      full: "./images/portrait/glen-full.webp",
+      ext: "./images/portrait/glen-ext.webp",
       crop: {
         x: 0,
         y: 0,
@@ -210,6 +210,7 @@ window.siteConfig = {
       id: "reuseid",
       title: "ReuseID",
       role: "Back-End Engineer & QA",
+      url: "https://reuse-id-web.vercel.app/",
       year: "2026",
       summary: "Secondhand donation platform with type-safe Node.js/TypeScript architecture, PostgreSQL database migration, automated Vercel deployment, and rigorous QA test suite.",
       tags: ["code", "typescript", "backend", "qa", "postgresql"]
@@ -234,6 +235,7 @@ window.siteConfig = {
       id: "kkn116-tamangapa",
       title: "KKN 116 Tamangapa Platform",
       role: "Web Developer",
+      url: "https://kkn-116-tamangapa.vercel.app/",
       year: "2026",
       summary: "Digital community service platform for Universitas Hasanuddin (KKN 116) documenting environmental initiatives including Eco-enzyme, Ecobrick, and BSF maggot cultivation.",
       tags: ["code", "web", "community"]

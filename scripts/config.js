@@ -210,6 +210,7 @@ window.siteConfig = {
       id: "reuseid",
       title: "ReuseID",
       role: "Back-End Engineer & QA",
+      url: "https://reuse-id-web.vercel.app/",
       year: "2026",
       summary: "Secondhand donation platform with type-safe Node.js/TypeScript architecture, PostgreSQL database migration, automated Vercel deployment, and rigorous QA test suite.",
       tags: ["code", "typescript", "backend", "qa", "postgresql"]
@@ -234,6 +235,7 @@ window.siteConfig = {
       id: "kkn116-tamangapa",
       title: "KKN 116 Tamangapa Platform",
       role: "Web Developer",
+      url: "https://kkn-116-tamangapa.vercel.app/",
       year: "2026",
       summary: "Digital community service platform for Universitas Hasanuddin (KKN 116) documenting environmental initiatives including Eco-enzyme, Ecobrick, and BSF maggot cultivation.",
       tags: ["code", "web", "community"]

@@ -238,6 +238,9 @@
       if (item.role) meta.innerHTML += `<span class="c-tag">Role: ${item.role}</span>`;
       if (item.year) meta.innerHTML += `<span class="c-tag">Year: ${item.year}</span>`;
       if (item.discipline) meta.innerHTML += `<span class="c-tag">${item.discipline}</span>`;
+      if (item.url || item.liveUrl) {
+        meta.innerHTML += `<a href="${item.url || item.liveUrl}" target="_blank" rel="noopener,noreferrer" class="c-btn c-btn-primary" style="margin-top:12px;padding:6px 14px;border-radius:999px;font-size:13px;display:inline-flex;align-items:center;gap:6px">Visit Live Website ↗</a>`;
+      }
 
       modal.style.display = 'grid';
       setTimeout(() => { modal.setAttribute('data-open', 'true'); }, 10);

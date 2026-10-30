@@ -265,7 +265,7 @@
 
       // Interactive Card Clicks (Deep Dive Navigation)
       const cardLinks = [
-        '../work/?p=reuseid',
+        'https://reuse-id-web.vercel.app/',
         'https://github.com/gln15',
         '../work/?p=lunch-attendance',
         '../work/?p=valas-cms'
