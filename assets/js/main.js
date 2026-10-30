@@ -1,205 +1,352 @@
 /**
- * MAIN.JS — INTERAKSI VANILLA JAVASCRIPT
- * Proyek    : Personal Page dan Aplikasi Bersama (Pra-UTS)
- * Mahasiswa : Zulfa Almajid Basyaasyah (Babas) - 103012400134
- *
- * Mencakup 5 fitur interaktif:
- * 1. Smooth Scroll & Active Section Spy pada Navigasi
- * 2. Filter Portofolio Dinamis (Semua / Spring Boot / AI Vue / Next.js)
- * 3. Dark / Harbor Light Theme Toggle dengan penyimpanan localStorage
- * 4. Validasi Sisi Klien (Client-Side) & Live Character Counter pada Form Guestbook
- * 5. Toggle Menu Navigasi Mobile Responsif
+ * assets/js/main.js
+ * Interaksi Sisi Klien (JavaScript) untuk Personal Page & Aplikasi Bersama
+ * Meyneza Ari Dwi Astuti (103012400299)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initThemeToggle();
-    initMobileNav();
-    initSmoothScrollAndSpy();
-    initPortfolioFilter();
-    initGuestbookValidation();
-});
+    // =========================================================================
+    // 1. MODE GELAP / TERANG (NIGHT MODE TOGGLE)
+    // =========================================================================
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const savedTheme = localStorage.getItem('nejaa_theme');
 
-/**
- * 1. Theme Toggle (Stealth Dark <-> Harbor Light)
- */
-function initThemeToggle() {
-    const root = document.documentElement;
-    const toggleBtn = document.getElementById('themeToggleBtn');
-    const themeLabel = document.getElementById('themeLabel');
+    const updateThemeButton = (isDark) => {
+        if (!themeToggleBtn) return;
+        const iconEl = themeToggleBtn.querySelector('.theme-icon');
+        const labelEl = themeToggleBtn.querySelector('.theme-label');
+        if (iconEl) iconEl.textContent = isDark ? '☀️' : '🌙';
+        if (labelEl) labelEl.textContent = isDark ? 'Day Mode' : 'Night Mode';
+    };
 
-    const savedTheme = localStorage.getItem('babas_theme') || 'dark';
-    root.setAttribute('data-theme', savedTheme);
-    updateThemeLabel(savedTheme, themeLabel);
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        updateThemeButton(true);
+    }
 
-    if (!toggleBtn) return;
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('nejaa_theme', isDark ? 'dark' : 'light');
+            updateThemeButton(isDark);
+        });
+    }
 
-    toggleBtn.addEventListener('click', () => {
-        const currentTheme = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-        const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        root.setAttribute('data-theme', nextTheme);
-        localStorage.setItem('babas_theme', nextTheme);
-        updateThemeLabel(nextTheme, themeLabel);
-    });
-}
+    // =========================================================================
+    // 2. MENU NAVIGASI RESPONSIF (MOBILE)
+    // =========================================================================
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNavLinks = document.getElementById('mainNavLinks');
 
-function updateThemeLabel(theme, labelEl) {
-    if (!labelEl) return;
-    labelEl.textContent = theme === 'light' ? 'HARBOR LIGHT' : 'STEALTH DARK';
-}
+    if (mobileMenuBtn && mainNavLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = mainNavLinks.classList.toggle('nav-open');
+            mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+        });
 
-/**
- * 2. Navigasi Mobile Responsif
- */
-function initMobileNav() {
-    const toggleBtn = document.getElementById('mobileNavToggle');
-    const primaryNav = document.getElementById('primaryNav');
+        mainNavLinks.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                mainNavLinks.classList.remove('nav-open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
 
-    if (!toggleBtn || !primaryNav) return;
+    // =========================================================================
+    // 3. INTERAKSI HERO PAINT TOOLBAR & TAMAGOTCHI KEYCHAIN
+    // =========================================================================
+    const toolButtons = document.querySelectorAll('.tool-btn[data-tool]');
+    const toolbarStatusText = document.getElementById('toolbarStatusText');
+    const tamagotchiCharm = document.getElementById('tamagotchiCharm');
 
-    toggleBtn.addEventListener('click', () => {
-        const isOpen = primaryNav.classList.toggle('is-open');
-        toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-}
-
-/**
- * 3. Smooth Scroll Antar Section & Highlight Navigasi Aktif
- */
-function initSmoothScrollAndSpy() {
-    const navLinks = document.querySelectorAll('.site-nav .nav-link[href^="#"]');
-    const primaryNav = document.getElementById('primaryNav');
-
-    navLinks.forEach((link) => {
-        link.addEventListener('click', (event) => {
-            const targetId = link.getAttribute('href');
-            if (!targetId || targetId === '#') return;
-
-            const targetEl = document.querySelector(targetId);
-            if (targetEl) {
-                event.preventDefault();
-                const headerOffset = 78;
-                const elementPosition = targetEl.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.scrollY - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth',
-                });
-
-                if (primaryNav && primaryNav.classList.contains('is-open')) {
-                    primaryNav.classList.remove('is-open');
-                }
+    toolButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            toolButtons.forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            const msg = btn.getAttribute('data-tool');
+            if (toolbarStatusText && msg) {
+                toolbarStatusText.textContent = `meynezaaaari — ${msg}`;
             }
         });
     });
 
-    const sections = document.querySelectorAll('main section[id]');
-    if (sections.length === 0 || navLinks.length === 0) return;
+    if (tamagotchiCharm) {
+        const greetings = [
+            'Hellowwrr! Aku Nejaa (103012400299) ✨',
+            'Graphic Designer + UI/UX Designer 🎨✨',
+            'Jangan lupa mampir isi Guestbook di bawah yaa! 📖',
+            'Server Route aktif: m2 — Telkom University 🚀'
+        ];
+        let greetIdx = 0;
 
-    window.addEventListener('scroll', () => {
-        const scrollPos = window.scrollY + 140;
-        sections.forEach((sec) => {
-            const top = sec.offsetTop;
-            const height = sec.offsetHeight;
-            const id = sec.getAttribute('id');
+        tamagotchiCharm.addEventListener('click', () => {
+            tamagotchiCharm.classList.remove('tama-bounce');
+            void tamagotchiCharm.offsetWidth; // trigger reflow
+            tamagotchiCharm.classList.add('tama-bounce');
 
-            if (scrollPos >= top && scrollPos < top + height) {
-                navLinks.forEach((link) => {
-                    link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-                });
+            if (toolbarStatusText) {
+                toolbarStatusText.textContent = greetings[greetIdx % greetings.length];
+                greetIdx++;
             }
         });
-    });
-}
+    }
 
-/**
- * 4. Filter Portofolio Interaktif
- */
-function initPortfolioFilter() {
-    const filterButtons = document.querySelectorAll('.portfolio-filters .filter-btn');
-    const portfolioCards = document.querySelectorAll('#portfolioGrid .portfolio-card');
+    // =========================================================================
+    // 4. TOGGLE BAHASA BIO (EN+ID / EN / ID)
+    // =========================================================================
+    const bioLangToggle = document.getElementById('bioLangToggle');
+    const bioLangLabel = document.getElementById('bioLangLabel');
+    const bioTextContainer = document.getElementById('bioTextContainer');
 
-    if (filterButtons.length === 0 || portfolioCards.length === 0) return;
+    if (bioLangToggle && bioTextContainer) {
+        const modes = ['both', 'en', 'id'];
+        let modeIdx = 0;
+
+        bioLangToggle.addEventListener('click', () => {
+            modeIdx = (modeIdx + 1) % modes.length;
+            const currentMode = modes[modeIdx];
+            const enEls = bioTextContainer.querySelectorAll('.bio-en');
+            const idEl = bioTextContainer.querySelector('.bio-id');
+
+            if (currentMode === 'both') {
+                enEls.forEach((el) => (el.style.display = ''));
+                if (idEl) idEl.style.display = '';
+                if (bioLangLabel) bioLangLabel.textContent = 'EN + ID';
+            } else if (currentMode === 'en') {
+                enEls.forEach((el) => (el.style.display = ''));
+                if (idEl) idEl.style.display = 'none';
+                if (bioLangLabel) bioLangLabel.textContent = 'EN Only';
+            } else {
+                enEls.forEach((el) => (el.style.display = 'none'));
+                if (idEl) idEl.style.display = '';
+                if (bioLangLabel) bioLangLabel.textContent = 'ID Only';
+            }
+        });
+    }
+
+    // =========================================================================
+    // 5. FILTER KATEGORI PORTOFOLIO
+    // =========================================================================
+    const filterButtons = document.querySelectorAll('.filter-btn[data-filter]');
+    const projectCards = document.querySelectorAll('.project-card[data-category]');
 
     filterButtons.forEach((btn) => {
         btn.addEventListener('click', () => {
-            const selectedFilter = btn.getAttribute('data-filter') || 'all';
-
             filterButtons.forEach((b) => b.classList.remove('active'));
             btn.classList.add('active');
 
-            portfolioCards.forEach((card) => {
-                const category = card.getAttribute('data-category');
-                const shouldShow = selectedFilter === 'all' || category === selectedFilter;
-                card.classList.toggle('is-hidden', !shouldShow);
+            const selectedFilter = btn.getAttribute('data-filter') || 'all';
+
+            projectCards.forEach((card) => {
+                const cats = (card.getAttribute('data-category') || '').split(/\s+/);
+                if (selectedFilter === 'all' || cats.includes(selectedFilter)) {
+                    card.classList.remove('is-hidden');
+                } else {
+                    card.classList.add('is-hidden');
+                }
             });
         });
     });
-}
 
-/**
- * 5. Validasi Sisi Klien (Client-Side) & Penghitung Karakter pada Form Guestbook
- */
-function initGuestbookValidation() {
-    const form = document.getElementById('guestbookForm');
-    const namaInput = document.getElementById('nama');
-    const pesanInput = document.getElementById('pesan');
+    // =========================================================================
+    // 6. GALERI MODAL DETAIL PROYEK
+    // =========================================================================
+    const projectModal = document.getElementById('projectModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const modalProjectImg = document.getElementById('modalProjectImg');
+    const modalProjectRole = document.getElementById('modalProjectRole');
+    const modalProjectTitle = document.getElementById('modalProjectTitle');
+    const modalProjectStack = document.getElementById('modalProjectStack');
+    const modalProjectPoints = document.getElementById('modalProjectPoints');
+
+    const closeModal = () => {
+        if (!projectModal) return;
+        projectModal.hidden = true;
+        document.body.style.overflow = '';
+    };
+
+    document.querySelectorAll('.btn-open-modal').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            if (!projectModal) return;
+            const title = btn.getAttribute('data-title') || '';
+            const role = btn.getAttribute('data-role') || '';
+            const img = btn.getAttribute('data-img') || '';
+            const stack = (btn.getAttribute('data-stack') || '').split(',').map((s) => s.trim()).filter(Boolean);
+            const points = (btn.getAttribute('data-points') || '').split('|').map((p) => p.trim()).filter(Boolean);
+
+            if (modalProjectTitle) modalProjectTitle.textContent = title;
+            if (modalProjectRole) modalProjectRole.textContent = role;
+            if (modalProjectImg) {
+                modalProjectImg.src = img;
+                modalProjectImg.alt = `Preview ${title}`;
+            }
+
+            if (modalProjectStack) {
+                modalProjectStack.innerHTML = '';
+                stack.forEach((tech) => {
+                    const pill = document.createElement('span');
+                    pill.className = 'tech-pill';
+                    pill.textContent = tech;
+                    modalProjectStack.appendChild(pill);
+                });
+            }
+
+            if (modalProjectPoints) {
+                modalProjectPoints.innerHTML = '';
+                points.forEach((pt) => {
+                    const li = document.createElement('li');
+                    li.textContent = pt;
+                    modalProjectPoints.appendChild(li);
+                });
+            }
+
+            projectModal.hidden = false;
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+    }
+
+    if (projectModal) {
+        projectModal.addEventListener('click', (e) => {
+            if (e.target === projectModal) closeModal();
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && projectModal && !projectModal.hidden) {
+            closeModal();
+        }
+    });
+
+    // =========================================================================
+    // 7. ANIMASI SAAT SCROLL (INTERSECTION OBSERVER)
+    // =========================================================================
+    const revealEls = document.querySelectorAll('.reveal-on-scroll');
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+            (entries, obs) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.08 }
+        );
+        revealEls.forEach((el) => observer.observe(el));
+    } else {
+        revealEls.forEach((el) => el.classList.add('is-visible'));
+    }
+
+    // =========================================================================
+    // 8. VALIDASI FORM SISI KLIEN (GUESTBOOK DI APP/INDEX.PHP & INDEX.PHP)
+    // =========================================================================
+    const attachGuestbookValidation = (formId, namaId, pesanId, errNamaId, errPesanId, counterId = null) => {
+        const form = document.getElementById(formId);
+        const namaInput = document.getElementById(namaId);
+        const pesanInput = document.getElementById(pesanId);
+        const errNama = document.getElementById(errNamaId);
+        const errPesan = document.getElementById(errPesanId);
+        const charCounter = counterId ? document.getElementById(counterId) : null;
+
+        if (!form || !namaInput || !pesanInput) return;
+
+        if (charCounter) {
+            const updateCount = () => {
+                charCounter.textContent = `${pesanInput.value.length} / 1000`;
+            };
+            pesanInput.addEventListener('input', updateCount);
+            updateCount();
+        }
+
+        form.addEventListener('submit', (e) => {
+            let valid = true;
+            const namaVal = namaInput.value.trim();
+            const pesanVal = pesanInput.value.trim();
+
+            if (errNama) errNama.textContent = '';
+            if (errPesan) errPesan.textContent = '';
+
+            if (namaVal.length < 2) {
+                if (errNama) errNama.textContent = 'Nama minimal 2 karakter.';
+                valid = false;
+            } else if (namaVal.length > 100) {
+                if (errNama) errNama.textContent = 'Nama maksimal 100 karakter.';
+                valid = false;
+            }
+
+            if (pesanVal.length < 3) {
+                if (errPesan) errPesan.textContent = 'Pesan minimal 3 karakter.';
+                valid = false;
+            } else if (pesanVal.length > 1000) {
+                if (errPesan) errPesan.textContent = 'Pesan maksimal 1000 karakter.';
+                valid = false;
+            }
+
+            if (!valid) {
+                e.preventDefault();
+            }
+        });
+    };
+
+    attachGuestbookValidation('guestbookForm', 'gbNama', 'gbPesan', 'errNama', 'errPesan', 'charCount');
+    attachGuestbookValidation('homeGuestbookForm', 'homeGbNama', 'homeGbPesan', 'homeErrNama', 'homeErrPesan');
+
+    // Kompatibilitas dengan form Guestbook bersama di repo kelompok (app/index.php)
+    const sharedForm = document.getElementById('guestbookForm');
+    const sharedNama = document.getElementById('nama');
+    const sharedPesan = document.getElementById('pesan');
     const namaFeedback = document.getElementById('namaFeedback');
     const pesanFeedback = document.getElementById('pesanFeedback');
     const charCounter = document.getElementById('charCounter');
 
-    if (!form || !namaInput || !pesanInput) return;
-
-    const updateCounter = () => {
-        if (!charCounter) return;
-        const len = pesanInput.value.length;
-        charCounter.textContent = `${len} / 1000`;
-    };
-
-    updateCounter();
-    pesanInput.addEventListener('input', updateCounter);
-
-    form.addEventListener('submit', (event) => {
-        let isValid = true;
-        const namaVal = namaInput.value.trim();
-        const pesanVal = pesanInput.value.trim();
-
-        // Reset state
-        namaInput.classList.remove('is-invalid');
-        pesanInput.classList.remove('is-invalid');
-        if (namaFeedback) namaFeedback.textContent = '';
-        if (pesanFeedback) pesanFeedback.textContent = '';
-
-        if (namaVal.length < 2) {
-            isValid = false;
-            namaInput.classList.add('is-invalid');
-            if (namaFeedback) {
-                namaFeedback.textContent = 'Nama pengirim wajib diisi (minimal 2 karakter).';
-            }
-        } else if (namaVal.length > 100) {
-            isValid = false;
-            namaInput.classList.add('is-invalid');
-            if (namaFeedback) {
-                namaFeedback.textContent = 'Nama pengirim maksimal 100 karakter.';
-            }
+    if (sharedForm && sharedNama && sharedPesan) {
+        if (charCounter) {
+            const syncCounter = () => {
+                charCounter.textContent = `${sharedPesan.value.length} / 1000`;
+            };
+            sharedPesan.addEventListener('input', syncCounter);
+            syncCounter();
         }
 
-        if (pesanVal.length < 5) {
-            isValid = false;
-            pesanInput.classList.add('is-invalid');
-            if (pesanFeedback) {
-                pesanFeedback.textContent = 'Pesan wajib diisi (minimal 5 karakter).';
-            }
-        } else if (pesanVal.length > 1000) {
-            isValid = false;
-            pesanInput.classList.add('is-invalid');
-            if (pesanFeedback) {
-                pesanFeedback.textContent = 'Pesan maksimal 1000 karakter.';
-            }
-        }
+        sharedForm.addEventListener('submit', (e) => {
+            let ok = true;
+            const nVal = sharedNama.value.trim();
+            const pVal = sharedPesan.value.trim();
 
-        if (!isValid) {
-            event.preventDefault();
-        }
-    });
-}
+            if (namaFeedback) namaFeedback.textContent = '';
+            if (pesanFeedback) pesanFeedback.textContent = '';
+            sharedNama.classList.remove('is-invalid');
+            sharedPesan.classList.remove('is-invalid');
+
+            if (nVal.length < 2) {
+                if (namaFeedback) namaFeedback.textContent = 'Nama pengirim minimal terdiri dari 2 karakter.';
+                sharedNama.classList.add('is-invalid');
+                ok = false;
+            } else if (nVal.length > 100) {
+                if (namaFeedback) namaFeedback.textContent = 'Nama pengirim maksimal 100 karakter.';
+                sharedNama.classList.add('is-invalid');
+                ok = false;
+            }
+
+            if (pVal.length < 5) {
+                if (pesanFeedback) pesanFeedback.textContent = 'Isi pesan minimal terdiri dari 5 karakter.';
+                sharedPesan.classList.add('is-invalid');
+                ok = false;
+            } else if (pVal.length > 1000) {
+                if (pesanFeedback) pesanFeedback.textContent = 'Isi pesan maksimal 1000 karakter.';
+                sharedPesan.classList.add('is-invalid');
+                ok = false;
+            }
+
+            if (!ok) {
+                e.preventDefault();
+            }
+        });
+    }
+});
+
