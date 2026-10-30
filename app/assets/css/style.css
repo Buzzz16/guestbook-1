@@ -925,6 +925,62 @@ pre,
     color: var(--harbor-muted);
 }
 
+.node-stats {
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px dashed var(--border-strong);
+}
+
+.stat-list {
+    list-style: none;
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.stat-item {
+    display: grid;
+    grid-template-columns: 44px 1fr 72px;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.65rem;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+}
+
+.stat-item:hover,
+.stat-item.is-filtered {
+    border-color: var(--accent-cyan);
+}
+
+.stat-item.is-active-node {
+    border-color: var(--accent-lime);
+}
+
+.stat-track {
+    height: 8px;
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+}
+
+.stat-bar {
+    display: block;
+    height: 100%;
+    background-color: var(--accent-lime);
+    transition: width 0.4s ease;
+}
+
+.stat-count {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-align: right;
+}
+
 .feed-header-row {
     display: flex;
     align-items: center;

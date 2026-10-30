@@ -134,10 +134,22 @@ try {
     $anggotaStmt->execute();
     $daftarAnggota = $anggotaStmt->fetchAll();
 
+    // Statistik jumlah pesan per node (seluruh data, tidak terpengaruh filter)
+    $statStmt = $pdo->prepare('
+        SELECT a.route_id, a.nama, COUNT(g.id) AS jumlah
+        FROM anggota a
+        LEFT JOIN guestbook g ON g.route_id = a.route_id
+        GROUP BY a.route_id, a.nama
+        ORDER BY a.route_id ASC
+    ');
+    $statStmt->execute();
+    $statNode = $statStmt->fetchAll();
+
 } catch (Throwable $e) {
     $dbError       = $e->getMessage();
     $entries       = [];
     $daftarAnggota = [];
+    $statNode      = [];
     $totalEntries  = 0;
     $totalPages    = 1;
     $filterRoute   = '';
@@ -276,7 +288,7 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
 
                 <?php if (!empty($daftarAnggota)): ?>
                     <div class="node-directory">
-                        <h3 class="mono-label">REGISTERED GROUP NODES (m0 - m4)</h3>
+                        <h3 class="mono-label">REGISTERED GROUP NODES (m0 - m5)</h3>
                         <ul class="node-list">
                             <?php foreach ($daftarAnggota as $agt): ?>
                                 <?php
@@ -289,6 +301,38 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
                                     <span class="node-code"><?= $rId ?></span>
                                     <span class="node-name"><?= $rNama ?></span>
                                     <span class="node-nim"><?= $rNim ?></span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (!empty($statNode)): ?>
+                    <?php
+                    $statTotal = array_sum(array_column($statNode, 'jumlah'));
+                    $statMax   = max(1, ...array_map('intval', array_column($statNode, 'jumlah')));
+                    ?>
+                    <div class="node-stats">
+                        <div class="label-row">
+                            <h3 class="mono-label">NODE TRAFFIC STATS</h3>
+                            <span class="mono-small"><?= $statTotal ?> PESAN</span>
+                        </div>
+                        <ul class="stat-list">
+                            <?php foreach ($statNode as $st): ?>
+                                <?php
+                                $sRoute  = (string) $st['route_id'];
+                                $sJumlah = (int) $st['jumlah'];
+                                $sPersen = $statTotal > 0 ? round($sJumlah / $statTotal * 100) : 0;
+                                $sLebar  = round($sJumlah / $statMax * 100);
+                                ?>
+                                <li>
+                                    <a class="stat-item <?= $sRoute === MEMBER_ROUTE ? 'is-active-node' : '' ?> <?= $sRoute === $filterRoute ? 'is-filtered' : '' ?>"
+                                       href="<?= htmlspecialchars(build_page_url(1, $isEmbed, $sRoute), ENT_QUOTES, 'UTF-8') ?>"
+                                       title="Lihat pesan dari <?= htmlspecialchars((string) $st['nama'], ENT_QUOTES, 'UTF-8') ?>">
+                                        <span class="node-code"><?= htmlspecialchars($sRoute, ENT_QUOTES, 'UTF-8') ?></span>
+                                        <span class="stat-track" aria-hidden="true"><span class="stat-bar" style="width: <?= $sLebar ?>%"></span></span>
+                                        <span class="stat-count"><?= $sJumlah ?> <span class="node-nim">(<?= $sPersen ?>%)</span></span>
+                                    </a>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
