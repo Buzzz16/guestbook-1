@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initGuestbookValidation();
     initMarioScrollAnimations();
     initInteractiveMarioControls();
+    initRelativeTimeFormatter();
 });
 
 /**
@@ -974,4 +975,95 @@ function initInteractiveMarioControls() {
             addCoin(btn);
         });
     });
+}
+
+/**
+ * 9. Format Waktu Relatif / "Berapa Waktu yang Lalu" (Relative Time Toggle)
+ *    - Mengubah string datetime ISO/MySQL menjadi format ramah (contoh: "Baru saja", "5 menit lalu", dsb.)
+ *    - Menyediakan tombol toggle global dan fitur klik pada tiap waktu pesan.
+ */
+function initRelativeTimeFormatter() {
+    const timeElements = document.querySelectorAll('.entry-time');
+    const toggleBtn = document.getElementById('timeFormatToggleBtn');
+    if (timeElements.length === 0) return;
+
+    let useRelative = localStorage.getItem('dini_relative_time') !== '0'; // default aktif
+
+    const getRelativeTimeString = (dateStr) => {
+        if (!dateStr) return '';
+        // Ganti spasi dengan 'T' untuk kompatibilitas parsing di seluruh browser
+        const normalized = dateStr.replace(' ', 'T');
+        const parsed = new Date(normalized);
+        if (isNaN(parsed.getTime())) return dateStr;
+
+        const now = new Date();
+        const diffSec = Math.floor((now.getTime() - parsed.getTime()) / 1000);
+
+        if (diffSec < 45) return 'Baru saja ⚡';
+        if (diffSec < 90) return '1 menit lalu';
+        if (diffSec < 3600) return `${Math.floor(diffSec / 60)} menit lalu`;
+        if (diffSec < 7200) return '1 jam lalu';
+        if (diffSec < 86400) return `${Math.floor(diffSec / 3600)} jam lalu`;
+        if (diffSec < 172800) return 'Kemarin';
+        if (diffSec < 604800) return `${Math.floor(diffSec / 86400)} hari lalu`;
+        if (diffSec < 2592000) return `${Math.floor(diffSec / 604800)} minggu lalu`;
+
+        return dateStr; // Jika sudah lewat sebulan, tampilkan tanggal aslinya
+    };
+
+    const updateDisplay = () => {
+        timeElements.forEach((el) => {
+            const originalTime = el.getAttribute('datetime') || el.textContent.trim();
+            if (!el.getAttribute('data-raw-time')) {
+                el.setAttribute('data-raw-time', originalTime);
+            }
+            const rawTime = el.getAttribute('data-raw-time');
+
+            if (useRelative) {
+                el.textContent = getRelativeTimeString(rawTime);
+                el.setAttribute('title', `Tanggal Asli: ${rawTime} (Klik untuk beralih)`);
+            } else {
+                el.textContent = rawTime;
+                el.setAttribute('title', `Waktu Relatif: ${getRelativeTimeString(rawTime)} (Klik untuk beralih)`);
+            }
+        });
+
+        if (toggleBtn) {
+            const labelEl = toggleBtn.querySelector('.time-toggle-label');
+            const iconEl = toggleBtn.querySelector('.time-toggle-icon');
+            if (labelEl) {
+                labelEl.textContent = useRelative ? 'Waktu Relatif' : 'Waktu Asli';
+            }
+            if (iconEl) {
+                iconEl.textContent = useRelative ? '⏱️' : '📅';
+            }
+        }
+    };
+
+    updateDisplay();
+
+    // Toggle via tombol di header daftar pesan
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            useRelative = !useRelative;
+            localStorage.setItem('dini_relative_time', useRelative ? '1' : '0');
+            updateDisplay();
+        });
+    }
+
+    // Tiap item waktu dapat diklik langsung oleh pengunjung
+    timeElements.forEach((el) => {
+        el.addEventListener('click', () => {
+            useRelative = !useRelative;
+            localStorage.setItem('dini_relative_time', useRelative ? '1' : '0');
+            updateDisplay();
+        });
+    });
+
+    // Update otomatis tiap 60 detik agar "x menit lalu" selalu akurat
+    setInterval(() => {
+        if (useRelative) {
+            updateDisplay();
+        }
+    }, 60000);
 }
