@@ -7,7 +7,7 @@ declare(strict_types=1);
  */
 
 if (!defined('MEMBER_ROUTE')) {
-    define('MEMBER_ROUTE', 'm4'); // Ketua Kelompok
+    define('MEMBER_ROUTE', 'm1');
 }
 
 if (!defined('MEMBER_NAMA')) {

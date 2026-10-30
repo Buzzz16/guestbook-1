@@ -11,15 +11,16 @@ Dokumentasi resmi proyek perkuliahan **Personal Page dan Aplikasi Bersama (Pra-U
 - **Nama Aplikasi Bersama**: Guestbook Kelompok Terdistribusi (`kelompok_db`)
 - **Program Studi / Kelas**: S1 Informatika Telkom University — **IF-48-05**
 
-### Daftar Anggota Kelompok (`m0` – `m4`)
+### Daftar Anggota Kelompok (`m0` – `m5`)
 
 | Route ID | NIM | Nama Anggota | Peran |
 | :--- | :--- | :--- | :--- |
 | **`m0`** | `103012400134` | **Zulfa Almajid Basyaasyah** | Ketua Kelompok |
 | **`m1`** | `103012400106` | **Glen David Hadiono** | Anggota |
-| **`m2`** | `103012400` | *Anggota Kelompok* | Anggota |
-| **`m3`** | `103012400` | *Anggota Kelompok* | Anggota |
+| **`m2`** | `103012400299` | **Meyneza Ari Dwi Astuti** | Anggota |
+| **`m3`** | `104012430028` | **Dini Nadia Mawaddah** | Anggota |
 | **`m4`** | `103012400045` | **Yuriko Astiani** | Anggota |
+| **`m5`** | `103012400117` | **Ravananda Nadhzief Atthalah** | Anggota |
 
 > **Catatan**: Identitas server/node lokal dikonfigurasi melalui file `identity.php` di root direktori mahasiswa masing-masing tanpa mengubah kode inti aplikasi kelompok di folder `app/`.
 

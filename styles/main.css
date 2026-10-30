@@ -9198,17 +9198,13 @@ html[data-theme="dark"] .corner {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 24px !important;
-  height: 24px !important;
-  min-width: 24px !important;
-  min-height: 24px !important;
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  min-height: 26px !important;
   border-radius: 6px !important;
-  background: var(--fg) !important;
-  color: var(--bg) !important;
-  font-weight: 800 !important;
-  font-size: 12px !important;
-  line-height: 1 !important;
-  letter-spacing: -0.02em !important;
+  object-fit: contain !important;
+  vertical-align: middle !important;
   flex-shrink: 0 !important;
 }
 
@@ -9400,4 +9396,348 @@ html[data-theme="light"] .served-by-text strong {
 .corner[data-theme="light"] .pulse-dot {
   background: #111111 !important;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25) !important;
-}
+}
+
+
+/* ==========================================================================
+   COMPREHENSIVE RESPONSIVE SYSTEM (Mobile, Tablet, and Desktop / Laptop)
+   ========================================================================== */
+
+/* 1. Global Box-Sizing & Overflow Safety */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img, video, canvas, iframe {
+  max-width: 100%;
+}
+
+/* 2. Responsive Gutter & Container */
+.c-wrap {
+  width: 100%;
+  max-width: var(--max, 1200px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+@media (max-width: 768px) {
+  :root, .corner {
+    --gutter: clamp(14px, 4vw, 24px) !important;
+  }
+}
+
+/* 3. Served By Banner Responsiveness */
+@media (max-width: 768px) {
+  .served-by-banner {
+    padding: 6px 12px !important;
+  }
+  .served-by-inner {
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 4px 10px !important;
+  }
+  .served-by-text {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+  }
+  .served-by-meta {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .served-by-banner {
+    padding: 5px 8px !important;
+  }
+  .served-by-text {
+    font-size: 11px !important;
+  }
+  .route-badge {
+    font-size: 10px !important;
+    padding: 2px 7px !important;
+  }
+}
+
+/* 4. Hero Section Responsiveness */
+@media (max-width: 768px) {
+  .c-hero-copy {
+    bottom: clamp(75px, 12vh, 105px) !important;
+    left: var(--gutter) !important;
+    right: var(--gutter) !important;
+    max-width: calc(100vw - (var(--gutter) * 2)) !important;
+  }
+  .c-hero-copy h1 {
+    font-size: clamp(38px, 10vw, 72px) !important;
+    line-height: 0.94 !important;
+  }
+  .c-hero-copy p {
+    font-size: clamp(14px, 3.5vw, 17px) !important;
+    margin-top: 10px !important;
+  }
+  .c-scroll-cue {
+    font-size: 12px !important;
+    margin-top: 16px !important;
+  }
+  .c-hero-skip {
+    top: 60px !important;
+    right: var(--gutter) !important;
+    font-size: 11.5px !important;
+    padding: 5px 12px !important;
+  }
+  #loadingWords {
+    font-size: 11px !important;
+    top: auto !important;
+    bottom: 90px !important;
+    right: var(--gutter) !important;
+  }
+}
+
+/* 5. Infinite Marquee ("I am a...") Responsiveness */
+@media (max-width: 768px) {
+  .c-iam-wrap {
+    grid-template-columns: 1fr !important;
+    padding: clamp(28px, 5vh, 50px) 0 !important;
+    gap: 16px !important;
+  }
+  .c-iam-lead {
+    background: none !important;
+    padding: 0 var(--gutter) !important;
+    justify-content: flex-start !important;
+  }
+  .c-iam-lead span {
+    font-size: clamp(26px, 7vw, 42px) !important;
+  }
+  .c-iam-rows {
+    margin-left: 0 !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+  .c-iam {
+    height: 38px !important;
+    font-size: 13px !important;
+    padding: 0 14px !important;
+  }
+}
+
+/* 6. "Currently" Cards Responsiveness */
+@media (max-width: 860px) {
+  .c-currently {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .c-currently > div {
+    padding: 16px 18px !important;
+  }
+}
+
+/* 7. Spotlight / Featured Experience Responsiveness */
+@media (max-width: 900px) {
+  .c-spotlight {
+    padding: clamp(18px, 3.5vw, 32px) !important;
+    border-radius: 20px !important;
+  }
+  .c-update-teaser {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    margin-top: 18px !important;
+  }
+  .c-video {
+    aspect-ratio: 16 / 10 !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 600px) {
+  #spotlightChips {
+    flex-wrap: wrap !important;
+  }
+  .c-chip {
+    font-size: 12px !important;
+    padding: 6px 12px !important;
+    height: auto !important;
+    min-height: 32px !important;
+  }
+  #spotlightBadge {
+    max-width: calc(100% - 24px) !important;
+    left: 12px !important;
+    bottom: 12px !important;
+    font-size: 11px !important;
+    padding: 4px 10px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .c-spotlight p.c-muted {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+  }
+}
+
+/* 8. Room Doors ("Explore another side of me") Responsiveness */
+@media (max-width: 860px) {
+  .c-doors {
+    flex-direction: column !important;
+    height: auto !important;
+    gap: 14px !important;
+  }
+  .c-door2 {
+    height: clamp(260px, 42vh, 320px) !important;
+    border-radius: 18px !important;
+    width: 100% !important;
+  }
+  .c-door2-title {
+    font-size: clamp(22px, 5vw, 28px) !important;
+  }
+  .c-door2-blurb {
+    font-size: 13.5px !important;
+    line-height: 1.4 !important;
+  }
+}
+
+/* 9. Guestbook Embed Section Responsiveness */
+.c-guestbook-frame {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  overflow: hidden;
+  box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.4);
+}
+
+.c-guestbook-frame iframe {
+  width: 100%;
+  height: 760px;
+  border: 0;
+  display: block;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  .c-guestbook-frame iframe {
+    height: 820px;
+  }
+}
+
+@media (max-width: 480px) {
+  .c-guestbook-frame iframe {
+    height: 880px;
+  }
+}
+
+/* 10. Bottom Floating Dock Navigation Responsiveness */
+@media (max-width: 768px) {
+  .c-dock {
+    bottom: 10px !important;
+    width: calc(100% - 16px) !important;
+    max-width: 500px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    justify-content: space-between !important;
+    padding: 4px 6px !important;
+    gap: 2px !important;
+  }
+  .c-dock-name {
+    padding: 0 6px !important;
+    height: 38px !important;
+  }
+  .c-dock-name img {
+    width: 22px !important;
+    height: 22px !important;
+  }
+  .c-dock-name span,
+  .c-dock-sep {
+    display: none !important;
+  }
+  .c-dock .c-roomtab {
+    flex: 1 !important;
+    justify-content: center !important;
+    height: 38px !important;
+    padding: 0 8px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+  }
+  .c-dock .c-roomtab .dot {
+    display: none !important;
+  }
+  .c-hire-split {
+    height: 38px !important;
+  }
+  .c-dock .c-hire-split .c-hire {
+    height: 38px !important;
+    padding: 0 10px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+  }
+  .c-hire-cv {
+    height: 38px !important;
+    padding: 0 8px 0 6px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* Ultra-Compact Mobile (< 390px, e.g. iPhone SE / Galaxy Z Flip) */
+@media (max-width: 390px) {
+  .c-dock {
+    width: calc(100% - 10px) !important;
+    padding: 3px 4px !important;
+    gap: 1px !important;
+  }
+  .c-dock-name {
+    padding: 0 4px !important;
+    height: 36px !important;
+  }
+  .c-dock-name img {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .c-dock .c-roomtab {
+    height: 36px !important;
+    padding: 0 5px !important;
+    font-size: 11px !important;
+  }
+  .c-dock .c-hire-split .c-hire {
+    height: 36px !important;
+    padding: 0 7px !important;
+    font-size: 11px !important;
+  }
+  .c-hire-cv {
+    height: 36px !important;
+    padding: 0 6px 0 4px !important;
+    font-size: 11px !important;
+  }
+  .c-hire-cv svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+}
+
+/* 11. Footer Responsiveness */
+@media (max-width: 860px) {
+  .c-footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 28px !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .c-footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .c-footer {
+    padding-top: 40px !important;
+    padding-bottom: clamp(140px, 20vh, 180px) !important;
+  }
+  .c-footer-bottom-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+}

@@ -79,11 +79,12 @@ $displayRoute = defined('MEMBER_ROUTE') && !empty(MEMBER_ROUTE) ? MEMBER_ROUTE :
         <span class="c-music-label">Play music</span>
       </button>
     </aside>
+    <div class="c-qa-scrim" style="display:none" aria-hidden="true"></div>
 
     <div class="c-dock-explore" data-show="false" aria-hidden="true">Explore another side of me</div>
     
     <nav class="c-dock" data-hidden="false" data-big="false" aria-label="Main">
-      <a class="c-dock-name" aria-label="Glen David, home" aria-current="page" href="./"><span class="c-dock-badge">GD</span><span>Glen David</span></a>
+      <a class="c-dock-name" aria-label="Glen David, home" aria-current="page" href="./"><img src="./favicon.png" alt="GD" class="c-dock-badge" width="26" height="26"/><span>Glen David</span></a>
       <span class="c-dock-sep" aria-hidden="true"></span>
       <a class="c-roomtab" data-room="developer" title="Back-end architecture, Go algorithms, type-safety, and QA testing." href="./engineer/">
         <span class="dot" aria-hidden="true"></span>Engineer
@@ -296,7 +297,7 @@ $displayRoute = defined('MEMBER_ROUTE') && !empty(MEMBER_ROUTE) ? MEMBER_ROUTE :
             </div>
             <div class="c-update-teaser">
               <div>
-                <div class="c-chips c-noprint" style="display:flex;gap:8px;margin-bottom:12px" id="spotlightChips">
+                <div class="c-chips c-noprint" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px" id="spotlightChips">
                   <button type="button" class="c-chip" aria-pressed="true" id="tabLunch" onclick="switchSpotlight('lunch')">01. Lunch Attendance &amp; Billing</button>
                   <button type="button" class="c-chip" aria-pressed="false" id="tabValas" onclick="switchSpotlight('valas')">02. Valas Company Profile CMS</button>
                 </div>
@@ -407,7 +408,7 @@ $displayRoute = defined('MEMBER_ROUTE') && !empty(MEMBER_ROUTE) ? MEMBER_ROUTE :
           <p class="c-eyebrow">my little corner of the internet</p>
           <p class="c-h3" style="margin-top:10px"><?= htmlspecialchars($displayName, ENT_QUOTES, 'UTF-8') ?></p>
           <p class="c-muted" style="margin:18px 0 14px">Undergraduate Informatics student at Telkom University Bandung (NIM <?= htmlspecialchars($displayNim, ENT_QUOTES, 'UTF-8') ?>). Software engineer, back-end developer, QA tester, and analytical thinker.</p>
-          <div style="display:flex;gap:10px;margin-top:14px">
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px">
             <a class="c-btn c-btn-primary" href="mailto:glendavid344@gmail.com">Get in touch ✉</a>
             <a class="c-btn" href="./cv.pdf" download="Glen David Hadiono - CV.pdf">Download CV ↓</a>
           </div>
@@ -439,7 +440,7 @@ $displayRoute = defined('MEMBER_ROUTE') && !empty(MEMBER_ROUTE) ? MEMBER_ROUTE :
           </ul>
         </div>
       </div>
-      <div class="c-wrap" style="margin-top:48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div class="c-wrap c-footer-bottom-row" style="margin-top:48px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
         <span class="c-eyebrow">© 2026 <?= htmlspecialchars($displayName, ENT_QUOTES, 'UTF-8') ?> · Bandung, West Java, Indonesia</span>
         <span class="c-eyebrow">Telkom University · S1 Informatika (Node <?= htmlspecialchars($displayRoute, ENT_QUOTES, 'UTF-8') ?>)</span>
       </div>
