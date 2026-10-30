@@ -1,446 +1,338 @@
 <?php
 declare(strict_types=1);
 
-/**
- * Halaman Utama Personal Page (Root `personal/index.php`)
- * Mahasiswa : Zulfa Almajid Basyaasyah (Babas) - 103012400134
- * Kelas     : S1 Informatika Telkom University (IF-48-05)
- */
-
 require_once __DIR__ . '/identity.php';
 
-$skills = [
+$nama  = defined('MEMBER_NAMA')  ? MEMBER_NAMA  : 'Student Name';
+$nim   = defined('MEMBER_NIM')   ? MEMBER_NIM   : '-';
+$route = defined('MEMBER_ROUTE') ? MEMBER_ROUTE : '-';
+
+function e(string $s): string
+{
+    return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+}
+
+$servedByFile = __DIR__ . '/app/partials/served_by.php';
+$appReady     = is_file(__DIR__ . '/app/index.php');
+
+/* ------------------------------------------------------------------
+ * DATA PROFIL — ubah isi di bawah ini bila perlu.
+ * Baris bertanda "GANTI" masih berisi contoh.
+ * ------------------------------------------------------------------ */
+$profil = [
+    'depan'      => 'Ravananda',
+    'belakang'   => 'Atthalah',
+    'kampus'     => 'Telkom University Bandung',
+    'prodi'      => 'Bachelor of Informatics',
+    'kata_besar' => 'INFORMATICS',
+    'hero_kiri'  => 'Taking systems apart to understand them, then making them safer and smarter.',
+    'hero_kanan' => 'Informatics student interested in cybersecurity, AI, and data analysis.',
+    'tentang'    => [
+        "I'm an undergraduate Informatics student at **Telkom University Bandung** with a growing interest in "
+        . '**cybersecurity**, **artificial intelligence**, and **data analysis**. I like understanding a system '
+        . 'down to its details before looking for ways to make it safer and smarter.',
+        "So far I've designed the interface for **Kostopia** and built **Poultry Derby** and a "
+        . '**fuzzy logic recommender** with my teammates.',
+    ],
+    'foto'       => 'assets/img/foto-potret.jpg',
+    'email'      => 'ravananda91@gmail.com',
+];
+
+$sosial = [                                         // GANTI tautannya dengan akunmu
+    ['label' => 'GitHub',    'url' => 'https://github.com/',
+     'ikon'  => '<path d="M12 2.5a9.5 9.5 0 0 0-3 18.5c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.2-3.3-1.2-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.1-.2-4.4-1.1-4.4-4.8 0-1 .4-1.9 1-2.6-.1-.3-.4-1.2.1-2.6 0 0 .8-.3 2.6 1a9 9 0 0 1 4.8 0c1.8-1.3 2.6-1 2.6-1 .5 1.4.2 2.3.1 2.6.6.7 1 1.6 1 2.6 0 3.7-2.3 4.6-4.4 4.8.3.3.6.9.6 1.8v2.6c0 .3.2.6.7.5A9.5 9.5 0 0 0 12 2.5Z"/>'],
+    ['label' => 'LinkedIn',  'url' => 'https://www.linkedin.com/',
+     'ikon'  => '<path d="M6.5 9.5v8M6.5 6.5v.01M10.5 17.5v-5a2.5 2.5 0 0 1 5 0v5M10.5 9.5v8"/><rect x="2.5" y="2.5" width="19" height="19" rx="4"/>'],
+    ['label' => 'Instagram', 'url' => 'https://www.instagram.com/',
+     'ikon'  => '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.3 6.7v.01"/>'],
+];
+
+$keahlian = [
+    'Languages'   => ['Indonesian (Native)', 'English (Proficient)'],
+    'Hard skills' => ['Python', 'Go', 'C++', 'Java', 'HTML/CSS', 'MySQL', 'Ms. Office'],
+    'Soft skills' => ['Project Management', 'Problem Solving', 'Teamwork', 'Adaptability'],
+];
+
+$proyek = [
     [
-        'name'     => 'Python',
-        'category' => 'Backend & AI/Data',
-        'level'    => 'Advanced',
-        'desc'     => 'Scripting otomasi, pengolahan data, pemodelan AI/ML, dan pembuatan REST API cepat.',
-        'code'     => 'PY-01',
+        'judul' => 'Poultry Derby', 'kategori' => 'Browser game',
+        'desk'  => 'A browser-based web game set in the world of competitive poultry farming. Players take the role '
+                 . 'of a poultry trainer who builds a team, trains the birds they choose, and leads them to glory in '
+                 . 'the competition arena. Built with a teammate using OOP and an MVC architecture.',
+        'tag'   => ['Java', 'Servlets', 'JSP', 'MVC', 'MySQL'],
     ],
     [
-        'name'     => 'Java (Spring Boot)',
-        'category' => 'Enterprise Backend',
-        'level'    => 'Advanced',
-        'desc'     => 'Arsitektur berlapis (Controller-Service-Repository), Spring Data JPA, keamanan, dan RESTful microservice.',
-        'code'     => 'JV-02',
+        'judul' => 'Fuzzy logic K-drama recommender', 'kategori' => 'Artificial intelligence',
+        'desk'  => 'A fuzzy logic system that scores 5,000 dramas from a MyDramaList dataset using episodes, viewers, '
+                 . 'reviews, sentiment, and popularity across 46 rules. We compared Mamdani and Sugeno inference: '
+                 . 'Mamdani had the lower error, and the two methods agreed with a 0.9975 correlation.',
+        'tag'   => ['Fuzzy logic', 'Mamdani', 'Sugeno', 'Data analysis'],
     ],
     [
-        'name'     => 'Node.js',
-        'category' => 'Runtime & API',
-        'level'    => 'Intermediate',
-        'desc'     => 'Backend asynchronous menggunakan Express.js untuk layanan real-time dan integrasi IoT/AI.',
-        'code'     => 'ND-03',
-    ],
-    [
-        'name'     => 'Vue.js',
-        'category' => 'Frontend Reactive',
-        'level'    => 'Intermediate',
-        'desc'     => 'Single Page Application (SPA) reaktif, manajemen state komponen, dan visualisasi metrik interaktif.',
-        'code'     => 'VU-04',
-    ],
-    [
-        'name'     => 'Tailwind CSS',
-        'category' => 'UI Engineering',
-        'level'    => 'Advanced',
-        'desc'     => 'Sistem desain utility-first yang responsif, dark-mode terstruktur, dan tipografi modern.',
-        'code'     => 'TW-05',
-    ],
-    [
-        'name'     => 'PostgreSQL',
-        'category' => 'Relational DBMS',
-        'level'    => 'Intermediate',
-        'desc'     => 'Perancangan skema relasional, optimasi indexing, transaksi ACID, dan integrasi cloud (Supabase).',
-        'code'     => 'PG-06',
+        'judul' => 'Kostopia', 'kategori' => 'UI design',
+        'desk'  => 'A boarding-house management app for owners and tenants that keeps payments, tenant records, '
+                 . 'and room status in one place. I designed its logo and web interface.',
+        'tag'   => ['Figma', 'UI/UX', 'Logo'],
     ],
 ];
 
-$portfolios = [
-    [
-        'id'       => 'PRJ-01',
-        'title'    => 'SuperKost',
-        'subtitle' => 'Platform Manajemen Hunian Indekos Terpadu',
-        'category' => 'backend',
-        'tags'     => ['Java Spring Boot', 'MySQL', 'Thymeleaf / REST', 'MVC'],
-        'year'     => '2025',
-        'status'   => 'PRODUCTION READY',
-        'summary'  => 'Web App berbasis Java Spring Boot & MySQL untuk mendigitalisasi pengelolaan kamar kos, pencatatan tagihan bulanan penghuni, manajemen ketersediaan unit real-time, serta pelaporan keuangan pemilik kos secara terstruktur.',
-        'highlights' => [
-            'Autentikasi berbasis role (Pemilik Kos & Penghuni)',
-            'Manajemen transaksi sewa dan histori pembayaran otomatis',
-            'Skema relasional MySQL dengan integritas referensial penuh',
-        ],
-    ],
-    [
-        'id'       => 'PRJ-02',
-        'title'    => 'PoluSee',
-        'subtitle' => 'AI-Powered Air Quality Monitoring Dashboard',
-        'category' => 'ai-web',
-        'tags'     => ['Vue.js', 'Express', 'Node.js', 'AI Forecasting'],
-        'year'     => '2025',
-        'status'   => 'PROTOTYPE DEPLOYED',
-        'summary'  => 'Sistem pemantauan kualitas udara cerdas berbasis AI dengan antarmuka reaktif Vue.js dan backend Express. Menganalisis indeks polutan (PM2.5, PM10, CO, AQI) serta menyajikan prediksi kualitas udara dan rekomendasi kesehatan.',
-        'highlights' => [
-            'Visualisasi tren indeks kualitas udara (AQI) secara real-time',
-            'Integrasi pipeline prediksi berbasis model Machine Learning',
-            'REST API ringan dengan Express.js dan arsitektur modular',
-        ],
-    ],
-    [
-        'id'       => 'PRJ-03',
-        'title'    => 'ChronosPlan',
-        'subtitle' => 'Progressive Web App Countdown & Academic Schedule',
-        'category' => 'fullstack',
-        'tags'     => ['Next.js', 'Supabase', 'PostgreSQL', 'PWA'],
-        'year'     => '2026',
-        'status'   => 'ACTIVE RELEASE',
-        'summary'  => 'Aplikasi Progressive Web App (PWA) pengatur jadwal dan hitung mundur (countdown) tenggat akademik menggunakan Next.js dan Supabase. Dapat diinstal di perangkat mobile maupun desktop dengan sinkronisasi cloud real-time.',
-        'highlights' => [
-            'Dukungan instalasi PWA & akses cepat jadwal perkuliahan/asistensi',
-            'Database PostgreSQL real-time via Supabase dengan Row Level Security',
-            'Antarmuka minimalis berfokus pada produktivitas mahasiswa',
-        ],
-    ],
-];
+/* ubah **teks** menjadi <strong>teks</strong> setelah di-escape */
+function tebal(string $s): string
+{
+    return preg_replace('/\*\*(.+?)\*\*/', '<strong>$1</strong>', e($s));
+}
+
+/* barcode dekoratif dari digit NIM */
+function barcode(string $kode): string
+{
+    $x = 0;
+    $rects = '';
+    foreach (str_split(preg_replace('/\D/', '', $kode) . '7301') as $i => $d) {
+        $d = (int) $d;
+        foreach ([1 + $d % 3, 1 + ($d + $i) % 2] as $j => $w) {
+            $rects .= '<rect x="' . $x . '" y="0" width="' . $w . '" height="40"/>';
+            $x += $w + 1 + ($j + $d) % 2;
+        }
+    }
+    return '<svg class="barcode" viewBox="0 0 ' . $x . ' 40" preserveAspectRatio="none" aria-hidden="true">' . $rects . '</svg>';
+}
+
+function badge(array $profil, string $nim, string $extra = ''): string
+{
+    return '<div class="badge ' . $extra . '">'
+         . '<span class="badge-hole" aria-hidden="true"></span>'
+         . '<p class="badge-name"><span>' . e(strtoupper($profil['depan'])) . '</span>'
+         . '<span class="ghost">' . e(strtoupper($profil['belakang'])) . '</span></p>'
+         . '<img class="badge-photo" src="' . e($profil['foto']) . '" alt="" draggable="false">'
+         . '<div class="badge-foot"><div><span class="badge-id">ID: ' . e($nim) . '</span>' . barcode($nim) . '</div>'
+         . '<span class="badge-dept">INFORMATICS<br>DEPT.</span></div>'
+         . '</div>';
+}
+
+$clip = '<svg class="clip" viewBox="0 0 40 70" aria-hidden="true">'
+      . '<rect x="6" y="2" width="28" height="14" rx="7" fill="none" stroke="currentColor" stroke-width="4"/>'
+      . '<rect x="16" y="14" width="8" height="10" rx="2" fill="currentColor"/>'
+      . '<path d="M20 24v26c0 8 9 10 12 3" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>'
+      . '<path d="M14 26v20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>';
+
+$strapText = str_repeat(e(strtoupper($profil['depan'] . ' ' . $profil['belakang'])) . ' &nbsp; ', 4);
 ?>
-<!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal Page Zulfa Almajid Basyaasyah (Babas) - Mahasiswa S1 Informatika Telkom University (IF-48-05) & Aplikasi Bersama Guestbook.">
-    <title><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> (Babas) // Personal Page &amp; Guestbook</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?= e($nama) ?> — Personal Page</title>
+    <meta name="description" content="<?= e($profil['hero_kanan']) ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-    <!-- Banner Identitas Wajib di Bagian Paling Atas -->
-    <?php require_once __DIR__ . '/app/partials/served_by.php'; ?>
+<!-- banner wajib dari tugas: tetap berbahasa Indonesia sesuai ketentuan -->
+<div class="served-by-slot">
+<?php if (is_file($servedByFile)): ?>
+    <?php include $servedByFile; ?>
+<?php else: ?>
+    <p class="served-by">Anda dilayani oleh laman <strong><?= e($nama) ?></strong> (<?= e($nim) ?>)</p>
+<?php endif; ?>
+</div>
 
-    <!-- Header & Navigasi Semantic HTML5 -->
-    <header class="site-header" id="top">
-        <div class="container header-inner">
-            <a href="#profil" class="brand-logo" aria-label="Beranda Zulfa Almajid Basyaasyah">
-                <span class="brand-bracket">[</span>BABAS<span class="brand-accent">//</span><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?><span class="brand-bracket">]</span>
-            </a>
+<header class="site-header">
+    <a class="brand" href="#top"><?= e($profil['depan']) ?>.</a>
+    <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span>
+        <span class="sr-only">Open menu</span>
+    </button>
+</header>
 
-            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Buka menu navigasi">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
+<!-- FULL-SCREEN MENU ------------------------------------------------ -->
+<nav class="menu" id="menu" aria-label="Main menu" hidden>
+    <div class="menu-inner">
+        <div>
+            <p class="label">Menu</p>
+            <ul class="menu-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#group-app">Group app</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="menu-side">
+            <ul class="socials">
+                <?php foreach ($sosial as $s): ?>
+                <li><a href="<?= e($s['url']) ?>" target="_blank" rel="noopener" aria-label="<?= e($s['label']) ?>">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><?= $s['ikon'] ?></svg></a></li>
+                <?php endforeach; ?>
+            </ul>
+            <p class="label">Get in touch</p>
+            <a class="menu-mail" href="mailto:<?= e($profil['email']) ?>"><?= e($profil['email']) ?></a>
+        </div>
+    </div>
+</nav>
 
-            <nav class="site-nav" id="primaryNav" aria-label="Navigasi Utama">
-                <ul class="nav-list">
-                    <li><a href="#profil" class="nav-link active">01. Profil</a></li>
-                    <li><a href="#pendidikan" class="nav-link">02. Pengalaman</a></li>
-                    <li><a href="#keahlian" class="nav-link">03. Keahlian</a></li>
-                    <li><a href="#portofolio" class="nav-link">04. Portofolio</a></li>
-                    <li><a href="#kontak" class="nav-link">05. Kontak</a></li>
-                </ul>
-            </nav>
+<main id="main">
 
-            <div class="header-actions">
-                <button type="button" id="themeToggleBtn" class="btn btn-icon" aria-label="Ubah mode kontras tampilan" title="Toggle Harbor Contrast Theme">
-                    <span class="theme-indicator-dot"></span>
-                    <span class="mono-small" id="themeLabel">STEALTH DARK</span>
-                </button>
-                <a href="app/index.php" class="btn btn-primary btn-sm">Buka Guestbook &nearr;</a>
+    <!-- HERO: ID card on a lanyard --------------------------------- -->
+    <section class="hero" id="top">
+        <h1 class="sr-only"><?= e($nama) ?>, Informatics student at <?= e($profil['kampus']) ?></h1>
+
+        <div class="stage" id="stage">
+            <div class="strap" id="strap" aria-hidden="true"><span><?= $strapText ?></span></div>
+            <div class="hanger" id="hanger" role="img" aria-label="ID card of <?= e($nama) ?>, draggable">
+                <?= $clip ?>
+                <?= badge($profil, $nim) ?>
             </div>
         </div>
-    </header>
 
-    <main>
-        <!-- SECTION 1: PROFIL (HERO) -->
-        <section id="profil" class="hero-section section-block">
-            <div class="container hero-grid">
-                <div class="hero-content">
-                    <div class="spec-pill-row">
-                        <span class="spec-pill">ROLE // KETUA KELOMPOK (<?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?>)</span>
-                        <span class="spec-pill">NIM // <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></span>
-                        <span class="spec-pill">CLASS // <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
-                    </div>
+        <p class="big-word" aria-hidden="true"><?= e($profil['kata_besar']) ?></p>
 
-                    <h1 class="hero-title">
-                        Zulfa Almajid Basyaasyah
-                        <span class="hero-alias">A.K.A. &ldquo;BABAS&rdquo;</span>
-                    </h1>
+        <div class="hero-lines">
+            <p><?= e($profil['hero_kiri']) ?></p>
+            <p><?= e($profil['hero_kanan']) ?></p>
+        </div>
+        <p class="drag-hint" aria-hidden="true">Drag the card</p>
+    </section>
 
-                    <p class="hero-lead">
-                        Mahasiswa <strong>S1 Informatika Telkom University</strong> kelas <strong>IF-48-05</strong> dan <strong>Asisten Dosen</strong> untuk 3 kelas Informatika. Berfokus pada rekayasa perangkat lunak <em>Full-Stack</em>, arsitektur backend yang tangguh, serta eksplorasi aplikasi berbasis kecerdasan buatan.
-                    </p>
-
-                    <div class="hero-cta-group">
-                        <a href="#portofolio" class="btn btn-primary">
-                            <span>Eksplorasi Portofolio</span>
-                            <span class="btn-arrow">&rarr;</span>
-                        </a>
-                        <a href="#aplikasi" class="btn btn-outline">
-                            <span>Isi Guestbook Bersama</span>
-                        </a>
-                        <a href="app/index.php" class="btn btn-ghost">
-                            <span>Halaman Penuh Guestbook &nearr;</span>
-                        </a>
-                    </div>
-
-                    <div class="telemetry-strip" aria-label="Ringkasan Akademik dan Proyek">
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">IF-48-05</span>
-                            <span class="telemetry-lbl">KELAS AKTIF</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">03 KELAS</span>
-                            <span class="telemetry-lbl">ASISTEN DOSEN</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">03+ APPS</span>
-                            <span class="telemetry-lbl">PORTOFOLIO UTAMA</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">NODE m0</span>
-                            <span class="telemetry-lbl">STATUS SERVER</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kartu Identitas Teknis (Techwear ID Tag) -->
-                <aside class="hero-id-card tech-card" aria-label="Kartu Identitas Mahasiswa">
-                    <div class="card-top-bar">
-                        <span class="mono-label">ID_BADGE // TELKOM_UNIV</span>
-                        <span class="status-chip">VERIFIED</span>
-                    </div>
-
-                    <div class="id-avatar-box">
-                        <div class="avatar-monogram" aria-hidden="true">ZAB</div>
-                        <div class="avatar-meta">
-                            <span class="mono-small">CALLSIGN: BABAS</span>
-                            <span class="mono-small">SECTOR: BANDUNG, ID</span>
-                        </div>
-                    </div>
-
-                    <dl class="id-spec-list">
-                        <div class="spec-row">
-                            <dt>NAMA LENGKAP</dt>
-                            <dd><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>NIM</dt>
-                            <dd class="mono-val"><?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>PROGRAM STUDI</dt>
-                            <dd>S1 Informatika</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>INSTITUSI</dt>
-                            <dd>Telkom University</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>KELAS</dt>
-                            <dd class="mono-val">IF-48-05</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>NODE ROUTE</dt>
-                            <dd class="mono-val"><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?> (Ketua)</dd>
-                        </div>
-                    </dl>
-
-                    <div class="id-barcode" aria-hidden="true">
-                        <span>||| || |||| | ||| |||| || | |||| ||| || | ||||</span>
-                        <span class="mono-small">103012400134-IF4805-M0</span>
-                    </div>
-                </aside>
+    <!-- ABOUT + SKILLS ---------------------------------------------- -->
+    <section class="section" id="about" aria-labelledby="h-about">
+        <div class="wrap about">
+            <div class="about-main">
+                <h2 class="title title-line" id="h-about">About me</h2>
+                <?php foreach ($profil['tentang'] as $par): ?>
+                <p class="about-text"><?= tebal($par) ?></p>
+                <?php endforeach; ?>
             </div>
-        </section>
-
-        <!-- SECTION 2: PENGALAMAN & PENDIDIKAN -->
-        <section id="pendidikan" class="section-block section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">02 // EDUCATION &amp; ACADEMIC EXPERIENCE</span>
-                    <h2 class="section-title">Pendidikan &amp; Pengalaman Akademik</h2>
-                    <p class="section-subtitle">
-                        Rekam jejak akademik di Fakultas Informatika Telkom University serta kontribusi aktif dalam kegiatan pengajaran dan asistensi kelas.
-                    </p>
+            <div class="about-skills" id="skills">
+                <h3 class="sr-only">Skills</h3>
+                <?php foreach ($keahlian as $grup => $daftar): ?>
+                <div class="skill-group">
+                    <h4 class="skill-label"><?= e($grup) ?></h4>
+                    <ul class="skill-list">
+                        <?php foreach ($daftar as $k): ?><li><?= e($k) ?></li><?php endforeach; ?>
+                    </ul>
                 </div>
-
-                <div class="timeline-grid">
-                    <!-- Card Pendidikan -->
-                    <article class="tech-card timeline-card">
-                        <div class="card-top-bar">
-                            <span class="mono-label">EDU // UNDERGRADUATE</span>
-                            <span class="badge-route">2024 &mdash; SEKARANG</span>
-                        </div>
-                        <h3 class="card-heading">S1 Informatika &mdash; Telkom University</h3>
-                        <p class="card-sub">Kelas IF-48-05 &bull; Bandung, Jawa Barat</p>
-                        <p class="card-desc">
-                            Menempuh pendidikan sarjana pada Program Studi S1 Informatika dengan fokus pada algoritma, struktur data, rekayasa perangkat lunak berbasis objek, basis data relasional, serta pengembangan aplikasi web modern.
-                        </p>
-                        <ul class="spec-bullet-list">
-                            <li>Ketua Kelompok (Node <code>m0</code>) pada Proyek Aplikasi Bersama Pra-UTS.</li>
-                            <li>Aktif mengembangkan berbagai produk perangkat lunak mandiri (SuperKost, PoluSee, ChronosPlan).</li>
-                        </ul>
-                    </article>
-
-                    <!-- Card Pengalaman Asisten Dosen -->
-                    <article class="tech-card timeline-card highlight-border">
-                        <div class="card-top-bar">
-                            <span class="mono-label">EXP // TEACHING ASSISTANT</span>
-                            <span class="badge-route">ACTIVE ROLE</span>
-                        </div>
-                        <h3 class="card-heading">Asisten Dosen (3 Kelas Informatika)</h3>
-                        <p class="card-sub">Fakultas Informatika &bull; Telkom University</p>
-                        <p class="card-desc">
-                            Dipercaya sebagai Asisten Dosen yang mendampingi proses perkuliahan, sesi praktikum/responsi, evaluasi tugas pemrograman, serta pembimbingan teknis bagi mahasiswa di <strong>3 kelas Informatika</strong>.
-                        </p>
-                        <ul class="spec-bullet-list">
-                            <li>Memfasilitasi diskusi pemecahan masalah algoritma dan debugging kode secara terstruktur.</li>
-                            <li>Menyusun materi asistensi, melakukan code review tugas mahasiswa, dan menjaga standar kualitas akademik.</li>
-                            <li>Berkoordinasi langsung dengan dosen pengampu untuk pemantauan progres belajar di 3 kelas paralel.</li>
-                        </ul>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 3: KEAHLIAN (SKILLS) -->
-        <section id="keahlian" class="section-block">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">03 // TECHNICAL ARSENAL</span>
-                    <h2 class="section-title">Keahlian &amp; Teknologi</h2>
-                    <p class="section-subtitle">
-                        Tumpukan teknologi utama yang saya gunakan dalam merancang sistem backend, antarmuka frontend modern, serta manajemen basis data.
-                    </p>
-                </div>
-
-                <div class="skills-grid">
-                    <?php foreach ($skills as $skill): ?>
-                        <article class="tech-card skill-card">
-                            <div class="card-top-bar">
-                                <span class="mono-label"><?= htmlspecialchars($skill['code'], ENT_QUOTES, 'UTF-8') ?> // <?= htmlspecialchars($skill['category'], ENT_QUOTES, 'UTF-8') ?></span>
-                                <span class="skill-level"><?= htmlspecialchars($skill['level'], ENT_QUOTES, 'UTF-8') ?></span>
-                            </div>
-                            <h3 class="skill-title"><?= htmlspecialchars($skill['name'], ENT_QUOTES, 'UTF-8') ?></h3>
-                            <p class="skill-desc"><?= htmlspecialchars($skill['desc'], ENT_QUOTES, 'UTF-8') ?></p>
-                        </article>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 4: PORTOFOLIO -->
-        <section id="portofolio" class="section-block section-alt">
-            <div class="container">
-                <div class="section-header-flex">
-                    <div>
-                        <span class="section-tag">04 // SELECTED WORKS</span>
-                        <h2 class="section-title">Portofolio Proyek</h2>
-                        <p class="section-subtitle">
-                            Kumpulan proyek perangkat lunak yang dibangun menggunakan Java Spring Boot, Vue.js, Express, Next.js, dan Supabase.
-                        </p>
-                    </div>
-
-                    <!-- Filter Interaktif via assets/js/main.js -->
-                    <div class="portfolio-filters" role="group" aria-label="Filter kategori portofolio">
-                        <button type="button" class="filter-btn active" data-filter="all">Semua (3)</button>
-                        <button type="button" class="filter-btn" data-filter="backend">Spring Boot &amp; SQL</button>
-                        <button type="button" class="filter-btn" data-filter="ai-web">AI &amp; Vue/Express</button>
-                        <button type="button" class="filter-btn" data-filter="fullstack">Next.js &amp; Supabase</button>
-                    </div>
-                </div>
-
-                <div class="portfolio-grid" id="portfolioGrid">
-                    <?php foreach ($portfolios as $proj): ?>
-                        <article class="tech-card portfolio-card" data-category="<?= htmlspecialchars($proj['category'], ENT_QUOTES, 'UTF-8') ?>">
-                            <div class="card-top-bar">
-                                <span class="mono-label"><?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?> // <?= htmlspecialchars($proj['year'], ENT_QUOTES, 'UTF-8') ?></span>
-                                <span class="status-chip"><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?></span>
-                            </div>
-
-                            <h3 class="portfolio-title"><?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?></h3>
-                            <p class="portfolio-subtitle"><?= htmlspecialchars($proj['subtitle'], ENT_QUOTES, 'UTF-8') ?></p>
-                            <p class="portfolio-summary"><?= htmlspecialchars($proj['summary'], ENT_QUOTES, 'UTF-8') ?></p>
-
-                            <ul class="spec-bullet-list portfolio-highlights">
-                                <?php foreach ($proj['highlights'] as $hl): ?>
-                                    <li><?= htmlspecialchars($hl, ENT_QUOTES, 'UTF-8') ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-
-                            <div class="tag-row">
-                                <?php foreach ($proj['tags'] as $tag): ?>
-                                    <span class="tech-tag"><?= htmlspecialchars($tag, ENT_QUOTES, 'UTF-8') ?></span>
-                                <?php endforeach; ?>
-                            </div>
-                        </article>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 5: KONTAK (TANPA NOMOR TELEPON) -->
-        <section id="kontak" class="section-block section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">05 // COMMUNICATION CHANNELS</span>
-                    <h2 class="section-title">Kontak &amp; Jejaring Profesional</h2>
-                    <p class="section-subtitle">
-                        Terbuka untuk diskusi seputar kolaborasi proyek perangkat lunak, riset informatika, maupun kegiatan akademik. (Sesuai kebijakan privasi, nomor telepon tidak dicantumkan di laman publik).
-                    </p>
-                </div>
-
-                <div class="contact-grid">
-                    <a href="mailto:zulfa.almajid@student.telkomuniversity.ac.id" class="tech-card contact-card">
-                        <div class="card-top-bar">
-                            <span class="mono-label">CHANNEL // 01</span>
-                            <span class="contact-arrow">&nearr;</span>
-                        </div>
-                        <h3 class="contact-title">Email Akademik &amp; Pribadi</h3>
-                        <p class="contact-handle">zulfa.almajid@student.telkomuniversity.ac.id</p>
-                        <span class="contact-hint">Kirim pesan elektronik resmi</span>
-                    </a>
-
-                    <a href="https://github.com/zulfaalmajid" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
-                        <div class="card-top-bar">
-                            <span class="mono-label">CHANNEL // 02</span>
-                            <span class="contact-arrow">&nearr;</span>
-                        </div>
-                        <h3 class="contact-title">GitHub Repository</h3>
-                        <p class="contact-handle">github.com/zulfaalmajid</p>
-                        <span class="contact-hint">Lihat repositori kode &amp; proyek open-source</span>
-                    </a>
-
-                    <a href="https://www.linkedin.com/in/zulfa-almajid-basyaasyah" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
-                        <div class="card-top-bar">
-                            <span class="mono-label">CHANNEL // 03</span>
-                            <span class="contact-arrow">&nearr;</span>
-                        </div>
-                        <h3 class="contact-title">LinkedIn Profile</h3>
-                        <p class="contact-handle">linkedin.com/in/zulfa-almajid-basyaasyah</p>
-                        <span class="contact-hint">Jejaring profesional &amp; rekam jejak karier</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer Semantic HTML5 -->
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <div class="footer-brand">
-                <span class="mono-small"><strong><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></strong> (<?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>)</span>
-                <span class="mono-small">S1 Informatika Telkom University &bull; Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
-            </div>
-            <div class="footer-links">
-                <a href="#top" class="mono-small">BACK_TO_TOP &uarr;</a>
-                <a href="app/index.php" class="mono-small">GUESTBOOK_APP &nearr;</a>
+                <?php endforeach; ?>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <script src="assets/js/main.js"></script>
+    <!-- FEATURED PROJECTS ------------------------------------------- -->
+    <section class="section" id="projects" aria-labelledby="h-projects">
+        <div class="wrap">
+            <h2 class="title" id="h-projects">Featured projects</h2>
+            <ul class="rows projects">
+                <?php foreach ($proyek as $p): ?>
+                <li class="row">
+                    <div class="row-meta">
+                        <span class="row-title"><?= e($p['judul']) ?></span>
+                        <span class="row-sub"><?= e($p['kategori']) ?></span>
+                    </div>
+                    <div class="row-body">
+                        <p class="row-big"><?= e($p['desk']) ?></p>
+                        <ul class="tags tags-sm">
+                            <?php foreach ($p['tag'] as $t): ?><li><?= e($t) ?></li><?php endforeach; ?>
+                        </ul>
+                    </div>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </section>
+
+    <!-- GROUP APP --------------------------------------------------- -->
+    <section class="section" id="group-app" aria-labelledby="h-group-app">
+        <div class="wrap app">
+            <div>
+                <h2 class="title" id="h-group-app">Group app</h2>
+                <p class="lead">The shared app that also runs on the other four members' pages. Anything submitted here is tagged with route <strong><?= e($route) ?></strong>.</p>
+                <a class="btn" href="app/index.php"><span>Open full page</span><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M6 14 14 6M7 6h7v7"/></svg></span></a>
+            </div>
+            <div class="browser">
+                <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span><span class="browser-url">localhost/personal/app/</span></div>
+                <?php if ($appReady): ?>
+                    <iframe src="app/index.php" title="Shared group app" loading="lazy"></iframe>
+                <?php else: ?>
+                    <div class="browser-empty">
+                        <p><strong>The group app isn't installed yet.</strong></p>
+                        <p>Clone the group repository into the <code>app/</code> folder, then reload this page.</p>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT ----------------------------------------------------- -->
+    <section class="contact-wrap" id="contact" aria-labelledby="h-contact">
+        <div class="contact-card">
+            <div class="contact-text">
+                <p class="label">Contact</p>
+                <h2 class="contact-title" id="h-contact">Let's work together.</h2>
+                <p class="lead">Have a project, a collaboration, or just a question? Send me a message and I'll reply by email.</p>
+                <div class="mail-line">
+                    <p class="label">Or email me directly</p>
+                    <div class="mail-row">
+                        <a class="mail" href="mailto:<?= e($profil['email']) ?>"><?= e($profil['email']) ?></a>
+                        <button type="button" class="copy" id="copy-mail" data-copy="<?= e($profil['email']) ?>">Copy</button>
+                    </div>
+                </div>
+            </div>
+
+            <form class="form" id="contact-form" novalidate data-email="<?= e($profil['email']) ?>">
+                <div class="field">
+                    <label for="f-nama">Name</label>
+                    <input id="f-nama" name="nama" type="text" maxlength="100" autocomplete="name" required>
+                    <p class="error" id="e-nama" aria-live="polite"></p>
+                </div>
+                <div class="field">
+                    <label for="f-email">Email</label>
+                    <input id="f-email" name="email" type="email" maxlength="120" autocomplete="email" required>
+                    <p class="error" id="e-email" aria-live="polite"></p>
+                </div>
+                <div class="field field-full">
+                    <label for="f-pesan">Message</label>
+                    <textarea id="f-pesan" name="pesan" rows="6" maxlength="1000" required></textarea>
+                    <p class="hint"><span id="count">0</span>/1000</p>
+                    <p class="error" id="e-pesan" aria-live="polite"></p>
+                </div>
+                <button class="btn" type="submit"><span>Send message</span><span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M6 14 14 6M7 6h7v7"/></svg></span></button>
+                <p class="form-status" id="form-status" role="status"></p>
+            </form>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER: "Let's talk." with the card between the words ----------- -->
+<footer class="site-footer">
+    <div class="footer-talk">
+        <span>Let's</span>
+        <div class="mini-hang" aria-hidden="true">
+            <div class="mini-strap"></div>
+            <?= $clip ?>
+            <?= badge($profil, $nim, 'badge-mini') ?>
+        </div>
+        <span>talk.</span>
+    </div>
+    <div class="footer-grid">
+        <div>
+            <p class="label">Get in touch</p>
+            <a class="footer-mail" href="mailto:<?= e($profil['email']) ?>"><?= e($profil['email']) ?></a>
+        </div>
+        <ul class="socials">
+            <?php foreach ($sosial as $s): ?>
+            <li><a href="<?= e($s['url']) ?>" target="_blank" rel="noopener" aria-label="<?= e($s['label']) ?>">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><?= $s['ikon'] ?></svg></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <p class="copyright">© <?= date('Y') ?> <?= e($nama) ?> (<?= e($nim) ?>)</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>
