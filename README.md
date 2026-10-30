@@ -9,17 +9,18 @@ Dokumentasi resmi proyek perkuliahan **Personal Page dan Aplikasi Bersama (Pra-U
 - **Judul Proyek**: Personal Page dan Aplikasi Bersama (Pra-UTS)
 - **Nama Aplikasi Bersama**: Guestbook Kelompok Terdistribusi (`kelompok_db`)
 - **Program Studi / Kelas**: S1 Informatika Telkom University — **IF-48-05**
-- **Node Pemilik Laman Lokal**: `m0` — **Zulfa Almajid Basyaasyah (Babas)** (`103012400134`)
+- **Node Pemilik Laman Lokal**: `m5` — **Ravananda Nadhzief Atthalah** (`103012400117`)
 
-### Daftar Anggota Kelompok (`m0` – `m4`)
+### Daftar Anggota Kelompok (`m0` – `m5`)
 
 | Route ID | NIM | Nama Anggota | Peran |
 | :--- | :--- | :--- | :--- |
-| **`m0`** | `103012400134` | **Zulfa Almajid Basyaasyah** | **Ketua Kelompok (Pemilik Personal Page ini)** |
+| **`m0`** | `103012400134` | **Zulfa Almajid Basyaasyah** | **Ketua Kelompok** |
 | **`m1`** | `103012400` | **a** | Anggota |
 | **`m2`** | `103012400` | **a** | Anggota |
 | **`m3`** | `103012400` | **a** | Anggota |
 | **`m4`** | `103012400045` | **Yuriko Astiani** | Anggota |
+| **`m5`** | `103012400117` | **Ravananda Nadhzief Atthalah** | **Anggota (Pemilik Personal Page ini)** |
 
 ---
 
@@ -31,7 +32,7 @@ personal/
 ├── assets/                    (Folder statis individu)
 │   ├── css/style.css          (Stylesheet Dark Techwear & Harbor Grey)
 │   └── js/main.js             (Interaksi Vanilla JS: Filter, Smooth Scroll, Theme, Validasi)
-├── identity.php               (Konfigurasi identitas mahasiswa lokal: m0 - Zulfa)
+├── identity.php               (Konfigurasi identitas mahasiswa lokal: m5 - Ravananda)
 ├── config/                    (Folder konfigurasi lokal)
 │   ├── .htaccess              (Proteksi akses langsung: Require all denied)
 │   └── db.php                 (Kredensial database: host, name, user, pass)
@@ -119,9 +120,9 @@ mysql -u root -p < C:/xampp/htdocs/personal/app/sql/schema.sql
    ```
    *(Apabila port MySQL XAMPP Anda diubah, sesuaikan nilai `'port'` pada file tersebut).*
 2. Periksa file `personal/identity.php` yang menyimpan konstanta identitas lokal:
-   - `MEMBER_ROUTE`: `'m0'`
-   - `MEMBER_NAMA`: `'Zulfa Almajid Basyaasyah'`
-   - `MEMBER_NIM`: `'103012400134'`
+   - `MEMBER_ROUTE`: `'m5'`
+   - `MEMBER_NAMA`: `'Ravananda Nadhzief Atthalah'`
+   - `MEMBER_NIM`: `'103012400117'`
 
 ---
 

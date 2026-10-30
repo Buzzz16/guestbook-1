@@ -78,7 +78,7 @@ try {
 
     // Filter opsional berdasarkan route_id
     $filterRoute = isset($_GET['route']) ? trim((string) $_GET['route']) : '';
-    $validRoutes = ['m0', 'm1', 'm2', 'm3', 'm4'];
+    $validRoutes = ['m0', 'm1', 'm2', 'm3', 'm4', 'm5'];
     if (!in_array($filterRoute, $validRoutes, true)) {
         $filterRoute = '';
     }
@@ -164,7 +164,7 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="<?= $isEmbed ? 'embed-body' : 'standalone-guestbook-body' ?>">
 
@@ -310,7 +310,7 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
                     <div class="route-filter-pills" role="group" aria-label="Filter berdasarkan route anggota">
                         <a href="<?= htmlspecialchars(build_page_url(1, $isEmbed, ''), ENT_QUOTES, 'UTF-8') ?>"
                            class="filter-pill <?= $filterRoute === '' ? 'active' : '' ?>">Semua</a>
-                        <?php foreach (['m0', 'm1', 'm2', 'm3', 'm4'] as $rCode): ?>
+                        <?php foreach (['m0', 'm1', 'm2', 'm3', 'm4', 'm5'] as $rCode): ?>
                             <a href="<?= htmlspecialchars(build_page_url(1, $isEmbed, $rCode), ENT_QUOTES, 'UTF-8') ?>"
                                class="filter-pill <?= $filterRoute === $rCode ? 'active' : '' ?>"><?= $rCode ?></a>
                         <?php endforeach; ?>
@@ -396,6 +396,6 @@ function build_page_url(int $targetPage, bool $isEmbed, string $filterRoute): st
         </footer>
     <?php endif; ?>
 
-    <script src="../assets/js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
