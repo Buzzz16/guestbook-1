@@ -177,8 +177,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (modalProjectTitle) modalProjectTitle.textContent = title;
             if (modalProjectRole) modalProjectRole.textContent = role;
             if (modalProjectImg) {
-                modalProjectImg.src = img;
-                modalProjectImg.alt = `Preview ${title}`;
+                try {
+                    const imageUrl = new URL(img, window.location.href);
+                    if (['http:', 'https:'].includes(imageUrl.protocol) && imageUrl.origin === window.location.origin) {
+                        modalProjectImg.src = imageUrl.href;
+                        modalProjectImg.alt = `Preview ${title}`;
+                    } else {
+                        modalProjectImg.removeAttribute('src');
+                        modalProjectImg.alt = '';
+                    }
+                } catch {
+                    modalProjectImg.removeAttribute('src');
+                    modalProjectImg.alt = '';
+                }
             }
 
             if (modalProjectStack) {
@@ -349,4 +360,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
