@@ -16,11 +16,11 @@ Dokumentasi resmi proyek perkuliahan **Personal Page dan Aplikasi Bersama (Pra-U
 | Route ID | NIM | Nama Anggota | Peran |
 | :--- | :--- | :--- | :--- |
 | **`m0`** | `103012400134` | **Zulfa Almajid Basyaasyah** | **Ketua Kelompok (Pemilik Personal Page ini)** |
-| **`m1`** | `103012400` | **a** | Anggota |
-| **`m2`** | `103012400` | **a** | Anggota |
-| **`m3`** | `103012400` | **a** | Anggota |
+| **`m1`** | `103012400106` | **Glen David Hadiono** | Anggota |
+| **`m2`** | `103012400299` | **Meyneza Ari Dwi Astuti** | Anggota |
+| **`m3`** | `104012430028` | **Dini Nadia Mawaddah** | Anggota |
 | **`m4`** | `103012400045` | **Yuriko Astiani** | Anggota |
-
+| **`m5`** | `103012400117` | **Ravananda Nadzief** | Anggota |
 ---
 
 ## 2. Struktur Direktori (`htdocs/personal/`)
