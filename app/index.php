@@ -410,7 +410,7 @@ function highlight_match(string $text, string $query): string
                     <div class="route-filter-pills" role="group" aria-label="Filter berdasarkan route anggota">
                         <a href="<?= htmlspecialchars(build_page_url(1, $isEmbed, '', $searchQuery, $sortBy, $sortDir), ENT_QUOTES, 'UTF-8') ?>"
                            class="filter-pill <?= $filterRoute === '' ? 'active' : '' ?>">Semua</a>
-                        <?php foreach (['m0', 'm1', 'm2', 'm3', 'm4'] as $rCode): ?>
+                        <?php foreach (['m0', 'm1', 'm2', 'm3', 'm4', 'm5'] as $rCode): ?>
                             <a href="<?= htmlspecialchars(build_page_url(1, $isEmbed, $rCode, $searchQuery, $sortBy, $sortDir), ENT_QUOTES, 'UTF-8') ?>"
                                class="filter-pill <?= $filterRoute === $rCode ? 'active' : '' ?>"><?= $rCode ?></a>
                         <?php endforeach; ?>
