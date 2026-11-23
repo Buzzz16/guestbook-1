@@ -3,24 +3,79 @@ declare(strict_types=1);
 
 /**
  * Halaman Utama Personal Page (Root `index.php`)
- * Mahasiswa : Yuriko Astiani (Yury) - 103012400045 - Node m4
- * Tema      : Gojo Satoru Edition (Dashboard Top + Architectural Editorial Grid Bottom)
+ * Mahasiswa : Dini Nadia Mawaddah - 103012430028
+ * Tema      : Super Mario Bros Retro-Modern (Custom Arcade World Layout)
  */
 
 require_once __DIR__ . '/identity.php';
 
+$skills = [
+    [
+        'name' => 'PHP & MySQL',
+        'category' => 'Backend & Database',
+        'level' => 'POWER-UP ★★★',
+        'desc' => 'Backend web terstruktur, integrasi PDO anti-SQL Injection, dan perancangan skema relasional.',
+        'code' => 'PH-01',
+        'icon' => '🍄',
+        'meter' => '100%',
+    ],
+    [
+        'name' => 'Java OOP',
+        'category' => 'Object-Oriented Architecture',
+        'level' => 'POWER-UP ★★★',
+        'desc' => 'Pemrograman berorientasi objek (Inheritance, Polymorphism, Encapsulation), MVC, dan struktur data.',
+        'code' => 'JV-02',
+        'icon' => '☕',
+        'meter' => '95%',
+    ],
+    [
+        'name' => 'HTML5 & CSS3',
+        'category' => 'Responsive UI Design',
+        'level' => 'POWER-UP ★★★',
+        'desc' => 'Desain semantik modern, sistem Flexbox & Grid, responsif laptop & ponsel, serta tema dinamis.',
+        'code' => 'FE-03',
+        'icon' => '🎨',
+        'meter' => '95%',
+    ],
+    [
+        'name' => 'UI/UX & Figma',
+        'category' => 'Interface & Prototyping',
+        'level' => 'POWER-UP ★★★',
+        'desc' => 'Desain antarmuka berpusat pada pengguna, wireframing, perancangan prototipe interaktif di Figma, dan user flow.',
+        'code' => 'UX-06',
+        'icon' => '🎯',
+        'meter' => '95%',
+    ],
+    [
+        'name' => 'Vanilla JavaScript',
+        'category' => 'Interactive Scripting',
+        'level' => 'POWER-UP ★★☆',
+        'desc' => 'Manipulasi DOM dinamis, modal dialog interaktif, filter portofolio, dan validasi form.',
+        'code' => 'JS-04',
+        'icon' => '⭐',
+        'meter' => '85%',
+    ],
+    [
+        'name' => 'Git & GitHub',
+        'category' => 'Version Control',
+        'level' => 'POWER-UP ★★☆',
+        'desc' => 'Kolaborasi source code, workflow branching terstruktur, commit konsisten, dan sinkronisasi tim.',
+        'code' => 'GT-05',
+        'icon' => '🌿',
+        'meter' => '88%',
+    ],
+];
+
 $portfolios = [
     [
-        'id' => '01',
-        'title' => 'SUPERKOST',
+        'id' => 'WORLD 1-1',
+        'icon' => '🏠',
+        'title' => 'SuperKost',
         'subtitle' => 'Platform Manajemen & Digitalisasi Hunian Indekos',
         'category' => 'web-app',
-        'tags' => ['PHP / JAVA', 'MYSQL DB', 'WEB APP'],
+        'tags' => ['PHP / Java', 'MySQL DB', 'Kost Management'],
         'year' => '2025',
-        'status' => 'Featured',
-        'preview_headline' => "Elevating Kost\nManagement",
-        'preview_kicker' => 'HUNIAN DIGITAL // 2025',
-        'preview_img' => 'assets/img/gojo-art-1.png',
+        'status' => 'CLEARED 🏆',
         'summary' => 'Aplikasi pengelolaan kamar kos dan hunian terpadu untuk monitoring ketersediaan unit, pencatatan sewa penghuni, tagihan berkala, dan rekap keuangan pemilik kos.',
         'highlights' => [
             'Manajemen ketersediaan unit kamar dan data penghuni real-time',
@@ -29,16 +84,14 @@ $portfolios = [
         ],
     ],
     [
-        'id' => '02',
-        'title' => 'REDESAIN IGRACIAS',
+        'id' => 'WORLD 1-2',
+        'icon' => '🎓',
+        'title' => 'Redesain iGracias',
         'subtitle' => 'UI/UX Redesign Portal Akademik Terintegrasi',
         'category' => 'ui-ux',
-        'tags' => ['UI/UX', 'FIGMA', 'WEB DESIGN'],
+        'tags' => ['UI/UX Design', 'Figma', 'Responsive Web'],
         'year' => '2025',
-        'status' => 'Featured',
-        'preview_headline' => "Modern Academic\nPortal Living",
-        'preview_kicker' => 'TELKOM UNIVERSITY // UI/UX',
-        'preview_img' => 'assets/img/gojo-banner.png',
+        'status' => 'FEATURED ⭐️',
         'summary' => 'Pembaruan antarmuka portal akademik iGracias Telkom University yang lebih bersih, modern, dan intuitif untuk kemudahan registrasi mata kuliah (KRS), cek jadwal kuliah, dan pantau nilai.',
         'highlights' => [
             'Antarmuka modern yang segar, minim distraksi, dan mudah dipahami',
@@ -47,16 +100,14 @@ $portfolios = [
         ],
     ],
     [
-        'id' => '03',
-        'title' => 'FINSMART',
+        'id' => 'WORLD 1-3',
+        'icon' => '💰',
+        'title' => 'FinSmart',
         'subtitle' => 'Aplikasi Pelacak & Pengatur Keuangan Mandiri',
         'category' => 'fintech',
-        'tags' => ['FINTECH', 'JAVASCRIPT', 'DATA CHARTS'],
+        'tags' => ['Finance Tracker', 'JavaScript', 'Data Charts'],
         'year' => '2025',
-        'status' => 'Verified',
-        'preview_headline' => "Focus\nTrack\nElevate",
-        'preview_kicker' => 'SMART FINANCE // 2025',
-        'preview_img' => 'assets/img/gojo-art-2.png',
+        'status' => 'CLEARED 🏆',
         'summary' => 'Platform pengatur keuangan cerdas untuk mencatat arus kas harian (pemasukan & pengeluaran), menetapkan alokasi anggaran belanja, dan menyajikan ringkasan visual.',
         'highlights' => [
             'Pencatatan transaksi harian cepat dengan kategorisasi pengeluaran',
@@ -65,16 +116,14 @@ $portfolios = [
         ],
     ],
     [
-        'id' => '04',
-        'title' => 'POLUSEE',
+        'id' => 'WORLD 1-4',
+        'icon' => '🌿',
+        'title' => 'PoluSee',
         'subtitle' => 'Platform Web Pemantau & Cek Kualitas Udara',
         'category' => 'env-web',
-        'tags' => ['AIR QUALITY', 'WEB APP', 'MONITORING'],
+        'tags' => ['Air Quality', 'Web App', 'Data Monitoring'],
         'year' => '2025',
-        'status' => 'Verified',
-        'preview_headline' => "Clean Air\nReal-Time\nVision",
-        'preview_kicker' => 'ENVIRONMENT // AQI MONITOR',
-        'preview_img' => 'assets/img/gojo-aura.png',
+        'status' => 'CLEARED 🏆',
         'summary' => 'Aplikasi web interaktif untuk memantau dan mengecek indeks kualitas udara (AQI) secara real-time, memberikan informasi tingkat polusi, serta rekomendasi kesehatan lingkungan.',
         'highlights' => [
             'Pengecekan indeks kualitas udara (AQI) dan status polusi secara akurat',
@@ -83,561 +132,552 @@ $portfolios = [
         ],
     ],
 ];
-
-$tools = [
-    ['abbr' => 'Ph', 'name' => 'PHP & MYSQL', 'desc' => 'Backend & Relasional PDO'],
-    ['abbr' => 'Jv', 'name' => 'JAVA OOP', 'desc' => 'Object-Oriented Architecture'],
-    ['abbr' => 'Fg', 'name' => 'FIGMA', 'desc' => 'UI/UX & Interactive Prototype'],
-    ['abbr' => 'Hc', 'name' => 'HTML5 & CSS3', 'desc' => 'Responsive Editorial Layout'],
-    ['abbr' => 'Js', 'name' => 'JAVASCRIPT', 'desc' => 'DOM & Client Validation'],
-    ['abbr' => 'Gt', 'name' => 'GIT & GITHUB', 'desc' => 'Version Control & Team Sync'],
-    ['abbr' => 'Pr', 'name' => 'PUBLIC RELATION', 'desc' => 'Communication & Engagement'],
-    ['abbr' => 'Vs', 'name' => 'VS CODE', 'desc' => 'Development Environment'],
-];
 ?>
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="id" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Personal Page <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars(MEMBER_NICKNAME, ENT_QUOTES, 'UTF-8') ?>) - Mahasiswa S1 Informatika Telkom University (<?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?>).">
-    <title><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> // Gojo Satoru Edition // Personal Page</title>
+        content="Personal Page <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> - Mahasiswa S1 Informatika Telkom University (<?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?>).">
+    <title><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> // Mario World // Personal Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cabinet+Grotesk:wght@700;800;900&family=Space+Grotesk:wght@600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css?v=59">
+    <link rel="stylesheet" href="assets/css/style.css?v=25">
 </head>
 
 <body>
 
-    <!-- Watermark Background Gojo Satoru Halus -->
-    <div class="bg-watermark-layer" aria-hidden="true"></div>
+    <!-- Dekorasi Langit & Elemen Mario Bros Melayang -->
+    <div class="mario-sky-decor" aria-hidden="true">
+        <span class="sky-cloud cloud-1">☁️</span>
+        <span class="sky-cloud cloud-2">☁️</span>
+        <span class="sky-cloud cloud-3">☁️</span>
+        <span class="sky-star star-1">⭐</span>
+        <span class="sky-star star-2">🪙</span>
+        <span class="sky-star star-3">🍄</span>
+        <span class="sky-star star-4">⭐</span>
+    </div>
 
-    <!-- Banner Identitas Node (`app/partials/served_by.php`) -->
-    <?php require_once __DIR__ . '/app/partials/served_by.php'; ?>
+    <!-- Animasi Samping Kiri & Kanan (Panjat Tanaman Vine, Pipa Samping, Platform & Flagpole) -->
+    <div class="mario-side-rails" aria-hidden="true">
+        <!-- SISI KIRI: Tanaman Vine & Pemanjat + Pipa Samping + Lift Blok -->
+        <div class="side-rail side-rail-left">
+            <div class="vine-stalk"></div>
 
-    <!-- =====================================================================
-         TOP NAVIGATION BAR
-         ===================================================================== -->
-    <header class="site-header" id="top">
-        <div class="container header-inner">
-            <!-- Kiri: Identitas Singkat Mahasiswa (Non-Redundan dengan Menu & Guestbook) -->
-            <div class="header-left-icons">
-                <a href="#top" class="sq-icon-btn sq-dark"
-                    title="Identitas Mahasiswa: <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>"
-                    aria-label="Identitas Mahasiswa">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                </a>
-                <span class="sq-icon-btn sq-accent"
-                    title="Node Aktif: <?= strtoupper(htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8')) ?> (<?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?>)"
-                    style="font-family: var(--font-display); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.04em; cursor: default;">
-                    <?= strtoupper(htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8')) ?>
-                </span>
-                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-expanded="false" aria-controls="primaryNav"
-                    aria-label="Buka menu navigasi">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
+            <!-- Karakter Pixel Mario Memanjat Vine Naik-Turun -->
+            <div class="vine-climber climber-1" id="leftVineClimber">
+                <div class="pixel-mario-badge">
+                    <span class="climber-hat">🧢</span>
+                    <span class="climber-body">🍄</span>
+                </div>
+                <span class="climber-label">1-UP</span>
             </div>
 
-            <!-- Tengah: Menu Navigasi Ringkas (4 Bagian Utama) -->
-            <nav class="site-nav" id="primaryNav" aria-label="Navigasi Utama">
+            <!-- Koopa / Jamur Kedua yang Ikut Memanjat -->
+            <div class="vine-climber climber-2">
+                <span class="climber-sprite">🐢</span>
+            </div>
+
+            <!-- Pipa Hijau Menempel di Dinding Kiri + Tanaman Piranha Keluar-Masuk -->
+            <div class="side-wall-pipe pipe-left-wall">
+                <div class="wall-pipe-body"></div>
+                <div class="wall-pipe-lip"></div>
+                <span class="piranha-peek">🌺</span>
+            </div>
+
+            <!-- Platform Lift Naik-Turun di Samping Kiri -->
+            <div class="side-elevator-platform">
+                <div class="platform-bricks">
+                    <span>🧱</span><span>?</span><span>🧱</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SISI KANAN: Tiang Bendera / Tangga Koin, Awan Lakitu & Pemanjat -->
+        <div class="side-rail side-rail-right">
+            <div class="flagpole-rod">
+                <span class="flagpole-top-orb">🟡</span>
+                <span class="flagpole-pennant">🚩</span>
+            </div>
+
+            <!-- Karakter Memanjat Tiang di Sisi Kanan -->
+            <div class="pole-climber" id="rightPoleClimber">
+                <span class="climber-star-badge">⭐</span>
+                <span class="climber-label">SUPER</span>
+            </div>
+
+            <!-- Awan Lakitu Melayang Naik-Turun di Samping Kanan -->
+            <div class="side-lakitu-cloud">
+                <span class="lakitu-rider">🐢</span>
+                <span class="lakitu-cloud-base">☁️</span>
+                <span class="lakitu-drop-coin">🪙</span>
+            </div>
+
+            <!-- Pipa Hijau di Dinding Kanan + Bola Api Melompat -->
+            <div class="side-wall-pipe pipe-right-wall">
+                <span class="fireball-pop">🔥</span>
+                <div class="wall-pipe-lip"></div>
+                <div class="wall-pipe-body"></div>
+            </div>
+
+            <!-- Deretan Blok Melayang Vertikal di Sisi Kanan -->
+            <div class="side-floating-qblocks">
+                <span class="m-block m-qblock">?</span>
+                <span class="side-coin-bounce">🪙</span>
+                <span class="m-block m-brick">🧱</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mario HUD Banner (`app/partials/served_by.php`) -->
+    <?php require_once __DIR__ . '/app/partials/served_by.php'; ?>
+
+    <!-- Header & Navigasi Kapsul Tengah -->
+    <header class="site-header" id="top">
+        <div class="container header-inner">
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-expanded="false" aria-controls="primaryNav"
+                aria-label="Buka menu navigasi">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="site-nav nav-pill-dock" id="primaryNav" aria-label="Navigasi Level">
                 <ul class="nav-list">
-                    <li><a href="#profil" class="nav-link active">Home</a></li>
-                    <li><a href="#portofolio" class="nav-link">Projects</a></li>
-                    <li><a href="#pendidikan" class="nav-link">Journey &amp; Tools</a></li>
-                    <li><a href="#kontak" class="nav-link">Contact</a></li>
+                    <li><a href="#profil" class="nav-link active">Profil</a></li>
+                    <li><a href="#portofolio" class="nav-link">Portofolio</a></li>
+                    <li><a href="#pendidikan" class="nav-link">Pengalaman</a></li>
+                    <li><a href="#keahlian" class="nav-link">Keahlian</a></li>
+                    <li><a href="#kontak" class="nav-link">Kontak</a></li>
                 </ul>
             </nav>
 
-            <!-- Kanan: Tombol Outlined & Filled -->
             <div class="header-actions">
-                <button type="button" id="themeToggleBtn" class="pill-btn pill-outline" aria-label="Ubah tema tampilan"
-                    title="Ganti Mode Terang / Gelap">
-                    <span id="themeLabel">Night Mode</span>
+                <button type="button" id="themeToggleBtn" class="btn btn-icon"
+                    aria-label="Ubah tema Overworld / Underground" title="Toggle Mario World Theme">
+                    <span class="theme-indicator-dot"></span>
+                    <span class="mono-small" id="themeLabel"
+                        style="font-family: var(--font-pixel); font-size: 0.65rem;">UNDERGROUND</span>
                 </button>
-                <a href="app/index.php" class="pill-btn pill-filled">
-                    Guestbook
-                </a>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- =================================================================
-             BAGIAN ATAS: DASHBOARD GOJO SATORU
-             ================================================================= -->
-        <section id="profil" class="dashboard-showcase-section">
-            <div class="container">
+        <!-- SECTION 1: PROFIL (CHARACTER SPOTLIGHT DI KIRI, BENTO DIALOG DI KANAN) -->
+        <section id="profil" class="hero-section section-block">
+            <div class="container hero-showcase-layout">
+                <!-- Kolom Kiri: Panggung Foto Karakter Utama -->
+                <aside class="hero-id-card character-spotlight-card tech-card" aria-label="Player Character Spotlight">
+                    <div class="spotlight-floating-badges">
+                        <span class="mono-label">★ PLAYER 1</span>
+                        <span class="status-chip">LVL 99</span>
+                    </div>
 
-                <!-- 1. HERO BANNER LEBAR DENGAN KARAKTER GOJO KELUAR FRAME DI KANAN -->
-                <div class="gojo-hero-banner">
-                    <div class="gojo-banner-bg">
-                        <div class="banner-soft-arc" aria-hidden="true"></div>
-                        <div class="banner-sparkles" aria-hidden="true">
-                            <span class="sp-dot d1"></span>
-                            <span class="sp-dot d2"></span>
-                            <span class="sp-dot d3"></span>
-                            <span class="sp-dot d4"></span>
-                            <span class="sp-dot d5"></span>
-                            <span class="sp-dot d6"></span>
-                            <span class="sp-dot d7"></span>
-                            <span class="sp-dot d8"></span>
-                            <span class="sp-dot d9"></span>
-                            <span class="sp-dot d10"></span>
-                            <span class="sp-dot d11"></span>
-                            <span class="sp-dot d12"></span>
+                    <div class="spotlight-avatar-frame">
+                        <img src="assets/img/avatar.png?v=2" alt="Foto Profil Dini Nadia Mawaddah"
+                            class="spotlight-avatar-img" width="195" height="195"
+                            onerror="this.style.display='none'; document.getElementById('avatarFallback').style.display='flex';">
+                        <div class="avatar-monogram" id="avatarFallback" style="display: none;" aria-hidden="true">DNM
                         </div>
+                        <span class="spotlight-hp-pill">❤️❤️❤️❤️❤️</span>
+                    </div>
 
-                        <div class="gojo-banner-content">
-                            <div class="gojo-emblem-logo">
-                                <span class="emblem-jp">五条悟</span>
-                                <span class="emblem-sub">NODE //
-                                    <?= strtoupper(htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8')) ?></span>
-                            </div>
+                    <p class="spotlight-role">S1 Informatika &bull; Telkom University</p>
 
-                            <h1 class="gojo-banner-title" id="bannerSlideTitle">
-                                <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>
-                            </h1>
+                    <div class="spotlight-chips">
+                        <span class="spotlight-chip">NIM <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></span>
+                    </div>
 
-                            <p class="gojo-banner-desc" id="bannerSlideDesc">
-                                Halo, panggil aku
-                                <strong><?= htmlspecialchars(MEMBER_NICKNAME, ENT_QUOTES, 'UTF-8') ?></strong>!
-                                Mahasiswa S1 Informatika Telkom University
-                                (<?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull; NIM
-                                <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>) yang aktif di bidang teknologi
-                                web, UI/UX, serta kolaborasi komunikasi &amp; komunitas.
-                            </p>
+                    <div class="id-barcode" aria-hidden="true">
+                        <span>🍄 ⭐️ 🪙 1-UP 🍄</span>
+                    </div>
+                </aside>
 
-                            <div class="gojo-banner-dots" role="tablist" aria-label="Slide Banner">
-                                <button type="button" class="banner-dot active" data-slide="0"
-                                    aria-label="Slide Profil"></button>
-                                <button type="button" class="banner-dot" data-slide="1"
-                                    aria-label="Slide Gojo Satoru"></button>
-                            </div>
+                <!-- Kolom Kanan: Judul, Kotak Dialog Mario & Tombol Aksi -->
+                <div class="hero-content hero-bento-right">
+                    <div class="spec-pill-row">
+                        <div class="mario-interactive-blocks" aria-hidden="true" title="Hit the Question Block!">
+                            <span class="m-block m-brick">🧱</span>
+                            <span class="m-block m-qblock">?</span>
+                            <span class="m-block m-brick">🧱</span>
+                            <span class="m-block m-qblock">?</span>
+                            <span class="m-coin-pop">🪙</span>
+                            <span class="m-shroom-pop">🍄</span>
                         </div>
                     </div>
 
-                    <div class="gojo-banner-char-wrap">
-                        <span class="floating-heart heart-lg" aria-hidden="true">💜</span>
-                        <span class="floating-heart heart-sm" aria-hidden="true">✦</span>
-                        <img src="assets/img/foto_yury.jpeg"
-                            alt="Foto Yuriko Astiani"
-                            class="gojo-banner-char-img"
-                            draggable="false">
-                    </div>
-                </div>
+                    <h1 class="hero-title">
+                        <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>
+                    </h1>
 
-                <!-- 2. GRID 3 KOLOM DI BAWAH BANNER -->
-                <div class="gojo-dashboard-grid">
-
-                    <!-- KOLOM 1: Recent Search (Filter Langsung Selected Projects) -->
-                    <div class="dash-col dash-col-search">
-                        <div class="dash-heading-row">
-                            <h2 class="dash-col-heading">Recent Search</h2>
-                            <span class="search-sync-chip" id="activeSearchChip">All (04)</span>
-                        </div>
-
-                        <div class="recent-search-stack" role="tablist" aria-label="Filter dan Pratinjau Proyek">
-                            <button type="button" class="search-pill-item tone-1" data-search-filter="web-app"
-                                data-label="SuperKost">
-                                <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
-                                    stroke="currentColor" stroke-width="2.4">
-                                    <circle cx="11" cy="11" r="7"></circle>
-                                    <line x1="20" y1="20" x2="16.2" y2="16.2"></line>
-                                </svg>
-                                <span class="pill-text">SuperKost Web App</span>
-                                <span class="pill-tag">01</span>
-                            </button>
-
-                            <button type="button" class="search-pill-item tone-2" data-search-filter="ui-ux"
-                                data-label="iGracias UI/UX">
-                                <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
-                                    stroke="currentColor" stroke-width="2.4">
-                                    <circle cx="11" cy="11" r="7"></circle>
-                                    <line x1="20" y1="20" x2="16.2" y2="16.2"></line>
-                                </svg>
-                                <span class="pill-text">Redesain iGracias UI/UX</span>
-                                <span class="pill-tag">02</span>
-                            </button>
-
-                            <button type="button" class="search-pill-item tone-3" data-search-filter="fintech"
-                                data-label="FinSmart">
-                                <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
-                                    stroke="currentColor" stroke-width="2.4">
-                                    <circle cx="11" cy="11" r="7"></circle>
-                                    <line x1="20" y1="20" x2="16.2" y2="16.2"></line>
-                                </svg>
-                                <span class="pill-text">FinSmart Finance 2025</span>
-                                <span class="pill-tag">03</span>
-                            </button>
-
-                            <button type="button" class="search-pill-item tone-4" data-search-filter="env-web"
-                                data-label="PoluSee">
-                                <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
-                                    stroke="currentColor" stroke-width="2.4">
-                                    <circle cx="11" cy="11" r="7"></circle>
-                                    <line x1="20" y1="20" x2="16.2" y2="16.2"></line>
-                                </svg>
-                                <span class="pill-text">PoluSee Air Quality</span>
-                                <span class="pill-tag">04</span>
-                            </button>
-
-                            <button type="button" class="search-pill-item tone-5 is-active" data-search-filter="all"
-                                data-label="All (04)">
-                                <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
-                                    stroke="currentColor" stroke-width="2.4">
-                                    <circle cx="11" cy="11" r="7"></circle>
-                                    <line x1="20" y1="20" x2="16.2" y2="16.2"></line>
-                                </svg>
-                                <span class="pill-text"><?= htmlspecialchars(MEMBER_NICKNAME, ENT_QUOTES, 'UTF-8') ?> //
-                                    Semua Proyek</span>
-                                <span class="pill-tag">ALL</span>
-                            </button>
-                        </div>
+                    <div class="mario-dialog-box">
+                        <p class="hero-lead">
+                            Mahasiswa Informatika yang punya prinsip disiplin, perfeksionis, dan zero tolerance buat hal
+                            yang buang-buang waktu. Suka mengeksplorasi sistem, teknologi, dan ide-ide baru dengan
+                            pendekatan yang santai tapi fokus. <em>Let’s build cool things and enjoy the ride!</em>
+                        </p>
                     </div>
 
-                    <!-- KOLOM 2: 2 Kartu Sticker Persegi -->
-                    <div class="dash-col dash-col-stickers">
-                        <div class="sticker-card-box">
-                            <button type="button" class="sticker-close-badge badge-tone-1"
-                                aria-label="Animasi karakter 1" title="Klik untuk interaksi">&times;</button>
-                            <img src="assets/img/gojo-sticker-1.png?v=58" alt="Gojo Satoru Avatar 1"
-                                class="sticker-square-img">
-                        </div>
-
-                        <div class="sticker-card-box">
-                            <button type="button" class="sticker-close-badge badge-tone-2"
-                                aria-label="Animasi karakter 2" title="Klik untuk interaksi">&times;</button>
-                            <img src="assets/img/gojo-sticker-2.png?v=58" alt="Gojo Satoru Avatar 2"
-                                class="sticker-square-img">
-                        </div>
-                    </div>
-
-                    <!-- KOLOM 4: 3 Kartu Ringkasan Cepat (Navigasi Sekali Klik ke Masing-Masing Section) -->
-                    <div class="dash-col dash-col-features">
-                        <a href="#portofolio" class="feature-horiz-card">
-                            <div class="feature-icon-wrap">
-                                <span class="big-number-01">04</span>
-                            </div>
-                            <div class="feature-text-wrap">
-                                <h3 class="feature-card-title">Selected Works</h3>
-                                <p class="feature-card-desc">
-                                    4 Proyek utama: SuperKost, Redesain iGracias, FinSmart, &amp; PoluSee.
-                                </p>
-                            </div>
+                    <div class="hero-cta-group">
+                        <a href="#portofolio" class="btn btn-primary">
+                            <span>▶ Jelajahi Proyek</span>
                         </a>
-
-                        <a href="#pendidikan" class="feature-horiz-card">
-                            <div class="feature-icon-wrap">
-                                <div class="circle-emblem-icon">
-                                    <span>♾️</span>
-                                </div>
-                            </div>
-                            <div class="feature-text-wrap">
-                                <h3 class="feature-card-title">Journey &amp; PR</h3>
-                                <p class="feature-card-desc">
-                                    S1 Informatika (<?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?>),
-                                    INTELECTA &amp; PR Hello World 2025.
-                                </p>
-                            </div>
-                        </a>
-
-                        <a href="#kontak" class="feature-horiz-card">
-                            <div class="feature-icon-wrap">
-                                <div class="spark-emblem-icon">
-                                    <span>✦</span>
-                                </div>
-                            </div>
-                            <div class="feature-text-wrap">
-                                <h3 class="feature-card-title">Connect //
-                                    <?= strtoupper(htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8')) ?></h3>
-                                <p class="feature-card-desc">
-                                    Terbuka untuk kolaborasi proyek web, UI/UX, &amp; kegiatan komunitas.
-                                </p>
-                            </div>
+                        <a href="app/index.php" class="btn btn-primary">
+                            <span>Buka Guestbook &nearr;</span>
                         </a>
                     </div>
 
+                    <!-- Baris Lencana Statistik Horizontal -->
+                    <div class="arcade-stat-pills" aria-label="Ringkasan Player">
+                        <div class="telemetry-item stat-pill-box">
+                            <span class="stat-pill-icon">🎮</span>
+                            <div>
+                                <span
+                                    class="telemetry-val"><?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
+                                <span class="telemetry-lbl">KELAS AKTIF</span>
+                            </div>
+                        </div>
+                        <div class="telemetry-item stat-pill-box">
+                            <span class="stat-pill-icon">🏆</span>
+                            <div>
+                                <span class="telemetry-val">04 WORLDS</span>
+                                <span class="telemetry-lbl">PROYEK KARYA</span>
+                            </div>
+                        </div>
+                        <div class="telemetry-item stat-pill-box">
+                            <span class="stat-pill-icon">🛡️</span>
+                            <div>
+                                <span class="telemetry-val">GUARDIAN</span>
+                                <span class="telemetry-lbl">INTELECTA</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- =================================================================
-             BAGIAN BAWAH: ARCHITECTURAL EDITORIAL GRID (SESUAI GAMBAR KEDUA)
-             ================================================================= -->
-        <div class="container editorial-monolith-wrap">
-            <div class="editorial-monolith-sheet">
+        <!-- SECTION 2: PORTOFOLIO PROYEK (WORLD MAP SHOWCASE DENGAN BANNER SAMPING) -->
+        <section id="portofolio" class="section-block section-alt">
+            <div class="container">
+                <div class="section-header section-header-centered">
+                    <span class="section-tag">★ WORLD MAP // CLEARED STAGES</span>
+                    <h2 class="section-title">Portofolio Proyek</h2>
+                    <p class="section-subtitle">
+                        Koleksi karya perangkat lunak dan desain antarmuka pilihan. Klik kartu level untuk membuka
+                        rincian misi.
+                    </p>
 
-                <!-- ─────────────────────────────────────────────────────────
-                     ROW 1: SELECTED PROJECTS ✦ (PORTOFOLIO PROYEK)
-                     ───────────────────────────────────────────────────────── -->
-                <section id="portofolio" class="ed-section ed-projects-section">
-                    <div class="ed-topbar">
-                        <div class="ed-topbar-left">
-                            <span class="ed-label-title">SELECTED PROJECTS</span>
-                            <span class="ed-star">✦</span>
-                        </div>
-                    </div>
+                    <!-- Filter Interaktif di Tengah (Opsional/Hidden) -->
+                    <!-- Filter portofolio dihilangkan sesuai permintaan -->
+                </div>
 
-                    <div class="ed-projects-grid" id="portfolioGrid">
-                        <?php foreach ($portfolios as $proj): ?>
-                            <article class="portfolio-card ed-project-cell"
-                                data-category="<?= htmlspecialchars($proj['category'], ENT_QUOTES, 'UTF-8') ?>" tabindex="0"
-                                role="button"
-                                aria-label="Lihat rincian proyek <?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?>">
+                <div class="portfolio-world-grid" id="portfolioGrid">
+                    <?php foreach ($portfolios as $proj): ?>
+                        <article class="tech-card portfolio-card world-stage-card"
+                            data-category="<?= htmlspecialchars($proj['category'], ENT_QUOTES, 'UTF-8') ?>" tabindex="0"
+                            role="button"
+                            aria-label="Lihat rincian misi <?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?>">
+                            <div class="world-stage-banner">
+                                <div class="world-icon-badge"><?= $proj['icon'] ?></div>
+                                <div class="world-stage-meta">
+                                    <span
+                                        class="mono-label"><?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?></span>
+                                    <span
+                                        class="status-chip"><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?></span>
+                                </div>
+                            </div>
 
-                                <!-- Hidden data for Modal Dialog -->
-                                <span
-                                    class="status-chip is-hidden"><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?></span>
-                                <p class="portfolio-summary is-hidden">
-                                    <?= htmlspecialchars($proj['summary'], ENT_QUOTES, 'UTF-8') ?>
+                            <div class="world-stage-body">
+                                <h3 class="portfolio-title"><?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?>
+                                </h3>
+                                <p class="portfolio-subtitle">
+                                    <?= htmlspecialchars($proj['subtitle'], ENT_QUOTES, 'UTF-8') ?></p>
+                                <p class="portfolio-summary"><?= htmlspecialchars($proj['summary'], ENT_QUOTES, 'UTF-8') ?>
                                 </p>
-                                <ul class="portfolio-highlights is-hidden">
+
+                                <ul class="spec-bullet-list portfolio-highlights">
                                     <?php foreach ($proj['highlights'] as $hl): ?>
                                         <li><?= htmlspecialchars($hl, ENT_QUOTES, 'UTF-8') ?></li>
                                     <?php endforeach; ?>
                                 </ul>
 
-                                <div class="ed-proj-head">
-                                    <span
-                                        class="ed-proj-num"><?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?></span>
-                                    <div class="ed-proj-titles">
-                                        <h3 class="portfolio-title ed-proj-name">
-                                            <?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?>
-                                        </h3>
-                                        <p class="portfolio-subtitle ed-proj-sub">
-                                            <?= htmlspecialchars($proj['subtitle'], ENT_QUOTES, 'UTF-8') ?>
-                                        </p>
+                                <div class="world-stage-footer">
+                                    <div class="tag-row">
+                                        <?php foreach ($proj['tags'] as $tag): ?>
+                                            <span class="tech-tag"><?= htmlspecialchars($tag, ENT_QUOTES, 'UTF-8') ?></span>
+                                        <?php endforeach; ?>
                                     </div>
-                                </div>
-
-                                <div class="ed-proj-mockup">
-                                    <div class="mockup-browser-bar">
-                                        <span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span>
-                                        <span
-                                            class="m-kicker"><?= htmlspecialchars($proj['preview_kicker'], ENT_QUOTES, 'UTF-8') ?></span>
-                                    </div>
-
-                                    <div class="mockup-Visual-stage">
-                                        <div class="mockup-domain-glow" aria-hidden="true"></div>
-                                        <div class="mockup-overlay-content">
-                                            <p class="mockup-serif-headline">
-                                                <?= nl2br(htmlspecialchars($proj['preview_headline'], ENT_QUOTES, 'UTF-8')) ?>
-                                            </p>
-                                            <span class="mockup-mini-cta">EXPLORE CASE &rarr;</span>
-                                        </div>
-                                        <div class="mockup-bottom-subcard">
-                                            <span><?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?> //
-                                                <?= htmlspecialchars($proj['year'], ENT_QUOTES, 'UTF-8') ?></span>
-                                            <span><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?> ✦</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="ed-proj-tags">
-                                    <?php foreach ($proj['tags'] as $tag): ?>
-                                        <span class="ed-rect-tag"><?= htmlspecialchars($tag, ENT_QUOTES, 'UTF-8') ?></span>
-                                    <?php endforeach; ?>
-                                </div>
-                            </article>
-                        <?php endforeach; ?>
-                    </div>
-                </section>
-
-                <!-- ─────────────────────────────────────────────────────────
-                     ROW 2: MY PROCESS & JOURNEY ✦ (KIRI) | TOOLS I USE ✦ (KANAN)
-                     ───────────────────────────────────────────────────────── -->
-                <section id="pendidikan" class="ed-section ed-split-process-tools">
-                    <!-- KIRI: PENDIDIKAN & PENGALAMAN KEPANITIAAN YURY -->
-                    <div class="ed-half-col ed-process-col">
-                        <div class="ed-subhead">
-                            <span class="ed-label-title">MY PROCESS &amp; JOURNEY</span>
-                            <span class="ed-star">✦</span>
-                        </div>
-
-                        <div class="ed-process-inner">
-                            <div class="ed-process-list">
-                                <div class="ed-step-item">
-                                    <span class="ed-step-num">01</span>
-                                    <div class="ed-step-body">
-                                        <h3 class="ed-step-title">S1 INFORMATIKA &mdash; TELKOM UNIVERSITY</h3>
-                                        <p class="ed-step-desc">Kelas
-                                            <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull; NIM
-                                            <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>
-                                            (2024&ndash;Sekarang). Mendalami rekayasa perangkat lunak, basis data, &amp;
-                                            arsitektur web.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="ed-step-item">
-                                    <span class="ed-step-num">02</span>
-                                    <div class="ed-step-body">
-                                        <h3 class="ed-step-title">INTELECTA &mdash; COMMUNITY ENGAGEMENT</h3>
-                                        <p class="ed-step-desc">Kepanitiaan INTELECTA Fakultas Informatika. Membangun
-                                            keterlibatan komunitas, komunikasi interaktif, dan kolaborasi partisipatif.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="ed-step-item">
-                                    <span class="ed-step-num">03</span>
-                                    <div class="ed-step-body">
-                                        <h3 class="ed-step-title">HELLO WORLD 2025 &mdash; PUBLIC RELATION</h3>
-                                        <p class="ed-step-desc">Divisi Public Relation Kepanitiaan Hello World 2025.
-                                            Mengelola hubungan masyarakat, publikasi informasi, dan jembatan komunikasi
-                                            acara.</p>
-                                    </div>
-                                </div>
-
-                                <div class="ed-step-item">
-                                    <span class="ed-step-num">04</span>
-                                    <div class="ed-step-body">
-                                        <h3 class="ed-step-title">DESIGN &amp; PROTOTYPE</h3>
-                                        <p class="ed-step-desc">Merancang wireframe, tata letak responsif, dan prototipe
-                                            UI/UX interaktif di Figma.</p>
-                                    </div>
-                                </div>
-
-                                <div class="ed-step-item">
-                                    <span class="ed-step-num">05</span>
-                                    <div class="ed-step-body">
-                                        <h3 class="ed-step-title">DEVELOP &amp; DELIVER</h3>
-                                        <p class="ed-step-desc">Implementasi kode bersih dengan PHP Native 8.x, PDO
-                                            anti-SQL Injection, Java OOP, dan pengujian menyeluruh.</p>
-                                    </div>
+                                    <span class="world-play-btn">DETAIL &rarr;</span>
                                 </div>
                             </div>
-
-                            <!-- Lingkaran Orbital Artistik Gojo + Kutipan Editorial (Tanpa Foto) -->
-                            <div class="ed-orbital-showcase">
-                                <div class="ed-orbital-ring">
-                                    <span class="ed-orbital-emblem" aria-hidden="true">♾️</span>
-                                    <span class="ed-orbital-kicker">UNLIMITED VOID // M4</span>
-                                    <p class="ed-orbital-quote">
-                                        A thoughtful<br>
-                                        process for<br>
-                                        meaningful<br>
-                                        results.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- KANAN: TOOLS I USE ✦ -->
-                    <div id="keahlian" class="ed-half-col ed-tools-col">
-                        <div class="ed-subhead">
-                            <span class="ed-label-title">TOOLS I USE</span>
-                            <span class="ed-star">✦</span>
-                        </div>
-
-                        <div class="ed-tools-grid">
-                            <?php foreach ($tools as $tool): ?>
-                                <div class="ed-tool-box"
-                                    title="<?= htmlspecialchars($tool['desc'], ENT_QUOTES, 'UTF-8') ?>">
-                                    <span
-                                        class="ed-tool-monogram"><?= htmlspecialchars($tool['abbr'], ENT_QUOTES, 'UTF-8') ?></span>
-                                    <div class="ed-tool-info">
-                                        <span
-                                            class="ed-tool-name"><?= htmlspecialchars($tool['name'], ENT_QUOTES, 'UTF-8') ?></span>
-                                        <span
-                                            class="ed-tool-sub"><?= htmlspecialchars($tool['desc'], ENT_QUOTES, 'UTF-8') ?></span>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-
-                        <p class="ed-tools-footer-note">
-                            &amp; MORE GREAT TECHNOLOGIES // NODE
-                            <?= strtoupper(htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8')) ?>
-                        </p>
-                    </div>
-                </section>
-
-                <!-- ─────────────────────────────────────────────────────────
-                     ROW 3: LET'S CREATE SOMETHING AMAZING (KONTAK, CTA & FOOTER TERPADU)
-                     ───────────────────────────────────────────────────────── -->
-                <section id="kontak" class="ed-section ed-contact-footer-row">
-                    <!-- Kolom 1: LET'S CREATE SOMETHING Amazing -->
-                    <div class="ed-contact-col ed-col-amazing">
-                        <h2 class="ed-create-heading">
-                            <span>LET&rsquo;S CREATE</span>
-                            <span>SOMETHING</span>
-                        </h2>
-                        <span class="ed-amazing-script">Amazing</span>
-                    </div>
-
-                    <!-- Kolom 2: I'M CURRENTLY OPEN FOR COLLABORATION -->
-                    <div class="ed-contact-col ed-col-cta">
-                        <h3 class="ed-open-title">
-                            I&rsquo;M CURRENTLY OPEN<br>
-                            FOR NEW PROJECTS
-                        </h3>
-                        <p class="ed-open-desc">
-                            Mari terhubung bersama <?= htmlspecialchars(MEMBER_NICKNAME, ENT_QUOTES, 'UTF-8') ?> untuk
-                            kolaborasi proyek web maupun kegiatan kampus.
-                        </p>
-                        <a href="app/index.php" class="ed-send-msg-btn">
-                            <span>OPEN GUESTBOOK</span>
-                            <span class="ed-star">✦</span>
-                        </a>
-                    </div>
-
-                    <!-- Kolom 3: 3 Baris Kontak & Navigasi Cepat -->
-                    <div class="ed-contact-col ed-col-links">
-                        <a href="mailto:yurikoastiani@gmail.com" class="ed-contact-line">
-                            <span class="ed-c-icon">&#9993;</span>
-                            <span>YURIKOASTIANI@GMAIL.COM</span>
-                        </a>
-                        <div class="ed-contact-line">
-                            <span class="ed-c-icon">&#9672;</span>
-                            <span><?= strtoupper(htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8')) ?> //
-                                <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></span>
-                        </div>
-                        <a href="#top" class="ed-contact-line">
-                            <span class="ed-c-icon">&uarr;</span>
-                            <span>BACK TO TOP // <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> (NODE
-                                <?= strtoupper(htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8')) ?>)</span>
-                        </a>
-                    </div>
-                </section>
-
+                        </article>
+                    <?php endforeach; ?>
+                </div>
             </div>
+        </section>
+
+        <!-- SECTION 3: PENDIDIKAN & PENGALAMAN (JALUR TIMELINE VERTIKAL MARIO) -->
+        <section id="pendidikan" class="section-block">
+            <div class="container">
+                <div class="section-header section-header-centered">
+                    <span class="section-tag">★ QUEST LOG // JOURNEY PATH</span>
+                    <h2 class="section-title">Pendidikan &amp; Pengalaman</h2>
+                    <p class="section-subtitle">
+                        Jejak perjalanan akademik di Telkom University dan kontribusi kepanitiaan kampus.
+                    </p>
+                </div>
+
+                <div class="mario-timeline-track">
+                    <!-- Stage 1: Pendidikan -->
+                    <article class="tech-card timeline-card timeline-step-row">
+                        <div class="timeline-step-badge">
+                            <span class="step-icon">🎓</span>
+                            <span class="mono-label">STAGE 01</span>
+                            <span class="badge-route">2024 &mdash; SEKARANG</span>
+                        </div>
+                        <div class="timeline-step-content">
+                            <h3 class="card-heading">S1 Informatika &mdash; Telkom University</h3>
+                            <p class="card-sub">Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull;
+                                Bandung</p>
+                            <p class="card-desc">
+                                Mendalami fondasi ilmu komputer, pemrograman berorientasi objek (Java), basis data
+                                relasional MySQL, jaringan komputer, serta rekayasa web modern.
+                            </p>
+                            <ul class="spec-bullet-list">
+                                <li>Anggota Node <code><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?></code>
+                                    pada Proyek Aplikasi Guestbook Terdistribusi.</li>
+                                <li>Fokus pada arsitektur perangkat lunak yang bersih, terstruktur, dan solutif.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <!-- Stage 2: Kepanitiaan INTELECTA -->
+                    <article class="tech-card timeline-card timeline-step-row highlight-border">
+                        <div class="timeline-step-badge">
+                            <span class="step-icon">🛡️</span>
+                            <span class="mono-label">STAGE 02</span>
+                            <span class="badge-route">GUARDIAN FORCE</span>
+                        </div>
+                        <div class="timeline-step-content">
+                            <h3 class="card-heading">Kepanitiaan INTELECTA</h3>
+                            <p class="card-sub">Guardian Force &bull; Fakultas Informatika</p>
+                            <p class="card-desc">
+                                Berperan aktif sebagai Guardian Force dalam kepanitiaan INTELECTA untuk menjaga
+                                kedisiplinan,
+                                ketertiban, serta kelancaran jalannya rangkaian kegiatan.
+                            </p>
+                            <ul class="spec-bullet-list">
+                                <li>Mengawal ketertiban, kedisiplinan peserta, dan kondusivitas selama acara
+                                    berlangsung.</li>
+                                <li>Berkoordinasi aktif dengan seluruh divisi kepanitiaan untuk pengamanan dan
+                                    kelancaran kegiatan.</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: KEAHLIAN & TEKNOLOGI (POWER-UP INVENTORY SLOTS 2 KOLOM) -->
+        <section id="keahlian" class="section-block section-alt">
+            <div class="container">
+                <div class="section-header section-header-centered">
+                    <span class="section-tag">★ POWER-UP INVENTORY // TECH STACK</span>
+                    <h2 class="section-title">Keahlian &amp; Teknologi</h2>
+                    <p class="section-subtitle">
+                        Perangkat teknologi andalan untuk membangun aplikasi web dan desain sistem yang rapi.
+                    </p>
+                </div>
+
+                <div class="skills-inventory-grid">
+                    <?php foreach ($skills as $skill): ?>
+                        <article class="tech-card skill-card skill-slot-card">
+                            <div class="skill-slot-icon" aria-hidden="true">
+                                <?= $skill['icon'] ?>
+                            </div>
+                            <div class="skill-slot-body">
+                                <div class="skill-slot-header">
+                                    <div>
+                                        <span
+                                            class="mono-label"><?= htmlspecialchars($skill['category'], ENT_QUOTES, 'UTF-8') ?></span>
+                                        <h3 class="skill-title"><?= htmlspecialchars($skill['name'], ENT_QUOTES, 'UTF-8') ?>
+                                        </h3>
+                                    </div>
+                                    <span
+                                        class="skill-level"><?= htmlspecialchars($skill['level'], ENT_QUOTES, 'UTF-8') ?></span>
+                                </div>
+                                <p class="skill-desc"><?= htmlspecialchars($skill['desc'], ENT_QUOTES, 'UTF-8') ?></p>
+                                <div class="power-meter-track" aria-hidden="true">
+                                    <div class="power-meter-fill"
+                                        style="width: <?= htmlspecialchars($skill['meter'], ENT_QUOTES, 'UTF-8') ?>;"></div>
+                                </div>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: KONTAK (HORIZONTAL SAVE POINT TILES) -->
+        <section id="kontak" class="section-block">
+            <div class="container">
+                <div class="section-header section-header-centered">
+                    <span class="section-tag">★ SAVE POINT // CONNECT</span>
+                    <h2 class="section-title">Kontak &amp; Jejaring</h2>
+                    <p class="section-subtitle">
+                        Mari terhubung untuk kolaborasi proyek maupun kegiatan kampus. (Nomor kontak tidak
+                        dipublikasikan untuk privasi).
+                    </p>
+                </div>
+
+                <div class="contact-tiles-row">
+                    <a href="mailto:dininadia2005@gmail.com" class="tech-card contact-card contact-tile-horizontal">
+                        <div class="contact-tile-icon">💌</div>
+                        <div class="contact-tile-info">
+                            <span class="mono-label">EMAIL</span>
+                            <h3 class="contact-title">Kirim Surat</h3>
+                            <p class="contact-handle">dininadia2005@gmail.com</p>
+                        </div>
+                        <span class="contact-tile-arrow">&nearr;</span>
+                    </a>
+
+                    <a href="https://github.com/DiniNadia13" target="_blank" rel="noopener noreferrer"
+                        class="tech-card contact-card contact-tile-horizontal">
+                        <div class="contact-tile-icon">🐙</div>
+                        <div class="contact-tile-info">
+                            <span class="mono-label">GITHUB</span>
+                            <h3 class="contact-title">Kode &amp; Proyek</h3>
+                            <p class="contact-handle">github.com/DiniNadia13</p>
+                        </div>
+                        <span class="contact-tile-arrow">&nearr;</span>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/dini-nadia-mawaddah-098132405/" target="_blank"
+                        rel="noopener noreferrer" class="tech-card contact-card contact-tile-horizontal">
+                        <div class="contact-tile-icon">💼</div>
+                        <div class="contact-tile-info">
+                            <span class="mono-label">LINKEDIN</span>
+                            <h3 class="contact-title">Jejaring Karir</h3>
+                            <p class="contact-handle">linkedin.com/in/dini-nadia-mawaddah</p>
+                        </div>
+                        <span class="contact-tile-arrow">&nearr;</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mini-Game Panggung Level Mario Bros Interaktif (Bisa Dimainkan!) -->
+        <div class="mario-stage-scene" id="marioStageGame" aria-label="Mini-game panggung Super Mario">
+            <!-- Panel Kontrol & Petunjuk Mini-Game -->
+            <div class="container stage-game-hud">
+                <div class="stage-game-info">
+                    <span class="stage-game-badge">🎮 PLAYABLE STAGE</span>
+                    <span class="stage-game-hint">Gunakan tombol <strong>◀ ▶</strong> / <strong>A D</strong> untuk jalan
+                        &amp; <strong>SPASI / ▲</strong> untuk lompat!</span>
+                </div>
+                <div class="stage-game-controls">
+                    <span class="stage-status-pill" id="stageGameStatus">READY!</span>
+                    <button type="button" class="stage-ctrl-btn" id="btnMarioLeft" aria-label="Jalan ke kiri"
+                        title="Jalan Kiri (A / ◀)">◀</button>
+                    <button type="button" class="stage-ctrl-btn stage-ctrl-jump" id="btnMarioJump" aria-label="Lompat"
+                        title="Lompat (Spasi / W / ▲)">LOMPAT ⏫</button>
+                    <button type="button" class="stage-ctrl-btn" id="btnMarioRight" aria-label="Jalan ke kanan"
+                        title="Jalan Kanan (D / ▶)">▶</button>
+                    <button type="button" class="stage-ctrl-btn stage-ctrl-reset" id="btnMarioReset"
+                        aria-label="Reset posisi Mario" title="Ulangi Posisi">🔄</button>
+                </div>
+            </div>
+
+            <!-- Arena Permainan Mario -->
+            <div class="container stage-objects" id="marioGameArena">
+                <div class="stage-floating-platform" id="stagePlatform">
+                    <span class="m-block m-brick" data-block="brick">🧱</span>
+                    <span class="m-block m-qblock" data-block="qblock">?</span>
+                    <span class="m-block m-brick" data-block="brick">🧱</span>
+                    <span class="m-block m-qblock" data-block="qblock">?</span>
+                    <span class="m-block m-brick" data-block="brick">🧱</span>
+                </div>
+                <div class="stage-ground-items">
+                    <span class="stage-item stage-bush">🌳</span>
+                    <span class="stage-item stage-shroom" data-collect="shroom" title="Ambil Super Mushroom!">🍄</span>
+                    <div class="stage-pipe" data-obstacle="pipe">
+                        <div class="pipe-top"></div>
+                        <div class="pipe-body"></div>
+                    </div>
+                    <div class="stage-coins">
+                        <span data-collect="coin">🪙</span>
+                        <span data-collect="coin">🪙</span>
+                        <span data-collect="coin">🪙</span>
+                    </div>
+                    <div class="stage-pipe pipe-short" data-obstacle="pipe">
+                        <div class="pipe-top"></div>
+                        <div class="pipe-body"></div>
+                    </div>
+                    <span class="stage-item stage-star" data-collect="star" title="Ambil Super Star!">⭐</span>
+                    <span class="stage-item stage-castle" data-collect="castle" title="Masuk ke Kastil!">🏰</span>
+                </div>
+
+                <!-- Karakter Mario yang Bisa Dikendalikan Pemain -->
+                <div class="playable-mario" id="playableMario" role="img" aria-label="Karakter Mario">
+                    <span class="mario-power-tag" id="marioPowerTag">M3</span>
+                    <div class="mario-sprite-body">
+                        <span class="mario-cap-icon">🧢</span>
+                        <span class="mario-char-icon">🏃‍♂️</span>
+                    </div>
+                    <span class="mario-run-dust">💨</span>
+                </div>
+            </div>
+            <div class="mario-brick-ground"></div>
         </div>
     </main>
 
-    <!-- Modal Dialog Detail Portofolio -->
+    <!-- Modal Dialog Misi Portofolio -->
     <div class="modal-backdrop" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-dialog">
             <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Tutup jendela">&times;</button>
             <div class="card-top-bar">
-                <span class="mono-label">PROJECT SPECIFICATION</span>
+                <span class="mono-label">★ MISSION DETAIL</span>
                 <span class="status-chip" id="modalStatus">STATUS</span>
             </div>
-            <h3 class="portfolio-title" id="modalTitle" style="margin-top: 0.4rem;">Judul Proyek</h3>
-            <p class="portfolio-subtitle" id="modalSubtitle" style="margin-bottom: 0.9rem;">Subjudul Proyek</p>
-            <p class="portfolio-summary" id="modalSummary" style="margin-bottom: 1.1rem;"></p>
+            <h3 class="portfolio-title" id="modalTitle" style="margin-top: 0.5rem;">Judul Proyek</h3>
+            <p class="portfolio-subtitle" id="modalSubtitle" style="margin-bottom: 1rem;">Subjudul Proyek</p>
+            <p class="portfolio-summary" id="modalSummary" style="margin-bottom: 1rem;"></p>
 
-            <h4 class="modal-sec-label">Fitur Utama:</h4>
-            <ul class="spec-bullet-list" id="modalHighlights" style="margin-bottom: 1.2rem;"></ul>
+            <h4
+                style="font-size: 0.88rem; font-family: var(--font-pixel); margin-bottom: 0.5rem; color: var(--mario-yellow);">
+                HIGHLIGHT FITUR:</h4>
+            <ul class="spec-bullet-list" id="modalHighlights" style="margin-bottom: 1.25rem;"></ul>
 
-            <h4 class="modal-sec-label">Teknologi:</h4>
+            <h4
+                style="font-size: 0.88rem; font-family: var(--font-pixel); margin-bottom: 0.5rem; color: var(--mario-yellow);">
+                TEKNOLOGI:</h4>
             <div class="tag-row" id="modalTags"></div>
         </div>
     </div>
 
-    <script src="assets/js/main.js?v=59"></script>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span>⭐ <strong><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></strong>
+                    (<?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>)</span>
+                <span>S1 Informatika Telkom University &bull; Kelas
+                    <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
+            </div>
+            <div class="footer-links">
+                <a href="#top">BACK TO TOP &uarr;</a>
+                <a href="app/index.php">GUESTBOOK &nearr;</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js?v=25"></script>
 </body>
 
 </html>
