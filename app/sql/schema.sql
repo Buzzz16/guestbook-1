@@ -48,11 +48,11 @@ CREATE TABLE IF NOT EXISTS `guestbook` (
 -- 5. Seed Data Dummy Anggota Kelompok (m0 - m5)
 INSERT INTO `anggota` (`route_id`, `nim`, `nama`) VALUES
     ('m0', '103012400134', 'Zulfa Almajid Basyaasyah'),
-    ('m1', '1030124001', 'a'),
-    ('m2', '1030124002', 'a'),
-    ('m3', '1030124003', 'a'),
-    ('m4', '1030124004', 'a'),
-    ('m5', '1030124005', 'a')
+    ('m1', '103012400106', 'Glen David Hadiono'),
+    ('m2', '103012400299', 'Meyneza Ari Dwi Astuti'),
+    ('m3', '104012430028', 'Dini Nadia Mawaddah'),
+    ('m4', '103012400045', 'Yuriko Astiani'),
+    ('m5', '103012400117', 'Ravananda Nadhzief Atthalah')
 ON DUPLICATE KEY UPDATE
     `nim` = VALUES(`nim`),
     `nama` = VALUES(`nama`);
