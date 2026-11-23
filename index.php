@@ -2,445 +2,642 @@
 declare(strict_types=1);
 
 /**
- * Halaman Utama Personal Page (Root `personal/index.php`)
- * Mahasiswa : Zulfa Almajid Basyaasyah (Babas) - 103012400134
- * Kelas     : S1 Informatika Telkom University (IF-48-05)
+ * Halaman Utama Personal Page (Root `index.php`)
+ * Mahasiswa : Yuriko Astiani (Yury) - 103012400045 - Node m4
+ * Tema      : Gojo Satoru Edition (Dashboard Top + Architectural Editorial Grid Bottom)
  */
 
 require_once __DIR__ . '/identity.php';
 
-$skills = [
+$portfolios = [
     [
-        'name'     => 'Python',
-        'category' => 'Backend & AI/Data',
-        'level'    => 'Advanced',
-        'desc'     => 'Scripting otomasi, pengolahan data, pemodelan AI/ML, dan pembuatan REST API cepat.',
-        'code'     => 'PY-01',
+        'id' => '01',
+        'title' => 'SUPERKOST',
+        'subtitle' => 'Platform Manajemen & Digitalisasi Hunian Indekos',
+        'category' => 'web-app',
+        'tags' => ['PHP / JAVA', 'MYSQL DB', 'WEB APP'],
+        'year' => '2025',
+        'status' => 'Featured',
+        'preview_headline' => "Elevating Kost\nManagement",
+        'preview_kicker' => 'HUNIAN DIGITAL // 2025',
+        'preview_img' => 'assets/img/gojo-art-1.png',
+        'summary' => 'Aplikasi pengelolaan kamar kos dan hunian terpadu untuk monitoring ketersediaan unit, pencatatan sewa penghuni, tagihan berkala, dan rekap keuangan pemilik kos.',
+        'highlights' => [
+            'Manajemen ketersediaan unit kamar dan data penghuni real-time',
+            'Pencatatan otomatis histori tagihan bulanan dan pembayaran sewa',
+            'Dashboard ringkas untuk laporan keuangan dan rekap hunian',
+        ],
     ],
     [
-        'name'     => 'Java (Spring Boot)',
-        'category' => 'Enterprise Backend',
-        'level'    => 'Advanced',
-        'desc'     => 'Arsitektur berlapis (Controller-Service-Repository), Spring Data JPA, keamanan, dan RESTful microservice.',
-        'code'     => 'JV-02',
+        'id' => '02',
+        'title' => 'REDESAIN IGRACIAS',
+        'subtitle' => 'UI/UX Redesign Portal Akademik Terintegrasi',
+        'category' => 'ui-ux',
+        'tags' => ['UI/UX', 'FIGMA', 'WEB DESIGN'],
+        'year' => '2025',
+        'status' => 'Featured',
+        'preview_headline' => "Modern Academic\nPortal Living",
+        'preview_kicker' => 'TELKOM UNIVERSITY // UI/UX',
+        'preview_img' => 'assets/img/gojo-banner.png',
+        'summary' => 'Pembaruan antarmuka portal akademik iGracias Telkom University yang lebih bersih, modern, dan intuitif untuk kemudahan registrasi mata kuliah (KRS), cek jadwal kuliah, dan pantau nilai.',
+        'highlights' => [
+            'Antarmuka modern yang segar, minim distraksi, dan mudah dipahami',
+            'Tata letak jadwal perkuliahan serta grafik nilai yang lebih rapi',
+            'Navigasi responsif yang nyaman diakses melalui perangkat smartphone',
+        ],
     ],
     [
-        'name'     => 'Node.js',
-        'category' => 'Runtime & API',
-        'level'    => 'Intermediate',
-        'desc'     => 'Backend asynchronous menggunakan Express.js untuk layanan real-time dan integrasi IoT/AI.',
-        'code'     => 'ND-03',
+        'id' => '03',
+        'title' => 'FINSMART',
+        'subtitle' => 'Aplikasi Pelacak & Pengatur Keuangan Mandiri',
+        'category' => 'fintech',
+        'tags' => ['FINTECH', 'JAVASCRIPT', 'DATA CHARTS'],
+        'year' => '2025',
+        'status' => 'Verified',
+        'preview_headline' => "Focus\nTrack\nElevate",
+        'preview_kicker' => 'SMART FINANCE // 2025',
+        'preview_img' => 'assets/img/gojo-art-2.png',
+        'summary' => 'Platform pengatur keuangan cerdas untuk mencatat arus kas harian (pemasukan & pengeluaran), menetapkan alokasi anggaran belanja, dan menyajikan ringkasan visual.',
+        'highlights' => [
+            'Pencatatan transaksi harian cepat dengan kategorisasi pengeluaran',
+            'Fitur penetapan target anggaran dan peringatan batas belanja',
+            'Visualisasi grafik arus kas interaktif yang informatif',
+        ],
     ],
     [
-        'name'     => 'Vue.js',
-        'category' => 'Frontend Reactive',
-        'level'    => 'Intermediate',
-        'desc'     => 'Single Page Application (SPA) reaktif, manajemen state komponen, dan visualisasi metrik interaktif.',
-        'code'     => 'VU-04',
-    ],
-    [
-        'name'     => 'Tailwind CSS',
-        'category' => 'UI Engineering',
-        'level'    => 'Advanced',
-        'desc'     => 'Sistem desain utility-first yang responsif, dark-mode terstruktur, dan tipografi modern.',
-        'code'     => 'TW-05',
-    ],
-    [
-        'name'     => 'PostgreSQL',
-        'category' => 'Relational DBMS',
-        'level'    => 'Intermediate',
-        'desc'     => 'Perancangan skema relasional, optimasi indexing, transaksi ACID, dan integrasi cloud (Supabase).',
-        'code'     => 'PG-06',
+        'id' => '04',
+        'title' => 'POLUSEE',
+        'subtitle' => 'Platform Web Pemantau & Cek Kualitas Udara',
+        'category' => 'env-web',
+        'tags' => ['AIR QUALITY', 'WEB APP', 'MONITORING'],
+        'year' => '2025',
+        'status' => 'Verified',
+        'preview_headline' => "Clean Air\nReal-Time\nVision",
+        'preview_kicker' => 'ENVIRONMENT // AQI MONITOR',
+        'preview_img' => 'assets/img/gojo-aura.png',
+        'summary' => 'Aplikasi web interaktif untuk memantau dan mengecek indeks kualitas udara (AQI) secara real-time, memberikan informasi tingkat polusi, serta rekomendasi kesehatan lingkungan.',
+        'highlights' => [
+            'Pengecekan indeks kualitas udara (AQI) dan status polusi secara akurat',
+            'Indikator visual kategori udara bersih hingga berbahaya yang mudah dipahami',
+            'Informasi edukasi dan rekomendasi aktivitas luar ruangan berdasarkan kondisi udara',
+        ],
     ],
 ];
 
-$portfolios = [
-    [
-        'id'       => 'PRJ-01',
-        'title'    => 'SuperKost',
-        'subtitle' => 'Platform Manajemen Hunian Indekos Terpadu',
-        'category' => 'backend',
-        'tags'     => ['Java Spring Boot', 'MySQL', 'Thymeleaf / REST', 'MVC'],
-        'year'     => '2025',
-        'status'   => 'PRODUCTION READY',
-        'summary'  => 'Web App berbasis Java Spring Boot & MySQL untuk mendigitalisasi pengelolaan kamar kos, pencatatan tagihan bulanan penghuni, manajemen ketersediaan unit real-time, serta pelaporan keuangan pemilik kos secara terstruktur.',
-        'highlights' => [
-            'Autentikasi berbasis role (Pemilik Kos & Penghuni)',
-            'Manajemen transaksi sewa dan histori pembayaran otomatis',
-            'Skema relasional MySQL dengan integritas referensial penuh',
-        ],
-    ],
-    [
-        'id'       => 'PRJ-02',
-        'title'    => 'PoluSee',
-        'subtitle' => 'AI-Powered Air Quality Monitoring Dashboard',
-        'category' => 'ai-web',
-        'tags'     => ['Vue.js', 'Express', 'Node.js', 'AI Forecasting'],
-        'year'     => '2025',
-        'status'   => 'PROTOTYPE DEPLOYED',
-        'summary'  => 'Sistem pemantauan kualitas udara cerdas berbasis AI dengan antarmuka reaktif Vue.js dan backend Express. Menganalisis indeks polutan (PM2.5, PM10, CO, AQI) serta menyajikan prediksi kualitas udara dan rekomendasi kesehatan.',
-        'highlights' => [
-            'Visualisasi tren indeks kualitas udara (AQI) secara real-time',
-            'Integrasi pipeline prediksi berbasis model Machine Learning',
-            'REST API ringan dengan Express.js dan arsitektur modular',
-        ],
-    ],
-    [
-        'id'       => 'PRJ-03',
-        'title'    => 'ChronosPlan',
-        'subtitle' => 'Progressive Web App Countdown & Academic Schedule',
-        'category' => 'fullstack',
-        'tags'     => ['Next.js', 'Supabase', 'PostgreSQL', 'PWA'],
-        'year'     => '2026',
-        'status'   => 'ACTIVE RELEASE',
-        'summary'  => 'Aplikasi Progressive Web App (PWA) pengatur jadwal dan hitung mundur (countdown) tenggat akademik menggunakan Next.js dan Supabase. Dapat diinstal di perangkat mobile maupun desktop dengan sinkronisasi cloud real-time.',
-        'highlights' => [
-            'Dukungan instalasi PWA & akses cepat jadwal perkuliahan/asistensi',
-            'Database PostgreSQL real-time via Supabase dengan Row Level Security',
-            'Antarmuka minimalis berfokus pada produktivitas mahasiswa',
-        ],
-    ],
+$tools = [
+    ['abbr' => 'Ph', 'name' => 'PHP & MYSQL', 'desc' => 'Backend & Relasional PDO'],
+    ['abbr' => 'Jv', 'name' => 'JAVA OOP', 'desc' => 'Object-Oriented Architecture'],
+    ['abbr' => 'Fg', 'name' => 'FIGMA', 'desc' => 'UI/UX & Interactive Prototype'],
+    ['abbr' => 'Hc', 'name' => 'HTML5 & CSS3', 'desc' => 'Responsive Editorial Layout'],
+    ['abbr' => 'Js', 'name' => 'JAVASCRIPT', 'desc' => 'DOM & Client Validation'],
+    ['abbr' => 'Gt', 'name' => 'GIT & GITHUB', 'desc' => 'Version Control & Team Sync'],
+    ['abbr' => 'Pr', 'name' => 'PUBLIC RELATION', 'desc' => 'Communication & Engagement'],
+    ['abbr' => 'Vs', 'name' => 'VS CODE', 'desc' => 'Development Environment'],
 ];
 ?>
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal Page Zulfa Almajid Basyaasyah (Babas) - Mahasiswa S1 Informatika Telkom University (IF-48-05) & Aplikasi Bersama Guestbook.">
-    <title><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> (Babas) // Personal Page &amp; Guestbook</title>
+    <meta name="description"
+        content="Personal Page <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars(MEMBER_NICKNAME, ENT_QUOTES, 'UTF-8') ?>) - Mahasiswa S1 Informatika Telkom University (<?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?>).">
+    <title><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?> // Gojo Satoru Edition // Personal Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css?v=59">
 </head>
+
 <body>
 
-    <!-- Banner Identitas Wajib di Bagian Paling Atas -->
+    <!-- Watermark Background Gojo Satoru Halus -->
+    <div class="bg-watermark-layer" aria-hidden="true"></div>
+
+    <!-- Banner Identitas Node (`app/partials/served_by.php`) -->
     <?php require_once __DIR__ . '/app/partials/served_by.php'; ?>
 
-    <!-- Header & Navigasi Semantic HTML5 -->
+    <!-- =====================================================================
+         TOP NAVIGATION BAR
+         ===================================================================== -->
     <header class="site-header" id="top">
         <div class="container header-inner">
-            <a href="#profil" class="brand-logo" aria-label="Beranda Zulfa Almajid Basyaasyah">
-                <span class="brand-bracket">[</span>BABAS<span class="brand-accent">//</span><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?><span class="brand-bracket">]</span>
-            </a>
+            <!-- Kiri: Identitas Singkat Mahasiswa (Non-Redundan dengan Menu & Guestbook) -->
+            <div class="header-left-icons">
+                <a href="#top" class="sq-icon-btn sq-dark"
+                    title="Identitas Mahasiswa: <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>"
+                    aria-label="Identitas Mahasiswa">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+                <span class="sq-icon-btn sq-accent"
+                    title="Node Aktif: <?= strtoupper(htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8')) ?> (<?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?>)"
+                    style="font-family: var(--font-display); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.04em; cursor: default;">
+                    <?= strtoupper(htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8')) ?>
+                </span>
+                <button class="mobile-nav-toggle" id="mobileNavToggle" aria-expanded="false" aria-controls="primaryNav"
+                    aria-label="Buka menu navigasi">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
 
-            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Buka menu navigasi">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-
+            <!-- Tengah: Menu Navigasi Ringkas (4 Bagian Utama) -->
             <nav class="site-nav" id="primaryNav" aria-label="Navigasi Utama">
                 <ul class="nav-list">
-                    <li><a href="#profil" class="nav-link active">01. Profil</a></li>
-                    <li><a href="#pendidikan" class="nav-link">02. Pengalaman</a></li>
-                    <li><a href="#keahlian" class="nav-link">03. Keahlian</a></li>
-                    <li><a href="#portofolio" class="nav-link">04. Portofolio</a></li>
-                    <li><a href="#kontak" class="nav-link">05. Kontak</a></li>
+                    <li><a href="#profil" class="nav-link active">Home</a></li>
+                    <li><a href="#portofolio" class="nav-link">Projects</a></li>
+                    <li><a href="#pendidikan" class="nav-link">Journey &amp; Tools</a></li>
+                    <li><a href="#kontak" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
 
+            <!-- Kanan: Tombol Outlined & Filled -->
             <div class="header-actions">
-                <button type="button" id="themeToggleBtn" class="btn btn-icon" aria-label="Ubah mode kontras tampilan" title="Toggle Harbor Contrast Theme">
-                    <span class="theme-indicator-dot"></span>
-                    <span class="mono-small" id="themeLabel">STEALTH DARK</span>
+                <button type="button" id="themeToggleBtn" class="pill-btn pill-outline" aria-label="Ubah tema tampilan"
+                    title="Ganti Mode Terang / Gelap">
+                    <span id="themeLabel">Night Mode</span>
                 </button>
-                <a href="app/index.php" class="btn btn-primary btn-sm">Buka Guestbook &nearr;</a>
+                <a href="app/index.php" class="pill-btn pill-filled">
+                    Guestbook
+                </a>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- SECTION 1: PROFIL (HERO) -->
-        <section id="profil" class="hero-section section-block">
-            <div class="container hero-grid">
-                <div class="hero-content">
-                    <div class="spec-pill-row">
-                        <span class="spec-pill">ROLE // KETUA KELOMPOK (<?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?>)</span>
-                        <span class="spec-pill">NIM // <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></span>
-                        <span class="spec-pill">CLASS // <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
-                    </div>
-
-                    <h1 class="hero-title">
-                        Zulfa Almajid Basyaasyah
-                        <span class="hero-alias">A.K.A. &ldquo;BABAS&rdquo;</span>
-                    </h1>
-
-                    <p class="hero-lead">
-                        Mahasiswa <strong>S1 Informatika Telkom University</strong> kelas <strong>IF-48-05</strong> dan <strong>Asisten Dosen</strong> untuk 3 kelas Informatika. Berfokus pada rekayasa perangkat lunak <em>Full-Stack</em>, arsitektur backend yang tangguh, serta eksplorasi aplikasi berbasis kecerdasan buatan.
-                    </p>
-
-                    <div class="hero-cta-group">
-                        <a href="#portofolio" class="btn btn-primary">
-                            <span>Eksplorasi Portofolio</span>
-                            <span class="btn-arrow">&rarr;</span>
-                        </a>
-                        <a href="#aplikasi" class="btn btn-outline">
-                            <span>Isi Guestbook Bersama</span>
-                        </a>
-                        <a href="app/index.php" class="btn btn-ghost">
-                            <span>Halaman Penuh Guestbook &nearr;</span>
-                        </a>
-                    </div>
-
-                    <div class="telemetry-strip" aria-label="Ringkasan Akademik dan Proyek">
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">IF-48-05</span>
-                            <span class="telemetry-lbl">KELAS AKTIF</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">03 KELAS</span>
-                            <span class="telemetry-lbl">ASISTEN DOSEN</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">03+ APPS</span>
-                            <span class="telemetry-lbl">PORTOFOLIO UTAMA</span>
-                        </div>
-                        <div class="telemetry-item">
-                            <span class="telemetry-val">NODE m0</span>
-                            <span class="telemetry-lbl">STATUS SERVER</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kartu Identitas Teknis (Techwear ID Tag) -->
-                <aside class="hero-id-card tech-card" aria-label="Kartu Identitas Mahasiswa">
-                    <div class="card-top-bar">
-                        <span class="mono-label">ID_BADGE // TELKOM_UNIV</span>
-                        <span class="status-chip">VERIFIED</span>
-                    </div>
-
-                    <div class="id-avatar-box">
-                        <div class="avatar-monogram" aria-hidden="true">ZAB</div>
-                        <div class="avatar-meta">
-                            <span class="mono-small">CALLSIGN: BABAS</span>
-                            <span class="mono-small">SECTOR: BANDUNG, ID</span>
-                        </div>
-                    </div>
-
-                    <dl class="id-spec-list">
-                        <div class="spec-row">
-                            <dt>NAMA LENGKAP</dt>
-                            <dd><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>NIM</dt>
-                            <dd class="mono-val"><?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>PROGRAM STUDI</dt>
-                            <dd>S1 Informatika</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>INSTITUSI</dt>
-                            <dd>Telkom University</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>KELAS</dt>
-                            <dd class="mono-val">IF-48-05</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>NODE ROUTE</dt>
-                            <dd class="mono-val"><?= htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8') ?> (Ketua)</dd>
-                        </div>
-                    </dl>
-
-                    <div class="id-barcode" aria-hidden="true">
-                        <span>||| || |||| | ||| |||| || | |||| ||| || | ||||</span>
-                        <span class="mono-small">103012400134-IF4805-M0</span>
-                    </div>
-                </aside>
-            </div>
-        </section>
-
-        <!-- SECTION 2: PENGALAMAN & PENDIDIKAN -->
-        <section id="pendidikan" class="section-block section-alt">
+        <!-- =================================================================
+             BAGIAN ATAS: DASHBOARD GOJO SATORU
+             ================================================================= -->
+        <section id="profil" class="dashboard-showcase-section">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">02 // EDUCATION &amp; ACADEMIC EXPERIENCE</span>
-                    <h2 class="section-title">Pendidikan &amp; Pengalaman Akademik</h2>
-                    <p class="section-subtitle">
-                        Rekam jejak akademik di Fakultas Informatika Telkom University serta kontribusi aktif dalam kegiatan pengajaran dan asistensi kelas.
-                    </p>
-                </div>
 
-                <div class="timeline-grid">
-                    <!-- Card Pendidikan -->
-                    <article class="tech-card timeline-card">
-                        <div class="card-top-bar">
-                            <span class="mono-label">EDU // UNDERGRADUATE</span>
-                            <span class="badge-route">2024 &mdash; SEKARANG</span>
+                <!-- 1. HERO BANNER LEBAR DENGAN KARAKTER GOJO KELUAR FRAME DI KANAN -->
+                <div class="gojo-hero-banner">
+                    <div class="gojo-banner-bg">
+                        <div class="banner-soft-arc" aria-hidden="true"></div>
+                        <div class="banner-sparkles" aria-hidden="true">
+                            <span class="sp-dot d1"></span>
+                            <span class="sp-dot d2"></span>
+                            <span class="sp-dot d3"></span>
+                            <span class="sp-dot d4"></span>
+                            <span class="sp-dot d5"></span>
+                            <span class="sp-dot d6"></span>
+                            <span class="sp-dot d7"></span>
+                            <span class="sp-dot d8"></span>
+                            <span class="sp-dot d9"></span>
+                            <span class="sp-dot d10"></span>
+                            <span class="sp-dot d11"></span>
+                            <span class="sp-dot d12"></span>
                         </div>
-                        <h3 class="card-heading">S1 Informatika &mdash; Telkom University</h3>
-                        <p class="card-sub">Kelas IF-48-05 &bull; Bandung, Jawa Barat</p>
-                        <p class="card-desc">
-                            Menempuh pendidikan sarjana pada Program Studi S1 Informatika dengan fokus pada algoritma, struktur data, rekayasa perangkat lunak berbasis objek, basis data relasional, serta pengembangan aplikasi web modern.
-                        </p>
-                        <ul class="spec-bullet-list">
-                            <li>Ketua Kelompok (Node <code>m0</code>) pada Proyek Aplikasi Bersama Pra-UTS.</li>
-                            <li>Aktif mengembangkan berbagai produk perangkat lunak mandiri (SuperKost, PoluSee, ChronosPlan).</li>
-                        </ul>
-                    </article>
 
-                    <!-- Card Pengalaman Asisten Dosen -->
-                    <article class="tech-card timeline-card highlight-border">
-                        <div class="card-top-bar">
-                            <span class="mono-label">EXP // TEACHING ASSISTANT</span>
-                            <span class="badge-route">ACTIVE ROLE</span>
-                        </div>
-                        <h3 class="card-heading">Asisten Dosen (3 Kelas Informatika)</h3>
-                        <p class="card-sub">Fakultas Informatika &bull; Telkom University</p>
-                        <p class="card-desc">
-                            Dipercaya sebagai Asisten Dosen yang mendampingi proses perkuliahan, sesi praktikum/responsi, evaluasi tugas pemrograman, serta pembimbingan teknis bagi mahasiswa di <strong>3 kelas Informatika</strong>.
-                        </p>
-                        <ul class="spec-bullet-list">
-                            <li>Memfasilitasi diskusi pemecahan masalah algoritma dan debugging kode secara terstruktur.</li>
-                            <li>Menyusun materi asistensi, melakukan code review tugas mahasiswa, dan menjaga standar kualitas akademik.</li>
-                            <li>Berkoordinasi langsung dengan dosen pengampu untuk pemantauan progres belajar di 3 kelas paralel.</li>
-                        </ul>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 3: KEAHLIAN (SKILLS) -->
-        <section id="keahlian" class="section-block">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">03 // TECHNICAL ARSENAL</span>
-                    <h2 class="section-title">Keahlian &amp; Teknologi</h2>
-                    <p class="section-subtitle">
-                        Tumpukan teknologi utama yang saya gunakan dalam merancang sistem backend, antarmuka frontend modern, serta manajemen basis data.
-                    </p>
-                </div>
-
-                <div class="skills-grid">
-                    <?php foreach ($skills as $skill): ?>
-                        <article class="tech-card skill-card">
-                            <div class="card-top-bar">
-                                <span class="mono-label"><?= htmlspecialchars($skill['code'], ENT_QUOTES, 'UTF-8') ?> // <?= htmlspecialchars($skill['category'], ENT_QUOTES, 'UTF-8') ?></span>
-                                <span class="skill-level"><?= htmlspecialchars($skill['level'], ENT_QUOTES, 'UTF-8') ?></span>
-                            </div>
-                            <h3 class="skill-title"><?= htmlspecialchars($skill['name'], ENT_QUOTES, 'UTF-8') ?></h3>
-                            <p class="skill-desc"><?= htmlspecialchars($skill['desc'], ENT_QUOTES, 'UTF-8') ?></p>
-                        </article>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 4: PORTOFOLIO -->
-        <section id="portofolio" class="section-block section-alt">
-            <div class="container">
-                <div class="section-header-flex">
-                    <div>
-                        <span class="section-tag">04 // SELECTED WORKS</span>
-                        <h2 class="section-title">Portofolio Proyek</h2>
-                        <p class="section-subtitle">
-                            Kumpulan proyek perangkat lunak yang dibangun menggunakan Java Spring Boot, Vue.js, Express, Next.js, dan Supabase.
-                        </p>
-                    </div>
-
-                    <!-- Filter Interaktif via assets/js/main.js -->
-                    <div class="portfolio-filters" role="group" aria-label="Filter kategori portofolio">
-                        <button type="button" class="filter-btn active" data-filter="all">Semua (3)</button>
-                        <button type="button" class="filter-btn" data-filter="backend">Spring Boot &amp; SQL</button>
-                        <button type="button" class="filter-btn" data-filter="ai-web">AI &amp; Vue/Express</button>
-                        <button type="button" class="filter-btn" data-filter="fullstack">Next.js &amp; Supabase</button>
-                    </div>
-                </div>
-
-                <div class="portfolio-grid" id="portfolioGrid">
-                    <?php foreach ($portfolios as $proj): ?>
-                        <article class="tech-card portfolio-card" data-category="<?= htmlspecialchars($proj['category'], ENT_QUOTES, 'UTF-8') ?>">
-                            <div class="card-top-bar">
-                                <span class="mono-label"><?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?> // <?= htmlspecialchars($proj['year'], ENT_QUOTES, 'UTF-8') ?></span>
-                                <span class="status-chip"><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?></span>
+                        <div class="gojo-banner-content">
+                            <div class="gojo-emblem-logo">
+                                <span class="emblem-jp">五条悟</span>
+                                <span class="emblem-sub">NODE //
+                                    <?= strtoupper(htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8')) ?></span>
                             </div>
 
-                            <h3 class="portfolio-title"><?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?></h3>
-                            <p class="portfolio-subtitle"><?= htmlspecialchars($proj['subtitle'], ENT_QUOTES, 'UTF-8') ?></p>
-                            <p class="portfolio-summary"><?= htmlspecialchars($proj['summary'], ENT_QUOTES, 'UTF-8') ?></p>
+                            <h1 class="gojo-banner-title" id="bannerSlideTitle">
+                                <?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?>
+                            </h1>
 
-                            <ul class="spec-bullet-list portfolio-highlights">
-                                <?php foreach ($proj['highlights'] as $hl): ?>
-                                    <li><?= htmlspecialchars($hl, ENT_QUOTES, 'UTF-8') ?></li>
-                                <?php endforeach; ?>
-                            </ul>
+                            <p class="gojo-banner-desc" id="bannerSlideDesc">
+                                Halo, panggil aku
+                                <strong><?= htmlspecialchars(MEMBER_NICKNAME, ENT_QUOTES, 'UTF-8') ?></strong>!
+                                Mahasiswa S1 Informatika Telkom University
+                                (<?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull; NIM
+                                <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>) yang aktif di bidang teknologi
+                                web, UI/UX, serta kolaborasi komunikasi &amp; komunitas.
+                            </p>
 
-                            <div class="tag-row">
-                                <?php foreach ($proj['tags'] as $tag): ?>
-                                    <span class="tech-tag"><?= htmlspecialchars($tag, ENT_QUOTES, 'UTF-8') ?></span>
-                                <?php endforeach; ?>
+                            <div class="gojo-banner-dots" role="tablist" aria-label="Slide Banner">
+                                <button type="button" class="banner-dot active" data-slide="0"
+                                    aria-label="Slide Profil"></button>
+                                <button type="button" class="banner-dot" data-slide="1"
+                                    aria-label="Slide Gojo Satoru"></button>
                             </div>
-                        </article>
-                    <?php endforeach; ?>
+                        </div>
+                    </div>
+
+                    <div class="gojo-banner-char-wrap">
+                        <span class="floating-heart heart-lg" aria-hidden="true">💜</span>
+                        <span class="floating-heart heart-sm" aria-hidden="true">✦</span>
+                        <img src="assets/img/foto_yury.jpeg"
+                            alt="Foto Yuriko Astiani"
+                            class="gojo-banner-char-img"
+                            draggable="false">
+                    </div>
+                </div>
+
+                <!-- 2. GRID 3 KOLOM DI BAWAH BANNER -->
+                <div class="gojo-dashboard-grid">
+
+                    <!-- KOLOM 1: Recent Search (Filter Langsung Selected Projects) -->
+                    <div class="dash-col dash-col-search">
+                        <div class="dash-heading-row">
+                            <h2 class="dash-col-heading">Recent Search</h2>
+                            <span class="search-sync-chip" id="activeSearchChip">All (04)</span>
+                        </div>
+
+                        <div class="recent-search-stack" role="tablist" aria-label="Filter dan Pratinjau Proyek">
+                            <button type="button" class="search-pill-item tone-1" data-search-filter="web-app"
+                                data-label="SuperKost">
+                                <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
+                                    stroke="currentColor" stroke-width="2.4">
+                                    <circle cx="11" cy="11" r="7"></circle>
+                                    <line x1="20" y1="20" x2="16.2" y2="16.2"></line>
+                                </svg>
+                                <span class="pill-text">SuperKost Web App</span>
+                                <span class="pill-tag">01</span>
+                            </button>
+
+                            <button type="button" class="search-pill-item tone-2" data-search-filter="ui-ux"
+                                data-label="iGracias UI/UX">
+                                <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
+                                    stroke="currentColor" stroke-width="2.4">
+                                    <circle cx="11" cy="11" r="7"></circle>
+                                    <line x1="20" y1="20" x2="16.2" y2="16.2"></line>
+                                </svg>
+                                <span class="pill-text">Redesain iGracias UI/UX</span>
+                                <span class="pill-tag">02</span>
+                            </button>
+
+                            <button type="button" class="search-pill-item tone-3" data-search-filter="fintech"
+                                data-label="FinSmart">
+                                <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
+                                    stroke="currentColor" stroke-width="2.4">
+                                    <circle cx="11" cy="11" r="7"></circle>
+                                    <line x1="20" y1="20" x2="16.2" y2="16.2"></line>
+                                </svg>
+                                <span class="pill-text">FinSmart Finance 2025</span>
+                                <span class="pill-tag">03</span>
+                            </button>
+
+                            <button type="button" class="search-pill-item tone-4" data-search-filter="env-web"
+                                data-label="PoluSee">
+                                <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
+                                    stroke="currentColor" stroke-width="2.4">
+                                    <circle cx="11" cy="11" r="7"></circle>
+                                    <line x1="20" y1="20" x2="16.2" y2="16.2"></line>
+                                </svg>
+                                <span class="pill-text">PoluSee Air Quality</span>
+                                <span class="pill-tag">04</span>
+                            </button>
+
+                            <button type="button" class="search-pill-item tone-5 is-active" data-search-filter="all"
+                                data-label="All (04)">
+                                <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
+                                    stroke="currentColor" stroke-width="2.4">
+                                    <circle cx="11" cy="11" r="7"></circle>
+                                    <line x1="20" y1="20" x2="16.2" y2="16.2"></line>
+                                </svg>
+                                <span class="pill-text"><?= htmlspecialchars(MEMBER_NICKNAME, ENT_QUOTES, 'UTF-8') ?> //
+                                    Semua Proyek</span>
+                                <span class="pill-tag">ALL</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- KOLOM 2: 2 Kartu Sticker Persegi -->
+                    <div class="dash-col dash-col-stickers">
+                        <div class="sticker-card-box">
+                            <button type="button" class="sticker-close-badge badge-tone-1"
+                                aria-label="Animasi karakter 1" title="Klik untuk interaksi">&times;</button>
+                            <img src="assets/img/gojo-sticker-1.png?v=58" alt="Gojo Satoru Avatar 1"
+                                class="sticker-square-img">
+                        </div>
+
+                        <div class="sticker-card-box">
+                            <button type="button" class="sticker-close-badge badge-tone-2"
+                                aria-label="Animasi karakter 2" title="Klik untuk interaksi">&times;</button>
+                            <img src="assets/img/gojo-sticker-2.png?v=58" alt="Gojo Satoru Avatar 2"
+                                class="sticker-square-img">
+                        </div>
+                    </div>
+
+                    <!-- KOLOM 4: 3 Kartu Ringkasan Cepat (Navigasi Sekali Klik ke Masing-Masing Section) -->
+                    <div class="dash-col dash-col-features">
+                        <a href="#portofolio" class="feature-horiz-card">
+                            <div class="feature-icon-wrap">
+                                <span class="big-number-01">04</span>
+                            </div>
+                            <div class="feature-text-wrap">
+                                <h3 class="feature-card-title">Selected Works</h3>
+                                <p class="feature-card-desc">
+                                    4 Proyek utama: SuperKost, Redesain iGracias, FinSmart, &amp; PoluSee.
+                                </p>
+                            </div>
+                        </a>
+
+                        <a href="#pendidikan" class="feature-horiz-card">
+                            <div class="feature-icon-wrap">
+                                <div class="circle-emblem-icon">
+                                    <span>♾️</span>
+                                </div>
+                            </div>
+                            <div class="feature-text-wrap">
+                                <h3 class="feature-card-title">Journey &amp; PR</h3>
+                                <p class="feature-card-desc">
+                                    S1 Informatika (<?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?>),
+                                    INTELECTA &amp; PR Hello World 2025.
+                                </p>
+                            </div>
+                        </a>
+
+                        <a href="#kontak" class="feature-horiz-card">
+                            <div class="feature-icon-wrap">
+                                <div class="spark-emblem-icon">
+                                    <span>✦</span>
+                                </div>
+                            </div>
+                            <div class="feature-text-wrap">
+                                <h3 class="feature-card-title">Connect //
+                                    <?= strtoupper(htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8')) ?></h3>
+                                <p class="feature-card-desc">
+                                    Terbuka untuk kolaborasi proyek web, UI/UX, &amp; kegiatan komunitas.
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 5: KONTAK (TANPA NOMOR TELEPON) -->
-        <section id="kontak" class="section-block section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-tag">05 // COMMUNICATION CHANNELS</span>
-                    <h2 class="section-title">Kontak &amp; Jejaring Profesional</h2>
-                    <p class="section-subtitle">
-                        Terbuka untuk diskusi seputar kolaborasi proyek perangkat lunak, riset informatika, maupun kegiatan akademik. (Sesuai kebijakan privasi, nomor telepon tidak dicantumkan di laman publik).
-                    </p>
-                </div>
+        <!-- =================================================================
+             BAGIAN BAWAH: ARCHITECTURAL EDITORIAL GRID (SESUAI GAMBAR KEDUA)
+             ================================================================= -->
+        <div class="container editorial-monolith-wrap">
+            <div class="editorial-monolith-sheet">
 
-                <div class="contact-grid">
-                    <a href="mailto:zulfa.almajid@student.telkomuniversity.ac.id" class="tech-card contact-card">
-                        <div class="card-top-bar">
-                            <span class="mono-label">CHANNEL // 01</span>
-                            <span class="contact-arrow">&nearr;</span>
+                <!-- ─────────────────────────────────────────────────────────
+                     ROW 1: SELECTED PROJECTS ✦ (PORTOFOLIO PROYEK)
+                     ───────────────────────────────────────────────────────── -->
+                <section id="portofolio" class="ed-section ed-projects-section">
+                    <div class="ed-topbar">
+                        <div class="ed-topbar-left">
+                            <span class="ed-label-title">SELECTED PROJECTS</span>
+                            <span class="ed-star">✦</span>
                         </div>
-                        <h3 class="contact-title">Email Akademik &amp; Pribadi</h3>
-                        <p class="contact-handle">zulfa.almajid@student.telkomuniversity.ac.id</p>
-                        <span class="contact-hint">Kirim pesan elektronik resmi</span>
-                    </a>
+                    </div>
 
-                    <a href="https://github.com/zulfaalmajid" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
-                        <div class="card-top-bar">
-                            <span class="mono-label">CHANNEL // 02</span>
-                            <span class="contact-arrow">&nearr;</span>
+                    <div class="ed-projects-grid" id="portfolioGrid">
+                        <?php foreach ($portfolios as $proj): ?>
+                            <article class="portfolio-card ed-project-cell"
+                                data-category="<?= htmlspecialchars($proj['category'], ENT_QUOTES, 'UTF-8') ?>" tabindex="0"
+                                role="button"
+                                aria-label="Lihat rincian proyek <?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?>">
+
+                                <!-- Hidden data for Modal Dialog -->
+                                <span
+                                    class="status-chip is-hidden"><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <p class="portfolio-summary is-hidden">
+                                    <?= htmlspecialchars($proj['summary'], ENT_QUOTES, 'UTF-8') ?>
+                                </p>
+                                <ul class="portfolio-highlights is-hidden">
+                                    <?php foreach ($proj['highlights'] as $hl): ?>
+                                        <li><?= htmlspecialchars($hl, ENT_QUOTES, 'UTF-8') ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+
+                                <div class="ed-proj-head">
+                                    <span
+                                        class="ed-proj-num"><?= htmlspecialchars($proj['id'], ENT_QUOTES, 'UTF-8') ?></span>
+                                    <div class="ed-proj-titles">
+                                        <h3 class="portfolio-title ed-proj-name">
+                                            <?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?>
+                                        </h3>
+                                        <p class="portfolio-subtitle ed-proj-sub">
+                                            <?= htmlspecialchars($proj['subtitle'], ENT_QUOTES, 'UTF-8') ?>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="ed-proj-mockup">
+                                    <div class="mockup-browser-bar">
+                                        <span class="m-dot"></span><span class="m-dot"></span><span class="m-dot"></span>
+                                        <span
+                                            class="m-kicker"><?= htmlspecialchars($proj['preview_kicker'], ENT_QUOTES, 'UTF-8') ?></span>
+                                    </div>
+
+                                    <div class="mockup-Visual-stage">
+                                        <div class="mockup-domain-glow" aria-hidden="true"></div>
+                                        <div class="mockup-overlay-content">
+                                            <p class="mockup-serif-headline">
+                                                <?= nl2br(htmlspecialchars($proj['preview_headline'], ENT_QUOTES, 'UTF-8')) ?>
+                                            </p>
+                                            <span class="mockup-mini-cta">EXPLORE CASE &rarr;</span>
+                                        </div>
+                                        <div class="mockup-bottom-subcard">
+                                            <span><?= htmlspecialchars($proj['title'], ENT_QUOTES, 'UTF-8') ?> //
+                                                <?= htmlspecialchars($proj['year'], ENT_QUOTES, 'UTF-8') ?></span>
+                                            <span><?= htmlspecialchars($proj['status'], ENT_QUOTES, 'UTF-8') ?> ✦</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="ed-proj-tags">
+                                    <?php foreach ($proj['tags'] as $tag): ?>
+                                        <span class="ed-rect-tag"><?= htmlspecialchars($tag, ENT_QUOTES, 'UTF-8') ?></span>
+                                    <?php endforeach; ?>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
+                </section>
+
+                <!-- ─────────────────────────────────────────────────────────
+                     ROW 2: MY PROCESS & JOURNEY ✦ (KIRI) | TOOLS I USE ✦ (KANAN)
+                     ───────────────────────────────────────────────────────── -->
+                <section id="pendidikan" class="ed-section ed-split-process-tools">
+                    <!-- KIRI: PENDIDIKAN & PENGALAMAN KEPANITIAAN YURY -->
+                    <div class="ed-half-col ed-process-col">
+                        <div class="ed-subhead">
+                            <span class="ed-label-title">MY PROCESS &amp; JOURNEY</span>
+                            <span class="ed-star">✦</span>
                         </div>
-                        <h3 class="contact-title">GitHub Repository</h3>
-                        <p class="contact-handle">github.com/zulfaalmajid</p>
-                        <span class="contact-hint">Lihat repositori kode &amp; proyek open-source</span>
-                    </a>
 
-                    <a href="https://www.linkedin.com/in/zulfa-almajid-basyaasyah" target="_blank" rel="noopener noreferrer" class="tech-card contact-card">
-                        <div class="card-top-bar">
-                            <span class="mono-label">CHANNEL // 03</span>
-                            <span class="contact-arrow">&nearr;</span>
+                        <div class="ed-process-inner">
+                            <div class="ed-process-list">
+                                <div class="ed-step-item">
+                                    <span class="ed-step-num">01</span>
+                                    <div class="ed-step-body">
+                                        <h3 class="ed-step-title">S1 INFORMATIKA &mdash; TELKOM UNIVERSITY</h3>
+                                        <p class="ed-step-desc">Kelas
+                                            <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> &bull; NIM
+                                            <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>
+                                            (2024&ndash;Sekarang). Mendalami rekayasa perangkat lunak, basis data, &amp;
+                                            arsitektur web.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="ed-step-item">
+                                    <span class="ed-step-num">02</span>
+                                    <div class="ed-step-body">
+                                        <h3 class="ed-step-title">INTELECTA &mdash; COMMUNITY ENGAGEMENT</h3>
+                                        <p class="ed-step-desc">Kepanitiaan INTELECTA Fakultas Informatika. Membangun
+                                            keterlibatan komunitas, komunikasi interaktif, dan kolaborasi partisipatif.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="ed-step-item">
+                                    <span class="ed-step-num">03</span>
+                                    <div class="ed-step-body">
+                                        <h3 class="ed-step-title">HELLO WORLD 2025 &mdash; PUBLIC RELATION</h3>
+                                        <p class="ed-step-desc">Divisi Public Relation Kepanitiaan Hello World 2025.
+                                            Mengelola hubungan masyarakat, publikasi informasi, dan jembatan komunikasi
+                                            acara.</p>
+                                    </div>
+                                </div>
+
+                                <div class="ed-step-item">
+                                    <span class="ed-step-num">04</span>
+                                    <div class="ed-step-body">
+                                        <h3 class="ed-step-title">DESIGN &amp; PROTOTYPE</h3>
+                                        <p class="ed-step-desc">Merancang wireframe, tata letak responsif, dan prototipe
+                                            UI/UX interaktif di Figma.</p>
+                                    </div>
+                                </div>
+
+                                <div class="ed-step-item">
+                                    <span class="ed-step-num">05</span>
+                                    <div class="ed-step-body">
+                                        <h3 class="ed-step-title">DEVELOP &amp; DELIVER</h3>
+                                        <p class="ed-step-desc">Implementasi kode bersih dengan PHP Native 8.x, PDO
+                                            anti-SQL Injection, Java OOP, dan pengujian menyeluruh.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lingkaran Orbital Artistik Gojo + Kutipan Editorial (Tanpa Foto) -->
+                            <div class="ed-orbital-showcase">
+                                <div class="ed-orbital-ring">
+                                    <span class="ed-orbital-emblem" aria-hidden="true">♾️</span>
+                                    <span class="ed-orbital-kicker">UNLIMITED VOID // M4</span>
+                                    <p class="ed-orbital-quote">
+                                        A thoughtful<br>
+                                        process for<br>
+                                        meaningful<br>
+                                        results.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="contact-title">LinkedIn Profile</h3>
-                        <p class="contact-handle">linkedin.com/in/zulfa-almajid-basyaasyah</p>
-                        <span class="contact-hint">Jejaring profesional &amp; rekam jejak karier</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
+                    </div>
 
-    <!-- Footer Semantic HTML5 -->
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <div class="footer-brand">
-                <span class="mono-small"><strong><?= htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8') ?></strong> (<?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?>)</span>
-                <span class="mono-small">S1 Informatika Telkom University &bull; Kelas <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?></span>
-            </div>
-            <div class="footer-links">
-                <a href="#top" class="mono-small">BACK_TO_TOP &uarr;</a>
-                <a href="app/index.php" class="mono-small">GUESTBOOK_APP &nearr;</a>
+                    <!-- KANAN: TOOLS I USE ✦ -->
+                    <div id="keahlian" class="ed-half-col ed-tools-col">
+                        <div class="ed-subhead">
+                            <span class="ed-label-title">TOOLS I USE</span>
+                            <span class="ed-star">✦</span>
+                        </div>
+
+                        <div class="ed-tools-grid">
+                            <?php foreach ($tools as $tool): ?>
+                                <div class="ed-tool-box"
+                                    title="<?= htmlspecialchars($tool['desc'], ENT_QUOTES, 'UTF-8') ?>">
+                                    <span
+                                        class="ed-tool-monogram"><?= htmlspecialchars($tool['abbr'], ENT_QUOTES, 'UTF-8') ?></span>
+                                    <div class="ed-tool-info">
+                                        <span
+                                            class="ed-tool-name"><?= htmlspecialchars($tool['name'], ENT_QUOTES, 'UTF-8') ?></span>
+                                        <span
+                                            class="ed-tool-sub"><?= htmlspecialchars($tool['desc'], ENT_QUOTES, 'UTF-8') ?></span>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <p class="ed-tools-footer-note">
+                            &amp; MORE GREAT TECHNOLOGIES // NODE
+                            <?= strtoupper(htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8')) ?>
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ─────────────────────────────────────────────────────────
+                     ROW 3: LET'S CREATE SOMETHING AMAZING (KONTAK, CTA & FOOTER TERPADU)
+                     ───────────────────────────────────────────────────────── -->
+                <section id="kontak" class="ed-section ed-contact-footer-row">
+                    <!-- Kolom 1: LET'S CREATE SOMETHING Amazing -->
+                    <div class="ed-contact-col ed-col-amazing">
+                        <h2 class="ed-create-heading">
+                            <span>LET&rsquo;S CREATE</span>
+                            <span>SOMETHING</span>
+                        </h2>
+                        <span class="ed-amazing-script">Amazing</span>
+                    </div>
+
+                    <!-- Kolom 2: I'M CURRENTLY OPEN FOR COLLABORATION -->
+                    <div class="ed-contact-col ed-col-cta">
+                        <h3 class="ed-open-title">
+                            I&rsquo;M CURRENTLY OPEN<br>
+                            FOR NEW PROJECTS
+                        </h3>
+                        <p class="ed-open-desc">
+                            Mari terhubung bersama <?= htmlspecialchars(MEMBER_NICKNAME, ENT_QUOTES, 'UTF-8') ?> untuk
+                            kolaborasi proyek web maupun kegiatan kampus.
+                        </p>
+                        <a href="app/index.php" class="ed-send-msg-btn">
+                            <span>OPEN GUESTBOOK</span>
+                            <span class="ed-star">✦</span>
+                        </a>
+                    </div>
+
+                    <!-- Kolom 3: 3 Baris Kontak & Navigasi Cepat -->
+                    <div class="ed-contact-col ed-col-links">
+                        <a href="mailto:yurikoastiani@gmail.com" class="ed-contact-line">
+                            <span class="ed-c-icon">&#9993;</span>
+                            <span>YURIKOASTIANI@GMAIL.COM</span>
+                        </a>
+                        <div class="ed-contact-line">
+                            <span class="ed-c-icon">&#9672;</span>
+                            <span><?= strtoupper(htmlspecialchars(MEMBER_NAMA, ENT_QUOTES, 'UTF-8')) ?> //
+                                <?= htmlspecialchars(MEMBER_NIM, ENT_QUOTES, 'UTF-8') ?></span>
+                        </div>
+                        <a href="#top" class="ed-contact-line">
+                            <span class="ed-c-icon">&uarr;</span>
+                            <span>BACK TO TOP // <?= htmlspecialchars(MEMBER_KELAS, ENT_QUOTES, 'UTF-8') ?> (NODE
+                                <?= strtoupper(htmlspecialchars(MEMBER_ROUTE, ENT_QUOTES, 'UTF-8')) ?>)</span>
+                        </a>
+                    </div>
+                </section>
+
             </div>
         </div>
-    </footer>
+    </main>
 
-    <script src="assets/js/main.js"></script>
+    <!-- Modal Dialog Detail Portofolio -->
+    <div class="modal-backdrop" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-dialog">
+            <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Tutup jendela">&times;</button>
+            <div class="card-top-bar">
+                <span class="mono-label">PROJECT SPECIFICATION</span>
+                <span class="status-chip" id="modalStatus">STATUS</span>
+            </div>
+            <h3 class="portfolio-title" id="modalTitle" style="margin-top: 0.4rem;">Judul Proyek</h3>
+            <p class="portfolio-subtitle" id="modalSubtitle" style="margin-bottom: 0.9rem;">Subjudul Proyek</p>
+            <p class="portfolio-summary" id="modalSummary" style="margin-bottom: 1.1rem;"></p>
+
+            <h4 class="modal-sec-label">Fitur Utama:</h4>
+            <ul class="spec-bullet-list" id="modalHighlights" style="margin-bottom: 1.2rem;"></ul>
+
+            <h4 class="modal-sec-label">Teknologi:</h4>
+            <div class="tag-row" id="modalTags"></div>
+        </div>
+    </div>
+
+    <script src="assets/js/main.js?v=59"></script>
 </body>
+
 </html>
