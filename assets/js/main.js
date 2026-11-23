@@ -1,248 +1,362 @@
-/* =========================================================
-   Interaksi personal page
-   1. Kartu ID di tali lanyard: bisa diseret, lalu berayun kembali
-   2. Menu layar penuh
-   3. Validasi form kontak sebelum dikirim
-   4. Salin email ke clipboard
-   ========================================================= */
-(function () {
-    'use strict';
+/**
+ * assets/js/main.js
+ * Interaksi Sisi Klien (JavaScript) untuk Personal Page & Aplikasi Bersama
+ * Meyneza Ari Dwi Astuti (103012400299)
+ */
 
-    var root = document.documentElement;
-    var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
-    var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.addEventListener('DOMContentLoaded', () => {
+    // =========================================================================
+    // 1. MODE GELAP / TERANG (NIGHT MODE TOGGLE)
+    // =========================================================================
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const savedTheme = localStorage.getItem('nejaa_theme');
 
-    /* ---------- 1. Kartu ID di lanyard ---------- */
-    var stage = $('#stage');
-    var strap = $('#strap');
-    var hanger = $('#hanger');
+    const updateThemeButton = (isDark) => {
+        if (!themeToggleBtn) return;
+        const iconEl = themeToggleBtn.querySelector('.theme-icon');
+        const labelEl = themeToggleBtn.querySelector('.theme-label');
+        if (iconEl) iconEl.textContent = isDark ? '☀️' : '🌙';
+        if (labelEl) labelEl.textContent = isDark ? 'Day Mode' : 'Night Mode';
+    };
 
-    var L = 210, CW = 300;                   // dibaca ulang dari CSS
-    var x = 0, y = 0, vx = 0, vy = 0, rot = 0;
-    var grabbed = false, grabDX = 0, grabDY = 0, lastMove = 0;
-    var running = false, lastT = 0;
-
-    var GRAVITY = 2600;                       // px/detik²
-    var STIFF = 900;                          // kekakuan tali saat tertarik
-    var DAMP = 1.6;                           // redaman udara
-
-    function readSize() {
-        var cs = getComputedStyle(root);
-        L = parseFloat(cs.getPropertyValue('--L')) || 210;
-        CW = hanger.offsetWidth || 300;
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        updateThemeButton(true);
     }
 
-    function render() {
-        var d = Math.hypot(x, y) || 1;
-        var a = Math.atan2(x, y);              // 0 = tegak lurus ke bawah
-        var tilt = Math.max(-18, Math.min(18, vx * 0.018));
-        var target = -a * 180 / Math.PI + tilt;
-        rot += (target - rot) * 0.25;
-        strap.style.height = d + 'px';
-        strap.style.transform = 'rotate(' + (-a) + 'rad)';
-        hanger.style.transform = 'translate(' + (x - CW / 2).toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + rot.toFixed(2) + 'deg)';
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('nejaa_theme', isDark ? 'dark' : 'light');
+            updateThemeButton(isDark);
+        });
     }
 
-    function step(dt) {
-        if (grabbed) return;
-        var ax = 0, ay = GRAVITY;
-        var d = Math.hypot(x, y) || 1;
-        if (d > L) {                           // tali menegang: tarik kembali ke panjang L
-            var nx = x / d, ny = y / d;
-            var stretch = d - L;
-            ax -= STIFF * stretch * nx;
-            ay -= STIFF * stretch * ny;
-            var radial = vx * nx + vy * ny;    // redam gerak searah tali agar tidak memantul berlebihan
-            ax -= radial * 14 * nx;
-            ay -= radial * 14 * ny;
-        }
-        vx += ax * dt; vy += ay * dt;
-        var f = Math.exp(-DAMP * dt);
-        vx *= f; vy *= f;
-        x += vx * dt; y += vy * dt;
+    // =========================================================================
+    // 2. MENU NAVIGASI RESPONSIF (MOBILE)
+    // =========================================================================
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNavLinks = document.getElementById('mainNavLinks');
+
+    if (mobileMenuBtn && mainNavLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = mainNavLinks.classList.toggle('nav-open');
+            mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        mainNavLinks.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                mainNavLinks.classList.remove('nav-open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
     }
 
-    function atRest() {
-        return !grabbed && Math.abs(vx) < 4 && Math.abs(vy) < 4 &&
-               Math.abs(x) < 0.6 && Math.abs(Math.hypot(x, y) - L) < 1.5;
-    }
+    // =========================================================================
+    // 3. INTERAKSI HERO PAINT TOOLBAR & TAMAGOTCHI KEYCHAIN
+    // =========================================================================
+    const toolButtons = document.querySelectorAll('.tool-btn[data-tool]');
+    const toolbarStatusText = document.getElementById('toolbarStatusText');
+    const tamagotchiCharm = document.getElementById('tamagotchiCharm');
 
-    function loop(t) {
-        var dt = Math.min(0.032, (t - lastT) / 1000 || 0.016);
-        lastT = t;
-        // beberapa sub-langkah agar fisika stabil
-        for (var i = 0; i < 4; i++) step(dt / 4);
-        render();
-        if (atRest()) { running = false; return; }
-        requestAnimationFrame(loop);
-    }
-    function wake() {
-        if (running) return;
-        running = true;
-        lastT = performance.now();
-        requestAnimationFrame(loop);
-    }
-
-    function stagePoint(ev) {
-        var r = stage.getBoundingClientRect();
-        return { x: ev.clientX - r.left, y: ev.clientY - r.top };
-    }
-
-    hanger.addEventListener('pointerdown', function (ev) {
-        if (ev.button !== 0) return;
-        ev.preventDefault();
-        var p = stagePoint(ev);
-        grabbed = true;
-        grabDX = p.x - x; grabDY = p.y - y;
-        vx = vy = 0;
-        lastMove = performance.now();
-        hanger.setPointerCapture(ev.pointerId);
-        hanger.classList.add('is-grabbed');
-        wake();
-    });
-    hanger.addEventListener('pointermove', function (ev) {
-        if (!grabbed) return;
-        var p = stagePoint(ev);
-        var nx = p.x - grabDX, ny = p.y - grabDY;
-        var d = Math.hypot(nx, ny);
-        var max = L * 1.12;                    // tali sedikit melar saat ditarik
-        if (d > max) { nx = nx / d * max; ny = ny / d * max; }
-        if (ny < -L * 0.3) ny = -L * 0.3;       // jangan sampai keluar layar atas
-        var now = performance.now();
-        var dt = Math.max(0.008, (now - lastMove) / 1000);
-        vx = vx * 0.5 + ((nx - x) / dt) * 0.5;
-        vy = vy * 0.5 + ((ny - y) / dt) * 0.5;
-        x = nx; y = ny; lastMove = now;
-    });
-    function release(ev) {
-        if (!grabbed) return;
-        grabbed = false;
-        hanger.classList.remove('is-grabbed');
-        if (performance.now() - lastMove > 80) { vx = 0; vy = 0; }   // dilepas tanpa ayunan
-        var cap = Math.max(-3000, Math.min(3000, vx)); vx = cap;
-        vy = Math.max(-3000, Math.min(3000, vy));
-        try { hanger.releasePointerCapture(ev.pointerId); } catch (err) {}
-        wake();
-    }
-    hanger.addEventListener('pointerup', release);
-    hanger.addEventListener('pointercancel', release);
-
-    window.addEventListener('resize', function () {
-        readSize();
-        wake();
+    toolButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            toolButtons.forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            const msg = btn.getAttribute('data-tool');
+            if (toolbarStatusText && msg) {
+                toolbarStatusText.textContent = `meynezaaaari — ${msg}`;
+            }
+        });
     });
 
-    readSize();
-    if (reduceMotion) {
-        x = 0; y = L;
-    } else {
-        x = -L * 0.5; y = L * 0.86;           // ayunan pembuka saat halaman dibuka
-    }
-    render();
-    wake();
+    if (tamagotchiCharm) {
+        const greetings = [
+            'Hellowwrr! Aku Nejaa (103012400299) ✨',
+            'Graphic Designer + UI/UX Designer 🎨✨',
+            'Jangan lupa mampir isi Guestbook di bawah yaa! 📖',
+            'Server Route aktif: m2 — Telkom University 🚀'
+        ];
+        let greetIdx = 0;
 
-    /* ---------- 2. Menu layar penuh ---------- */
-    var menu = $('#menu');
-    var menuBtn = $('#menu-btn');
-    var closeTimer = null;
+        tamagotchiCharm.addEventListener('click', () => {
+            tamagotchiCharm.classList.remove('tama-bounce');
+            void tamagotchiCharm.offsetWidth; // trigger reflow
+            tamagotchiCharm.classList.add('tama-bounce');
 
-    function openMenu() {
-        clearTimeout(closeTimer);
-        menu.hidden = false;
-        requestAnimationFrame(function () { menu.classList.add('is-open'); });
-        menuBtn.setAttribute('aria-expanded', 'true');
-        document.body.style.overflow = 'hidden';
-        var first = $('.menu-links a', menu);
-        if (first) setTimeout(function () { first.focus(); }, 300);
+            if (toolbarStatusText) {
+                toolbarStatusText.textContent = greetings[greetIdx % greetings.length];
+                greetIdx++;
+            }
+        });
     }
-    function closeMenu(focusBtn) {
-        menu.classList.remove('is-open');
-        menuBtn.setAttribute('aria-expanded', 'false');
+
+    // =========================================================================
+    // 4. TOGGLE BAHASA BIO (EN+ID / EN / ID)
+    // =========================================================================
+    const bioLangToggle = document.getElementById('bioLangToggle');
+    const bioLangLabel = document.getElementById('bioLangLabel');
+    const bioTextContainer = document.getElementById('bioTextContainer');
+
+    if (bioLangToggle && bioTextContainer) {
+        const modes = ['both', 'en', 'id'];
+        let modeIdx = 0;
+
+        bioLangToggle.addEventListener('click', () => {
+            modeIdx = (modeIdx + 1) % modes.length;
+            const currentMode = modes[modeIdx];
+            const enEls = bioTextContainer.querySelectorAll('.bio-en');
+            const idEl = bioTextContainer.querySelector('.bio-id');
+
+            if (currentMode === 'both') {
+                enEls.forEach((el) => (el.style.display = ''));
+                if (idEl) idEl.style.display = '';
+                if (bioLangLabel) bioLangLabel.textContent = 'EN + ID';
+            } else if (currentMode === 'en') {
+                enEls.forEach((el) => (el.style.display = ''));
+                if (idEl) idEl.style.display = 'none';
+                if (bioLangLabel) bioLangLabel.textContent = 'EN Only';
+            } else {
+                enEls.forEach((el) => (el.style.display = 'none'));
+                if (idEl) idEl.style.display = '';
+                if (bioLangLabel) bioLangLabel.textContent = 'ID Only';
+            }
+        });
+    }
+
+    // =========================================================================
+    // 5. FILTER KATEGORI PORTOFOLIO
+    // =========================================================================
+    const filterButtons = document.querySelectorAll('.filter-btn[data-filter]');
+    const projectCards = document.querySelectorAll('.project-card[data-category]');
+
+    filterButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const selectedFilter = btn.getAttribute('data-filter') || 'all';
+
+            projectCards.forEach((card) => {
+                const cats = (card.getAttribute('data-category') || '').split(/\s+/);
+                if (selectedFilter === 'all' || cats.includes(selectedFilter)) {
+                    card.classList.remove('is-hidden');
+                } else {
+                    card.classList.add('is-hidden');
+                }
+            });
+        });
+    });
+
+    // =========================================================================
+    // 6. GALERI MODAL DETAIL PROYEK
+    // =========================================================================
+    const projectModal = document.getElementById('projectModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const modalProjectImg = document.getElementById('modalProjectImg');
+    const modalProjectRole = document.getElementById('modalProjectRole');
+    const modalProjectTitle = document.getElementById('modalProjectTitle');
+    const modalProjectStack = document.getElementById('modalProjectStack');
+    const modalProjectPoints = document.getElementById('modalProjectPoints');
+
+    const closeModal = () => {
+        if (!projectModal) return;
+        projectModal.hidden = true;
         document.body.style.overflow = '';
-        closeTimer = setTimeout(function () { menu.hidden = true; }, reduceMotion ? 0 : 550);
-        if (focusBtn) menuBtn.focus();
-    }
-    menuBtn.addEventListener('click', function () {
-        if (menuBtn.getAttribute('aria-expanded') === 'true') closeMenu(false);
-        else openMenu();
-    });
-    $$('a', menu).forEach(function (a) { a.addEventListener('click', function () { closeMenu(false); }); });
-    document.addEventListener('keydown', function (ev) {
-        if (ev.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') closeMenu(true);
-    });
+    };
 
-    /* ---------- 3. Validasi form kontak ---------- */
-    var form = $('#contact-form');
-    var pesan = $('#f-pesan');
-    var counter = $('#count');
-    var status = $('#form-status');
-    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    document.querySelectorAll('.btn-open-modal').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            if (!projectModal) return;
+            const title = btn.getAttribute('data-title') || '';
+            const role = btn.getAttribute('data-role') || '';
+            const img = btn.getAttribute('data-img') || '';
+            const stack = (btn.getAttribute('data-stack') || '').split(',').map((s) => s.trim()).filter(Boolean);
+            const points = (btn.getAttribute('data-points') || '').split('|').map((p) => p.trim()).filter(Boolean);
 
-    pesan.addEventListener('input', function () { counter.textContent = pesan.value.length; });
+            if (modalProjectTitle) modalProjectTitle.textContent = title;
+            if (modalProjectRole) modalProjectRole.textContent = role;
+            if (modalProjectImg) {
+                try {
+                    const imageUrl = new URL(img, window.location.href);
+                    if (['http:', 'https:'].includes(imageUrl.protocol) && imageUrl.origin === window.location.origin) {
+                        modalProjectImg.src = imageUrl.href;
+                        modalProjectImg.alt = `Preview ${title}`;
+                    } else {
+                        modalProjectImg.removeAttribute('src');
+                        modalProjectImg.alt = '';
+                    }
+                } catch {
+                    modalProjectImg.removeAttribute('src');
+                    modalProjectImg.alt = '';
+                }
+            }
 
-    function setError(name, msg) {
-        var input = $('#f-' + name);
-        input.closest('.field').classList.toggle('invalid', !!msg);
-        input.setAttribute('aria-invalid', msg ? 'true' : 'false');
-        $('#e-' + name).textContent = msg || '';
-    }
-    function validate() {
-        var nama = $('#f-nama').value.trim();
-        var email = $('#f-email').value.trim();
-        var isi = pesan.value.trim();
-        var ok = true;
-        if (nama.length < 2) { setError('nama', 'Please enter at least 2 characters.'); ok = false; } else setError('nama', '');
-        if (!emailRe.test(email)) { setError('email', 'Please enter a valid email, e.g. name@email.com.'); ok = false; } else setError('email', '');
-        if (isi.length < 10) { setError('pesan', 'Your message needs at least 10 characters.'); ok = false; } else setError('pesan', '');
-        return ok ? { nama: nama, email: email, isi: isi } : null;
-    }
-    ['nama', 'email', 'pesan'].forEach(function (n) {
-        $('#f-' + n).addEventListener('blur', function () { if (form.dataset.tried) validate(); });
-    });
-    form.addEventListener('submit', function (ev) {
-        ev.preventDefault();
-        form.dataset.tried = '1';
-        status.textContent = '';
-        var data = validate();
-        if (!data) {
-            var firstBad = $('.field.invalid input, .field.invalid textarea', form);
-            if (firstBad) firstBad.focus();
-            return;
-        }
-        var subject = encodeURIComponent('Message from ' + data.nama);
-        var body = encodeURIComponent(data.isi + '\n\n— ' + data.nama + ' (' + data.email + ')');
-        window.location.href = 'mailto:' + form.dataset.email + '?subject=' + subject + '&body=' + body;
-        status.textContent = 'Looks good. Your email app will open so you can send it.';
-        form.reset();
-        counter.textContent = '0';
-        delete form.dataset.tried;
+            if (modalProjectStack) {
+                modalProjectStack.innerHTML = '';
+                stack.forEach((tech) => {
+                    const pill = document.createElement('span');
+                    pill.className = 'tech-pill';
+                    pill.textContent = tech;
+                    modalProjectStack.appendChild(pill);
+                });
+            }
+
+            if (modalProjectPoints) {
+                modalProjectPoints.innerHTML = '';
+                points.forEach((pt) => {
+                    const li = document.createElement('li');
+                    li.textContent = pt;
+                    modalProjectPoints.appendChild(li);
+                });
+            }
+
+            projectModal.hidden = false;
+            document.body.style.overflow = 'hidden';
+        });
     });
 
-    /* ---------- 4. Salin email ---------- */
-    var toast = $('#toast');
-    var toastTimer = null;
-    function showToast(msg) {
-        toast.textContent = msg;
-        toast.classList.add('show');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2000);
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
     }
-    $('#copy-mail').addEventListener('click', function () {
-        var text = this.dataset.copy;
-        var done = function () { showToast('Email copied: ' + text); };
-        if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });
-        } else {
-            fallbackCopy(text); done();
+
+    if (projectModal) {
+        projectModal.addEventListener('click', (e) => {
+            if (e.target === projectModal) closeModal();
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && projectModal && !projectModal.hidden) {
+            closeModal();
         }
     });
-    function fallbackCopy(text) {
-        var ta = document.createElement('textarea');
-        ta.value = text; ta.setAttribute('readonly', '');
-        ta.style.position = 'absolute'; ta.style.left = '-9999px';
-        document.body.appendChild(ta); ta.select();
-        try { document.execCommand('copy'); } catch (err) {}
-        document.body.removeChild(ta);
+
+    // =========================================================================
+    // 7. ANIMASI SAAT SCROLL (INTERSECTION OBSERVER)
+    // =========================================================================
+    const revealEls = document.querySelectorAll('.reveal-on-scroll');
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+            (entries, obs) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.08 }
+        );
+        revealEls.forEach((el) => observer.observe(el));
+    } else {
+        revealEls.forEach((el) => el.classList.add('is-visible'));
     }
-})();
+
+    // =========================================================================
+    // 8. VALIDASI FORM SISI KLIEN (GUESTBOOK DI APP/INDEX.PHP & INDEX.PHP)
+    // =========================================================================
+    const attachGuestbookValidation = (formId, namaId, pesanId, errNamaId, errPesanId, counterId = null) => {
+        const form = document.getElementById(formId);
+        const namaInput = document.getElementById(namaId);
+        const pesanInput = document.getElementById(pesanId);
+        const errNama = document.getElementById(errNamaId);
+        const errPesan = document.getElementById(errPesanId);
+        const charCounter = counterId ? document.getElementById(counterId) : null;
+
+        if (!form || !namaInput || !pesanInput) return;
+
+        if (charCounter) {
+            const updateCount = () => {
+                charCounter.textContent = `${pesanInput.value.length} / 1000`;
+            };
+            pesanInput.addEventListener('input', updateCount);
+            updateCount();
+        }
+
+        form.addEventListener('submit', (e) => {
+            let valid = true;
+            const namaVal = namaInput.value.trim();
+            const pesanVal = pesanInput.value.trim();
+
+            if (errNama) errNama.textContent = '';
+            if (errPesan) errPesan.textContent = '';
+
+            if (namaVal.length < 2) {
+                if (errNama) errNama.textContent = 'Nama minimal 2 karakter.';
+                valid = false;
+            } else if (namaVal.length > 100) {
+                if (errNama) errNama.textContent = 'Nama maksimal 100 karakter.';
+                valid = false;
+            }
+
+            if (pesanVal.length < 3) {
+                if (errPesan) errPesan.textContent = 'Pesan minimal 3 karakter.';
+                valid = false;
+            } else if (pesanVal.length > 1000) {
+                if (errPesan) errPesan.textContent = 'Pesan maksimal 1000 karakter.';
+                valid = false;
+            }
+
+            if (!valid) {
+                e.preventDefault();
+            }
+        });
+    };
+
+    attachGuestbookValidation('guestbookForm', 'gbNama', 'gbPesan', 'errNama', 'errPesan', 'charCount');
+    attachGuestbookValidation('homeGuestbookForm', 'homeGbNama', 'homeGbPesan', 'homeErrNama', 'homeErrPesan');
+
+    // Kompatibilitas dengan form Guestbook bersama di repo kelompok (app/index.php)
+    const sharedForm = document.getElementById('guestbookForm');
+    const sharedNama = document.getElementById('nama');
+    const sharedPesan = document.getElementById('pesan');
+    const namaFeedback = document.getElementById('namaFeedback');
+    const pesanFeedback = document.getElementById('pesanFeedback');
+    const charCounter = document.getElementById('charCounter');
+
+    if (sharedForm && sharedNama && sharedPesan) {
+        if (charCounter) {
+            const syncCounter = () => {
+                charCounter.textContent = `${sharedPesan.value.length} / 1000`;
+            };
+            sharedPesan.addEventListener('input', syncCounter);
+            syncCounter();
+        }
+
+        sharedForm.addEventListener('submit', (e) => {
+            let ok = true;
+            const nVal = sharedNama.value.trim();
+            const pVal = sharedPesan.value.trim();
+
+            if (namaFeedback) namaFeedback.textContent = '';
+            if (pesanFeedback) pesanFeedback.textContent = '';
+            sharedNama.classList.remove('is-invalid');
+            sharedPesan.classList.remove('is-invalid');
+
+            if (nVal.length < 2) {
+                if (namaFeedback) namaFeedback.textContent = 'Nama pengirim minimal terdiri dari 2 karakter.';
+                sharedNama.classList.add('is-invalid');
+                ok = false;
+            } else if (nVal.length > 100) {
+                if (namaFeedback) namaFeedback.textContent = 'Nama pengirim maksimal 100 karakter.';
+                sharedNama.classList.add('is-invalid');
+                ok = false;
+            }
+
+            if (pVal.length < 5) {
+                if (pesanFeedback) pesanFeedback.textContent = 'Isi pesan minimal terdiri dari 5 karakter.';
+                sharedPesan.classList.add('is-invalid');
+                ok = false;
+            } else if (pVal.length > 1000) {
+                if (pesanFeedback) pesanFeedback.textContent = 'Isi pesan maksimal 1000 karakter.';
+                sharedPesan.classList.add('is-invalid');
+                ok = false;
+            }
+
+            if (!ok) {
+                e.preventDefault();
+            }
+        });
+    }
+});
